@@ -1,0 +1,62 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\paragraph{Jedrske reakcije.} $$A + B \to A + B~~~\text{(elastično sipanje)}$$
+$$A + B \to A + B^*~~~\text{(neelastično sipanje)}$$
+$$A + B \to C + D$$
+$$A + B \to C + D + E$$
+$$A + B \to C^* \to D + E + F + ...$$
+Z $^*$ smo označili vzbujeno stanje jedra. Definiramo še sipalni presek $\sigma$, ki je presek, ki ga mora zadeti projektil (gibajoče se jedro), da pride do reakcije.
+$\sigma$ vpliva na število reakcij, ki se bodo lahko zgodile med nekim številom projektilov in nekim številom jeder v tarči:
+$$N_x = N_tN_i\frac{\sigma}{S}$$
+$N_x$ označuje število reakcij, $N_t$ število delcev v tarči, $N_i$ število projektilov $S$ pa površina tarče. Tipično je $\sigma$ reda velikosti 100 fm$^2$ ali 1 b (barn) in je odvisen od kinetične energije projektila. \\
+Pomembne jedrske reakcije:
+$$^2H + ^3H \to ^4He + n + 17.6\,\mathrm{MeV}$$
+$$n + ^{235}_{92}U \to ^A_ZX + ^{(236 - A - \mu)}_{(92-Z)}Y + \mu n + 170\,\mathrm{MeV}$$
+$\mu$ je načeloma naključen, povprečna vrednost pa je okoli $2.47$.
+Druga reakcija (jedrska fisija) ima največji sipalni presek za termične nevtrone, tj. pri kinetičnih energijah okoli $3/80$\,eV.
+$$\sigma(3/80\,\mathrm{eV}) = 500\,\mathrm{b}$$
+$$\sigma(1\,\mathrm{MeV}) = 5\,\mathrm{b}$$
+\paragraph{Fisijski reaktor.} Gostota vezavne energije je za $^{235}_{92}U$ precej visoka (okoli -8\,MeV). Jedro bo najraje razpadlo na delec z magičnim številom protonov ali nevtronov, ki imajo mnogo nižjo gostoto vezavne energije (okoli $-80\,$MeV). Zato se pri procesu sprosti energija (te je približno 170\,MeV). \\
+Problem: v naravi je večina urana v obliki $^{238}U$, ki ima z nevtronom sledečo reakcijo:
+$$n + ^{238}U \to ^{239}U^* \to ^{239}U + \gamma$$
+Zapovrh imajo nevtroni, ki se sprostijo pri fisiji, običajno energije reda velikosti $\sim1\,\mathrm{MeV}$. Za $^{235}U$ to pomeni sipalni presek reda velikosti $5\,\mathrm{b}$, za $^{238}U$ pa $1000\,\mathrm{b}$. Torej je urana 238 več, pa še večja možnost je, da reagira. \\
+Da lahko na ta način pridobivamo energijo, bomo morali najprej obogatiti uran. To naredimo s centrifugo: ker je uran 238 težji, gre bolj navzven, kar nam omogoči fizično ločitev izotopov.
+Drugi stvar, s katero povečamo reaktivnost v reaktorju, je termalizacija nevtronov - poskrbeti moramo, da nevtroni s trki izgubijo kinetično energijo. Najboljša za to so lahka jedra (da se izgubi čim več električne energije).
+Najpogosteje se za to uporabi vodo ali ogljik - voda ima dodatno prednost, da lahko hkrati hladi reaktor. Posebej uporabna je težka voda, ki ima namesto vodika devterij (da ne pride do izgube nevtronov zaradi reakcije $^1H + n \to ^2H$).
+Ne glede na izbiro tej snovi rečemo moderator. \\[2mm]
+Bilanca nevtronov v modernih reaktorjih: Če začnemo s 100 termičnimi nevtroni, ki sprožijo razcep, imamo po reakciji cca. 250 hitrih nevtronov. Od teh v povprečju 6 lahko sproži nov razcep, pri katerem nastane 15 novih hitrih nevtronov. Imamo torej 259 hitrih nevtronov. \\
+Izmed teh 259 nevtronov jih 13 uide iz reaktorja, preden kar koli zadanejo, 50 nevtronov reagira z $^238U$, ostali pa se termalizirajo. \\
+Izmed 196 termalnih nevtronov jih 10 ponovno uide iz reaktorja, 30 se absorbira v $^{238}U$, 56 pa ne povzroči reakcije. Ostane torej 100 nevtronov, ki sprožijo razcep. \\[2mm]
+Ta bilanca je, kot vidimo, precej občutljiva, zato moramo imeti način, da po potrebi zmanjšamo število nevtronov - to naredimo tako, da v reaktorsko posodo vstavimo snov, ki absorbira nevtrone.
+Temu pravimo kontrolne palice, pogosto so narejene iz bora ali kadmija, ki jih lahko poljubno vstavljamo v reaktor ali iz njega. \\[2mm]
+Triga (Podgorica) ima samoregulacijo, in sicer so v gorivne elemente vgrajeni elementi, ki absorbirajo nevtrone pri določeni energiji. Ko se reaktorju poveča moč, se segreje, zato se poveča termična energija nevtronov in posledično verjetnost, da se nevtron absorbira. \\[2mm]
+Tudi v ustavljenem reaktorju še vedno prihaja do $\beta^-$ razpada, torej se v reaktorju pojavijo elektroni. To vodi do Cherenkovega sevanja.
+\paragraph{Fuzija.} $$p + p \to d + e^+ + \nu_e$$
+$$^1H + ^1H \to ^2H + e^+ + \nu_e,~~\Delta E = 0.42\,\mathrm{MeV}$$
+$$^1H + ^2H \to ^3He + \gamma, ~~\Delta E = 5.5\,\mathrm{MeV}$$
+$$^2H + ^3H \to ^4He + n, ~~\Delta E = 17.6\,\mathrm{MeV}$$
+Zaradi Coulombske bariere je za to reakcijo potrebna precejšnja kinetična energija, običajno reakcija zanesljivo poteče šele pri temperaturah $\sim 10^8\,\mathrm{K}$.
+Da obvarujemo reaktor, bi morali delce držati v zraku z magnetnim poljem.
+\end{document}

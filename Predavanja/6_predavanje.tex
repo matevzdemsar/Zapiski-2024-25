@@ -1,0 +1,57 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+\paragraph{Zgradba jeder.} Od prejšnjič poznamo semi empirično masno formulo, ki pa ni nujno popolnoma natančna.
+Skiciramo lahko izmerjeno in izračunano (po SEMF) vezavno energijo za različne atome:
+\begin{figure}[h!]
+    \centering
+    \includegraphics{SEMF.jpg}
+\end{figure}
+Opazimo, da so največja odstopanja pri vrednostih 2, 8, 20, 28, 50, 82 in 126. Tem številom pravimo magična števila - gre za jedra, ki so posebej dobro vezana.
+Jedrom, ki imajo magično število protonov ali nevtronov, pravimo magična jedra - primer takih jeder so jedra žlahtnih plinov. Atomom, ki imajo magično število protonov in magično število elektronov, pravimo
+dvojno magična jedra (na primer $^{208}Pb$). Jedra, katerih vrednost $Z$ ali $N$ ravno za 1 večje od magičnega števila (tj. 3, 9, 21 itd.) pa so veliko manj stabilna - primer so alkalijske kovine,
+ki so tako ali tako reaktivne, saj imajo na zunanji lupini samo en elektron. \\[2mm]
+Vzrok za takšno obnašanje iščemo v vezavi nukleona v jedru. Na nukleon mora delovati nekakšen potencial, in ker je sila med nukleoni kratkega dosega, je ta potencial zelo podoben porazdelitvi mase v jedru.
+\begin{figure}[h!]
+    \centering
+    \includegraphics{potencial.png}
+\end{figure}
+(Če je razdalja med nukleonoma manjša od vsote njunih polmerov, je potencial neskončen, saj ne moreta eden skozi drugega.)
+Nukleoni bodo v potencialu zasedli najnižje dostopno stanje. Ker so nukleoni fermioni, velja izključitveno načelo in sme biti v določenem stanju le en sam
+nukleon. Ker imajo tudi nukleoni spin, se bosta na vsaki stopnji potenciala pojavila največ dva protona in dva nevtrona.
+$$V_{ef} = - \frac{V_0}{e^{(M_p - M_j)/2} + 1}$$
+Rešujemo Schrödingerjevo enačbo:
+$$-\frac{\hbar^2}{2m}\nabla^2R(\vct{r}) + V_{ef}R(\vct{r}) = WR(\vct{r})$$
+Enačba ni analitično rešljiva, lahko pa naredimo še kar dober približek in potencial aproksimiramo s parabolo:
+$$V_{ef} \approx \frac{1}{2}mw^2r^2 = \frac{1}{2}mw^2(x^2 + y^2 + z^2)$$
+Nato uporabimo nastavek $\displaystyle{R(x, y, z) = X(x)Y(y)Z(z)}$ - kajti $x$, $y$ in $z$ so neodvisne.
+S tem dobimo vsoto treh enačb:
+$$\left(-\frac{\hbar^2}{2m}X''YZ + \frac{1}{2}mw^2x^2XYZ\right) + \left(-\frac{\hbar^2}{2m}XY''Z + \frac{1}{2}mw^2y^2XYZ\right) + \left(-\frac{\hbar^2}{2m}XYZ'' + \frac{1}{2}mw^2z^2XYZ\right) = WXYZ$$
+Na levi in desni strani delimo z $XYZ$:
+$$\left(-\frac{\hbar^2}{2m}\frac{X''}{X} + \frac{1}{2}mw^2x^2\right) + \left(-\frac{\hbar^2}{2m}\frac{Y''}{Y} + \frac{1}{2}mw^2y^2\right) + \left(-\frac{\hbar^2}{2m}\frac{Z''}{Z} + \frac{1}{2}mw^2z^2\right) = W$$
+Dobili smo tri enačbe (eno za $X$, eno za $Y$ in eno za $Z$), katerih vsote morajo biti konstantne. Ker so spremenljivke $x$, $y$ in $z$ neodvisne, morajo biti tudi izrazi v oklepajih konstantni.
+Recimo $W_x + W_y + W_z = W$. Tedaj dobimo diferencialne enačbe za $X$, $Y$ in $Z$. Gre pa ravno za enačbe linearnih harmonskih oscilatorjev, torej je
+$\displaystyle{W_x = \hbar w(\frac{1}{2} + n_x)}$, $\displaystyle{W_y = \hbar w(\frac{1}{2} + n_y)}$, $\displaystyle{W_z = \hbar w(\frac{1}{2} + n_z)}$.
+Tedaj je $\displaystyle{W = \hbar w \left(\frac{3}{2} + n_x + n_y + n_z\right)}$
+\end{document}

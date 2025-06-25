@@ -1,0 +1,71 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+\paragraph{Masa jedra.} Izmerimo jo z magnetnim poljem, kajti $p = eBR$. To izkoristimo v napravi, imenovani masni spektrometer.
+Ker so energije v masnem spektrometru nizke, torej $T \ll m_jc^2$, nam relativističnega popravka ni treba upoštevati. Jedra z električnim poljem pospešimo do znane hitrosti,
+nato pa jih izstrelimo v magnetno polje, kjer se gibljejo po krožnici. Radij te krožnice zelo enostavno izmerimo.
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \draw (0, 0) -- (0, 2);
+        \draw (0, 2.5) -- (0, 4.5);
+        \draw[<-] (0.1, 0.25) arc (-90:90:1);
+        \draw[<->] (0.2, 0.5) -- (0.2, 2);
+        \node (r) at (0.5, 1.25) {$2R$};
+        \draw (-3, 0) -- (-3, 4.5);
+        \draw[->] (-2.8, 2.25) -- (-0.2, 2.25);
+        \draw[<->] (-2.5, 4) -- (-0.5, 4);
+        \node (u) at (-1.5, 4.3) {$U$};
+    \end{tikzpicture}
+\end{figure} \\
+Tedaj je $$m_j = \frac{eB^2R^2}{2U}$$
+Pričakujemo, da je masa jedra manjša od vsote mas protonov in elekktronov, sicer bi se jedrom bolj splačalo ostati narazen. Izračunamo lahko specifično vezavno energijo jedra:
+$$W_v = m_jc^2 - Zm_pc^2 - (A-Z)m_nc^2$$
+Tu je $A$ število nukleonov, $Z$ pa število protonov. Specifično vezavno energijo jedra pa dobimo tako, da vezavno energijo delimo s številom nukleonov: $w_v = W_v/A$
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=2.5]{Binding_energy_curve_-_common_isotopes2.jpg}
+\end{figure} \\
+Dejstvo, da je $W_v \propto A$, nam pove, da posamezen nukleon čuti le privlak sosedov, torej je sila, ki jih drži skupaj, kratkega dosega. \\
+V večini stabilnih jeder je nevtronov več kot protonov. Narišemo lahko graf $N(Z)$, na katerem je prikazano število nevtronov, ki jih mora imeti atom nekega elementa, da je stabilen. \\
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.8]{neutron-proton-ratio.png}
+\end{figure} \\
+Jedra, ki se ne držijo te krivulje, so nestabilna. Če imajo premalo nevtronov, utegne priti do $\beta^-$ razpada, če preveč, pa do $\beta^+$ razpada. O tem pozneje.
+\paragraph{Semi-empirična masna formula.} Ta formula ni popolnoma natančna, je pa zelo koristna. Zanima nas vezavna energija $W_v(A, Z)$.
+$$W_v(A, Z) = -w_0A + w_1A^{2/3} + w_2\frac{Z^2}{A^{1/3}} + w_3\frac{(A-2Z)^2}{A} + w_4\frac{\delta_{ZN}}{A^{3/4}}$$
+Pri tem je $$\delta_{ZN} = \begin{cases}
+    -1 & \text{Z, N oba soda} \\
+    0 & \text{Z sod, N lih, ali obratno} \\
+    1 & \text{Z, N oba liha} \\
+\end{cases}$$
+Izmerimo še $w_0, ... w_4$:
+\begin{align*}
+    w_0 & = 15.6\,MeV \\
+    w_1 & = 17.3\,MeV \\
+    w_2 & = 0.70\,MeV \\
+    w_3 & = 23.3\,MeV \\
+    w_4 & = 33.5\,MeV \\
+\end{align*}
+\end{document}

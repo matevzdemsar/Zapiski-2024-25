@@ -1,0 +1,110 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\section{Razpad jeder}
+\paragraph{Razpad $\gamma$} Ko je jedro v vzbujenem stanju, pridejo v osnovno stanje tako, da odda foton (kot elektron v atomu).
+$$X^* \to X + \gamma$$
+Energija fotona je $\Delta E = \hbar \omega$. Zanima nas razpadni čas:
+$$\Gamma = \frac{1}{\tau} = \frac{\omega^3|\avg{\vct{p}_{e_{1, 2}}}|}{3\pi\varepsilon_0c^3\hbar}$$
+Bolj ali manj točno tako kot pri elektronih. S $\vct{p}_e$ označimo dipolni moment $e\vct{r}$
+$$\avg{\vct{p}_{e_{1,2}}} = \int_V \psi^*_2(\vct{r})\hat{\vct{p}}_{e}\psi_1(\vct{r}) \dif V = \int_V \psi^*_2(\vct{r})e\vct{r}\psi_1(\vct{r}) \dif V$$
+Da bo to različno od 0, mora biti integrirana funkcija soda. Sledi, da morata imeti $\psi_2$ in $\psi_1$ različno parnost. Drugi pogoj je povezan z vrtilno količino jedra.
+\begin{align*}
+    \text{Pogoj 1:  } & P(\psi_2) = -P(\psi_1) \\
+    \text{Pogoj 2:  } & J' - J = 0, \pm 1 \\
+\end{align*}
+Če ta dva pogoja nista izpolnjena, je $\avg{\vct{p}_e} = 0$ in do prehoda ne pride (kajti $1/\tau = 0 \Rightarrow \tau = \infty$)
+\paragraph{Razpad $\alpha$} Gre za razpad oblike
+$$^A_ZX \to ^{A-4}_{Z-2}Y + ^4_2He$$
+Primer:
+$$^{226}_{88}Ra \to ^{222}_{86}Rn + ^{4}_{2}\alpha$$
+$$\Delta E = (M_{Ra} - M_{Rn} - M_{\alpha})c^2 = 4.87\,\text{MeV}$$
+Energijska razlika je dovolj majhna, da se nam z relativnostjo še ni treba ukvarjati. Upoštevajmo ohranitev gibalne količine ter kinetične energije:
+$$\Delta E = \frac{1}{2}M_{Ra}v^2_{Rn} + \frac{1}{2}M_{\alpha}v^2_{\alpha}$$
+$$0 = M_{Rn} v_{Rn} + M_{\alpha}v_{\alpha}$$
+Dobimo $\displaystyle{v_{Rn} = \frac{M_\alpha}{M_{Rn}}v_{\alpha}}$,
+kar pomeni $T_\alpha \approx \Delta E$, kajti hitrost $\alpha$ delca je mnogo večja od hitrosti jedra. \\[3mm]
+Za \(r > R\) deluje na \(\alpha\) delec potencial \[V_C = C\frac{2(Z-2)}{r}\]
+Vpeljali smo konstanto \(\displaystyle{C = \frac{e_0^2}{4\pi\varepsilon_0}} = 1,44\,\mathrm{MeV}\)
+Gre za potencialno bariero, ki jo mora delec premagati, da pride iz jedra. Da mu to uspe, mora imeti določeno kinetično energijo \(T_\alpha\) (označimo tudi \(W_k\)). Ta je, kot smo že omenili, približno enaka \(\Delta E\),
+točneje pa jo izračunamo kot potencial v točki \(R_0\), ki predstavlja radij jedra - sila med delci v jedru ima namreč zelo kratek doseg.
+\[W_k = V_C(R_0) = \frac{2e_0^2(Z-2)}{4\pi\varepsilon_0R_0}\]
+Obratno lahko iz kinetične energije (ki je, kot bomo kmalu videli, merljiva na podlagi razpadnega časa) izračunamo raij jedra:
+\[R_0 = \frac{2e_0^2(Z-2)}{4\pi\varepsilon_0W_k} = C\frac{2(Z-2)}{W_k}\]
+\paragraph{Razpadni čas.} Razpadni čas je odvisen bolj ali manj samo od potrebne kinetične energije \(\alpha\) delca:
+\[\ln\tau = \frac{a}{\sqrt{W_k}} + b\]
+To formulo izpeljemo na osnovi prepustnosti. Prepustnost skozi neko tanko tanko plast potenciala je enaka:
+\[T = \frac{1}{1 + \frac{1}{16}\left(\frac{k}{K} + \frac{K}{k}\right)^2\left(e^{-K\Delta r} - e^{K\Delta r}\right)^2}\]
+\[k = \frac{1}{\hbar}\sqrt{2mW_k}\]
+\[K = \frac{1}{\hbar}\sqrt{2m(V_C - W_k)}\]:
+\[T_i = \frac{1}{1 + \frac{1}{16}\left(\frac{k}{K} + \frac{K}{k}\right)^2\left(e^{-K\Delta r} - e^{K\Delta r}\right)^2}\]
+Obravnavamo limito \(K\Delta r \gg 1\), torej lahko nekaj stvari zanemarimo:
+\[\frac{1}{1 + \frac{1}{16}\left(\frac{k}{K} + \frac{K}{k}\right)^2\left(e^{-K\Delta r} - e^{K\Delta r}\right)^2} \approx \frac{1}{\frac{1}{16}\left(\frac{k}{K} + \frac{K}{k}\right)^2\left(e^{K\Delta r}\right)^2 = ... = B\,e^{-2K\Delta r}}\]
+Označili smo \(\displaystyle{B = \frac{16}{\left(\frac{k}{K} + \frac{K}{k}\right)^2}}\)
+Skupna prepustnost je produkt prepustnosti posameznih plasti:
+\[T = \prod_{i}T_i = \prod_{i}e^{-2K_i\Delta r_i}\]
+\[\ln T = \sum_{i}\ln T_i = B' - \sum_{i} 2K_i\Delta r\]
+V limiti, ko so plasti neskončno tanke, vsoto zapišemo kot integral:
+\[\ln T = B' - \int_{R}^{R_0}2K(r)\,\dif r = B' - 2\int_{R}^{R_0}\frac{1}{\hbar}\sqrt{2m(V_C(r) - W_k)}\,\dif r\]
+Iz relacije \(W_k = V_C(R_0)\) dobimo \(V_C/W_k = R_0/r\), kar nam omogoči uvedbo nove spremenljivke \(u = W_k/V_C = r/R_0\)
+Preden vstavimo v integral, razčistimo še sledeče:
+\[V_C(r) - W_k = W_k\left(\frac{V_C(r)}{W_k} - 1\right) = W_k\left(\frac{1}{u} - 1\right)\]
+Izrazimo še \(\dif u = \dif r / R_0\) in vse skupaj vstavimo v integral.
+\[\ln T = B' - 2\int_{R/R_0}^{1} \frac{1}{\hbar}\sqrt{2mW_k}\sqrt{\frac{1}{u} - 1}\,R_0\,\dif u\]
+\[\ln T = B' - \frac{2R_0}{\hbar}\sqrt{2mW_k}\int_{R/R_0}^{1}\sqrt{\frac{1}{u}-1}\,\dif u = B' - \frac{2R_0}{\hbar}\sqrt{2mW_k}\left[\int_{0}^{1}\sqrt{\frac{1}{u}-1}\,\dif u - \int_{0}^{R/R_0}\sqrt{\frac{1}{u}-1}\,\dif u\right]\]
+Integral od \(0\) do \(1\) rešujemo s substitucijo \(u = \sin^2\varphi\). Pri drugem integralu si tega ne moremo privoščiti, ker ne poznamo novih mej, tu pa sta novi meji \(0\) in \(\pi/2\).
+\[\int_{0}^{1} \sqrt{\frac{1}{u} - 1} \,\dif u = \int_{0}^{\pi/2}2\sin\varphi\cos\varphi\sqrt{\frac{1}{\sin^2\varphi} - \frac{\sin^2\varphi}{\sin^2\varphi}\,\dif\varphi} = \int_{0}^{\pi/2}\cos^2\varphi\,\dif\varphi = \frac{\pi}{2}\]
+Pri integralu od \(0\) do \(R/R_0\) se bomo morali zadovoljiti s približkom, da je \(u\) dovolj majhen, da velja \(\displaystyle{\sqrt{\frac{1}{u} - 1} \approx \frac{1}{\sqrt{u}}}\):
+\[\int_{0}^{R/R_0}\sqrt{\frac{1}{u} - 1}\,\dif u \approx \int_{0}^{R/R_0}\frac{\dif u}{\sqrt{u}} = 2\sqrt{\frac{R}{R_0}}\]
+Zdaj \(R_0\) izrazimo s kinetično energijo:
+\[\ln T = B' - \frac{2}{\hbar}\sqrt{2mW_k}C\frac{2(Z-2)}{W_k}\left(\frac{\pi}{2} - 2\sqrt{\frac{2RW_k}{2C(Z-2)}}\right)\]
+Zdaj dobljeni \(\ln T\) prepišemo kot vsoto funkcije kinetične energije in neke konstante:
+\[\ln T = B'' - \frac{2\pi}{\hbar}(Z-2)C\frac{2m}{W_k}\]
+Zdaj naredimo sledeči razmislek: razpadni čas je odvisen od frekvenco 'poskusov' razpada (\(\nu\)). To število lahko karakteriziramo s časom, ki ga delec porabi do roba jedra:
+\[\frac{1}{\tau} = T\nu = \frac{v}{R} = \frac{\sqrt{\frac{2W_k}{m}}}{2R}\]
+Izrazimo \(\tau\), nato pa še njegov logaritem. Upoštevamo izračunani \(\ln T\) od prej.
+\[\tau = T^{-1} \frac{2R\sqrt{m_\alpha}}{\sqrt{W_k}}\]
+\[\ln\tau = \ln T^{-1} + \ln\frac{2R\sqrt{m_\alpha}}{\sqrt{W_k}} = -B'' + \frac{e_0^2(Z-2)}{2\varepsilon_0\hbar} \sqrt{\frac{2m}{W_k}} + \ln\frac{2R\sqrt{m_\alpha}}{\sqrt{W_k}}\]
+Če drugi člen zanemarimo kot konstantnega, dobimo \(\displaystyle{\ln\tau \approx \frac{a}{\sqrt{W_k}} + b}\). Običajno lahko izmerimo \[a \sim 340\,\mathrm{MeV}\] \\[3mm]
+V praksi to pomeni, da razpade opazimo šele, ko so potrebne kinetične energije dovolj velike, da je razpadni čas razmeroma majhen.
+Teoretično so razpadi možni že pri \(A = 140\), vendar so razpadni časi tako veliki, da jih nima smisla opazovati.
+Pri \(A = 206\) pa dobimo kinetične energije reda velikosti \(4\,\mathrm{MeV}\), kar nam da dovolj majhen razpadni čas, da je razpad vredno opazovati.
+\paragraph{Spontani razcep.} Nastaneta dve približno enako veliki jedri. Zaenkrat za ta razccep povemo samo, da obstaja.
+\paragraph{Razpad \(\beta\).} Delimo ga na pozitivni in negativni \(\beta\) razpad - odvisno od tega, kaj se pri njem zgodi z nabojem jedra.
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c}
+        \(\beta^-:\) & \(n \to p e^- \overline{\nu_e}\) \\
+        \(\beta^+:\) & \(p\to n e^+ \nu_e\) \\
+    \end{tabular}
+\end{table}
+Pri tem se sprosti nekaj energije, označimo \(E_0\). Nastalo jedro je pogosto v vzbujenem stanju in odda še žarek \(\gamma\), kar je uporabno za obsevanje raka ali kaj podobnega.
+Če ima reakcija dolg razpadni čas, pa jo lahko uporabimo za datiranje arheoloških najdb. \\
+Vidimo, da je hitrost razpadanje jeder odvisna od njihovega števila:
+$$\dd{N}{t} = - \alpha N(t)$$
+$$\int_{N_0}^{N}\frac{\dif N}{N} = -\int_{0}^{t}\alpha \dif t$$
+$$N = N_0\,e^{-\alpha t}$$
+Običajno označimo $\alpha = 1/\tau$, kjer je $\tau$ razpadni čas. Definiramo pa lahko tudi pojem razpolovnega časa, ki je definiran kot
+$$t_{1/2} = \tau \ln 2$$
+\end{document}

@@ -1,0 +1,84 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\,\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Šibka interakcija pri leptonih.} Leptoni, spomnimo se, so delci, ki niso sestavljeni iz kvarkov. Teh delcev je šest, in sicer:
+\[\begin{array}{c c c}
+    e & \mu & \tau \\
+    \nu_e & \nu_\mu & \nu_\tau
+\end{array} \hspace{2cm} \begin{array}{c c}
+    m_e c^2 & = 0.511\,\mathrm{MeV} \\
+    m_\mu c^2 & = 104\,\mathrm{MeV} \\
+    m_\tau c^2 & = 1.8\,\mathrm{GeV}
+\end{array}\]
+Elektron je stabilen in, kolikor vemo, ne razpada. Muon in tau pa razpadata v sledečih reakcijah:
+\[\mu \to e^-\overline{\nu}_e\nu_\mu\]
+\begin{align*}
+    \tau & \to \mu^-\overline{\nu}_\mu\nu_\tau \\
+    & \to e^-\overline{\nu}_e\nu_\tau \\
+    & \to \pi^- \nu_\tau
+\end{align*}
+Nevtrini imajo šibke interakcije. V standardnem modelu rečemo kar \(m_\nu = 0\), kar sicer ni popolnoma res.
+\paragraph{Inverzni beta razpad.} Če obrnemo enačbo za \(\beta\) razpad, dobimo:
+\[\nu_e n \to pe^-\]
+\[\overline{\nu}_e p \to ne^+\]
+Nevtrine zaznamo z napravo, imenovano scintilator. Gre v bistvu zato, da nevtrino v jedru nekega elementa sproži razpad \(\beta\). Nastalo jedro je v vzbujenem stanju,
+zato odda \(\gamma\) žarek, da pride v osnovno stanje. Žarek pa lahko zaznamo.
+\paragraph{Prehodi med nevtrini.} Prihaja lahko do prehodov \(\nu_e \leftrightarrow \nu_\mu\) in \(\nu_e \leftrightarrow \nu_\tau\). Iz tega sledi, da \(\mu_e \neq 0\), česar standardni model ne razloži. \\
+Obravnavajmo prehod \(\nu_e \leftrightarrow \nu_\mu\). Opišemo ga z lastnima funkcijama Hamiltonovega operatorja \(\widehat{H}\): \(\nu_1\) in \(\nu_2\).
+\[|\nu_e\rangle = \cos\varphi |\nu_1\rangle + \sin\varphi|\nu_2\rangle\]
+\[|\nu_\mu\rangle = -\sin\varphi |\nu_1\rangle + \cos\varphi|\nu_2\rangle\]
+Iz tega lahko izrazimo \(|\nu_1\rangle\) in \(\nu_2\). Oglejmo si še časovno odvisnost obeh stanj:
+\[|\nu_1(t)\rangle = |\nu_1\rangle e^{-i\frac{E_1}{\hbar}t}\]
+\[|\nu_2(t)\rangle = |\nu_2\rangle e^{-i\frac{E_2}{\hbar}t}\]
+Sledi:
+\begin{align*}
+    |\nu_e(t)\rangle & = (\cos^2\varphi\,e^{-i\frac{E_1}{\hbar}t} + \sin^2\,e^{-i\frac{E_2}{\hbar}t})|\nu_e\rangle \\
+    & + (-\cos\varphi\sin\varphi\,e^{-i\frac{E_1}{\hbar}t} + \cos\varphi\sin\varphi\,e^{-i\frac{E_1}{\hbar}t})|\nu_\mu\rangle \\[2mm]
+    |\nu_e(t)\rangle & = C_e(t)\,|\nu_e\rangle + C_\mu(t)\,|\nu_\mu\rangle
+\end{align*}
+Zanima nas verjetnost za prehod \(\nu_e \to \nu_\mu\), torej \(|C_\mu(t)|^2\) \\
+\[|C_\mu(t)|^2 = ... = \sin^2 2\varphi \cdot \sin^2\left(\frac{(E_2 - E_1)t}{2\hbar}\right)\]
+Pri čemer je \(E_1 = \sqrt{p^2c^2 + m_1^2c^4}\) in \(E_2 = \sqrt{p^2c^2 + m_2^2c^4}\). Zanima nas razlika energij, torej:
+\[E_2 - E_1 = \frac{1}{2}\frac{c^2}{p^2}\left(m_2^2 - m_1^2\right)\]
+Izrazimo še čas. Ker imajo nevtrini (vsaj po standardnem modelu sodeč) maso \(0\), velja
+\(t = L/c\), kjer je \(L\) dolžina, ki jo nevtrino prepotuje po snovi.
+\[|C_\mu(t)|^2 = \sin^2 2\varphi \cdot \sin^2\left(\frac{(m_2^2 - m_1^2)cL}{4\hbar p^2}\right)\]
+Mimogrede smo dobili pogoj za mešanje: \(m_1 \neq m_2\).
+Dobljena verjetnost je odvisna od \(L\) in \(p\).
+\paragraph{Ohranitev leptonskega števila.} Vemo že, da se pri reakcijah ohranja število barionov, število mezonov pa ne nujno.
+V primeru leptonov se leptonsko število ohranja. Pri tem je letponsko število leptona \(L = 1\), leptonsko število antileptona pa \(L = -1\).
+\paragraph{Drugi ohranitveni zakoni.} Pri reakcijah med delci se ohranjajo sledeče količine:
+\begin{itemize}
+    \item Leptonsko število
+    \item Barionsko število
+    \item Naboj
+    \item Okus (kvarkov), razen pri reakcijah s šibko interakcijo
+\end{itemize}
+\paragraph{Težava standardnega modela.} Standardni model ne uspe opisati
+\begin{itemize}
+    \item Mase nevtrina. Standardni model napove \(m_\nu = 0\), vendar imajo nevtrini medsebojne prehode, torej morajo imeti maso.
+    \item Temne snovi.
+\end{itemize}
+\end{document}

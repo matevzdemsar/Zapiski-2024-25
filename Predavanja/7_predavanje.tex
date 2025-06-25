@@ -1,0 +1,92 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+Pri prejšnjem predavanju smo za energijo nukleonov izpeljali
+$$E_n = \hbar \omega (\frac{3}{2} + n_x + n_y + n_z)$$
+\begin{align*}
+    n & = 0 & E_n & = \frac{3}{2}\hbar\omega & \text{Število stanj: } & 2 \\
+    n & = 1 & E_n & = \frac{5}{2}\hbar\omega & \text{Število stanj: } & 6 \\
+    n & = 2 & E_n & = \frac{7}{2}\hbar\omega & \text{Število stanj: } & 12 \\
+    n & = 3 & E_n & = \frac{9}{2}\hbar\omega & \text{Število stanj: } & 20 \\
+\end{align*}
+Število stanj je odvisno od števila možnih kombinacij $n_x, n_y, n_z$, da bo $n_x + n_y + n_z = n$. Število kombinacij pa nato pomnožimo z 2, saj imamo dva možna spina.
+Če nadaljujemo to zaporedje, pri $n=4$ dobimo $30$ možnih stanj, za $n = 5$ pa $42$ možnih stanj.
+Zdaj poglejmo delne vsote tega zaporedja:
+\begin{align*}
+    n & = 0 & \Sigma_n & = 2 \\
+    n & \leq 1 & \Sigma_n & = 8 \\
+    n & \leq 2 & \Sigma_n & = 20 \\
+    n & \leq 3 & \Sigma_n & = 40 \\
+    n & \leq 4 & \Sigma_n & = 70 \\
+    n & \leq 5 & \Sigma_n & = 112 \\
+\end{align*}
+Opazimo: Prve tri delne vsote se ujemajo z magičnimi števili. Ta so $2, 8, 20, 28, 50, 82, 126$. Zakaj se od prvih treh členov naprej ne ujemajo več? Očitno je del težave naš približek,
+da je potencial enak potencialu harmonskega oscilatorja.
+\paragraph{Alternativno reševanje:} Namesto $R(\vct{r}) = X(x)Y(y)Z(z)$ vzemimo $R(\vct{r}) = \mathcal{R}(r)\mathcal{Y}_{lm}(\vartheta, \varphi)$.
+Tedaj dobimo lastna stanja:
+$$n = 2n_r + l + 1$$
+$$E_n = \hbar\omega\left(n + \frac{1}{2}\right)$$
+Število stanj pri določenem $l$ je $2l + 1$, na podlagi $l$ določimo tudi oznake stanj:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c}
+        $l$ & Oznaka \\
+        \hline
+        0 & s \\
+        1 & p \\
+        2 & d \\
+        3 & f \\
+        4 & g \\
+        5 & h \\
+        6 & i \\
+    \end{tabular}
+\end{table}
+Poleg tega moramo zapisati tudi, kolikokrat se je določeno stanje že pojavilo (npr. 1s, 2s, 3s itd.) Vidimo, da bo stanje z višjim $l$ boljše vezano kot stanje z nižjim $l$.
+Tudi to pa nam ne da pričakovanih magičnih števil (dobili smo iste rešitve kot prej, le v drugem koordinatnem sistemu).
+\paragraph{Popravek Hamiltonove funkcije.} V Hamiltonovi funkciji upoštevajmo sklopitev spin-tir.
+$$H \to H - C\dd{V}{r} \vct{l} \cdot \vct{s}$$
+$$E \to E + \avg{j, j_3, l, s|-C\dd{V}{r}\hat{\vct{l}}\cdot\hat{\vct{s}}|j, j_3, l, s}$$
+Tu je $\displaystyle{-C\dd{V}{r}}$ neodvisna od $j, j_3, l$ ter $s$ - torej konstanta - zato računajmo le $\avg{j, j_3, l, s|\hat{\vct{l}}\cdot\hat{\vct{s}}|j, j_3, l, s}$.
+$$\avg{j, j_3, l, s|\hat{\vct{l}}\cdot\hat{\vct{s}}|j, j_3, l, s} = \frac{1}{2}\avg{j, j_3, l, s|\hat{\vct{j}}^2 - \hat{\vct{l}}^2 - \hat{\vct{s}}^2|j, j_3, l, s}$$
+$$= \frac{1}{2}\left(j(j+1) - l(l+1) - s(s+1)\right)$$
+Ker je $s$ omejen na eno od vrednosti $\displaystyle{-\frac{1}{2}, \frac{1}{2}}$ in velja $\vct{j} = \vct{l} + \vct{s}$, velja:
+$$E \to E - C\dd{V}{r}\cdot\begin{cases}
+    \frac{1}{2}\,l \\
+    - \frac{1}{2}\,(l+1)
+\end{cases}$$
+Dobimo degeneracijo stanj:
+$\displaystyle{\Delta E = E_{s = 1/2} - E_{s = - 1/2} \propto - (l + \frac{1}{2})}$
+\\
+Kot pri orbitalah atomov lahko dojemo to kot nekakšen lupine, ki se polnijo z nukleoni. Posebej se polnijo lupine s protoni in nevtroni.
+Se pa protoni in nevtroni paroma sklopijo v vrtilno količino $j = 0$.
+\paragraph{Parnost.} Operator parnosti označimo s $\hat{P}$.
+$$\hat{P} \psi = \psi ~~\text{Soda parnost}$$
+$$\hat{P} \psi = -\psi ~\text{Liha parnost}$$
+Na primer za sferični harmonik $\mathcal{Y}_{lm}$:
+$$\hat{P}(\mathcal{Y}_{lm}) = (-1)^l$$
+\paragraph{Vzbujena stanje jeder.} Delimo jih na več vrst. \\[3mm]
+1. Enodelčna vezana stanja: Ko jedru dodamo nevtron, tipično so energijske razlike reda 1 MeV. \\[3mm]
+2. Rotacijska vzbujena stanja: Če je jedro elipsoidno (tj. daleč od magičnega števila - ta so okrogla)
+ima rotacijsko energijo $$W = \frac{\hbar^2j(j+1)}{2I},$$ kjer je $I$ vztrajnostni moment. 
+\end{document}
