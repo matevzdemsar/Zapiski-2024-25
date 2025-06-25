@@ -1,0 +1,85 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\section{Numerična analiza}
+\paragraph{Interpolacija.} Končnemu številu podatkov želimo prirediti neko zvezno funkcijo. Recimo, da imamo $n+1$ meritev,
+ki jim želimo prirediti polinom. (Polinomi so očitna izbira za interpolacijo, saj so najpreprostejši. Ko imamo opravka s periodičnimi podatki, pa nam bolj prav pridejo trigonometrične funkcije.)
+Obstaja lema, da to lahko naredimo, in sicer na natanko en način. \\[3mm]
+Izberimo bazo za polinom: najpreprostejša je $1, x, x^2, ... x^n$. Vsak polinom se da na točno en način zapisati kot linearna kombinacija
+teh polinomov. S temi polinomi želimo aproksimirati funkcijo $f(x)$. Za meritve $x_0, x_1, ... , x_i, ..., x_n$ definiramo sistem linearnih enačb
+\begin{eqnarray*}
+    a_nx_0^n + a_{n-1}x_0^{n-1} + ... + a_0 = f(x_0) \\
+    a_nx_1^n + a_{n-1}x_1^{n-1} + ... + a_0 = f(x_1) \\
+    \dots \\
+    a_nx_n^n + a_{n-1}x_n^{n-1} + ... + a_0 = f(x_n) \\
+\end{eqnarray*}
+Sistem predstavimo z matrično enačbo $\underline{A}\mathbf{a} = \mathbf{f}$, kjer je $\mathbf{a}$ vektor koeficientov polinoma $p$, $\underline{A}$ pa je Vandermondova matrika.
+Sistem bo imel rešitev natanko takrat, ko je determinanta matrike $\underline{A}$ enaka 0. Pri Matematiki II smo pokazali, da je determinanta take matrike $\underline{A}$ enaka
+$$\det\underline{A}=\prod_{i<j}(x_i - x_j),$$ kar je različno od 0, če so $x_i$ paroma različni med seboj. \\
+Reševanje takega sistema enačb je zanumdno, zato uporabimo Lagrangeovo metodo - izberemo drugo bazo za polinome.
+$$L_{n, i} = \prod_{k = 0,~k \neq i}^{n}\frac{x - x_k}{x_i - x_k}$$
+$$p_n(x) = \sum_{j=0}^{n}f(x_j)L_{n,j}(x)$$
+Če je $x = x_i$, je vrednost produkta enaka 1. Sicer je enaka 0. Sledi $p(x_j) = f(x_j)$, kar je to, kar smo želeli. Vrh tega ima ta metoda (pri ne prevelikih vrednostih $n$) časovno zahtevnost $\mathcal{O}(n^2)$, kar je veliko bolje od naše prvotne baze ($1, x^, ... x^n$), ki je imela časovno zahtevnost $\mathcal{O}(n^3)$. \\[3mm]
+Tretja metoda je t. i. Newtonova oblik baze.
+$$p_n(x) = [x_0]f + (x-x_0)[x_0, x_1]f + (x-x_0)(x-x_1)[x_0, x_1, x_2]f + ...$$
+$$+ ... (x-x_0)(x-x_1) ... (x-x_{n-1})[x_0, x_1, ... x_n]f$$
+Deljena diferenca $[x_0, x_1, ... x_k]f$ je vodilni koeficient interpolacijskega polinoma stopnje $k$, ki ga izračunamo s točkami $x_0, x_1, ..., x_k$.
+Izračunamo jih z rekurzivno formulo $$[x_0, x_1, ..., x_k]f = \frac{[x_1, x_2, ..., x_k]f - [x_0, x_1, ..., x_{k-1}]f}{x_k - x_0}$$
+Rekurzijo ustavimo pri $[x_i]f = f(x_i)$. Tako je npr. $\displaystyle{[x_0, x_1]f = \frac{[x_1]f - [x_0]f}{x_1 - x_0} = \frac{f(x_1) - f(x_0)}{x_1 - x_0}}$
+To pa je ravno smerni koeficient premice med točkama $(x_0, f(x_0))$ in $(x_1, f(x_1))$. Tej deljeni diferenci smo v sredni šoli rekli diferenčni kvocient. \\
+Sestavimo lahko tabelo deljenih diferenc za različne $x_i$. Ta postopek ima časovno zahtevnost $\mathcal{O}(n^2)$.
+\paragraph{Primer.} Iščemo kubični polinom, ki interpolira točke $(1, 0),~(0, 1),~(1, 2),~(2, 9)$. \\
+Klasična oblika: rešujemo sistem enačb
+$$\begin{bmatrix}
+    -1 & 1 & -1 & 1 \\
+    0 & 0 & 0 & 1 \\
+    1 & 1 & 1 & 1 \\
+    8 & 4 & 2 & 1
+\end{bmatrix}\begin{bmatrix}
+    a_0 \\ a_1 \\ a_2 \\ a_3
+\end{bmatrix} = \begin{bmatrix}
+    0 & 1 & 2 & 9
+\end{bmatrix}$$
+Dobimo rešitev $(1, 0, 0, 1)$, ki ustreza polinomu $x^3 + 1$. \\
+Lagrangeova oblika:
+$$L_{3, 0} = -\frac{x(x-1)(x-2)}{6}$$
+$$L_{3, 1} = \frac{(x+1)(x-1)(x-2)}{2}$$
+$$L_{3, 2} = -\frac{x(x+1)(x-2)}{2}$$
+$$L_{3, 3} = -\frac{x(x+1)(x-1)}{6}$$
+$$p_3(x) = \sum_{j=1}^3 f(x_j)L_{3, j}(x) = ... = x^3 + 1$$
+Newtonova oblika:
+\begin{tabular}{c|c c c c}
+    &&&& \\
+    \hline
+    -1 & 0 &&& \\
+    0 & 1 & 1 && \\
+    1 & 2 & 1 & 0 & \\
+    2 & 9 & 7 & 3 & 1 \\
+\end{tabular}
+Zanimajo nas le vrednosti na diagonali, dobimo torej
+$$p_3(x) = 0 + (x - (-1)) \cdot 1 + (x - (-1))(x - 0) \cdot 0 + (x - (-1))(x - 0)(x - 1) \cdot 1 = x + 1 + x^3 - x = x^3 + 1$$
+\paragraph{Alternativnei zapis Lagrangeove motode.} Naj bo $w(x) = (x-x_0)(x-x_1)...(x-x_n)$ Potem na kratko piošemo $$L_{n, i}(x) = \frac{w(x)}{(x-x_i)w'(x_i)}$$
+Izrek: Če je $f$ (n+1)-krat zvezno odvedljiva na intervalu [a, b], ki vsebuje paroma različne točke $x_0, x_1, ..., x_n$, potem za vsako število $x\in[a, b]$ obstaja tako število $\xi \in (a, b)$, da bo
+$$f(x) - p_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!}w(x)$$
+\end{document}

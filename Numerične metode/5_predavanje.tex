@@ -1,0 +1,87 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{../mycommands}
+
+
+\begin{document}
+5. predavanje: Tangentna metoda \\[4mm]
+Tangentna metoda iskanja ničel: Nov približek je presečišče tangente v prejšnjem približku z abscisno osjo. Dobimo rekurzivno zvezo
+$$x_{r+1} = x_r - \frac{f(x_r)}{f'(x_r)}$$
+Izpeljava je iz Taylorjeve vrste:
+$$f(x_r + \Delta x_r) = f(x_r) + f'(x_r) \Delta x_r + ... = 0$$
+$$\Delta x_r = - \frac{f(x_r)}{f'(x_r)} \equiv f(x_{r+1}) - f(x_r)$$
+Ali ta metoda konvergira? \\
+Tangentna metoda je primer navadne iteracije.
+\begin{displaymath}
+    x_{r+1} = g(x_r)
+\end{displaymath}
+Če je $\alpha$ enostavna ničla, je $f'(\alpha)$ neskončen, torej je $g(\alpha) = \alpha$.
+Preverimo red konvergence:
+$$g'(x) = 1 - \frac{f'(x)^2 - f(x)f''(x)}{f'(x)^2} = \frac{f(x)f''(x)}{f'(x)^2}$$
+$$g'(\alpha) = \frac{f(\alpha)f''(\alpha)}{f'(\alpha)^2} = 0$$
+Zadnje velja, ker je $f(\alpha) = 0$. To pomeni, da ima tangentna metoda vsaj kvadratno konvergenco. \\
+Poglejmo še, kako je z drugim odvodom.
+$$g''(\alpha) = ... = \frac{f''(\alpha)}{f'(\alpha)}$$
+To je enako 0, če je $f''(\alpha) = 0$, torej mora imeti $f$ v enostavn ničli še prevoj, kot na primer funkcija $\tan x$ v $x = 0$. Tedaj je konvergenca vsaj kubična. \\[3mm]
+Pri prejšnjem predavanju smo omenili Babilonsko metodo za računanje kvadratnega korena: $$g(x) = \frac{x^2 + a}{2x}$$
+Funkcija $f(x) = x^2 - a$ ima ničli v $\displaystyle{\pm \sqrt{a}}$.
+Po tangentni metodi je \begin{displaymath}
+    g(x) = x - \frac{f(x)}{f'(x)} = x - \frac{x^2 - a}{2x} = \frac{x^2 + a}{2x}
+\end{displaymath}
+Če je $\alpha$ večkratna ničla, označimo njeno stopnjo z $m\in\N \setminus {1}$. Tedaj lahko funkcijo $f$ zapišemo kot:
+$$f(x) = \left(x - \alpha\right)^mh(\alpha),~h(\alpha)\neq0$$
+$$g(x) = x - \frac{f(x)}{f'(x)} = x - \frac{\left(x - \alpha\right)^mh(x)}{m\left(x-\alpha\right)^{m-1}h(x) + \left(x - \alpha\right)^mh'(x)}$$
+$$= x - \frac{h(x)}{mh(x) + \left(x-\alpha\right)h'(x)}$$
+Z izračunom odvoda v $x = \alpha$ dobimo:
+$$g'(\alpha) = 1 - \frac{1}{m},$$
+kar je enako 0 pri enkratni ničli. Ker pa smo zahtevali, da $m \neq 1$, vidimo, da ima tangentna metoda pri iskanju večkratnih
+ničel linearno konvergenco. Pri ničlah z visoko kratnostjo konvergira celo zelo počasi. \\
+
+Sekantna metoda: \\
+Tangentna metoda ima to pomankljivost, da zahteva odvod, ki ga strojno zelo težko natančno izračunamo. Če ga aproksimiramo z diferenčnim kvocientom:
+$$f'(x_r) \approx \frac{f(x_r) - f(x_{r-1})}{x_r - x_{r-1}}$$
+dobimo sekantno metodo. Red konvergence te metode je $p = \Phi \approx 1.62$.
+Če vzamemo boljšo aproksimacijo odvoda, dobimo višji red konvergence, vendar še pri tako veliko točkah ne bomo prehiteli tangentne metode. \\
+
+Mullerjeva metoda: \\
+Podobna sekantni, le da namesto dveh točk za aproksimacijo odvoda uporabi tri. Ta ima rahlo težavo, in sicer, da ima parabola običajno dve ničli (ali pa nobene, kar je še slabše). \\
+
+Inverzna interpolacija: \\
+Aproksimira inverzno funkcijo funkcije $f$ in izračuna $f^{-1}(0)$ \\
+
+Metoda $(f, f', f'')$: \\
+Podobna tangentni, le da namesto enega uporabi dva člena Taylorjevega razvoja. Pojavijo se dodatne komplikacije, saj ima parabola dve ničli. Metodo je uporabljal Haley pri
+računanju tirnice kometa. Ima kubično konvergenco, vendar zahteva drugi odvod, kar ni optimalno. \\
+
+Brentova metoda: \\
+Kombinira interpolacijo, bisekcijo in sekantno metodo, velja za eno boljših metod.\\
+
+Poseben primer: Polinomske enačbe \\
+Prva uporabna lastnost polinomov je, da lahko izračunamo vse ničle. Pri prejšnjem predavanju smo pokazali, da so ničle lahko privlačne ali odbijajoče, kar pomeni, da bomo nekatere zelo težko dosegli.
+Polinom pa lahko enostavno delimo z $x - x_0$ in dobimo nov polinom, katerega ničle lahko iščemo.
+Druga metoda je, da sestavimo matriko
+$$A_n = \begin{bmatrix}
+    0 & 1 & 0 & 0 & ... & 0 \\
+    0 & 0 & 1 & 0 & ... & 0 \\
+    0 & 0 & 0 & 1 & ... & 0 \\
+    \vdots & \vdots & \vdots &\vdots & \ddots & \vdots \\
+    0 & 0 & 0 & 0 & ... & 1 \\
+    -a_0/a_n & -a_1/a_n & -a_2/a_n & -a_3/a_n & ... & -a_{n-1}/a_n
+\end{bmatrix}$$
+in izračunamo njena lastne vrednosti. Računanje lastnih vrednosti je sicer nekoliko komplicirano (definitivno ne uporabimo karakterističnega polinoma), nam pa da pravi rezultat. Dokažimo to: \\
+Naj bo $\lambda$ lastna vrednost funkcije. Tedaj mora biti $$\det (A_n - \lambda I) = C p(\lambda)$$
+Ugibamo, da je $\displaystyle{C = \frac{(-1)^n}{a_n}}$. Dokazujemo pa z indukcijo, in sicer:
+\begin{itemize}
+    \item $n=1$: $p(\lambda) = a_1 \lambda + a_0$ \\
+    $$A_1 = \left[-\frac{a_0}{a_1}\right]$$
+    $$\det (A_1 - \lambda I) = -\frac{a_0}{a_1} - \lambda = \frac{-1}{a_1}\left(a_1 \lambda + a_0\right) = \frac{-1}{a_1}p(\lambda)$$
+    \item $n -1 \to n$: Matriko $A_n - \lambda I$ razvijemo po prvem stolpcu. Dobimo $$\det(A_n - \lambda I) = (-\lambda)\left|\begin{matrix}-\lambda & 1 & 0 & ... & 0 & 0 \\ 0 & -\lambda & 1 & ... & 0 & 0 \\ \vdots &&&&& \vdots \\ 0 & 0 & 0 & ... & -\lambda & 1 \\ -\frac{a_1}{a_n} & -\frac{a_2}{a_n} & -\frac{a_3}{a_n} & ... & -\frac{a_{n-2}}{a_n} & -\frac{a_{n-1}}{a_n} - \lambda \end{matrix}\right| + (-1)^{n+1}\left(-\frac{a_0}{a_n}\right)\cdot 1$$ 
+    Uporabimo indukcijsko predpostavko: $$\det (A_n - \lambda I) = (-\lambda) (-1)^{n-1} \frac{1}{a_n}\left(a_n\lambda^{n-1} + ... + a_2 \lambda + a_1\right) + (-1)^n\frac{a_0}{a_n}$$
+    $$= (-1)^n\frac{1}{a_n}(a_n\lambda^n + a_{n-1}\lambda^{n-1} + ... + a_1\lambda + a_0) + (-1)^n \frac{a_0}{a_n}$$
+    $$= (-1)^n \frac{1}{a_n}(a_n\lambda^n + a_{n-1}\lambda^n + ... + a_1\lambda + a_0) = (-1)^n\frac{1}{a_n}p(\lambda)$$
+\end{itemize}
+\begin{math}\backslash\text{end}\{\text{proof}\}\end{math} \\
+\end{document}
