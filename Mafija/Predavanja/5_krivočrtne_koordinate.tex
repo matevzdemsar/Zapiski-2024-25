@@ -1,0 +1,138 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+Kartezične koordinate:
+$$\vct{r} = x\hat{e}_x + y\hat{e}_y + z\hat{e}_z = x^{i}\hat{e}_i$$
+To ni čisto točno vektor, saj $\hat{e}_x$, $\hat{e}_y$ in $\hat{e}_z$ niso vektorji. Lokalne bazne vektorje dobimo z odvodom:
+$$\vct{e_i} = \pd{\vct{r}}{x^i}$$
+$$\vct{v} = v^i\hat{e}_i = v^i\partial_i$$
+(Načeloma $\partial_i \vct{r}$) \\[4mm]
+V cilindričnih koordinatah: $$\vct{r} = (r\cos\varphi, r\sin\varphi)$$
+$$\vct{e_r} = (\cos\varphi, \sin\varphi)$$
+$$\vct{e_\varphi} = (-r\sin\varphi, r\cos\varphi)$$
+Infinitezimalni premik:
+$$d\vct{r} = \pd{\vct{r}}{x^i}dx^i = \vct{e}_idx^i$$
+Taka oznaka je pravilna v vseh koordinatnih sistemih.
+$$|d\vct{r}|^2 = d\vct{r} \cdot d\vct{r} = dx^i\vct{e}_i\cdot\vct{e}_jdx^j = g_{ij}dx^idx^j$$
+Pri tem je $g$ metrični tenzor. Dobimo ga s skalarnim množenjem baznih vektorjev. V cilindričnih koordinatah je na primer enak
+$$g = \begin{bmatrix}
+    1 & 0 \\ 0 & r^2
+\end{bmatrix}$$
+\paragraph{Gradient.} Obravnavamo skalarno polje $f$
+$$df = \pd{f}{x^i}dx^i = (\nabla f)_idx^i$$
+Mimogrede, tu se ponovno pokaže misel od prejšnjič, da so kontravariantni vektorji primerljivi s plastnicami.
+\paragraph{Operator $\nabla$}. \\
+Kartezčne koordinate: $\displaystyle{\nabla = \left(\pd{}{x}, \pd{}{y}, \pd{}{z}\right)}$ \\
+Polarne koordinate: $\displaystyle{\nabla = \left(\pd{}{r}, \frac{1}{r}\pd{}{\varphi}\right)}$ \\
+In tako naprej. Obstajajo tabele $\nabla$ v različnih koordinatnih sistemih, za poljuben sistem pa jih lahko tudi izpeljemo, če $\nabla$ v kartezičnih koordinatah zapišemo kot $\nabla = \hat{e}^i\partial_i$
+in izrazimo $\hat{e}_i$ za iskani koordinatni sistem (npr. $\hat{e}_r = (\cos\varphi, \sin\varphi)$).
+\paragraph{Menjava koordinat.} To ni nujno linearen proces. Recimo, da preslikamo $x^i \to u^j$.
+$$\pd{f}{x^i} = \pd{f}{u^j}\pd{u^j}{x^i} = \pd{f}{u^j}T^i$$
+S $T$ smo označili posplošeno linearno preslikavo - gre za matriko z elementi $T^{ij} = \pd{u^j}{x^i}$
+\paragraph{Integral gradienta.} Primer: Vzgon
+$$F_{v} = \varoiint pd\vct{S} = \varoiint \rho g h d\vct{S} = \rho g V = \iiint \rho gdV = \iiint \nabla pdV$$
+V splošnem:
+$$\varoiint fd\vct{S} = \iiint \nabla f dV$$
+\paragraph{Usmerjeni odvod.} Imamo parametrizirano krivuljo $\vct{r}(t)$. Opazujemo odvod neke funkcije $f$ v smeri tangente na $\vct{r}$ (označimo s $t$).
+$$\dd{f(\vct{r})}{t} = \pd{f}{x^i}\pd{x^i}{t} = (\nabla f)\vct{T}$$
+Označimo $\vct{t}\cdot\vct{\nabla}$ - operator odvoda v smeri $\vct{t}$
+$$(\vct{t} \cdot \vct{\nabla})f = \frac{f(\vct{r} + h\vct{t}) - f(\vct{r})}{h}$$
+To velja tudi, če je $f$ vektorska funkcija. \\[4mm]
+Nekaj primerov: \\
+Advekcijski člen za pretok temperature v toku tekočine:
+$$\dd{T}{t} = \pd{T}{t} + (\vct{v}\cdot\vct{\nabla})T$$
+Advekcijski člen za gibanje tekočin:
+$$\rho \dd{\vct{v}}{t} = -\nabla p + \text{druge sile}$$
+$$\dd{\vct{v}}{t} = \pd{\vct{v}}{t} + (\vct{v}\cdot\nabla)\vct{v}$$
+Sile na dipol v nehomogenem polju:
+$$F_m = (\vct{p_m}\cdot\nabla)\vct{B} = (p_j\partial_j)B_i = p_j\partial_iB_j = p_j(\partial_iB_j) = \vct{p}(\vct{\nabla}\cdot\vct{B})$$
+$$-\vct{p_m}\vct{B} = W_m$$
+Sledi:
+$$\vct{F} = -\nabla W_m = \nabla_i(p_jB_j) = p_j\partial_iB_j$$
+\paragraph{Gradient vektorja.} Za primer vzemimo $\vct{B}$
+$$\partial_iB^j = \begin{bmatrix}
+    \partial_xB_x & \partial_xB_y & \partial_xB_z \\
+    \partial_yB_x & \partial_yB_y & \partial_yB_z \\
+    \partial_zB_x & \partial_zB_y & \partial_zB_z \\
+\end{bmatrix}$$
+\paragraph{Divergenca.} Videli smo jo že v Gaussovem izreku, na splošno pa pri pretokih vektorjev skozi ploskve. \\
+Najbolj nas bo zanimal pretok skozi zaključeno ploskev: \\
+$\displaystyle{\varoiint \vct{v}d\vct{S}}$ v pošljimo v limito $V \to 0$
+\begin{align*}
+    \varoiint \vct{v} d\vct{S} & = v_x(x + dx, y, z)\,dy\,dz - v_x(x, y, z)\,dy\,dz \\
+    & + v_y(x, y + dy, z)\,dx\,dz - v_x(x, y, z)\,dx\,dz \\
+    & + v_z(x, y, z + dz)\,dx\,dy - v_x(x, y, z)\,dx\,dy \\
+    & = \left(\pd{v_x}{x} + \pd{v_y}{y} + \pd{v_z}{z}\right)\,dx\,dy\,dz
+\end{align*}
+Izraz $\displaystyle{\left(\pd{v_x}{x} + \pd{v_y}{y} + \pd{v_z}{z}\right)}$ imenujemo divergenca (označimo $\vct{\nabla}$ ali $div$).
+$$\vct{\nabla} \vct{v} = div\vct{v} = \partial_iv^i$$
+Tudi divergenca ima v različnih koordinatnih sistemih različne oblike, ki so ravno tako tabelirane,
+da pa se jih tudi izpeljati.
+\paragraph{Rotor.} Rotor je uporaben pri integralih po zaključenih krivuljah. Na primer:
+\begin{align*}
+    \vct{v} \cdot d\vct{r} & = v_y(x + dx, y, z)\,dy - v_x(x, y+dy, z)\,dx \\
+    & ~~- v_y(x, y, z)\,dy + v_x(x, y, z)\,dx \\
+    & = \pd{v_y}{x}\,dx\,dy - \pd{v_x}{y}\,dx\,dy \\
+    & = (\vct{\nabla} \times \vct{v})\,d\vct{S}_{xy}
+\end{align*}
+Uvedli smo rotor:
+$$(\vct\nabla \times \vct v) = \varepsilon_{ijk}\partial_jv_k$$
+\paragraph{Kombinirani diferencialni operatorji.}
+$$\nabla \times (\nabla f) = 0$$
+$$\nabla \cdot (\nabla \times \vct v) = 0$$
+V elektromagnetizmu:
+$$\oint \vct H d \vct e = \iint \left(\dot{\vct D} + \vct j\right)d\vct S$$
+Kajti: $$\vct\nabla\times\vct H = \dot{\vct{D}} + \vct{j}$$
+\paragraph{Laplaceov operator.} $\displaystyle{\nabla^2f = \vct\nabla (\nabla f) = \partial_i\partial_if}$ \\
+V kartezičnih koordinatah je enak $\displaystyle{\pd{^2}{x^2} + \pd{^2}{y^2} + \pd{^2}{z^2}}$ \\
+V fiziki je izjemno uporaben, npr. pri difuzijski enačbi:
+$$D\nabla^2T = \pd{T}{t}$$
+Poissonova enačba:
+$$\nabla^2U = -\frac{\rho_e}{\varepsilon_0}$$
+Laplaceova enačba:
+$$\nabla^2U = 0$$
+(Poissonova, če nimamo izvorov) \\[4mm]
+Valovna enačba:
+$$c^2\nabla^2y = \pd{^2y}{t^2}$$
+V cilinddričnih koordinatah: \\
+$\displaystyle{\nabla^2f = \frac{1}{r}\pd{}{r}\left(\pd{f}{r}\right) + \frac{1}{r^2}\pd{^2f}{\varphi^2}}$ \\
+V sferičnih koordinatah: \\
+$\displaystyle{\nabla^2f = \frac{1}{r^2}\pd{}{r}\left(r^2\pd{f}{r}\right) + \frac{1}{r^2}\left[\frac{1}{\sin\vartheta}\pd{}{\vartheta}\left(\sin\vartheta\pd{f}{\vartheta}\right)+ \frac{1}{\sin^2\varphi}\pd{^2f}{\varphi^2}\right]}$ \\
+\paragraph{Vektorski Laplaceov operator.} Definiran je enako, se ga pa običajno da napisati drugače.
+$$\nabla^2\vct{v} = div\,grad\,\vct{v} = \partial_j\partial_jv_i$$
+Vendar:
+$$\vct\nabla \times (\vct\nabla \times \vct{v}) = \vct\nabla(\vct\nabla\vct{v}) - \nabla^2\vct{v}$$
+To je običajno lažje izračunati.
+\paragraph{Zunanji odvod in diferencialne forme.} Skalarno funkcijo spremenimo v vektorsko z gradientom.
+$$\int_{r} v_idx^i[\vct{r}(t)] = \int_{r}\vct{v}d\vct{r} = \int\vct{v}\pd{\vct{r}}{t}dt$$
+Vektorje, povezane s ploskvami (tj. jih moramo integrirato po ploskvah), včasih imenujemo tudi psevdovektorji ali bivektorji. Do njih pridemo tako, da na vektorjih izvedemo rotor. \\[4mm]
+Skalarje, povezane s prostornino (razne gostote), imenujemo tudi psevdoskalarji. Do njih pridemo tako, da na psevdoskalarjih uporabimo divergenco. Lahko jim rečemo tudi trivektor, gre namreč za mešani produkt $\vct\alpha\cdot(\vct\beta\times\vct\gamma)$. \\[4mm]
+Zunanji odvod definiramo kot $df = \nabla_ifdx^i$
+$$d(v_idx^i) = \pd{v_i}{x^j}dx^i\wedge dx^j$$
+Z $\wedge$ smo označili zunanji produkt vektorjev (gre za nekakšen vektorski produkt).
+Ker nam zunanji produkt vrne nekaj podobnega rotorju, velja $d(df) = 0$
+\paragraph{Stokesov izrek:} Zunanji odvod nam omogoči, da v integralu izrazimo dejstvo, da integriramo po robu množice.
+$$\oint_\partial M\omega = \int d\omega$$
+Posledično je naša ugotovitev $d(df) = 0$ ekvivalentna trditvi $\partial(\partial M) = 0$, ali drugače: Rob množice nima roba.
+\end{document}

@@ -1,0 +1,129 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\section{Nelinearne diferencialne enačbe 1. reda}
+Imamo enačbo oblike
+$$\dot{\vct{x}} = f(\vct{x}) = A(\vct{x} - \vct{x_0}) + \mathcal{O}(x^2),$$
+kjer je $f(\vct{x_0}) = 0$ in $\displaystyle{A_{ij} = \pd{f_i}{x_j}(\vct{x_0})}$. Naredili smo prvi člen Taylorjevega razvoja.
+Naslednji člen bi bil $\displaystyle{\frac{1}{2}(x-x_0)_j(x-x_0)_k\pd{f_i}{x_j}\pd{f_i}{x_k}}$.
+Ker so nelinearne diferencialne enačbe v splošnem zelo težko rešljive, bomo reševali le v okolizi ničel, kjer je naš enočlenski razvoj dovolj dober. \\
+
+Matriko $A$ diagonaliziramo (to se običajno da). V smeri lastnih vektorjev je rešitev diferencialne enačbe $e^{\lambda t}$, pri čemer je lahko $\lambda$ realna ali kompleksna. \\
+Če ima matrika $A$ realne lastne vrednosti, lahko navedemo še dva posebna primera: Če so vse $\lambda > 0$, govorimo o odbojni točki oziroma izvoru. Gre za nestabilno stacionarno točko. Če so vse $\lambda < 0$ govorimo o privlačni točki ali ponoru. To je stabilna stacionarna točka.
+Najpogosteje so nekatere lastne vrednosti večje od 0, nekatere pa manjše. Še posebej pogosti so ti primeri zato, ker je tedaj sled matrike $A$ lahko enaka 0, kar je pogosta lastnost Hamiltonskih sistemov.
+Nazadnje imamo primere, ko so nekatere lastne vrednosti enake 0. V teh primerih imamo smeri, v katere je obnašanje rešitve neeksponentno in se splača pri računanju uporabiti še drugi člen Taylorjevega razvoja. \\[3mm]
+Če so lastne vrednosti kompleksne, imamo opravka s konjugiranimi pari $a \pm bi$.
+$$A(\vct{u} \pm \vct{v}i) = (a \pm b_i)(\vct{u} \pm \vct{i})$$
+$$\vct{x}(t) = A^+ e^{(a + bi) t}(\vct{u} + \vct{v}i) + A^- e^{(a - bi) t}(\vct{u} - \vct{v}i)$$
+$$= e^{at}\left(A^+ (\cos bt + i\sin bt)(\vct{u} + \vct{v}i) + A^- (\cos bt - i\sin bt) (\vct{u} - \vct{v}i)\right)$$
+Vrednost $a$ (oziroma njen predznak) nam pove, ali gre za privlačno ali odbojno točko. Drugi faktor je periodičen. Se pravi gre običajno za nekakšno spiralo proti ali stran od točke $\vct{x_0}$
+\begin{align*}
+    \vct{x}(t) & = e^{at} \vct{u} \left[(A^+ + A^-) \cos bt + i(A^+ - A^-)\sin bt\right] \\
+    & + e^{at} \vct{v} \left[-(A^+ + A^-)\sin bt + i(A^+ - A^-)\cos bt\right]
+\end{align*}
+Ker mora biti končni rezultat realen, mora biti $A^+ = \overline{A^-}$, tedaj je
+$$\vct{x}(t) = 2e^{at}\left(\mathfrak{Re}(A) \vct{u} \cos bt - \mathfrak{Im}(A) \vct{u} \sin bt - \mathfrak{Im}(A) \vct{v} \cos bt + \mathfrak{Re}(A) \vct{v} \sin bt\right)$$
+Če izpostavimo člena z $A_r$ in $A_i$, dobimo rotacijsko matriko, ki sistem $\vct{u}, \vct{v}$ zasuka za kot $bt$. \\[3mm]
+Poseben primer: $\lambda = \pm bi$ brez realnega dela. Tedaj je lahko $\mathrm{Tr}A = 0$, poleg tega je funkcija okoli točke ciklična.
+\paragraph{Hamiltonski sistem.}
+$$\pd{}{t}\begin{bmatrix}
+    q \\ p
+\end{bmatrix} = \begin{bmatrix}
+    \pd{H}{p} \\ - \pd{H}{q}
+\end{bmatrix} \approx \begin{bmatrix}
+    \pd{^2 H}{p \partial q} & \pd{^2 H}{p^2} \\
+    \pd{^2 H}{p^2} & \pd{^2 H}{q \partial p}
+\end{bmatrix}\begin{bmatrix}
+    q-q_0 \\ p-p_0
+\end{bmatrix}$$
+Vidimo, da za Hamiltonski sistem velja $\mathrm{Tr}A = 0$, torej imemo lahko samo krožne točke in sedla, kar pa nadaljnje pomeni,
+da so trajektorije gibanje v prostoru take, da ohranjajo energijo.
+\paragraph{Primer: Lotka-Voltera} Obravnavamo velikost populacije plenilcev ($L$) in plena ($Z$).
+$$\dot{Z} = \alpha Z - \beta ZL = (\alpha - \beta L) Z$$
+$$\dot{L} = -\gamma L + \delta ZL = (-\beta + \delta Z) L$$
+$$\dd{Z}{L} = \frac{\alpha Z - \beta LZ}{-\gamma L + \delta LZ}$$
+$$\int (-\gamma + \delta z) \frac{\dif Z}{Z} = \int (\alpha - \beta L)\frac{\dif L}{L}$$
+$$-\gamma \ln\frac{Z}{Z_0} + \delta (Z - Z_0) = \alpha \ln\frac{L}{L_0} - \beta (L-L_0)$$
+Če narišemo graf $L(Z)$, ima ta obliko nekakšne sklenjene krivulje okoli neke točke. To točko poiščemo z odvodom, da dobimo stacionarno točko, mora namreč veljati
+$$\dot Z = \dot L = 0$$
+Dobimo dve stacionarni točki:
+\begin{align*}
+    L_0 & = \frac{\alpha}{\beta} & L_0 & = 0 \\
+    Z_0 & = \frac{\gamma}{\delta} & Z_0 & = 0 \\
+\end{align*}
+Prva točka je krožna točka, druga pa sedlo. Izračunamo lahko tudi obhodne čase za majhne odmike iz stacionarne točke $(\alpha/\beta, \gamma/\delta)$, in sicer imamo tedaj opravka z odvisnostjo $$L, Z \propto e^{i\sqrt{\alpha\gamma}t}$$
+Časovne odvisnosti $L(t)$ in $Z(t)$ pa ne moremo enostavno izračunati.
+\paragraph{Model laserja.} Imamo fotone in atome - njih števila označimo s $F$ in $A$.
+$$\dot F = - \alpha F + \gamma A F = F(\gamma A - \alpha)$$
+$$\dot A = - \beta A - \delta AF + R$$
+$R$ označuje črpanje atomov v prostor (lahko je tudi negativno, če jih črpamo ven).
+\begin{enumerate}
+    \item Ravnovesje pri $F=0, A = \beta/R$
+    $$J = \begin{bmatrix}
+        \pd{\dot F}{F} & \pd{\dot F}{A} \\
+        \pd{\dot A}{F} & \pd{\dot A}{A} \\
+    \end{bmatrix} = \begin{bmatrix}
+        -\alpha + \gamma A & \gamma F \\
+        - \delta A & -\beta - \delta F
+    \end{bmatrix}$$
+    Vstavimo $F$ in $A$ ter dobimo
+    $$\begin{bmatrix}
+        -\alpha + \gamma\frac{R}{\beta} & 0 \\
+        -\frac{\delta R}{\beta} & -\beta
+    \end{bmatrix}$$
+    Točka bo odbojna, če je $R > \frac{\alpha \beta}{\gamma}$, sicer pa privlačna.
+    \item Ravnovesje pri $A_0 = \frac{\alpha}{\gamma}$ in $F_0 = \frac{R\gamma - \alpha\beta}{\alpha\delta}$ \\
+    Uvedemo brezdimenzijske količine:
+    $$\dot f = \alpha(-f + af)$$
+    $$\dot a = \beta(a - af + r)$$
+    Pri $f = F\frac{\delta}{\beta}$ imamo ravnovesje. Tedaj je matrika za 2. stacionarno točko enaka
+    $$J = \begin{bmatrix}
+        0 & \alpha(r-1) \\
+        -\beta & -\beta r
+    \end{bmatrix}$$
+    Vidimo, da bomo imeli prag pri $r=1$. Izračunamo karakteristični polinom
+    $$\lambda^2 + \beta r \lambda + \alpha\beta (r-1) = 0$$
+    Označimo $\alpha\beta(r-1) = \omega_0^2$. $\omega_0$ je frekvenca nihanja nedušenega sistema, $\frac{\beta r}{2}$ pa je koeficient dušenja.
+    Razmerje med njima opisuje koeficient dobrote (kvalitete): $$Q = \sqrt{\frac{a(r-1)}{\beta r^2}}$$
+\end{enumerate}
+\paragraph{(Kemijske) reakcije.} Iz kemijskih reakcij lahko zapišemo enačbe kemijske kinetike, npr.pri reakciji $A + B \to C$.
+$$\dot A = -q AB$$
+$$\dot B = -q AB$$
+Vemo tudi, da je $A - B$ konstanta, označimo $K$
+$$\dot A = -qA(A - K)$$
+Ko integriramo, dobimo $$A(t) = \frac{A_0}{\frac{A_0}{K}+\left(1 - \frac{A_0}{K}\right)e^{-Kqt}}$$
+Poseben primer pa dobimo, če je $K = 0$:
+$$\dot A = -qA^2$$
+$$A(t) = \frac{A_0}{1 + A_0qt}$$
+Reakcijam, pri katerih je $K=0$, rečemo reakcije 2. reda (ostalim pa reakcije 1. reda).
+\paragraph{Model epidemije.} Imamo tri neznanke: število bolnih ($B$), število dovzetnih ($D$) in število imunih ($I$).
+$$\dot B = \alpha BD - \beta B$$
+$$\dot D = -\alpha BD + \gamma I$$
+$$\dot I = - \gamma I + \beta B$$
+Ker je $B + D + I$ konstanta (nekateri, ki zbolijo, sicer umrejo, ampak s tem tehnično gledano postanejo imuni) in če je $\gamma = 0$ (torej če imuni ostanejo imuni - ali mrtvi), lahko stvar poenostavimo tako kot pri zajcih in lisicah:
+$$\dd{B}{D} = \frac{\alpha D - \beta}{\alpha \beta} \frac{B}{D}$$
+Ko to integriramo, dobimo
+$$B - B_0 + D - D_0 = \frac{\beta}{\alpha} \ln \frac{D}{D_0}$$
+\end{document}

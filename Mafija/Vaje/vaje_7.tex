@@ -1,0 +1,35 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+\paragraph{Vaje z indeksi}\text{} \\
+$$\vct{n} \times (\vct{\nabla} \times \vct{n}) = ?$$
+$$(\vct{a} \times \vct{b})_i = \varepsilon_{ijk} a_jb_k$$
+$$\vct{n} \times (\vct{\nabla} \times \vct{n}) = \varepsilon_{ijk} n_j (\varepsilon_{kgh} \nabla_g n_h) = \varepsilon_{kij}\varepsilon_{kgh} n_j\nabla_gn_h$$
+Poznamo zvezo $\varepsilon_{kij}\varepsilon_{kgh} = \delta_ig\delta_{jh} - \delta_{ih}\delta_{jg}$
+$$=(\delta_{ig}\delta_{jh} - \delta_{ih}\delta_{jg})n_j(\nabla_gn_h)$$
+Velja: $\delta_{ih}n_h = n_i$
+$$= \delta_{ig} n_j\nabla_gn_j - \delta_{ih} n_j\nabla_jn_h = n_j\nabla_in_j - n_j\nabla_jn_i$$
+To pa je ravno enako $(\vct{n}\cdot\vct{n})\nabla-(\vct{n}\cdot\vct{\nabla})\vct{n}$
+Če je $\vct{n}$ enotski vektor, poleg tega velja $n_jn_j = 1$ in $\nabla_i(n_jn_j) = 0$ (kajti gre za odvod konstante). Ostane nam torej le $-n_j\nabla_jn_i$
+\end{document}

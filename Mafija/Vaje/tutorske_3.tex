@@ -1,0 +1,69 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{2. izpit 2023} Podane imamo sledeče podatke:
+$$\partial_xT = \frac{\Delta T}{L}$$
+$$\vct{j} = (j_x, 0)$$
+$$\varphi(y) = \frac{y}{H}\Delta\varphi$$
+Zanimata nas $j_x(y)$ in $P$.
+$$\vct{j} = -\duline{\lambda} \nabla T$$
+V lastnem sistemu je $\displaystyle{\duline{\lambda} = \begin{pmatrix}
+    \lambda_\perp & 0 \\
+    0 & \lambda_\parallel
+\end{pmatrix}}$, hkrati vemo:
+$$\vct{j}\cdot\widehat{e}_y = - (\duline{\lambda} \nabla T)\cdot\widehat{e}_y = 0$$
+$$\widehat{e}_y^T\left(\lambda \partial_xT\widehat{e}_x + \lambda\partial_yT\widehat{e}_y\right) = 0$$
+Vemo: $\hat{e}_i^T\lambda \hat{e}_j = \lambda_{ij}$
+$$\lambda_{xy} \frac{\Delta T}{L} + \lambda_{yy} \partial_yT = 0$$
+$$\partial_yT = -\frac{\lambda_{xy}}{\lambda_{yy}}\frac{\Delta T}{L}$$
+\\
+$$j_x = \vct{j}\cdot\widehat{e}_x = -\widehat{e}_x^T\left(\lambda\frac{\Delta T}{L}\widehat{e}_x + \lambda\partial_yT\widehat{e}_y\right) =$$
+$$= -\left(\lambda_{xx} \frac{\Delta T}{L} - \lambda_{xy}\frac{\lambda_{xy}}{\lambda_{yy}} \frac{\Delta T}{L}\right) = -\frac{\lambda_{xx}\lambda_{yy} - \lambda_{xy}^2}{\lambda_{yy}}\frac{\Delta T}{L} = \frac{\det(\lambda)}{\lambda_{yy}}\frac{\Delta T}{L}$$
+$\det(\lambda)$ je enaka v lastnem sistemu, torej hitro vidimo $\det(\lambda) = \lambda_\perp \lambda_\parallel$. $\lambda_{yy}$ dobimo tako, da v lastnem sistemu zapišemo vektorja $\widehat{e}_x$ in $\widehat{e}_y$.
+Tedaj je $\lambda_{yy} = \widehat{e}^T_{y}\lambda^{\text{last.}}\widehat{e}_y = \lambda_\perp \sin^2\varphi + \lambda_\parallel \cos^2\varphi$. \\
+Sledi $$j_x(\varphi) = -\frac{\Delta T}{L}\frac{\lambda_\perp\lambda_\parallel}{\lambda_\perp \sin^2\varphi + \lambda_\parallel \cos^2\varphi}$$
+Iz tega lahko hitro izrazimo $j_x(y)$. \\
+$$P = -\int j_x\dif S = \frac{\Delta T}{L} r\lambda_\parallel\lambda_\perp \int_{-H/2}^{H/2}\frac{\dif y}{\lambda_\perp \sin^2\varphi + \lambda_\parallel\cos^2\varphi}$$
+Pri tem smo označili $\dif S = r \dif y$ - predpostavimo, da je plošča pravokotna s stranicama $r$ in $H$. Zdaj bomo vzeli novo spremenljivko, in sicer je $\displaystyle{y = \frac{H}{\Delta \varphi} \varphi}$. Konstante pred integralom bomo združili v konstanto $\alpha$.
+$$P = \alpha \int_{-\Delta\varphi}^{\Delta\varphi}\frac{\dif \varphi}{\lambda_\perp\sin^2\varphi + \lambda_\parallel\cos^2\varphi}$$
+Vzamemo substitucijo $u = \tan\varphi$, $\displaystyle{\dif u = \frac{\dif\varphi}{\cos^2\varphi}}$
+$$P = \alpha \int_{-\tan(\Delta\varphi/2)}^{\tan(\Delta\varphi/2)}\frac{1 / \lambda_\perp}{u^2 + \frac{\lambda_\parallel}{\lambda_\perp}}$$
+$$P = \frac{\Delta T \cdot S}{L} \cdot \frac{2\sqrt{\lambda_\perp\lambda_\parallel}}{\Delta\varphi} \arctan\left(\sqrt{\frac{\lambda_\perp}{\lambda_\parallel}}\tan\left(\frac{\Delta\varphi}{2}\right)\right)$$
+V limiti $\lambda_\perp = \lambda_\parallel$ preverimo:
+$$P = \frac{\Delta T \cdot S}{L}\lambda$$
+\paragraph{Pismena vaja, 1987} (v učbeniku vaja 192) Imamo palico, ki jo zvijemo. V nekem koordinatnem sistemu je
+$$\mu = \begin{pmatrix}
+    \mu_2&& \\
+    &\mu_2& \\
+    &&\mu_1
+\end{pmatrix}$$
+Tu sta $\mu_2$ in $\mu_1$ pravokotna na smer palice, $\mu_1$ pa je vzporedna. Vklopimo navor, ki je tangenten na enega od koncev palice. Zanima nas navor na palico (označimo s $\vct{T}$).
+$$\vct{T} = \vct{p_m}\times\vct{B}$$
+$$\vct{M} = \duline{\chi}\vct{H} + \mathcal{O}(H^2) \approx \dd{\vct{p_m}}{V}\vct{H}$$
+$$\dif \vct{T} = \duline{\chi}\vct{H}\times\vct{B}\,\dif V$$
+$$\vct{H} = \frac{1}{\mu_0}\vct{B},~~\duline{\chi} = (\duline{\mu} - I)$$
+Vemo: $I\vct{B}\times\vct{B} = 0$
+$$\dif\vct{T} = (\duline{\mu}\vct{B}) \times \vct{B} \frac{1}{\mu_0}\,S\dif l$$
+\end{document}

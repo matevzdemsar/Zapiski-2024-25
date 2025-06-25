@@ -1,0 +1,120 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\dunderline}[1]{\underline{\underline{#1}}}
+\begin{document}
+\paragraph{Tenzorski račun.} \text{} \\
+$$\vct{j} = \sigma \vct{E} = \sigma E^j\hat{e}_j$$
+$$j_i = \hat{e}_i\sigma\hat{e}_j E^j = \sigma_{ij}E^j$$
+Izrazili smo tenzor drugega reda: $\underline{\underline{\sigma}} = \sigma_{ij}\hat{e}^i\hat{e}^j = \sigma_{ij} \hat{e}_i \otimes \hat{e}_j$
+$$\underline{\underline{\sigma}}\vct{E} = \sigma_{ij}\vct{E}_j\hat{e}_i\left[\hat{e}_j\cdot\hat{e}_i\right]$$
+Se pravi gre za nekakšno projekcijo. Če je $\dunderline{\sigma}$ simetričen, obstaja baza, v kateri je diagonalen:
+$$\dunderline{\sigma} = \sigma_{xx}\hat{e}_x\otimes\hat{e}_x + \sigma_{yy}\hat{e}_y\otimes\hat{e}_y + \sigma_{zz}\hat{e}_z\otimes\hat{e}_z$$
+Pri tem ponovno poudarimo, da je $\vct{n} \otimes \vct{n}$ projekcija na $\vct{n}$, kajti:
+$$(\vct{n} \otimes \vct{n})\cdot\vct{v} = \vct{n}\cdot(\vct{n}\cdot\vct{v})$$
+V nekaterih snoveh lahko uporabljamo izotopni tenzor:
+$$\sigma_{ij} = \sigma\delta_{ij}$$
+To pomeni, da so lastnosti snovi neodvisne od osi (tj. v smeri $x$ enake kot v smeri $y$ in $z$). V snoveh, kot so voda, to dobro velja, v snoveh, kot je les, pa ne nujno.
+Les je namreč sestavljen iz vlaken, ki po navadi tečejo v isto smer.
+\paragraph{Simetrije in dekompozicija.} Obravnavajmo na primer gostoto moči: $q = \vct{j} \cdot \vct{E} = \vct{E} \dunderline{\sigma} \vct{E}$
+Temu pravimo kvadratna forma. \\
+Za električno polje dobimo podoben primer: $\vct{D} = \varepsilon\varepsilon_0\vct{E} \Rightarrow \vct{D}\cdot\vct{E} = \varepsilon_0 (\vct{E} \dunderline{\varepsilon} \vct{E})$.
+Takšna simetrija po navadi izhaja iz ohranitvenih zakonov (in variacijskega principa):
+$$T_{ij} = \frac{1}{2}\left(T_{ij} + T_{ji}\right) - \frac{1}{2}\left(T_{ij} - T_{ji}\right) =: S_{ij} + A_{ij}$$
+Če to zapišemo v tenzorski obliki:
+$$T = \frac{1}{2}\left(T + T^T\right) + \frac{1}{2}\left(T - T^T\right)$$
+Čim velja $A_{ij} = 0$, je $T = T^T$
+\paragraph{Vztrajnostni moment.} Pustili si bomo predpostaviti, da gre za togo telo. Tedaj velja $\vct{\Gamma} = \dunderline{J}\vct{\omega}$
+$$\dif\vct{\Gamma} = \vct{r} \times \dif\vct{G} = \rho \vct{r} \times (\vct{omega} \times \vct{r}) \dif V$$
+$$\vct{\Gamma}_i = \int \dif\Gamma_i = \iiint \rho \varepsilon_{ijk}r_j\varepsilon_{klm} \omega_l r_m \dif V$$
+$$ = \iiint \rho (\delta_{il}\delta_{jm} - \delta_{im}\delta_{lj})r_jr_m\dif V\omega_l = \iiint\rho(\delta_{ij}r^2-r_jr_j)\dif V \omega_j$$
+$$J_{ij} = \iiint \begin{bmatrix}
+    y^2 + z^2 & -xy & -xz \\
+    -xy & z^2 + x^2 & -yz \\
+    -xz & -yz & x^2 + y^2
+\end{bmatrix} \rho \, \dif x \, \dif y \, \dif z$$
+Steinerjev izrek izrazimo kot $\displaystyle{J'_{ij} = J_{ij} + m\left(\delta_{ij} r'^2 - r'_i r'_j\right)}$. Nazadnje za rotacijsko energijo spet dobimo kvadratno formo:
+$$W_r = \frac{1}{2}\vct{\omega} \dunderline{J} \vct{\omega}$$
+\paragraph{Primer: Vrtenje togega telesa.} Upoštevamo ohranitev $\vct{\Gamma}$:
+$$\dot{\vct{\Gamma}} = 0 = \dot{J}\vct{\omega} + J\dot{\vct{\omega}}$$
+Naj bo lastni sistem $\hat{e}'_i$:
+$$\hat{e}'_i = T_{ij}\hat{e}_j$$
+$$\dot{\hat{e}}'_i = \Omega_{ij}\hat{e}'_j = \vct{\omega}\times\vct{e}'_j$$
+$$\dunderline{J} = J_{11}\hat{e}'_1\otimes\hat{e}'_1 + J_{22}\hat{e}'_2\otimes\hat{e}'_2 + J_{33}\hat{e}'_3\otimes\hat{e}'_3$$
+$$\dunderline{\dot{J}} = J_{11}\dot{\hat{e}}'_1\otimes\hat{e}'_1 + J_{22}\dot{\hat{e}}'_2\otimes\hat{e}'_2 + J_{33}\dot{\hat{e}}'_3\otimes\hat{e}'_3 + J_{11}\hat{e}'_1\otimes\dot{\hat{e}}'_1 + J_{22}\hat{e}'_2\otimes\dot{\hat{e}}'_2 + J_{33}\hat{e}'_3\otimes\dot{\hat{e}}'_3$$
+Ko to izrazimo s koordinatami $\hat{e}'_x, \hat{e}'_y, \hat{e}'_z$, dobimo:
+$$-J\dot{\vct{\omega}} = \dot{J}\vct{\omega} =$$
+$$= J_x (\omega \times \hat{e}'_x)(\vct{\omega} \cdot \hat{e}'_x) + J_y (\omega \times \hat{e}'_y)(\vct{\omega} \cdot \hat{e}'_y) + J_z (\omega \times \hat{e}'_z)(\vct{\omega} \cdot \hat{e}'_z)$$
+Dobimo sistem enačb:
+$$J_x\dot{\vct{\omega}}_x = \left(J_z - J_y\right)\omega_y\omega_z$$
+$$J_y\dot{\vct{\omega}}_y = \left(J_x - J_z\right)\omega_z\omega_x$$
+$$J_x\dot{\vct{\omega}}_z = \left(J_y - J_x\right)\omega_x\omega_y$$
+Ta sistem je matematično rešljiv (lahko dobimo $\omega$), vendar je naša rešitev rahlo neuporabna. Če si pustimo nekoliko poenostaviti problem, lahko na primer zahtevamo, da je vrtenje eno-osno, kar pomeni:
+$$J_z = J_\parallel$$
+$$J_x = J_y = J_\perp$$
+Ta poenostavitev nam takoj da $\dot{\omega}_z = 0$, torej $\omega_z = \text{konst.}$, ostali dve enačbi pa imata rešitev
+$$\omega_x = \omega_0 \cos\omega_pt$$
+$$\omega_y = \omega_0 \sin\omega_pt$$
+Torej precesijo $\omega$ okoli $\hat{e}_z$ s frekvenco $\omega_p$.
+\paragraph{Inverzi in robni pogoji.} Vzemimo za primer toplotno prevodnost skozi ploščo debeline $d$:
+$$\vct{j}_Q = - \dunderline{\lambda} \nabla T$$
+Recimo, da podamo $T$ na obeh ploščah.
+$$\vct{j} = -\lambda\frac{\Delta T}{d}\hat{e}_x$$
+$$j_x = \hat{e}_x\cdot\vct{j} = -\frac{\Delta T}{d}\left(\hat{e}_x\lambda\hat{e}_y\right) = -\lambda_{xx}\frac{\Delta T}{d}$$
+$$j_y = -\frac{\Delta T}{d}\left(\hat{e}_y\lambda\hat{e}_x\right) = -\lambda_{yy}\frac{\Delta T}{d}$$
+Lahko si izberemo tudi drugačen robni pogoj: Recimo, da tok teče samo pravokotno na ploskev, torej le vzdolž osi $x$:
+$$j\hat{e}_x = -\lambda\nabla T = -\lambda\left(\frac{\Delta T_x}{d_x} \hat{e}_x + \frac{\Delta T_y}{d_y}\hat{e}_y\right)$$
+$$\hat{e}_xj\hat{e}_x = j = -\left(\frac{\Delta T_x}{d_x} \lambda_{xx} + \frac{\Delta T_y}{d_y} \lambda_{xy}\right)$$
+Podobno dobimo za $j_y$:
+$$\hat{e}_yj\hat{e}_x = 0 = -\left(\frac{\Delta T_x}{d_x}\lambda_{xy} + \frac{\Delta T_y}{d_y}\lambda_{yy}\right)$$
+Enačbi odštejemo, da dobimo:
+$$\frac{\Delta T_y}{d_y} =- \frac{\Delta T_x}{d_x}\frac{\lambda_{xx}}{\lambda_{yy}}$$
+$$j = -\frac{\Delta T_{x}}{d_x}\left(\lambda_{xx} - \frac{\lambda_{xy}^2}{\lambda_{yy}}\right) = \frac{\Delta T}{d_x} \left(\frac{\lambda_{xx}\lambda_{yy} - \lambda_xy^2}{\lambda_{yy}}\right)$$
+Dobili smo ravno nasprotno vrednost determinante inverza:
+$$\frac{\Delta T}{d_x} = -\frac{\lambda_{yy}}{\det \lambda}j$$
+$$\nabla T = -\dunderline{\lambda^{-1}}\vct{j}$$
+Če se postavimo v lastni sistem (lastna vektorja $\vct{n}, \vct{m}$), je naša naloga še lažja:
+$$\begin{bmatrix}
+    \lambda_\parallel^{-1} & 0 \\
+    0 & \lambda_\perp^{-1}
+\end{bmatrix} = \lambda_\parallel^{-1} \vct{n}\otimes\vct{n} + \lambda_{\perp}^{-1} \vct{m}\otimes\vct{m}$$
+V lastni koordinatni sistem bomo prišli z rotacijo za nek kot $\varphi$:
+$$\hat{e}_x \dunderline{\lambda}\hat{e}_x = \lambda_\parallel^{-1}\cos^2\varphi + \lambda_\perp^{-1}\sin^2\varphi$$
+Iz tega dobimo originalno $\lambda$. Vidimo tudi, da je $\displaystyle{\frac{\lambda_{yy}}{\det\dunderline{\lambda}} = \frac{\lambda_\perp\cos^2\varphi + \lambda_\parallel\sin^2\varphi}{\lambda_\perp\lambda_\parallel}}$.
+\paragraph{Laplaceov operator v anizotropni snovi.} Velja $\nabla\cdot\vct{j}=0$
+$$\partial_i\lambda_{ij}\partial_jT=0$$
+Ta enačba vsebuje mešane odvode. Definirali smo
+$$T = \frac{C}{\sqrt{x'^2 + y'^2 + z'^2}} = \frac{C}{\sqrt{\frac{x^2}{\lambda_x} + \frac{y^2}{\lambda_y} + \frac{z^2}{\lambda_z}}}$$
+Tedaj je $x_i' = T_{ij}^{-1}x_j$, torej je tudi $\displaystyle{\pd{}{x_j} = T_{ji}^{-1}x\pd{}{x_i}}$
+$$\pd{}{x_i}\lambda_{ij}\pd{}{x_j} = \left(T_{ik}^{-1} \pd{}{x'_k}\lambda_{ij}T_{jl}^{-1}\pd{}{x'_l}\right) \equiv \pd{}{x'_k}\pd{}{x'_k}$$
+Torej je $\displaystyle{\delta_{kl} = T^{-1}_{ik}\lambda_{ij}T^{-1}_{jl}}$ \\
+Če je $T$ "koren" $\lambda$ (kar se za matrike da definirati), je v $x'$ bazi $\nabla\lambda\nabla = \nabla^2$
+\paragraph{Tekoči kristali.} Snov opišemo s tako imenovanim direktorjem (vektorjem, ki opisuje (povprečno?) smer molekul v kristlu). Iščemo način, da ga določimo. \\
+Najprej uvedemo tenzorski parameter:
+$$Q_{ij} = \frac{S}{2} \left(n_in_j - \delta_{ij}\right)$$
+Vidimo, da je $\det Q \neq 0$. $S$ predstavlja skalarni ureditveni parameter, ki je izotropen. \\[3mm]
+Snov bo zavzela tako stanje, da bo prosta energija čim manjša. Prosta energija pa je sestavljena iz dveh delov, in sicer ureditvenega ter elastičnega dela: \\[3mm]
+Ureditveni del opisuje enačba: $$F = \frac{1}{2}A\mathrm{tr}(Q^2) + \frac{1}{3}B\mathrm{tr}(Q^3) + \frac{1}{4}C\left(\mathrm{tr}(Q^2)\right)^2$$
+Elastični del:
+$$\frac{1}{2}L_1\pd{{Q}_{ij}}{x_k}\pd{Q_{ij}}{x_k} + \frac{1}{2}L_2\pd{Q_{ij}}{x_j}\pd{Q_{ik}}{x_k} + \frac{1}{2}L_3Q_{ij}\pd{Q_{kl}}{x_i}\pd{Q_{kl}}{x_j}$$
+Da to minimiziramo, uporabimo smerni odvod, kar nam da $\vct{n}$.
+\end{document}

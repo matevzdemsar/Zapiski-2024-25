@@ -1,0 +1,73 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\,\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Diferencialne enačbe.} Imamo tri plasti, ki drsijo ena mimo druge. Med njimi deluje viskoznost s koeficientom $\gamma$.
+$$m\dot{v}_1 = \gamma(v_2 - v_1)$$
+$$m\dot{v}_2 = \gamma(v_3 - v_2) + \gamma (v_1 - v_2) = \gamma (v_3 - 2v_2 + v_1)$$
+$$m\dot{v}_3 = \gamma(v_2 - v_3)$$
+Sistem zapišemo v matrični obliki:
+$$\dot{\vct{v}} = \tilde{A}\vct{v}$$
+$$\tilde{A} = \frac{\gamma}{m} \begin{bmatrix}
+    -1 & 1 & 0 \\
+    1 & -2 & 1 \\
+    0 & 1 & -1
+\end{bmatrix} = \frac{\gamma}{m}A$$
+Diagonalizirajmo $A$:
+$$\det(A - \lambda I) = (-1 - \lambda)\left((- 2 - \lambda)(1 - \lambda) - 1\right) - (-1 - \lambda) = ... = -\lambda(\lambda + 1)(\lambda + 2)$$
+Iammo lastne vrednosti $\lambda_1 = 0$, $\lambda_2 = -1$, $\lambda_3 = -3$. Izračunamo še pripadajoče lastne vektorja:
+$$\lambda_1 = 0:~~\vct{u_1}(t) = u_0 \begin{bmatrix}
+    1 \\ 1 \\ 1
+\end{bmatrix}$$
+$$\lambda_2 = -1:~~\vct{u_2}(t) = u_0 e^{-\gamma t/m}\begin{bmatrix}
+    1 \\ 0 \\ -1
+\end{bmatrix}$$
+$$\lambda_3 = -3:~~\vct{u_3}(t) = u_0 e^{-3 \gamma t/m}\begin{bmatrix}
+    1 \\ -2 \\ 1
+\end{bmatrix}$$
+Sledi: $\vct{v}(t) = a \vct{u_1}(t) + b\vct{u_2}(t) + c{u_3}(t)$
+\paragraph{Kolokvij 2019.} Imamo kroglo z gostoto toplotnih izvorov $q$. Velja $q = kT^2$. Zanima nas toplotni tok, ki izhaja iz krogle.
+$$\dd{W}{t} = qV - jS$$
+$$mc\dd{T}{t} = qV - \lambda \frac{D}{s} T$$
+$$\dot{T} = \frac{k}{\rho c} T^2 - \frac{\lambda}{k\rho c}\frac{3}{R} T$$
+Imamo enačbo oblike $$\dot T = A(T^2 - BT)$$
+$$A\dot T = A^2\left((T-\frac{B}{2})^2 - \frac{B^2}{4}\right) = \left(A\left(T - \frac{B}{2}\right)\right)^2 - \frac{A^2B^2}{4}$$
+Vzamemo novo spremenljivko $u$:
+$$\dot u  = u^2 - \left(\frac{AB}{2}\right)^2 = u^2 - u_0^2$$
+$$\dif t = \frac{\dif u}{u^2 - u_0^2}$$
+$$t = \begin{cases}
+    -\frac{1}{u_0}\mathrm{artanh}\frac{u}{u_0} + t_0 & |u|<u_0 \\
+    -\frac{1}{u_0}\mathrm{arcoth}\frac{u}{u_0} + t_0 & |u|>u_0 \\
+\end{cases}$$
+Poiščemo lahko inverz:
+$$u_1 = -u_0\tanh\left[(t-t_0)u_0\right]$$
+$$u_1 = -u_0\coth\left[(t-t_0)u_0\right]$$
+\paragraph{Majhna nihanja.} Pri majhnih nihanjih imamo posplošene koordinate $\underline{q}$, v katerih mora veljati:
+$$\pd{V}{q_i} = 0$$
+Konstruiramo matriki $\duline{V}$ in $\duline{T}$, kjer je
+$$V_{jk} = \partial_j\partial_k V$$
+$$T_{jk} = \partial_j\partial_k T$$
+Nato poiščemo lastne frekvence $\omega$ in pripadajoče lastne vektorje, da velja $$\det(\duline{V} - \omega^2\duline{T}) = 0$$
+Tedaj je $$\underline{q}(t) = \mathrm{Span}\{\underline{q}_{last.} e^{i\omega t}\}$$
+\end{document}

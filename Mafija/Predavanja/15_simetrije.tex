@@ -1,0 +1,51 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\,\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\section*{Simetrije v fiziki}
+\paragraph{Dve sklopljeni nihali.} Opravka imamo z diferencialno enačbo
+\[J\ddot\varphi = \begin{bmatrix}
+    -K & K' \\
+    K' & -K
+\end{bmatrix}\varphi = \begin{bmatrix}
+    -K\varphi_1 + K'\varphi_2 \\ K'\varphi_1 - K\varphi_2
+\end{bmatrix}\]
+Ali drugače:
+\[J\left(\ddot\varphi_1 + \ddot\varphi_2\right) = -(K-K')(\varphi_1 + \varphi_2)\]
+\[J\left(\ddot\varphi_1 - \ddot\varphi_2\right) = -(K-K')(\varphi_1 - \varphi_2)\]
+Označimo simetrično matriko \[S = \begin{bmatrix}
+    0 & -1 \\ -1 & 0
+\end{bmatrix}\]
+Velja \(K = S^{-1}KS\) ali drugače \(SK = KS\). Sledi, da \(K\) in \(S\) komutirata, torej sta simultano diagonalizabilni.
+\paragraph{Zrcaljenje funkcij realnih števil.} Naj bosta operatorja
+\[\widehat{n} f(x) = f(-x)\]
+\[\widehat{e} f(x) = f(x)\]
+Lihe funkcije so tiste, za katere velja \(\widehat{n} f(x) = -f(x)\) in \(\widehat{e} f(x) = f(x)\). Sode funkcije so tiste,
+za katere velja \(\widehat{n}f(x) = f(x)\) in \(\widehat{e}f(x) = f(x)\). \\
+Operatorja \(\widehat{n}\) in \(\widehat{e}\) tvorite grupo z operacijo kompozituma (velja \(\widehat{e}\widehat{e} = 1, \widehat{e}\widehat{n} = \widehat{n}\widehat{e} = \widehat{n}\) ter \(\widehat{n}\widehat{n} = \widehat{e}\)). Lahko zapišemo sodo in liho upodobitev:
+\[s(x) = \frac{f(x) + f(-x)}{2} = \frac{\widehat{e}f(x) + \widehat{n}f(x)}{2}\]
+\[l(x) = \frac{f(x) - f(-x)}{2} = \frac{\widehat{e}f(x) - \widehat{n}f(x)}{2}\]
+To, ali \(\widehat{n}f(-x)\) odštejemo ali odštejemo, so nekakšne lastne vrednosti operatorja. Ravno tako za \(\widehat{e}\), čeprav ima ta le eno lastno vrednost: \(1\). Delimo z \(2\), saj je to moč grupe.
+V splošnem take projekcije opravimo po formuli \[\vct{v}_\chi = \frac{\sum \chi_i\widehat{g_i}\vct{v}}{|g|}\]
+\end{document}

@@ -1,0 +1,119 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\vr}{\vct{r}}
+\newcommand{\vv}{\vct{v}}
+\newcommand{\vw}{\vct{\omega}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Tenzor vztrajnostnega momenta.} Imejmo togo telo, ki se vrti s hitrostjo $\vw$. Vemo: $$\dif\Gamma = \vr \times(\vv\dif m)$$
+Pri togem vrtenju velja: $\vv = \vw\times\vr$. Sledi:
+$$\dif\Gamma = \dif m \vr \times (\vw \times \vr)$$
+$$= \dif m \left(r^2\vw - (\vr\cdot\vw)\vr\right)$$
+Označimo $(\vr\cdot\vw)\vr = (\vr\otimes\vr)\vw$ (tenzorski produkt)
+$$\duline{J} = \int (r^2 \duline{1} - (\vr \otimes \vr)) \dif m = \int \dif m \begin{pmatrix}
+    y^2 + z^2 & -xy & -xz \\
+    -xy & x^2 + z^2 & -yz \\
+    -xz & -yz & x^2 + y^2
+\end{pmatrix}$$
+Z $\duline{1}$ označimo identično matriko ($\mathrm{diag}(1, 1, 1)$).
+\paragraph{Steinerjev izrek.} S tem smo izračunali vztrajnostni moment okoli težišča ($J = J^*$). Če telo vrtimo okoli kake druge osi, je
+$$J_{ij} = m(\vr^*\delta_{ij} - r_i^*r_j^*) + J*_{ij}$$
+\paragraph{Naloga.} Vrtimo tanko palico ($x \approx 0,~y\approx 0$) pod kotom $45^\circ$ glede na njeno dolžino.
+$$J = \int \dif m \begin{pmatrix}
+    y^2 + z^2 & -xy & -xz \\
+    -xy & x^2 + z^2 & -yz \\
+    -xz & -yz & x^2 + y^2
+\end{pmatrix}$$
+$$= \frac{m}{l}\int_{-l/2}^{l/2}\begin{pmatrix}
+    z^2 & 0 & 0 \\
+    0 & z^2 & 0 \\
+    0 & 0 & 0
+\end{pmatrix} \dif z = \frac{ml^2}{12}\begin{pmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 0
+\end{pmatrix}$$
+Izračunajmo še $\vct{\Gamma} = \duline{J}\vw$.
+Vemo: $\displaystyle{\vw = \frac{\omega_0}{\sqrt{2}}\left[0, 1, 1\right]^T}$
+$$\vct{\Gamma} = \frac{ml^2\omega_0}{12\sqrt{2}}\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 0
+\end{bmatrix}\begin{bmatrix}
+    0 \\ 1 \\ 1
+\end{bmatrix} = \frac{ml^2\omega_0}{12\sqrt{2}}\,\mathbf{\hat{e}_y}$$
+\paragraph{Nadaljevanje vrtenja.} Recimo $J_{ij} = J_0(\delta_{ij}an_in_j)$, kjer je $\dot{\vct{n}} = \vw \times \vct{n}$ in $a$ neka konstanta (če bo treba, jo bomo nastavili na $1$). $J_0$ je konstanta, in sicer $\displaystyle{\frac{ml^2}{12}}$. Če na palico ne deluje noben navor, velja:
+$$\dot{\vct{\Gamma}} = 0$$
+$$\dd{}{t}\duline{J} \vw + \duline{J} \dd{}{t}\vw = 0$$
+$$-J_0a(\dot{\vct{n}}(\vct{n}\cdot\vw) + \vct{n}(\dot{\vct{n}}\cdot\vw)) + \duline{J}\dot{\vw} = 0$$
+Vstavimo $\dot{\vct{n}} = \vw\times\vct{n}$. Zaradi lastnosti mešanega produkta je $(\vw\times\vct{n})\cdot\vw = 0$.
+$$-J_0a (\vw\times\vct{n})(\vct{n}\cdot\vw) + J_0\dot{\vw} - J_0a\vct{n}(\vct{n}\cdot\dot{\vw}) = 0$$
+Na obeh straneh z desne skalarno pomnožimo z $\vct{n}$. Prvi člen bo tako enak 0 (mešani produkt).
+$$J_0\vct{n}\cdot\dot{\vw} - J_0a\vct{n}\cdot\dot{\vw} = 0$$
+$$J_0(1-a)\vct{n}\cdot\dot{\vw}$$
+Če je $a = 1$, bo to veljalo v vsakem primeru. V splošnem primeru pa mora biti $\vct{n}\cdot\dot{\vw} = 0$. \newpage
+\paragraph{Vztrajnostni moment "rogovile".} Rogovilo razdelimo na tri dele - enega v smeri $x$, enega v smeri $y$ in enega v smeri $z$.
+$$J_1 = \frac{m}{l} \int \begin{pmatrix}
+    y^2 & 0 & 0 \\
+    0 & 0 & 0 \\
+    0 & 0 & y^2
+\end{pmatrix}\dif y = \frac{ml^2}{3}\begin{pmatrix}
+    1 & 0 & 0 \\
+    0 & 0 & 0 \\
+    0 & 0 & 1
+\end{pmatrix}$$
+$$J_2 = \frac{m}{l} \int \begin{pmatrix}
+    0 & 0 & 0 \\
+    0 & x^2 & 0 \\
+    0 & 0 & x^2
+\end{pmatrix}\dif x = \frac{ml^2}{3}\begin{pmatrix}
+    0 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{pmatrix}$$
+$$J_3 = J^* + m(r^{*2}\duline{1} - \vct{r}^*\otimes\vct{r}^*) = \frac{ml^2}{12}\begin{pmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 0
+\end{pmatrix} + ml^2\begin{pmatrix}
+    0 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{pmatrix} = ml^2\begin{pmatrix}
+    \frac{1}{12} & 0 & 0 \\
+    0 & \frac{13}{12} & 0 \\
+    0 & 0 & 1
+\end{pmatrix}$$
+Zdaj lahko izračunamo vztrajnostni moment okoli težišča. Le-to ima koordinate $\vr_T = l(\frac{1}{2}, \frac{1}{6}, 0)$
+$$J = J_1 + J_2 + J_3 = ml^2\begin{pmatrix}
+    \frac{5}{15} & 0 & 0 \\
+    0 & \frac{17}{12} & 0 \\
+    0 & 0 & \frac{15}{12}
+\end{pmatrix}$$
+$$J^* = J - 3m(r_T^2I - (\vr_T\otimes\vr_T)) = ... = ml^2\begin{pmatrix}
+    \frac{1}{3} & \frac{1}{4} & 0 \\
+    \frac{1}{4} & \frac{2}{3} & 0 \\
+    0 & 0 & \frac{5}{6} \\
+\end{pmatrix}$$
+\end{document}

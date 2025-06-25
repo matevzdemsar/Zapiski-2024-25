@@ -1,0 +1,153 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+\paragraph{Eksaktna forma.} Najprej razložimo, kaj mislimo s formami.
+\begin{itemize}
+    \item 0-forma: Skalarji in skalarne funkcije.
+    \item 1-forma: Vektorji (jakosti). Gre za gradient 0-forme.
+    \item 2-forma: Vektorji (pretoki). Gre za rotor 1-forme.
+    \item 3-forma: Skalarji (gostote). Gre za divergenco 2-forme.
+\end{itemize}
+Če je forma eksaktna, se jo da zapisati kot odvod $n-1$ forme.
+\paragraph{Zaprta forma.} Zaprta forma pomeni, da je njen integral po zaključeni zanki/ploskvi enak 0.
+Če je forma eksaktna, je gotovo tudi zaprta, obratno pa ne velja nujno, kajti:
+$$\text{Bodi } \oint \vct{v} d\vct{r} = 0$$
+$$\oint \vct{v} d\vct{r} = \iint (\vct{\nabla}\times\vct{v})d\vct{S}$$
+To zadnje pa obstaja le, če definicijsko območje nima lukenj.
+\paragraph{Elektromagnetizem.} Označimo potencial $\vct{A}$
+$$\vct{B} = \vct{\nabla}\times\vct{A}$$
+$$\vct{E} = \nabla U - \pd{\vct{A}}{t}$$
+Edini rahel problem je, da $U$ in $\vct{A}$ nista enolično določena. Napetost $U$ po dogovoru začnemo meriti pri ozemljitvi,
+vendar je to zgolj dogovor. Pri $\vct{A}$ je važen le rotor, zato ga lahko spremenimo za gradient poljubne skalarne funkcije. Če to storimo, moramo prilagoditi tudi $U$:
+$$\vct{A'} = \vct{A} + \nabla f$$
+$$\Rightarrow U' = U - \pd{f}{t}$$
+V relativnosti definiramo sledeča četverca:
+$$A^\mu = \left(\frac{U}{c}, \vct{A}\right)$$
+$$\partial^\mu = \pm\left(-\frac{1}{c}\pd{}{t}, \vct{\nabla}\right)$$
+\\
+$$\vct\nabla\cdot\vct{E} = -\nabla^2U - \pd{\vct\nabla\cdot\vct{A}}{t} = \frac{\rho}{\varepsilon_0}$$
+Zdaj izberimo tak $f$, da je $\nabla^2f = -\vct\nabla\cdot\vct{A}$ in definiramo $\vct\nabla\vct{A}' = \vct\nabla\vct{A} + \nabla^2f$. Poskrbimo lahko tudi, da je $\vct\nabla\cdot\vct{A} = 0$. To pomeni, da je
+$$-\nabla^2U = \frac{\rho}{\varepsilon_0}$$
+To je Laplaceova enačba, ki je popolnoma rešljiva.
+\paragraph{Amperov zakon.} Na podlagi naše definicije $\vct{B}$ lahko izrazimo
+$$\vct\nabla\times\vct{B} = \vct\nabla\times(\vct\nabla\times\vct{A}) = \mu_0\vct{j} + \mu_0\varepsilon_0\pd{\vct{E}}{t}$$
+$$-\nabla^2A + \nabla(\vct\nabla\cdot\vct{A}) = \mu_0\vct{j}-\mu_0\varepsilon_0\left(\nabla\pd{U}{t} + \pd{^2\vct{A}}{t^2}\right)$$
+Vemo, da je $\mu_0 \varepsilon_0 = 1/c^2$, torej je
+$$-\nabla^2\vct{A} + \frac{1}{c^2}\pd{^2}{t^2}\vct{A} + \nabla\left(\vct\nabla\cdot\vct{A} + \frac{1}{c^2}\pd{U}{t}\right) = \mu_0\vct{j}$$
+V prvih dveh členih prepoznamo $-\partial_\nu\partial^\nu A^\mu$, v drugem pa $\partial_\mu A^\mu$, za kar smo že prej rekli, da je enako 0.
+Operatorju $\partial_\nu\partial^\nu$ rečemo tudi d'Lambertov operator in ga
+včasih označimo s $\square$, saj gre za Laplaceov operator ($\Delta$) v štirih dimenzijah.
+Imamo torej diferencialno enačbo $\displaystyle{\square\vct{A} = \mu_0\vct{j}}$, rešitev katere so ravni valovi, ki potujejo s svetlobno hitrostjo. \\[3mm]
+Ta razmislek smo začeli z uvedbo fizikalne količine $\vct{A}$, ki ni fizikalno smiseln, saj ni merljiv. Vendar lahko izmerimo integral te količine:
+$$\oint\vct{A}d\vct{r}=\varoiint\vct\nabla\times\vct{A}d\vct{S}=\varoiint\vct{B}\cdot\mathrm{d}\vct{S}=\Phi_m$$
+\paragraph{Ahmeronov-Bohmov pojav.} Naša količina $\vct{A}$ se pojavi še nekje. Če vzamemo Feynmannov integral $\displaystyle{e^{iS/\hbar}}$, akcijo $S$ dobimo z integralom
+$$S = \int\mathcal{L}dt$$
+Lagrangian $\mathcal{L}$ je enak
+$$\mathcal{L} = \frac{1}{2}m\dot{\vct{r}^2} - V(r) + e\dot{\vct{r}}\cdot\vct{A}$$
+Sledi $\displaystyle{S=e\int\vct{A}\cdot\mathrm{d}\vct{r}}$. Če pošljemo delec okoli magnetnega polja $B$, 
+lahko izmerimo jakost tega magnetnega polja, kajti potencialna razlika med potema je enaka integralu Lagrangiana po zaključeni poti.
+$$S=e\oint\vct{A}\cdot\mathrm{d}\vct{r}$$
+\paragraph{Prevajanje toplote:}
+$$\vct{j} = -\lambda \nabla T$$
+Toplotni tok $\vct{j}$ je 2-forma, $\nabla T$ pa 1-forma. Sledi, da je $\lambda$ pretvornih iz prostora 1-form v prostor 2-form. Pri ohranitvi energije pa velja:
+$$\pd{w}{t} + \vct\nabla\cdot\vct{j} = 0$$
+Tu ni težav: tako $w$ kot $\vct\nabla\cdot\vct{j}$ sta 3-formi. V štirih dimenzijah bi veljalo $\partial_\mu j^\mu = 0$ - res pa je, da pri toploti posebne teorije relativnosti običajno ne potrebujemo. \\
+Če zgornji enačbi združimo v eno samo, dobimo
+$$\pd{w}{t} = \lambda\nabla^2T$$
+To pa je difuzijska enačba.
+\paragraph{Viskoznost.} Pri klasični fiziki smo viskoznost opisali z enačbo
+$$\dd{F_x}{S_y} = \eta \pd{v_x}{y}$$
+Prepišimo to z indeks notacijo, ki smo jo spoznali med prejšnjimi predavanji:
+$$dF_i = \eta\pd{v_i}{x_j}dS_j$$
+To ni več odvisno od izbire koordinat.
+$$F_i = \varoiint \eta \pd{v_i}{x_j}dS_j = \eta \iiint \partial_j \pd{v_i}{x_j} dV = \eta \iiint \nabla^2 v_i dV$$
+S tem smo dobili Navier-Stokesovo enačbo:
+$$\vct{f} = \dd{\vct{F}}{V} = \eta \nabla^2\vct{v}$$
+$$\rho \dd{\vct{v}}{t} = \vct{f} = -\nabla(p+\rho gh) + \eta\nabla^2\vct{v}$$
+$$\rho \left(\pd{\vct{v}}{t} + (\vct\nabla\cdot\vct{v})\vct{v}\right) = -\nabla(p+\rho gh) + \eta\nabla^2\vct{v}$$
+Če se masa ohranja, lahko upoštevamo $\displaystyle{\pd{\rho}{t} + \nabla(\vct{v}\rho) = 0}$, čče je tekočina nestisljiva, pa velja tudi
+$$(\vct\nabla\cdot\vct{v}) = 0$$
+Ker pa je divergenca enaka 0, lahko kakor pri elektromagnetizmu uvedemo novo funkcijo $\vct{\psi}$:
+$$\vct{v} = \nabla\times\psi$$
+$$\vct{\nabla}\times\vct{v} = \text{vrtinčnost} = \vct\zeta = -\nabla^2\psi$$
+Spet lahko dobimo Laplaceovo diferencialno enačbo $\nabla^2\vct{\psi} = 0$
+V dveh dimenzijah ima $\psi$ le komponento $z$, kar nam stvari dodatno poenostavi.
+\paragraph{Vektorski odvodi funkcij položaja.} Recimo, da imamo $\vct{r} = (x, y, z) = r_i$
+$$\partial_ir_j = \delta_{ij} = \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 \\
+\end{bmatrix}$$
+$\partial_i r_i$ nam da število dimenzij. $\partial_ir$ nam da enotski vektor v smeri $r$.
+$$\vct\nabla r^n = nr^{n-1}\nabla r = nr^{n-1}\frac{\vct{r}}{r} = nr^{n-2}\vct{r}$$
+$$\nabla{r^{n-1}\vct{r}} = [(n-1)r^{n-3}\vct{r}]\cdot\vct{r} + r^{n-1}\vct\nabla\cdot\vct{r}$$
+Vemo že, da je $\nabla\vct{r}$ enako številu dimenzij, obravnavali pa bomo večinoma samo primere, ko je to enako 3. Sledi:
+$$\nabla (r^{n-1}\vct{r}) = r^{n-1}(n-1+3) = r^{n-1}(n+2)$$
+$$\nabla^2r^n = n\nabla(r^{n-2}\vct{r}) = n(n+1)r^{n-2}$$
+Rešitev Laplaceove enačbe:
+$$\nabla^2f(r) = 0:$$
+$$f(r) = \frac{c}{r}$$
+Brez izvorov povsod, razen pri $r=0$.
+Če imamo na primer $U = \rho_e/\varepsilon_0$, je rešitev $$U = \frac{1}{4\pi\varepsilon_0}\iiint \rho_e(\vct{r}')\frac{1}{||\vct{r} - \vct{r}'||}d\vct{r}'$$
+$$\nabla\times\left(\nabla\times\vct{H}\right) = -\nabla^2\vct{H} + \nabla(\vct\nabla\cdot\vct{H}) = \nabla\times\iiint j(\vct{r'}) \delta(\vct{r}-\vct{r'}) d\vct{r'}$$
+Upoštevamo $\vct\nabla\cdot\vct{H} = 0$, nato na obeh straneh pomnožimo z $1/\nabla^2$
+$$\vct{H} \nabla \times \iiint \frac{\vct{j}}{|\vct{r} - \vct{r'}|}d\vct{r'}$$
+Dobili smo Biot-Savartov zakon, upoštevati moramo le $\vct{j} = I\delta^2(\text{žice})\vct{t}$, kjer je $\vct{t}$ smerni vektor žice.
+Nazadnje izrazimo $$\vct{H} = \iiint \frac{\vct{j}(\vct{r}) \times (\vct{r} - \vct{r'})d^3\vct{r'}}{|\vct{r} - \vct{r'}|^3}$$
+$$\vct{H} = I \int \frac{d\vct{r} \times (\vct{r} - \vct{r'})}{|\vct{r} - \vct{r'}|^3}$$
+\paragraph{Helmholtzov razcep.} V splošnem ne moremo pričakovati, da bo polje brez vrtincev ali brez izvorov. Morda pa ga lahko zapišemo kot vsoto brezvrtinčnega polja in polja brez izvorov:
+$$\vct{v} = -\nabla\varphi + \vct\nabla\times\vct{A}$$
+Če na obeh straneh uporabimo divergenco:
+$$(\vct\nabla\cdot\vct{v}) = -\nabla^2\varphi$$
+Dobimo $\displaystyle{\varphi = \iiint \frac{(\vct\nabla\cdot\vct{v})(\vct{r'})}{|\vct{r} - \vct{r'}|}dV'}$ \\
+Če na obeh straneh uporabimo rotor:
+$$\vct\nabla\times\vct{v} = -\nabla^2\vct{A}$$
+Dobimo $\displaystyle{\vct{A} = \iiint \frac{(\vct\nabla\times\vct{v})\vct{r'}}{|\vct{r} - \vct{r'}|}dV'}$ \\
+\paragraph{Primer: Toplotna energija z izvori.} Imejmo
+$$\vct{j} = -\lambda\nabla T$$
+$$\vct\nabla\cdot\vct{j} = q$$
+$$-\lambda\nabla^2T=q$$
+$$T(\vct{r'}) = \frac{1}{\lambda}\iiint\frac{q(\vct{r'})}{|\vct{r} - \vct{r'}|}dV'$$
+Nalogo se v dovolj preprostih primerih da rešiti tudi drugače, in sicer velja:
+$$\int \vct{j}\cdot d\vct{S} = \int_{0}^{r}4\pi r'^2 q(r') dr'$$
+Ker je prvi integral v dovolj preprostih primerih enak $4\pi r^2 j(r)$, lahko izrazimo
+$$-\lambda\pd{T}{r} = \frac{1}{r^2}\int_{0}^{r}r'^2q(r')dr'$$
+V dveh dimenzijah:
+$$U = \frac{\ln(r)}{2\pi}$$
+$$\vct{A} = \vct{A}_0 \frac{\ln(r)}{2\pi} = \mu_0I\frac{\ln(r)}{2\pi}\hat{e}_z$$
+Tedaj je $\displaystyle{\vct{B} = \frac{\mu_0I}{2\pi r}\hat{e}_\varphi}$ \\[3mm]
+Naredimo lahko tabelo, kako izgledajo polja in potenciali v različnih dimenzijah:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c|c|c}
+        & 1D & 2D & 3D \\[3mm]
+        \hline
+        Polje: & $\displaystyle{\hat{e}_x}$ & $\displaystyle{\frac{1}{2\pi r}\frac{\vct{r}}{r}}$ & $\displaystyle{\frac{\vct{r}}{r}}$ \\[3mm]
+        \hline
+        Potencial: & $\displaystyle{|x|}$ & $\displaystyle{\frac{\ln(r)}{2\pi}}$ & $\displaystyle{\frac{1}{4 \pi r}}$ \\
+    \end{tabular}
+\end{table}
+Opazimo, da ima v treh dimenzijah limito $r\to\infty$ enako 0, v eni in dveh ap nima limite. Sledi, da bi se vesolje, ko bi bilo eno- ali dvodimenzionalno, sesedlo samo vase. \\
+V eni dimenziji operiramo v primeru ploščatega kondenzatorja, v dveh dimenzijah v primeru polj žic in cilindrov, v treh dimenzijah pa v primeru krogelnega kondenzatorja, točkastih nabojev, gravitacije, ipd.
+\end{document}

@@ -1,0 +1,99 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\paragraph{EM tenzor v prostor-času.} Označimo $A^\mu = (U/c, \vct{A})$ in $\displaystyle{\partial^\mu = -\frac{1}{c}\pd{}{t}, \vct{\nabla}}$. Prejšnjič smo definirali
+$$F^{\mu\nu} = \partial^\nu A^\mu - \partial^\mu A^\mu = \begin{bmatrix}
+    0 & E_x/c & E_y/c & E_z/c \\
+    -E_x/c & 0 & B_z & -B_y \\
+    -E_y/c & -B_z & 0 & B_x \\
+    -E_z/c & B_y & -B_x & 0 \\
+\end{bmatrix}$$
+Vidimo, da je $\displaystyle{\frac{1}{2}F^{\mu\nu}F_{\mu\nu} = \vct{B}^2 - \frac{\vct{E}^2}{c^2}}$.
+Definirajmo Lagrangian $$\mathcal{L} = -\frac{1}{4\mu_0}F^{\mu\nu}F_{\mu\nu} - j^\mu A_{\mu}$$
+Tu je $j^\mu = (\rho_ec, \vct{j})$. Zdaj uporabimo Lagrangeov formalizem, torej
+$$\partial_\nu \pd{\mathcal{L}}{(\partial_\nu A_\mu)} - \pd{\mathcal{L}}{A_\mu} = 0$$
+Dobimo relacijo $\partial_\nu F^{\nu\mu} = \mu_0j^\mu$, v kateri sta skriti dve Maxwellowi enačbi:
+$$\nabla \times \vct{B} = \mu_0\vct{j} + \varepsilon_0\pd{\vct{E}}{t}$$
+$$\nabla\cdot\vct{E} = \frac{\rho}{\varepsilon_0}$$
+Druga stvar, ki jo lahko opazimo, je, da lahko definiramo spremenljivko $G^{\mu\nu} = \frac{1}{2}\varepsilon^{\mu\nu\alpha\beta}F_{\alpha\beta}$, kjer je $\varepsilon$ Levi-Civita tenzor v 4D, in veljalo bo
+$$F^{\mu\nu} G_{\mu\nu} = -\frac{4}{c}\vct{E}\cdot\vct{B},$$
+kar je invariantno na izbiro koorinatnega sistema, saj je $\partial_{\mu}G^{\mu\nu} = 0$.
+\paragraph{Napetostni tenzor EM v 4D}
+$$T^{\mu\nu} = \frac{1}{\mu_0}\left[F^{\mu\alpha} F^\nu_\alpha - \frac{1}{4}g^{\mu\nu}F^{\alpha\beta}F_{\alpha\beta}\right]$$
+Tu je $g^{\mu\nu}$ tenzor za skalarni produkt v prostoru Minkovskega ($\mathrm{diag}(-1, 1, 1, 1)$).
+$$T^{\mu\nu} = \begin{bmatrix}
+    \frac{1}{2}\varepsilon_0E^2 + \frac{1}{2\mu_0}B^2 & \frac{\vct{E}\times\vct{B}}{c\mu_0} \\
+    \frac{\vct{E}\times\vct{B}}{c\mu_0} & -\underline{\sigma}
+\end{bmatrix} = \begin{bmatrix}
+    w & \vct{S} \\
+    \vct{S} & -\underline{\sigma}
+\end{bmatrix}$$
+Tu je $w$ gostota energije, $\vct{S}$ Poyntingov vektor, $\underline{\sigma}$ pa napetostni tenzor v $\mathrm{3D}$. \\
+Cauchyjeva enačba pravi $\partial_\mu T^{\mu\nu} = 0 = \displaystyle{\frac{1}{c}\pd{w}{t} + \nabla\cdot\vct{S}}$
+To pomeni, da bo odtekanje energije enako divergenci energijskih tokov.
+\paragraph{Splošne relativnost.} Vzamemo metriko $\dif\vct{r}^2 = g_{\mu\nu} \dif r^\mu \dif r^\nu$ (Pitagorov izrek).
+V prostoru Minkovskega je $\dif s^2 = -c^2\dif t^2 - (\dif\vct{r})^2$ \\
+$$(\vct{u}\cdot\nabla)(\vct{v}\cdot\nabla) R = u^i\partial_i v^j\partial_j\hat{e}_j = u^i\left(\partial_iv^j\right)\vct{e_j} + u^iv^j\Gamma^k_{ij}\vct{e_k}$$
+Uporabili smo Kristofni simbol $\Gamma$, ki je definiran kot odvod metrike.
+Vmes se pojavijo mešani členi. Včasih lahko predpostavimo, da so enaki 0.
+Definiramo tudi kovariantni odvod:
+$$(\nabla_{\vct{u}} \vct{v}) = (\vct{u}\nabla)\vct{v}$$
+Če so bazni vektorji izpeljani iz odvodov ploščine, potem je $$\Gamma_{ij}^k = \Gamma_{ji}^k$$
+Geodetke: To so krivulje, ki grejo naravnost. Kaj mislimo s tem?
+Če označimo s $\vct{t}$ tangentni vektor, definiran kot $$\vct{t} = \pd{\vct{R}}{\tau} = \pd{\vct{R}}{x^i}\pd{x^i}{\tau} = \vct{e_i}\pd{x^i}{\tau}$$
+Naravnost pomeni, da se $\tau$ paralelno transportira vzdolž same sebe, torej je $(\vct{t}\cdot\nabla)\vct{t} = 0$. Če za neko krivuljo velja ta pogoj, govorimo o geodetki.
+Izraz lahko razpišemo v $\ddot{x}^l + \dot{x}^i\dot{x}^j\Gamma_{ij}^l = 0$. \\
+Oglejmo si primer polarnega koordinatnega sistema. Za koordinato $r$:
+$$\vct{r} + \Gamma_{\varphi\varphi}^r\dot{\varphi}\dot{\varphi} = \ddot{r} - r^2\dot{\varphi}^2 = 0$$
+To je ravno centrifugalna sila. Za koordinato $\varphi$:
+$$\ddot\varphi + \Gamma^\varphi_{r\varphi} \dot\varphi\dot r = \ddot{\varphi} + \frac{1}{2}\frac{\dot\varphi\dot r}{r} = 0$$
+To je ravno Coriolisova sila. \\
+Geodetke so priročne zato, ker se vse giblje po njih. \\[3mm]
+Liejev oklepaj: $$[\vct{u}, \vct{v}] = \vct{u}\vct{v} - \vct{v}\vct{u} = u^i(\partial_iv^j)e_j + u^iv^j\Gamma^k_{ij}\vct{e_k} - v^i(\partial_iu^j)e_j - u^iv^j\Gamma^k_{ij}\vct{e_k}$$
+$$= \left((u^i\partial_i)v^j - (v^i\partial_i)u^j\right)\hat{e}_j$$
+Če to naredimo na dveh vektorskih poljih, dobimo novo vektorsko polje, ki nam v bistvu pove, kako različni sta si vektorski polji. \\[3mm]
+Riemannov tenzor: Naj bosta $\vct{u}$ in $\vct{v}$ polji. Nek vektor $z$ transportirajmo po zaključenih kvadratih po $\vct{u}, \vct{v}$ ravnini in gledamo, kako se spreminja.
+$$\delta \vct{z} = (\vct{u}\cdot\nabla)(\vct{v}\cdot\nabla)\vct{z} - (\vct{v}\cdot\nabla)(\vct{u}\cdot\nabla)\vct{z} - \left([\vct{u}, \vct{v}]\cdot\nabla\right)\vct{z}$$
+Ko to izračunamo, dobimo ravno mešani člen:
+$$\delta z = u^iv^j\left(\partial_i\partial_j\vct{z} - \partial_j\partial_i\vct{z}\right)$$
+Pri matematiki smo nekoč dokazali, da lahko zamenjamo vrstni red odvajanja zamenjamo, vendar to ne velja, če se baza spreminja. Zato moramo to računati drugače:
+$$0 u^iv^j\left(\partial_i(\partial_jz^k)\vct{e_k} + \partial_i\left(z^k\Gamma^l_{jk} \vct{e_l}\right) - \partial_j(\partial_iz^k)\vct{e_k} - \partial_j\left(z^k\Gamma^l_{jk}\vct{e_l}\right)\right)$$
+Členi, ki odvajajo $z$, se pokrajšajo, ostane le $$= u^iv^j \left(z^k\partial_i(\Gamma_{jk}^l\vct{e_l}) - z^k\partial_j(\Gamma^l_{ik}\vct{e_l})\right)$$
+$$= u^iv^jz^kR^{m}_{ijk} = \partial_i\Gamma_{jk}^m - \partial_j\Gamma^m_{ik} + \Gamma^l_{jk}\Gamma^m_{il} - \Gamma^l_{ik}\Gamma^m_{jl}$$
+Gre za tenzor četrtega reda v štirih dimenzijah, torej ima 256 sprenljivk. Da dobimo $\delta z$, moramo rešiti sistem 256 nelinearnih diferencialnih enačb drugega reda. V praksi pa ima v najslabšem primeru 20 neodvisnih komponent, običajno pa še manj. \\[3mm]
+Riccijev tenzor: Definiran je kot $\underline{R}_{\mu\nu} = R^\alpha_{\mu\alpha\nu}$ in je invarianten. Zdaj lahko definiramo vpliv gravitacije na prostor:
+$$R^{\mu\nu} - \frac{1}{2}R^{\alpha\beta}g_{\alpha\beta}g^{\mu\nu} + \Lambda g^{\mu\nu} = \frac{8 \pi G}{c^4}T^{\mu\nu}$$
+Člen $R^{\alpha\beta}g_{\alpha\beta}$ je pravzaprav sled Ricijevega tenzorja in mu pravimo Riccijev skalar. $\Lambda$ je kozmološka konstanta, $T^{\mu\nu}$ pa napetostni tenzor (v bistvu gre za tlak in energijo).
+Newtonov gravitacijski zakon dobimo v $(0, 0)$-ti komponenti te enačbe, torej za primer $\mu = \nu = 0$. \\
+Če predpostavimo, da je vesolje homogeno (tj. da je energija enakomerno porazdeljena), dobimo Friedmannove enačbe, ki opisujejo širjenje vesolja s časom in so trenutno najboljši opis vesolja.
+\section{Diferencialne enačbe.} Opazimo: V nobeni fizikalni enačbi ne nastopa odvod po času, višji od drugega. Glavni razlog za to so predvsem lastnosti Lagrangeove in Hamiltonove funckije - izkaže se, da bi imela Legrangeova enačba drugačno število prostostnih stopenj kot Hamiltonova, če bi v njej nastopal tudi drugi odvod. Ker mora v Lagrangeove enačbi nastopati zgolj prvi odvod, mora v Newtonovi enačbi nastopati največ drugi odvod. Označimo torej
+$$\ddot{\vct{x}} = f(\vct{x}, \dot{\vct{x}}, t)$$
+Kjer $\vct{x}$ predstavlja položaj delca. Če velja $\ddot{\vct{x}} = f(\vct{x}, \dot{\vct{x}})$, enačbi pravimo avtonomna. Tedaj lahko uporabimo tudi substitucijo $\displaystyle{\dd{v}{t} = \dd{x}{t}\dd{v}{x} = v\dd{v}{x}}$. Enačbo tedaj prepišemo na sistem enačb prvega reda, torej:
+$$\dot{\vct{x}} = \vct{v}$$
+$$\dot{v} = f(\vct{x}, \vct{v}, t)$$
+Lagrangeova in Hamiltonova funkcija: $$\mathcal{H}(p_i, q_i) = \dot{p_i}q_i - \mathcal{L}(p_i, \dot{p_i})$$
+S tem smo naredili zamenjavo spremenljivk (mimogrede: to je zelo podobno Legendrovi transformaciji, ki smo jo delali pri termodinamiki). \\[3mm]
+\paragraph{Smerno polje in fazni prostor.} Rešitev Newtonovega zakona (vektor $[x, v]^T$) opisuje krivuljo v $x, v$ prostoru. Če diferencialna enačba ni odvisna od $t$, potem je smerno polje $(x, v)$ konstantno. Trajektorije gibanje bodo sledile tangentam smernega polja. primer je matematično nihalo, ki v $\varphi, \omega$ polju sledi nekim krivuljam.
+Kot zanimivost lahko pogledamo, kako se bodo razlikovale krivulje nihal pri rahlo različnih začetnih pogojih. Še posebej pa je to izrazito pri dvojnem matematičnega nihalu, okolica se namreč neizogibno razširi, zato je gibanje takega nihala nemogoče napovedati za več kot nekaj časa.
+\end{document}

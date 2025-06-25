@@ -1,0 +1,69 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{1. naloga:} V posodo z barvilom priteka voda, raztopina lahko izteka na drugi strani. Podan imamo $\phi_V$, zanima nas konventracija $c(t)$.
+$$c = \frac{m_b}{V}$$
+$$\dif m = c \dd{V}{t} \dif t = - \phi_V \dif t$$
+$$\dif c = -\frac{\phi_v}{V}\dif t$$
+$$\dif c = - c \frac{\phi_V}{V}\dif t$$
+$$c(t) = c_0 e^{-\frac{\phi(t)}{V}t}$$
+\paragraph{2. naloga:} Isto kot prej, le da namesto čiste vode v posodo priteka voda z barvilom s koncentracijo $c_1$.
+$$\dif c = - c\frac{\phi_V}{V} \dif t + c_1\frac{\phi_V}{V}\dif t$$
+Zdaj imamo nehomogeno diferencialno enačbo. Homogena rešitev je enaka prejšnji, za partikularno rešitev uporabimo varioacijo konstante, torej nastavek:
+$$c_p = Ae^{-\frac{\phi_v}{V}t} + B$$
+$$-A\frac{\phi_V}{V}e^{\frac{\phi_V}{V}} + \frac{\phi_V}{V}\left(Ae^{-\frac{\phi_V}{V}t + B} = \frac{c_1\phi_V}{V}\right)$$
+$$B = c_1$$
+Imamo robni pogoj $c_p(0) = c_0$, kar nam da $A = -B = c_1$.
+$$c_p(t) = (c_0 - c_1)e^{-\frac{\phi_V}{V}t} + c_1$$
+Rešitev diferencialne enačbe je vsota teh dveh rešitev.
+\paragraph{3. naloga:} V valj črpamo konstanten masni tok idealnega plina, iz njega pa konstanten volumski tok. Računamo $p(t)$.
+$$pV = \frac{m}{M}RT$$
+$$p = \rho \frac{RT}{M}$$
+$$\dot\rho = \left(\phi_m - \phi_V\rho\right) \frac{1}{V}$$
+Imamo linearno nehomogeno diferencialno enačbo za $\rho$, iz rešitve bomo izrazili $p$.
+Iskanje partikularne rešitve z integracijo:
+$$\dd{\rho}{t} + \frac{\phi_V}{V}\rho = \frac{\phi_m}{V}$$
+$$\frac{V \dif \rho}{\phi_m - \phi_V\rho} = \dif t$$
+$$\int_{\rho_0}^{\rho} \frac{V\dif\rho}{\phi_m-\phi_v\rho} = \int_{0}^{t}\dif t$$
+$$\frac{V}{\phi_V}\ln\frac{\phi_m - \phi_v\rho}{\phi_m - \phi_v\rho_0} = t$$
+$$\phi_m - \phi_v\rho = (\phi_m - \phi_v\rho_0)e^{-\frac{\phi_V}{V}t}$$
+\paragraph{4. naloga:} Trajektorija dušenega elektrona v magnetnem polju. $\vct{v}(\vct{r}, t) = ?$
+$$\vct{F} = e_0\vct{v}\times\vct{B} - \eta\vct{v}$$
+$$\vct{v} = \vct{v_\parallel} + \vct{v_\perp}$$
+Vzdolž $\vct{B}$:
+$$\vct{v_\parallel} = \vct{v_\parallel}_0\, e^{-\frac{\eta}{m} t}$$
+$$\vct{v}_\perp = (v_x, v_y, 0)$$
+$$m\dot{v}_x = e_0v_yB-\eta v_x$$
+$$m \dot{v}_y = -e_0v_xB - \eta v_y$$
+Drugo enačbo pomnožimo z $i$ in ju seštejemo, uvedemo novo spremenljivko $u = v_x + iv_y$
+$$m \dot u = -ie_0Bu - \eta u$$
+$$m\dot u = - (\eta + ie_0B) u$$
+$$\frac{\dot u}{u} = - \frac{\eta + ie_0B}{m}$$
+$$u(t) = u_0\exp\left[-\frac{\eta + ie_0B}{m}t\right] = u_0e^{-\beta t} e^{-i\omega t}$$
+Označili smo $\beta = \eta/m$ in $\omega = e_0B/m$.
+Da dobimo $v_x$ in $v_y$, dobljeno hitrost $u$ razstavimo na realno in imaginarno komponento.
+$$v_x = v_{x0} e^{-\beta t} \cos(\omega t) + v_{y0} e^{-\beta t} \sin(\omega t)$$
+$$v_y = v_{y0} e^{-\beta t} \cos(\omega t) + v_{x0} e^{-\beta t} \sin(\omega t)$$
+\end{document}

@@ -1,0 +1,100 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+\begin{document}
+\paragraph{1. naloga} Imamo safirno ploščico, njena toplotna prevodnost ima lastni vrednosti $\lambda_\parallel$ in dvojno lastno vrednost $\lambda_\perp$.
+$$\lambda = \begin{bmatrix}
+    \lambda_\parallel & 0 & 0 \\
+    0 & \lambda_\perp & 0 \\
+    0 & 0 & \lambda_\perp
+\end{bmatrix}$$
+Ploščica ima debelino $a = 5\,mm$, širino $100\,mm$, velja $\lambda_\parallel = 36\,W/mK$ in $\lambda_\perp = 32\,W/mK$. Velja $\Delta T_x = 10\,K$. Os, ki pripada lastni vrednosti $\lambda_\parallel$, je za kot $45^\circ$ nagnjena glede na $\hat{e}_x$. Zanima nas toplotni tok skozi ploščico.
+\paragraph{Reševanje.} Po definiciji je $$\vct{j} = -\duline{\lambda} \nabla T$$
+$\duline{\lambda}$ moramo zapisati v laboratorijski (xyz) bazi. Takšno rotacijo opisuje
+$$A' = RAR^T$$
+$$R = \begin{bmatrix}
+    \cos\varphi & \sin\varphi & 0 \\
+    -\sin\varphi & \cos\varphi & 0 \\
+    0 & 0 & 1 
+\end{bmatrix}$$
+Zavrteti moramo za $-45^\circ$.
+$$\duline{\lambda}' = R\duline{\lambda}R^T = \begin{bmatrix}
+    \cos\varphi & \sin\varphi & 0 \\
+    -\sin\varphi & \cos\varphi & 0 \\
+    0 & 0 & 1
+\end{bmatrix}\begin{bmatrix}
+    \lambda_\parallel && \\
+    & \lambda_\perp & \\
+    && \lambda_\perp \\
+\end{bmatrix}\begin{bmatrix}
+    \cos\varphi & -\sin\varphi & 0 \\
+    \sin\varphi & \cos\varphi & 0 \\
+    0 & 0 & 1 
+\end{bmatrix}$$
+$$=\begin{bmatrix}
+    \cos\varphi & \sin\varphi & 0 \\
+    -\sin\varphi & \cos\varphi & 0 \\
+    0 & 0 & 1 
+\end{bmatrix}\begin{bmatrix}
+    \lambda_\parallel\cos\varphi & \lambda_\parallel\sin\varphi & 0 \\
+    -\lambda_\perp\sin\varphi & \lambda_\perp\cos\varphi & 0 \\
+    0 & 0 & 1
+\end{bmatrix}$$
+$$ = \begin{bmatrix}
+    \lambda_\parallel\cos^2\varphi + \lambda_\perp\sin^2\varphi & \lambda_\parallel\sin\varphi\cos\varphi - \lambda_\perp\sin\varphi\cos\varphi & 0 \\
+    \lambda_\parallel\sin\varphi\cos\varphi - \lambda_\perp\sin\varphi\cos\varphi & \lambda_\parallel\sin^2\varphi + \lambda_\perp\cos^2\varphi & 0 \\
+    0 & 0 & 1
+\end{bmatrix}$$
+Zdaj izračunamo $\vct{j}$. Pričakujemo, da ta teče v smeri $y$, saj imamo tam temperaturno razliko:
+$$\vct{j} = j\hat{e}_y,~~~
+\nabla T = \begin{bmatrix}
+    \partial_xT \\
+    \partial_yT \\
+    0
+\end{bmatrix},~~~\partial_yT = \frac{\Delta T}{d}$$
+$$\begin{bmatrix}
+    0 \\ j \\ 0
+\end{bmatrix} = \begin{bmatrix}
+    \lambda_\parallel\cos^2\varphi + \lambda_\perp\sin^2\varphi & \lambda_\parallel\sin\varphi\cos\varphi - \lambda_\perp\sin\varphi\cos\varphi & 0 \\
+    \lambda_\parallel\sin\varphi\cos\varphi - \lambda_\perp\sin\varphi\cos\varphi & \lambda_\parallel\sin^2\varphi + \lambda_\perp\cos^2\varphi & 0 \\
+    0 & 0 & 1
+\end{bmatrix}\begin{bmatrix}
+    \partial_xT \\
+    \partial_yT \\
+    0
+\end{bmatrix}$$
+$$j_y = -\left(\lambda_\parallel \cdot \frac{1}{2} - \lambda_\perp\cdot\frac{1}{2}\right)\partial_xT - \left(\lambda_\parallel\cdot\frac{1}{2} + \lambda_\perp\cdot\frac{1}{2}\right)\partial_yT$$
+$$j_x = 0 = -\left(\lambda_\parallel \cdot \frac{1}{2} + \lambda_\perp\cdot\frac{1}{2}\right)\partial_xT - \left(\lambda_\parallel\cdot\frac{1}{2} - \lambda_\perp\cdot\frac{1}{2}\right)\partial_yT$$
+Izračunamo lahko $\displaystyle{\partial_xT = \frac{\frac{1}{2}(\lambda_\parallel - \lambda_\perp)}{\frac{1}{2}(\lambda_\parallel + \lambda_\perp)}\partial_yT = ... = \frac{1}{17}\partial_yT}$ (iz začetnih podatkov).
+Nazadnje vstavimo številke, da izračunamo $j_y$.
+\paragraph{Naloga.} Imamo kondenzator, v katerem velja:
+$$\vct{j} = \duline{\sigma}\vct{E}$$
+Tu $\duline{\sigma}$ označuje tenzor električne prevodnosti. Njegov inverz je tenzor električne upornosti $\duline{\zeta}$. Označimo
+$$\vct{E} = \duline{\zeta}\vct{j}$$
+Kot prej ima v lastnem sistemu $\duline{\sigma}$ obliko
+$$\duline{\sigma} = \begin{bmatrix}
+    \sigma_\parallel && \\
+    & \sigma_\perp & \\
+    & & \sigma_\perp \\ 
+\end{bmatrix}$$ Kot prej je lastni vektor $\sigma$ nagnjen za nek kot glede na os $x$, vzdolž katere deluje polje.
+\end{document}

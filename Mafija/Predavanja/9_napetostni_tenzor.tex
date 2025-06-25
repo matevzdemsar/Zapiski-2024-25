@@ -1,0 +1,96 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\paragraph{Napetostni tenzor.} Najbolj očitna primera se pojavita pri viskoznosti in elastičnosti.
+$$\dif F_i = \eta \pd{v_i}{x_j}\dif S_j$$
+$$\dif F_i = E \frac{\Delta l_x}{l_x}\dif S_x$$
+Uvedemo napetostni tenzor $F_i = \sigma_{ij}S_j$
+$$\varoiint \dif F_i = \varoiint \sigma_{ij}\dif S_j = \iiint \nabla_j \sigma_{ij} \dif V$$
+Dobimo Cauchyjevo enačbo (ki je v bistvu 2. Newtonov zakon v snovi):
+$$\rho \dot{v}_i = \nabla_j\sigma_{ij} + f_i$$
+Tu $f$ označuje vsoto zunanjih sil, na primer $\rho g$. \\[3mm]
+V izotropni snovi je $\sigma_{ij} = -p \delta_{ij}$, sledi $\rho \dot{v}_i = -\nabla_ip + f_i$ in tako naprej.
+Če naj velja ravnovesje (torej $\dot{v} = 0$), mora biti
+$$\nabla_j\sigma_{ij} + f_i = 0$$
+Hkrati želimo, da je tudi navor enak 0:
+$$\dif M_i = \varepsilon_{ijk}r_j\dif F_k = \varepsilon_{ijk}r_j\left(\sigma_{kl}\dif S_l + f_k\dif V\right)$$
+$$\varoiint \dif M_i = \iiint \nabla_l \varepsilon_{ijk} r_j \sigma_{kl} \dif V + \iiint \varepsilon_{ijk} r_j f_k \dif V$$
+$$= \iiint\varepsilon_{ijk} \sigma_{kj} \dif V + \iiint \varepsilon_{ijk} r_j \left(\nabla_l\sigma_{kl} + f_k\right)\dif V$$
+Zadnji integral je po predpostavki statičnosti enak 0.
+Za ravnovesje mora veljati $\displaystyle{\dd{M}{V} = 0}$
+$$\varepsilon_{ijk}\sigma_{kj} = 0$$
+$$\left(\varepsilon_{ijk} - \varepsilon_ikj\right) \sigma_{kj} = 0$$
+$$\sigma_{kj} = \sigma_{jk}$$
+To mora veljati, da se vrtilna količina ohranja. Simetričen mora biti tudi viskozni napetostni tenzor:
+$$\nabla_j\sigma_{ij} = \eta\left(\nabla_i(\vct\nabla\cdot\vct{r} + \nabla^2v_i)\right)$$
+V elastomehaniki:
+$$\pd{u_i}{r_j} = \frac{1}{2}\left(\pd{u_i}{r_j} + \pd{u_j}{r_i}\right) + \frac{1}{2}\left(\pd{u_i}{r_j} - \pd{u_j}{r_i}\right)$$
+V prvem členu nastopa (simetrični) deformacijski tenzor $\displaystyle{\varepsilon_{ij} = \frac{1}{2}\left(\pd{u_i}{r_j} + \pd{u_j}{r_i}\right)}$.
+Drugi člen je antisimetričen in predstavlja nekakšno rotacijo materiala, na katerega deluje sila. \\
+Iščemo splošno zvezo med napetostjo in deformacijo snovi. Dobimo sledečo enačbo:
+$$\sigma_{ij} = 2\mu u_{ij} + \lambda \delta_{ij}u_{kk}$$
+Tu sta $\mu$ in $\lambda$ Lamejeva koeficienta, načeloma je $\mu = G$ oziroma strižni modul. Poleg tega smo z $u_{kk}$ v bistvu označili $\Delta V / V$.
+Da dobimo deformacijski tenzor (ki ga po navadi želimo izračunati in ga nimamo že od prej), izračunajmmo najprej sled te enačbe:
+$$\sigma_{ii} = 2\mu u_{ii} + 3\lambda u_{ii} = (3\lambda + 2\mu)u_{ii}$$
+V izotropni snovi velja
+$$-3p = \left(3\lambda + 2\mu\right)\frac{\Delta V}{V}$$
+in lahko izrazimo stisljivostni koeficient $\displaystyle{\chi = \frac{3}{3\lambda + 2\mu}}$
+Iz prvotne enačbe izrazimo $\displaystyle{2\mu u_{ij}}$:
+$$2\mu u_{ij} = \sigma_{ij} - \lambda \delta_{ij}u_{kk} = \sigma_{ij} - \lambda\frac{\sigma_{kk}}{3\lambda + 2\mu}\delta_{ij}$$
+S tem lahko izrazimo tenzor deformacije, in sicer:
+$$u_{ij} = \frac{1}{2\mu}\sigma_{ij} - \frac{\lambda}{2\mu \left(3\lambda + 2\mu\right)}\sigma_{kk} \delta_{ij}$$
+Elastični tenzor:
+$$\sigma_{ij} = c_{ijkl} u_{kl}$$
+$\sigma_{ij}$ bo imel v 3D šest komponent ($\sigma_{xx}, \sigma_{yy}, \sigma_{zz}, \sigma_{xy}, \sigma_{yz}, \sigma_{xz}$). Podobno z $u$. Tedaj bo imel $c_{ijkl}$ 36 komponent. Na podlagi zgornjih enačb ga lahko tudi izrazimo:
+$$\sigma_{ij} = 2\mu u_{ij} + \lambda u_{kk} \delta_{ij} = \left(\mu(\delta_{ik} \delta_{jl} + \delta_{jk} \delta_{kl}) + \lambda \delta_{ij}\delta_{kl}\right)u_{kl} \equiv c_{ijkl} u_{kl}$$
+S tem smo izrazili $c_{ijkl}$. Če rečemo, da ima snov neko preferenčno smer $\vct{a}$, lahko elastični tenzor sestavimo na podlagi komponent, za katere je verjetno, da jih bo tenzor spreminjal.
+$$c_{ijkl} = \left[\mu(\delta_{ik}\delta_{jl} + \delta_{ji}\delta_{il}) + \lambda\delta_{ij}\delta_{kl} + A(a_ia_j\delta_{kl} + \delta_{ij}a_ka_l) + B(a_ia_k\delta_{jl} + a_ja_k\delta_{il} + a_ia_l\delta_{jk} + a_ja_l\delta_{ik}) + D(a_ia_ja_ka_l)\right]$$
+\paragraph{Elektromagnetni napetostni tenzor.} $$\nabla \times \vct{E} = -\pd{\vct{B}}{t}$$
+$$\nabla \times \vct{H} = \vct{j} + \pd{\vct{T}}{t}$$
+$$\nabla\cdot\vct{D} = \rho_e$$
+$$\nabla\cdot\vct{B} = 0$$
+Definiramo Poyntingov vektor: $\vct{P} = \vct{E} \times \vct{H}$ in gostoto gibalne količine $\vct{g} = \vct{D} \times \vct{B}$.
+$$\sigma_{ij} = \varepsilon_0\left[E_iE_j-\frac{1}{2}E^2\delta_{ij}\right] + \mu_0\left[H_iH_j-\frac{1}{2}H^2\delta_{ij}\right]$$
+$$\nabla_j\sigma_{ij} = \varepsilon_0\left[(\partial_jE_i)E_j + E_i(\partial_jE_j) - \frac{1}{2}\partial_iE^2\right] + ...$$
+Vemo, da se nam bo izraz za magnetno polje precej poenostavil, saj magnetno polje (kolikor vemo) nima monopolov. Upoštevamo tudi $\partial_jE_j = \rho/\varepsilon_0$
+$$= \rho \vct{E} + \varepsilon_0\left[\vct{E} \times (\vct{\nabla}\times\vct{E}) \right] - \mu_0\left[\vct{H}\times(\vct{\nabla}\times\vct{H})\right]$$
+$$=\rho\vct{E} + \varepsilon_0\vct{E}\times\pd{\vct{B}}{t} - \mu_0\vct{H}\times\left(\vct{j} + \pd{\vct{D}}{t}\right) = \rho\vct{E} + \vct{D}\times\pd{\vct{B}}{t} - \vct{B}\times\left(\vct{j} + \pd{\vct{D}}{t}\right)$$
+To pa je pravzaprav Lorentzova sila. Velja $$\nabla_j\sigma_{ij} = \pd{}{t}\vct{g}_{\text{delca}} + \pd{}{t}\vct{g}_{\text{polja}}$$
+Nazadnje poglejmo Pointingov vektor, začenši z njegovim časovnim odvodom.
+$$\pd{\vct{P}}{t} = \pd{\vct{E}}{t} \times \vct{H} + \vct{E} \times \pd{\vct{H}}{t} = \frac{1}{\varepsilon_0}\left(\nabla\times\vct{H}-\vct{j}\right)\times\vct{H}-\frac{1}{\mu_0}\vct{E}\times\left(\nabla\times\vct{E}\right)$$
+$$= \frac{1}{\varepsilon_0} \left(-\vct{j}\times\vct{H}\right) - \frac{1}{\varepsilon_0}\left(\nabla\frac{H^2}{2} - (\vct{H}\nabla)\vct{H}\right) - \frac{1}{\mu_0}\left(\nabla\frac{E^2}{2}-(\vct{E}\nabla)\vct{E}\right)$$
+To je spet podobno kot prej, se bomo pa s podobnim primerom še ukvarjali, zato zaenkrat zaključimo s tem.
+\paragraph{EM tenzor v prostoru-času.} Pri posebni teoriji relativnosti smo uvedli četverce. Za EM polje je te oblike
+$$A^{\mu} = \left(\frac{\mathcal{U}}{c}, \vct{A}\right)$$
+$$\vct{E} = -\nabla \mathcal{U} - \pd{\vct{A}}{t}$$
+$$\vct{B} = \nabla \times \vct{A}$$
+Predvsem nas zanima izraziti silo:
+$$\mathcal{F}^{\mu\nu} = \partial^{\mu}A^{\nu} - \partial^\nu A^\mu = \begin{bmatrix}
+    0 & E_x/c & E_y/c & E_z/c \\
+    -E_x/c & 0 & B_z & -B_y \\
+    -E_y/c & -B_z & 0 & B_x \\
+    -E_z/c & B_y & -B_x & 0 \\
+\end{bmatrix}$$
+Pri tem $\mu$ predstavlja čas, $\nu$ pa prostor. Dobili smo elektromagnetni tenzo, ki smo ga izpeljali že pri relativnosti.
+\end{document}

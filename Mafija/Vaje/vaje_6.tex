@@ -1,0 +1,34 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+\section{Diferencialni operatorji}
+Obravnavamo polje potenciala $\displaystyle{\varphi = \left|\vct{A}\times\vct{r}\right|}$, kjer je $\vct{A}$ konstanten vektor.
+$$E(r) = -\nabla\varphi = A\left(\frac{x}{\sqrt{x^2 + y^2}}, \frac{y}{\sqrt{x^2 + y^2}}, 0\right)$$
+Brez koordinat: $$\varphi = \sqrt{A^2r^2 - (\vct{A}\cdot\vct{r})^2}$$
+$$E(r) = -\nabla\varphi(r) = -\frac{\nabla(A^2r^2 - (\vct{A}\cdot\vct{r})^2)}{2\sqrt{A^2r^2 - (\vct{A}\cdot\vct{r})^2}}$$
+$$\nabla r^2 = 2r\nabla r$$
+V cilindričnih koordinatah je $\nabla r = \hat{e}_r$.
+$$\nabla(\vct{A}\cdot\vct{r})^2 = 2(\vct{A}\cdot\vct{r})\nabla(\vct{A}\cdot\vct{r}) = 2(\vct{A}\cdot\vct{r})\vct{A}$$
+Definiramo vektor $\vct{\rho} = \vct{r} - \text{pr}_{\vct{A}}^{\perp}(\vct{r})$, kar nam da $\displaystyle{E(r) = -\frac{\vct{\rho}}{\rho}}$.
+
+\end{document}

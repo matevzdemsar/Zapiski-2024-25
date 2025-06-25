@@ -1,0 +1,57 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+$\displaystyle{r(\varphi) = \frac{1}{1 + 2\frac{|\varphi|}{\pi} + \frac{\varphi^2}{\pi^2}}}$, $\vct{B}(0, 0, 0) = ?$
+$$d\vct{B}(0, 0, 0) = \frac{\mu_0I}{4\pi}\frac{d\vct{r}\times\vct{r}}{|\vct{r}|^3}$$
+$$d\vct{r} = r'(\varphi)\hat{e}_r + r(\varphi)\hat{e}_\varphi$$
+$$d\vct{r}\times\vct{r} = r^2\hat{e}_\varphi\times\hat{e}_r = r^2e_z$$
+$$d\vct{B} = \hat{e}_z\frac{r^2(\varphi)}{r^3(\varphi)} = \frac{1}{r(\varphi)}\hat{e}_z = \hat{e}_z\,\left(1 + 2t + t^2\right)dt$$
+$$B_z = \frac{\mu_0I}{4\pi}\int_{0}^{1} (1+t^2)\,dt = \frac{7\mu_0I}{6}$$
+\\
+V nadaljnje bomo označevali $\displaystyle{\partial_x = \pd{}{x}}$. \\[3mm]
+$\displaystyle{\cos\vartheta = a + b\cos 3\varphi}$, ploskev je enakomerno nabita, $r=\text{konst.}$
+$\vct{E}(0, 0, 0) = ?$ \\[3mm]
+Zaraadi simetrije pričakujemo, da bo polje kazalo z smeri $\hat{e}_z$.
+$$d\vct{E} = -\frac{de}{4\pi\varepsilon_0r^2} \hat{r}$$
+$$de = \sigma dS = \sigma r^2d(\cos\vartheta)d\varphi$$
+$$E = E_z = |E|\,\hat{r}\cdot\hat{z} = |E|\cos\vartheta$$
+$$dE = \frac{-\sigma\cos\vartheta\,d(\cos\vartheta)\,d\varphi}{4\pi\varepsilon_0}$$
+$$\cos\vartheta \in [a + b\cos 3\varphi, 1]$$
+$$E = -\frac{\sigma}{4\pi\varepsilon_0 a^2} \int_{0}^{2\pi}\int_{a + b\cos 3\varphi}^{1}\cos\vartheta d(\cos\vartheta)d\varphi = $$
+$$ = -\frac{\sigma}{4\pi\varepsilon_0}\int_{0}^{2\pi}\frac{u^2}{2}\Big|_{a+b\cos 3\varphi}^{1}d\varphi =
+-\frac{\sigma}{4\pi\varepsilon_0}\int_{0}^{2\pi} \frac{1-(a + b\cos 3\varphi)^2}{2}d\varphi$$
+$$ = \frac{-\sigma}{8\pi\varepsilon_0} \int_{0}^{2\pi} 1 - (a + b\cos 3\varphi)^2d\varphi$$
+Pomožni izračuni:
+$$\int_{0}^{2\pi} \cos 3\varphi d\varphi = 0$$
+$$\int_{2}^{2\pi} \cos^2 3\varphi d\varphi = \pi$$
+$$E = -\frac{\sigma (2-2a^2-b^2)}{8\varepsilon_0}$$
+\\
+Vektorski produkti v sferičnih koordinatah: \\
+$$\hat{e}_r\times\hat{e}_\vartheta=e_\varphi$$
+$$\hat{e}_\varphi\times\hat{e}_r=e_\vartheta$$
+$$\hat{e}_\vartheta\times\hat{e}_\varphi=e_r$$
+Skalarni produkti z navpišnico v sferičnih koordinatah:
+$$\hat{e}_r \cdot \hat{z} = \cos\vartheta$$
+$$\hat{e}_\varphi \cdot \hat{z} = 0$$
+$$\hat{e}_\vartheta \cdot \hat{z} = -\sin\vartheta$$
+\end{document}

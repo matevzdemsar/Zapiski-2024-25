@@ -1,0 +1,86 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Smerna polja v eni dimenziji.} Naj za neko skalarno funkcijo velja $\dot{v} = f(v)$. Točke $v_0$, za katere velja $f(v_0) = 0$, so stacionarne točke.
+V njihovi okolici velja $$\dot{v} \approx f'(v_0)(v-v_0)$$
+To je diferencialna enačba, katere rešitev je eksponentna funkcija, razen v primerih večkratnih ničel.
+Tedaj je $\dot v \approx A(v-v_0)^2$ - te enačbe veljajo za t.i. reakcije $n$-tega reda.
+$$\dd{v}{t} = A(v-v_0)^n$$
+Vzamemo spremenljivko $u = v-v_0$
+$$\int_{u_0}^{u} \frac{\dif u}{u^n} = At$$
+$$\frac{u^{-n+1}}{-n+1}\Big|_{u_0}^{u} = At$$
+$$u^{1-n} = (1-n)A(t-t_0), ~~n \neq 1$$
+\paragraph{Kvadratni zakon upora.} $\dot v = -Kv^2$
+$$v = \frac{v_0}{1+v_0Kt}$$
+Kvadratni zakon upora z gravitacijo: $\dot v = -Kv^2 + g = -K(v^2 - v_T^2)$, kjer je $v_T = \sqrt{g/K}$
+$$\frac{1}{v_T}\mathrm{artanh}\frac{v}{v_T} = -K(t-t_0)$$
+$$v = V_T\tanh(-v_TK(t-t_0))$$
+\paragraph{Hlajenje po Stefanovem zakonu.} $\dot T \propto T_0^4 - T^4$
+$$t \propto \int \frac{\dif T}{(T_0^2 - T^2)(T_0^2 + T^2)} = ... = -\frac{1}{2T_0^2}\left(\frac{1}{T_0}\arctan\frac{T}{T_0} - \frac{1}{T_0}\mathrm{artanh}\frac{T}{T_0}\right)$$
+Integral je analitično rešljiv (pri polinomih je bolj ali manj vedno tako), le temperature ne znamo izraziti.
+\paragraph{Dušeno nihanje.}\begin{itemize}
+    \item Linearno dušenje: $\ddot{x} + 2\beta\dot{x} + \omega_0^2x = 0$ $$x(t) = e^{-\beta t} \left(A\cos\omega t + B\sin\omega t\right)$$
+    \item Kvadratno dušenje: $m\dot v = -kx - \beta v|v|$
+    $$\dd{v}{t} = \dd{v}{t}\dd{x}{x} = \dd{x}{t}\dd{v}{x} = v\dd{v}{x}$$
+    $$mv\dd{v}{x} = -kx - \beta v|v|$$
+    Rešujemo posebej za $v > 0$ in $v < 0$. V vsakem primeru dobimo nehomogeno diferencialno enačbo, katere homogena rešitev
+    je eksponentna funkcija, partikularna pa polinom (v tem primeru stopnje 1, kajti najvišja potenca $x$ je 1).
+    $$\frac{mv^2}{2} = W_0e^{\mp \frac{2\beta}{m}v}\mp\frac{km}{2\beta} + k$$
+    Če hočemo dobiti $x(t)$, moramo najprej izračunati integral (ki najbrž ni analitično rešljiv), nato pa iz njega iztaziti $x$. Verjetno je to nemogoče,
+    lahko pa iz faznega diagrama $v(x)$ že dobimo kar nekaj informacij.
+    \item Konstantno dušenje (dušenje s trenjem): $m\dot v = -kx - \beta\frac{v}{|v|}$
+    Reševanje nam močno olajša dejstvo, da imamo opravka s skalarji in je $\displaystyle{\frac{v}{|v|} = \pm 1}$.
+    $$m\dot v = -k\left(x\pm \frac{\beta}{k}\right)$$
+    $$x = \mp \frac{\beta}{k} + A\cos\omega t + B\sin\omega t$$
+\end{itemize}
+\paragraph{Sistemi diferencialnih enačb drugega reda.} Primer sta sklopljeni nihali.
+$$J_1\ddot{\varphi_1} = -m_1gl\varphi_1 + b^2k(\varphi_2 - \varphi_2)$$
+$$J_2\ddot{\varphi_2} = -m_2gl\varphi_2 + b^2k(\varphi_1 - \varphi_2)$$
+V matrični obliki sistem zapišemo kot
+$$\begin{bmatrix}
+    J_1 & 0 \\
+    0 & J_2
+\end{bmatrix}\dd{^2}{t}\begin{bmatrix}
+    \varphi_1 \\ \varphi_2
+\end{bmatrix} = \begin{bmatrix}
+    -m_1gl - b^2k & b^2k \\
+    b^2k & -m_2gl - b^2k
+\end{bmatrix}\begin{bmatrix}
+    \varphi_1 \\ \varphi_2
+\end{bmatrix}$$
+$$\duline{M}\ddot{\vct{\varphi}} = -\duline{K}\varphi$$
+Uporabimo nastavek $\vct{\varphi} = e^{i\omega t}\varphi_0$
+$$-\omega^2\duline{M}\varphi_0 = -K\varphi_0$$
+Dobili smo problem lastnih vrednosti:
+$$\det(\duline{K} - \omega^2\duline{M}) = 0$$
+Energija nihal:
+$$W = W_k + W_p = \frac{1}{2}\dot{\vct{\varphi}}\cdot\duline{M}\dot{\vct{\varphi}} + \frac{1}{2}\vct{\varphi}\duline{K}\vct{\varphi}$$
+$$L = W_k - W_p = \frac{1}{2}\dot{\vct{\varphi}}\cdot\duline{M}\dot{\vct{\varphi}} - \frac{1}{2}\vct{\varphi}\duline{K}\vct{\varphi}$$
+$$W_p = \frac{1}{2}\varphi_i\varphi_jK_{ij}$$
+$$W_p= x_i\pd{V}{x_i} + \frac{1}{2}x_ix_j\pd{V}{x_i \partial x_j}$$
+\paragraph{Disipacija sklopljenih nihal.} $\duline{M}\ddot{\vct{\varphi}} + \duline{B}\dot{\vct{\varphi}} + \duline{K}\vct{\varphi} = 0$.
+Spet z nastavkom $e^{\lambda t}$ dobimo problem lastnih vrednosti:
+$$\det(\lambda^2\duline{M}+\lambda\duline{B}+\duline{K})=0$$
+\end{document}

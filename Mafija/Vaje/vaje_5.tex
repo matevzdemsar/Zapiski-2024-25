@@ -1,0 +1,87 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{../mycommands}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\dif}{\mathrm{d}}
+
+\begin{document}
+\paragraph{Vektorski račun}
+2. kolokvij 2011:
+Električno polje okoli traku dolžine $2a$ s površinsko gostoto naboja $\sigma$.
+To smo delali pri prejšnjih vajah in dobili $$\mathrm{d} \vct{E} = \frac{\sigma \mathrm{d}x (\vct{r} - \vct{r}')}{2\pi\varepsilon_0|\vct{r} - \vct{r}'|^2}$$
+$$\vct{E} = \int_{-a}^{a}\frac{\sigma(x - x', y)}{2\pi\varepsilon_0[(x-x')^2 + y^2]}\mathrm{d}x'$$
+$$E_x = \frac{\sigma}{2\pi\varepsilon_0}\int_{-a}^{a} \frac{x - x'}{(x - x')^2 + y^2} \dif x'$$
+$$E_y = \frac{\sigma}{2\pi\varepsilon_0}\int_{-a}^{a} \frac{y}{(x - x')^2 + y^2} \dif x'$$
+Za itračun $E_x$ uporabimo substitucijo $u = (x - x')^2,~\dif u = -2(x - x')\dif x'$
+$$E_x = \frac{\sigma}{-4\pi\varepsilon_0}\int_{-u_2}^{u_1}\frac{1}{u}\dif u = \frac{\sigma}{-4\pi\varepsilon_0}\ln\frac{(x-a)^2 + y^2}{(x + a)^2 + y^2}$$
+$$E_y = -\frac{\sigma}{2\pi\varepsilon_0}\left[\arctan\frac{x-a}{y} - \arctan\frac{x+a}{y}\right]$$
+$E_x$ dobimo iz razmerja razdalij, $E_y$ pa iz zornega kota. Če kanimo izračunati silo na nabit delec v tovrstem polju, nam zadošča naboj delca množiti z dobljenim vektorjem $(E_x, E_y)$. \\
+
+2. kolokvij 2015: Izraziti želimo potencial $V(\vct{r}=0)$ in $\vct{E}(\vct{r}=0)$ za nabito spiralo oblike $\displaystyle{r = e^{k\varphi}}$ dolžine $l$. \\
+Skica spirale:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.8]{spirala.png}
+\end{figure}
+\newline
+V polarnih koordinatah to spiralo parametriziramo kot $\vct{r} = r\hat{e}_r = ae^{k\varphi}\hat{e}_r$. Seveda je $\dif l = |\dif\vct{r}|$, to pa je enako:
+$$\dif \vct{r} = ake^{k\varphi} \hat{e}_r\dif\varphi + ae^{k\varphi}\hat{e}_{\varphi}\dif\varphi$$
+Interval, po katerem teče $\varphi$, izrazimo kot $[0, \varphi_0]$, v upanju, da bomo lahko $\varphi_0$ brez večjih težav izrazili z $l$. \\
+Potencial točkastega naboja: $$V(r) = \frac{e}{4\pi\varepsilon_0r}$$
+$$\dif V = \frac{\mu |\dif \vct{r}|}{4\pi\varepsilon_0|\vct{r}|} = \frac{\mu}{4\pi\varepsilon_0}\frac{\sqrt{(ake^{k\varphi})^2 + (ae^{k\varphi})^2}\dif \varphi}{ae^{k\varphi}} = \frac{\mu\dif\varphi}{4\pi\varepsilon_0}\sqrt{k^2 + 1}$$
+$$V = \frac{\mu}{4\pi\varepsilon_0}\varphi_0\sqrt{k^2 + 1}$$
+Potrebujemo le še izraz za $\varphi_0$. Vemo:
+$$l = \int_{0}^{\varphi_0}|\dif\vct{r}| = \int_{0}^{\varphi_0}ae^{k\varphi}\sqrt{k^2 + 1}d\varphi = \frac{a\sqrt{k^2 + 1}}{k}\left(e^{k\varphi_0} - 1\right)$$
+$$\varphi_0 = \ln\left(1 + \frac{k}{\sqrt{k^2 + 1}}\frac{l}{a}\right)$$
+Torej: $$V = \frac{\mu}{4\pi\varepsilon_0}\ln\left(1 + \frac{k}{\sqrt{k^2 + 1}\frac{l}{a}}\right)\sqrt{k^2 + 1}$$
+Električno polje $\vct{E}$ izračunamo po formuli $$\vct{E} = \frac{e}{4\pi\varepsilon_0r^2}\hat{e}_r$$. V splošnem pa je $\vct{E}(\vct{r}) = -\nabla V(\vct{r})$
+$$\vct{E} = \frac{-\mu}{4\pi\varepsilon_0} \int_{\vct{r}(0)}^{\vct{r}(\varphi_0)}\frac{\vct{r}|\dif\vct{r}|}{|\vct{r}|^3} = ... \text{ (pokrajšamo } ae^{k\varphi}) = \frac{\mu}{4\pi\varepsilon_0}\int_{0}^{\varphi_0}\frac{\sqrt{k^2 + 1}}{a}e^{-k\varphi}(\cos\varphi, \sin\varphi)\dif\varphi$$
+Tak integral lahko najdemo v Matematičnem priročniku, lahko pa se malo znajdemo in ga prevedemo na kompleksna števila: $(\cos\varphi, \sin\varphi) \to (\cos\varphi + i\sin\varphi) = e^{i\varphi}$
+$$I = \frac{-\mu}{4\pi\varepsilon_0} \frac{\sqrt{k^2 + 1}}{a} \int_{0}^{\varphi_0} e^{\varphi (i-k)}\dif\varphi = \frac{-\mu}{4\pi\varepsilon_0} \frac{\sqrt{k^2 + 1}}{a} \frac{- i - k}{k^2 + 1}\left(e^{\varphi_0(i - k) - 1}\right)$$
+$$E_x = \mathfrak{Re}I = \frac{-\mu}{4\pi\varepsilon_0} \frac{1}{a\sqrt{k^2 + 1}}\left(-k(e^{-k\varphi_0}\cos\varphi_0 - 1) + e^{-k\varphi_0}\sin\varphi_0\right)$$
+$$E_y = \mathfrak{Im}I = \frac{-\mu}{4\pi\varepsilon_0} \frac{1}{a\sqrt{k^2 + 1}}\left(-(e^{-k\varphi_0}\cos\varphi_0 - 1) - ke^{-k\varphi_0}\sin\varphi_0\right)$$
+
+Kodre 54/7: $\vct{H}$ v središču in goriščih elipse, po kateri teče tok $I$. \\
+Enačba elipse: $$\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$$
+Parametrizacija elipse: $\displaystyle{\vct{r}' = (a\cos\varphi, b\sin\varphi, 0)}$
+Uporabimo Biot-Savartov zakon:
+$$\vct{H}(\vct{r}) = \frac{I}{4\pi}\int_{0}^{2\pi}\frac{\dif\vct{r}'\times(\vct{r} - \vct{r}')}{|\vct{r} - \vct{r}'|^3}$$
+Najprej obravnavajmo primer $\vct{r} = (0, 0, 0)$. Pri računanju vektorskega produkta ugotovimo, da sta $x$ in $y$ komponenti enako 0:
+$$H_z = ... = \frac{I}{4\pi}\int_{0}^{2\pi}ab\frac{\dif\varphi}{(a^2\cos^2\varphi + b^2\sin^2\varphi)^{3/2}}$$
+To je eliptični integral 2. vrste, ki ni analitično rešljiv. Z uporabo Mathematice dobimo $\displaystyle{H_z(\vct{r}) = \frac{I}{\pi b} E\left(1 - \frac{b^2}{a^2}\right)}$, kjer je
+$\displaystyle{E(k) = \int_{0}^{\pi/2} \sqrt{1 - k^2\sin^2\varphi}\dif\varphi}$.
+Označimo $\displaystyle{\varepsilon = 1 - \frac{b^2}{a^2}}$ - ekscentričnost elipse.
+V posebnem primeru, ko je $\varepsilon = 0$, tj. imamo krog z radijem $R$, dobimo $\displaystyle{H_z = \frac{I}{2R}}$. \\[3mm]
+V gorišču elipšse imamo vzamemo drugačno parametrizacijo za $\vct{r}'$. Uvedemo goriščni parameter $\displaystyle{p = \frac{b^2}{a}}$.
+$$|\vct{r}'| = \frac{p}{1 + \varepsilon\cos\varphi}$$
+$$\vct{r}' = \frac{p}{1 + \varepsilon\cos\varphi}\hat{e}_r$$
+Ker nova parametrizacija upošteva, da je naše izhodišče v gorišču, spet velja $|\vct{r}' - \vct{r}| = \vct{r'}$.
+$$H_z(\vct{r}) = ... = \frac{I}{4\pi}\int_{0}^{2\pi} \frac{\dif\varphi}{r'} = \frac{I}{4\pi p} \int_{0}^{2\pi} (1 + \varepsilon \cos\varphi)\dif\varphi$$
+Funkcija $\cos$ je periodična, torej lahko ta člen izpustimo iz integrala, ostane nam
+$$H_z = \frac{I}{2p}$$
+
+Kodre 4.8: Polje krožnega loka (v središču kroga in na nasprotni strani kroga) \\
+V središču:
+$$\dif\vct{E} = -\frac{\dif e}{4\pi\varepsilon_0R^2}$$
+Uvedemo $\displaystyle{\mu = \frac{\dif e}{\dif l}}$ oziroma $\dif e = \mu \hat{e}_r \dif l = \mu R (\cos\varphi, \sin\varphi) \dif \varphi$
+$$\vct{E} = -\frac{\mu}{4\pi\varepsilon_0R}\int_{-\varphi_0}^{\varphi_0}(\cos\varphi, \sin\varphi)\dif\varphi$$
+$$= -\frac{\mu}{4\pi\varepsilon_0R}\left(\sin\varphi\Big|^{\varphi_0}_{\varphi_0}, -\cos\varphi\Big|^{\varphi_0}_{\varphi_0}\right)$$
+$$= -\frac{\mu}{2\pi\varepsilon_0R}(\sin\varphi_0, 0)$$
+Za $\left(0, -R\right)$ bi lahko poiskali novo parametrizacijo $r(\varphi)$. Vendar se nam ne da.
+$$\vct{r} = (R, 0) + R(\cos\varphi, \sin\varphi) = R(1 + \cos\varphi, \sin\varphi)$$
+$$\dif\vct{E} = \frac{-\dif e}{4\pi\varepsilon_0|\vct{r}|^2}\frac{\vct{r}}{|\vct{r}|}$$
+$$\vct{E} = - \frac{\mu}{4\pi\varepsilon_0}\int_{-\varphi_0}^{\varphi_0} \frac{R\dif\varphi}{|\vct{r}' + (R, 0)|^2}\frac{\vct{r}}{|\vct{r}|}$$
+$$|R(1 + \cos\varphi, \sin\varphi)|^2 = R^2(1 + 2\cos\varphi + \cos^2\varphi + \sin^2 \varphi) = 2R^2(\cos\varphi + 1)$$
+$$\vct{E} = \frac{\mu}{8\pi\varepsilon_0R}\int_{-\varphi_0}^{\varphi_0}\frac{(\cos\varphi + 1, \sin\varphi)}{\sqrt{2\cos\varphi + 2}}\frac{\dif\varphi}{\cos\varphi + 1}$$
+Označimo $\displaystyle{A = \frac{\mu}{8\pi\varepsilon_0R}}$. Poleg tega vemo, da lahko $\cos\varphi + 1$ zapišemo kot $\displaystyle{2\cos^2\frac{\varphi}{2}}$
+$$E_x = -A \int_{-\varphi_0}^{\varphi_0}\frac{\dif\varphi}{\sqrt{2}\cos\frac{\varphi}{2}}$$
+Dobimo integral, ki je v bistvu precej grd, je pa v matematičnem priročniku:
+$$\int\frac{\dif\varphi}{\cos\frac{\varphi}{2}} = \ln\tan\left(\frac{x}{2} + \frac{\pi}{4}\right) + C$$
+$$E_x = \sqrt{2}A\ln\frac{\tan\frac{\pi - \varphi_0}{4}}{\tan\frac{\pi + \varphi_0}{4}}$$
+V primeru $E_y$ gre za liho funkcijo na simetričnem intervalu, tako da je rezultat enak 0.
+$$\vct{E} = \left(\sqrt{2}A\ln\frac{\tan\frac{\pi - \varphi_0}{4}}{\tan\frac{\pi + \varphi_0}{4}}, 0\right)$$
+\end{document}

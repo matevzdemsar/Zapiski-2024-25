@@ -1,0 +1,59 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Tenzorji.} Imamo tenzor 2. reda. Običajno je simetričen, otrej je ortogonalno diagonalizabilen.
+$$\duline{A}\vct{a_i} = A_i\vct{a_i}$$
+Ravno tako bosta pogosto dve izmed lastnih vrednosti $A_i$ enaki, označimo $A_\parallel, A_\perp, A_\perp$.
+Poskusimo zapisati $\duline{A} = A_\perp I + \tilde{A}\widehat{a}_\parallel \otimes \widehat{a}_\parallel$.
+Pri tem smo definirali tenzorski produkt $\widehat{a}\otimes\widehat{a} = \widehat{a}\widehat{a}^T$ z lastnostjo $(\widehat{a} \otimes \widehat{a})\vct{r} = \widehat{a}(\widehat{a} \cdot \vct{r})$
+$$\duline{A}_\perp \widehat{a}_\perp= A_\perp \widehat{a}_\perp$$
+$$\duline{A}\widehat{a}_\parallel = A_\perp \widehat{a}_\parallel + \tilde{A} \widehat{a}_\parallel = (A_\perp + \tilde{A})\widehat{a}_\parallel = A_\parallel \widehat{a}_\parallel$$
+Sledi $\tilde{A} = A_\parallel - A_\perp$.
+\paragraph{4. kolokvij 2019} Imamo valjast kondenzator (notranji radij $r_1$, zunanji radij $r_2$), vzdolž njega je dielektričnost matriala enaka
+$$\varepsilon(r) = \varepsilon'\left(\frac{2r_2 - r_1 - r}{2(r_2 - r_1)}\right)$$
+$$\tilde{\varepsilon}'_\parallel = 3,~~\tilde{\varepsilon}'_\perp = 2$$
+Lastni sistem je nagnjen glede na radij za kot $\phi$.
+Zanima nas kapaciteta takega kondenzator.
+\paragraph{Reševanje.} Gaussov zakon:
+$$e = \iiint \nabla \cdot \vct{D} \, \dif V = \varoiint \vct{D}\cdot\dif\vct{S}$$
+$$\dif \vct{S} = h r\widehat{r} \dif \varphi$$
+$$e = \int_{0}^{2\pi} hr \vct{D} \cdot \widehat{r}\,\dif\varphi = 2\pi r h \vct{D}\cdot\widehat{r}$$
+Poleg tega je $\vct{E} = E\widehat{r}$
+$$\vct{D} = \varepsilon_0\duline{\varepsilon}\vct{E}$$
+$$\widehat{r}\cdot\vct{D} = \varepsilon_0 \left(\widehat{r}\duline{\varepsilon}\widehat{r}\right)E$$
+Efektivna komponenta dielektričnega tenzorja je $$(\varepsilon_\parallel \cos^2\phi + \varepsilon_\perp \sin^2\phi)\,\varepsilon(r)$$
+V splošnem je $$[A]_\mathcal{B} = \begin{bmatrix}
+    A_\parallel \cos^2\varphi + A_\perp \sin^2\varphi & (A_\parallel - A_\perp) \sin\varphi \cos\varphi \\
+    (A_\parallel - A_\perp) \sin\varphi \cos\varphi & A_\parallel \sin^2\varphi + A_\parallel \cos^2 \varphi
+\end{bmatrix}$$
+$$[A^{-1}]_\mathcal{B} = \frac{1}{A_\parallel A_\perp} \begin{bmatrix}
+    A_\parallel \sin^2\varphi + A_\perp \cos^2\varphi & (A_\perp - A_\parallel) \sin\varphi \cos\varphi \\
+    (A_\perp - A_\parallel) \sin\varphi \cos\varphi & A_\parallel \cos^2\varphi + A_\parallel \sin^2 \varphi
+\end{bmatrix}$$
+In samo preberemo člen. Torej je
+$$\widehat{r}\cdot\vct{D} = E\varepsilon_0\left[\varepsilon_\parallel \cos^2\phi + A_\perp \sin^2\phi\right] \cdot \frac{2r_2 - r_1 - r}{2(r_2 - r_1)}$$
+Iz tega lahko izrazimo odvisnost $E(r)$ (kajti vemo, da je $\widehat{r} \cdot \vct{D} 2\pi r h = e$). Nato stvar integriramo po $r$, da dobimo napetost, in ta je enaka $e/C$. Tako lahko izračunamo $C$, ampak ne bomo zapravljali časa z zamudnim integriranjem.
+
+\end{document}

@@ -1,0 +1,282 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Linearne diferencialne enačbe 1. reda.}
+So oblike $\dot{\vct{x}} = A\vct{x} + \vct{f}(t)$. Členu $A\vct{x}$ rečemo homogeni del, členu $\vct{f}(t)$ pa partikularni del.
+Če rešimo homogeni del, lahko na podlagi te rešitve konstruiramo tudi partikularno rešitev. Pri Matematiki III smo postopku rekli
+variacija konstante, pri Mafiji to obravnavamo kot konvolucijo $\displaystyle\int_{0}^{\infty}\vct{G}(\vct{f}(t'), t-t')\dif t'$,
+kjer je $\vct{G}(\vct{x_0}, t) = \vct{x}$ rešitev homogenega dela.
+Imejmo zdaj sistem $\dot{\vct{x}} = A\vct{x}$. \\ Najprej si mislimo, da je $A$ diagonalizabilna.
+$$A = PDP^{-1}$$
+$$P^{-1}\dot{\vct{x}} = P^{-1}PDP^{-1}\vct{x}$$
+Uvedemo spremenljivko $\vct{y} = P^{-1}\vct{x}$.
+$$\dot{\vct{y}} = D\vct{y}$$
+$$\vct{y} = e^{Dt}\vct{y_0}$$
+Če $A$ ni diagonalizabilna, jo damo v Jordanovo bazo:
+$$A = PJP^{-1}$$
+Jordanova matrika je sestavljena iz celic oblike
+$$J_k = \begin{bmatrix}
+    \lambda_k & 1 &&& \\
+    & \lambda_k & 1 && \\
+    && \ddots & \ddots & \\
+    &&& \lambda_k & 1
+\end{bmatrix}$$
+Da jo damo v tako obliko, moramo poiskati korenske vektorje te matrike. Ko jih najdemo, je rešitev oblike
+$$\vct{x} = e^{At}\vct{x_0},~~e^{At} = Pe^{\lambda t} \begin{bmatrix}
+    1 & t & t^2/2 & \dots & & \\
+    & 1 & t & t^2/2 & \dots &  \\
+    & & \ddots & \ddots & \ddots & \ddots \\
+    &&& \ddots & \ddots & \ddots  \\
+    &&&& \ddots & \ddots  \\
+    &&&&& 1
+\end{bmatrix} P^{-1}$$
+\paragraph{Harmonično nihanje.} Harmonično nihanje opisuje sistem enačb 
+$$\dd{}{t}\begin{bmatrix}
+    x \\ v
+\end{bmatrix} = \begin{bmatrix}
+    0 & 1 \\
+    -\frac{k}{m} & 0
+\end{bmatrix}\begin{bmatrix}
+    x \\ v
+\end{bmatrix}$$
+(Uvedli smo spremenljivko $v = \dot{x}$, sicer gre za enačbo $\ddot{x} = -\frac{k}{m}x$)
+Uvedemo spremenljivki $y = \omega^{-1} v$ in $\tau = \omega t$.
+$$\dd{}{\tau}\begin{bmatrix}
+    x \\ y
+\end{bmatrix} = \begin{bmatrix}
+    0 & 1 \\
+    -1 & 0
+\end{bmatrix}\begin{bmatrix}
+    x \\ y
+\end{bmatrix}$$
+Zdaj uporabimo prej opisani postopek za $\displaystyle{A = \begin{bmatrix}
+    0 & 1 \\
+    -1 & 0
+\end{bmatrix}}$ in dobimo sinusno nihanje.
+\paragraph{Kritično dušenje.} To imamo opravka z enačbo oblike $\ddot{x} + 2\omega\dot{x} + \omega^2x = 0$ V matrični obliki ga zapišemo kot
+$$\dd{}{t}\begin{bmatrix}
+    x \\ v
+\end{bmatrix} = \begin{bmatrix}
+    0 & 1 \\
+    -\omega^2 & -2\omega
+\end{bmatrix}\begin{bmatrix}
+    x \\ v
+\end{bmatrix}$$
+$$\dd{}{\tau}\begin{bmatrix}
+    x \\ y
+\end{bmatrix} = \begin{bmatrix}
+    0 & 1 \\
+    -1 & -2
+\end{bmatrix}\begin{bmatrix}
+    x \\ y
+\end{bmatrix}$$
+Ta matrika ni diagonalizabilna (koeficient dušenja mora biti $\beta = 2\omega$). Uporabimo Jordanovo matriko in dobimo
+$$\begin{bmatrix}
+    x \\ y
+\end{bmatrix} = \begin{bmatrix}
+    x_0 \\ y_0
+\end{bmatrix} e^{-\tau} \begin{bmatrix}
+    -1 & -1 \\
+    1 & 0
+\end{bmatrix} \begin{bmatrix}
+    (x_0 + y_0) (1 + \tau) - y_0 \\
+    y_0 - \tau(x_0 + y_0)
+\end{bmatrix}$$
+Tu je matrika $\displaystyle{\begin{bmatrix}
+    -1 & -1 \\
+    1 & 0
+\end{bmatrix}}$ prehodna matrika $P$. Za ostale matrike smo že poskrbeli.
+\paragraph{Problem kompartmentov.} Večina matrik je diagonalizabilnih. Problem kompartmentov je primer, ko se nediagonalizabilni matriki ne moremo izogniti.
+Mislimo si, da imamo tri kompartmente z vodo, vezane enega za drugim. V prvega dodamo nek topljenec in gledamo, kako se spreminja masa topljenca v naslednjih kompartmentih.
+\begin{eqnarray*}
+    \dot{m}_1 = -\frac{\phi}{V}m_1 \\
+    \dot{m}_2 = -\frac{\phi}{V}m_2 + \frac{\phi}{V}m_1 \\
+    \dot{m}_3 = -\frac{\phi}{V}m_3 + \frac{\phi}{V}m_3 \\
+\end{eqnarray*}
+V matrični obliki to zapišemo kot
+$$\dd{}{t}\begin{bmatrix}
+    m_1 \\ m_2 \\ m_3
+\end{bmatrix} = \frac{\phi}{V} \begin{bmatrix}
+    -1 & 0 & 0 \\
+    1 & -1 & 0 \\
+    0 & 1 & -1
+\end{bmatrix} \begin{bmatrix}
+    m_1 \\ m_2 \\ m_3
+\end{bmatrix}$$
+Tako je $m_1 = e^{-\lambda t}m_0$, $m_2 = Ce^{-\lambda t} + Ate^{-\lambda t}$ in tako naprej. Tak sistem lahko rešimo s časovno zahtevnostjo $\mathcal{O}(n)$.
+\paragraph{Sistem enačb s pasovno matriko - prevajanje toplote.} Imejmo matriko, ki ima neničelne vrednosti le na glavni diagonali in diagonalah ob njej.
+Primer take matrike je sistem enačb za prevajanje toplote (med kompartmenti).
+\begin{eqnarray*}
+    m_1c\dot{T}_1 = h (T_2 - T_1) \\
+    m_2c\dot{T}_2 = h (T_1 - T_2) + h (T_3 - T_2) \\
+    m_3c\dot{T}_3 = h (T_2 - T_3) + h (T_4 - T_3) \\
+\end{eqnarray*}
+In tako naprej za naslednje kompartmente. V matrični obliki to enačbo zapišemo kot
+$$\begin{bmatrix}
+    m_1 c &&& \\
+    & m_2 c && \\
+    && m_3 c & \\
+    &&& \ddots
+\end{bmatrix}\dd{}{t}\begin{bmatrix}
+    T_1 \\ T_2 \\ T_3 \\ \vdots
+\end{bmatrix} = h\begin{bmatrix}
+    -1 & 1 & \dots & \\
+    1 & -2 & 1 & \\
+    \vdots & 1 & 2 & \ddots \\
+    & & \ddots & \ddots \\
+\end{bmatrix}\begin{bmatrix}
+    T_1 \\ T_2 \\ T_3 \\ \vdots
+\end{bmatrix}$$
+Imamo enačbo oblike $M\dot{\vct{T}} = K\vct{T}$
+Imamo posplošen primer lastnih vrednosti:
+$$\vct{T} = \vct{T_{n}}e^{\lambda t}$$
+Lastne vrednosti dobimo iz enačbe $\det (K - \lambda M) = 0$.
+\paragraph{Lastni načini.} V limiti $n \to \infty$, kjer $n$ predstavlja število enačb, naša enačba $\dot{T}_n = T_{n-1} - 2T_{n} + T_{n+1}$
+predstavlja drugi odvod po kraju. Dobimo torej
+$$\pd{}{t}T = \Delta x^2 \nabla^2 T - qT$$
+ali difuzijsko enačbo. Njena rešitev je kombinacija funkcij oblike $T = e^{\lambda t} T(x)$, ki jih imenujemo lastni načini. Pri tem mora veljati:
+$$\lambda T = \Delta x^2 \nabla^2 T$$
+Rešujemo z nastavkom $T = A\cos(kx)$
+$$A \lambda T = \Delta x^2 A (-k^2) T$$
+$$\lambda = -k^2 - 1$$
+\paragraph{Kompleksne rešitve 2D sistemov.} Recimo, da sistem opisuje matrika $\displaystyle{A = \begin{bmatrix}
+    0 & -1 \\
+    1 & 0
+\end{bmatrix}}$. Tedaj je $$e^{At} = \begin{bmatrix}
+    \cos t & -\sin t \\
+    \sin t & \cos t
+\end{bmatrix} = I\cos t + A \sin t$$
+Tako lastnost imajo tri bazne matrike:
+$$i\sigma_x = \begin{bmatrix}
+    0 & i \\
+    i & 0
+\end{bmatrix}~~i\sigma_y = \begin{bmatrix}
+    0 & 1 \\
+    -1 & 0
+\end{bmatrix}~~i\sigma_z = \begin{bmatrix}
+    i & 0 \\
+    0 & -i
+\end{bmatrix}$$
+Te matrike imenujemo tudi Pavlijeve matrike. Imajo sledeče lastnosti:
+\begin{eqnarray*}
+    \sigma_x\sigma_y = i\sigma_z
+    \sigma_y\sigma_z = i\sigma_x
+    \sigma_z\sigma_x = i\sigma_y
+\end{eqnarray*}
+Vrh tega lahko z njimi generiramo rotacijske matrike.
+\paragraph{Eulerjeva delta.} Označimo $\vct{n}$ ... os rotacije in $\sigma_i$ ... Pavlijeva matrika.
+$$e^{i(n_i\sigma_i) = \cos\frac{\varphi}{2} + i\sigma_i n_i \sin\frac{\varphi}{2}}$$
+\paragraph{Dušeno vrtenje.} Imamo sistem
+$$\dd{}{t} \begin{bmatrix}
+    x \\ y
+\end{bmatrix} = A \begin{bmatrix}
+    x \\ y
+\end{bmatrix},~~~A = \begin{bmatrix}
+    -\beta & \omega \\
+    -\omega & -\beta
+\end{bmatrix}$$
+Vidimo, da je $A$ linearna kombinacija ene od Pavlijevih matrik in identitete. To pomeni, da je
+$$e^{At} = e^{(-\beta I + \omega(i\sigma_y))t} = e^{-\beta t} e^{w(i\sigma_y)t} = e^{-\beta t} \begin{bmatrix}
+    \cos \omega t & \sin \omega t \\
+    - \sin \omega t & \cos \omega t \\
+\end{bmatrix}$$
+To smemo storiti, ker $I$ komutira z $i\sigma_i$ - sicer eksponent vsote ne bi bil enak produktu eksponentov.
+\paragraph{Gibanje naboja v elektro-magnetnem polju.} Mislimo si, da imamo opravka še z dušenjem, koeficient katerega označimo z $\gamma$.
+$$m\dot{\vct{v}} = e\vct{E} - \gamma\vct{v} + e\vct{v}\times\vct{B}$$
+$$m\begin{bmatrix}
+    \dot{v}_x \\ \dot{v}_y
+\end{bmatrix} = e \begin{bmatrix}
+    E_x \\ E_y
+\end{bmatrix} + \gamma \begin{bmatrix}
+    1 & 0 \\
+    0 & 1
+\end{bmatrix}\begin{bmatrix}
+    v_x \\ v_y
+\end{bmatrix} + eB \begin{bmatrix}
+    0 & 1 \\
+    -1 & 0
+\end{bmatrix} \begin{bmatrix}
+    v_x \\ v_y
+\end{bmatrix}$$
+Opravka imamo z matrično enačbo
+$$\begin{bmatrix}
+    0 & 1 \\
+    -1 & 0
+\end{bmatrix} \begin{bmatrix}
+    x \\ y
+\end{bmatrix} = \lambda \begin{bmatrix}
+    x \\ y
+\end{bmatrix}$$
+Matrika je točno enaka $i\sigma_y$, ki pa je samo rotirana matrika $i\sigma_z$, ki ima lastni vrednosti $\pm i$. \\
+Prehod v lastni sistem je ekvivalenten uvedbi nove spremenljivke $w = v_x + iv_y$. Imamo torej le eno kompleksno enačbo
+$$m \dot w = e (E_x + iE_y) - \gamma w - eBiw$$
+Homogeni del: $\displaystyle{w = w_0 e^{-\frac{\gamma + eBi}{m}t}}$ \\
+Partikularni del: Označimo $f = e(E_x + iE_y)$
+$$0 = f - (\gamma - eBi)w$$
+$$w = \frac{f}{\gamma + eBi}$$
+Za $v_x$ in $v_y$ samo vzamemo realni in imaginarni del te rešitve.
+\paragraph{Faucaltovo nihalo} (nihalo v vrtečem se koordinatnem sistemu)
+Opravka imamo z diferencialno enačbo $$m\ddot{\vct{x}} = 2m\vct{\Omega}\times\dot{\vct{x}} - m\frac{g}{l}\vct{x} - m\vct{g}$$
+V matrični obliki jo zapišemo kot
+$$\begin{bmatrix}
+    m\ddot{u} \\ m\ddot{v}
+\end{bmatrix} = 2m\begin{bmatrix}
+    0 & -\Omega \\
+    \Omega & 0
+\end{bmatrix}\begin{bmatrix}
+    \dot u \\ \dot v
+\end{bmatrix} - \frac{mg}{l}\begin{bmatrix}
+    u \\ v
+\end{bmatrix}$$
+Spet uvedemo spremenljivko $w$ in dobimo $$\ddot{w} = 2\Omega i \dot w - \omega_0^2 w$$
+Rešimo z nastavkom $w = w_0e^{i\omega t}$, ki nam da karakteristično enačbo
+$$-\omega^2 = 2\Omega (-\omega) - \omega_0^2$$
+$$\omega = \Omega \pm \sqrt{\Omega^2 + \omega_0^2}$$
+$$w = w_1 e^{i(\Omega + \sqrt{\Omega^2 + \omega_0^2})t} + w_2 e^{i(\Omega \pm \sqrt{\Omega^2 + \omega_0^2})t}$$
+Če začnemo v koordinatnem izhodišču: $w_1 = -w_2$
+$$w = 2w_1e^{i\Omega t}\sin\left(\sqrt{\Omega^2 + \omega_0^2}\right)t$$
+Tu $w_1$ redstavlja začetno hitrost (in je kompleksen, torej predstavlja tako $x$ kot $y$ smer). $e^{i \Omega t}$ predstavlja vrtenje ravnine nihanja, $\sin\left(\sqrt{\Omega^2 + \omega_0^2}\right)t$
+pa nihanje samo.
+\paragraph{Kvaternioni.} Postopek, kakršnega smo uporabili pri obravnavi Faucaltovega nihala, je možen v dveh dimenzijah, kjer si lahko pomagamo s kompleksnimi števili.
+V treh dimenzijah potrebujemo kvaternione. Nekako gre za opis vektorskega prostora, katerega baze so Pavlijeve matrike in identiteta.
+$$Q = a_0 + a_1 \cdot i + a_2 \cdot j + a_3 \cdot k$$
+$$i^2 = j^2 = k^2 = -1$$
+\begin{eqnarray*}
+    ij = k = -ji \\
+    jk = i = -kj \\
+    ki = j = -ik \\
+    \\
+    i \leftrightarrow i\sigma_x
+    j \leftrightarrow i\sigma_y
+    k \leftrightarrow i\sigma_z
+\end{eqnarray*}
+Rotacijo $P$ lahko predstavimo kot $\displaystyle{P = \cos\frac{\varphi}{2} + \vct{n}\cdot(i, j, k) \sin\frac{\varphi}{2}}$
+Inverz te rotacije $P^*$ dobimo tako, da namesto $i$ vstavimo $-i$ in tako naprej.
+Količino $Q = a_1 i + a_2 j + a_3 k$ pa si lahko predstavljamo kot vektor. To pomeni, da lahko na nek način seštevamo skalarje in vektorje:
+$$A = s + \vct{v} = s + v_x i + v_y j + v_z k$$
+$$B = t + \vct{w} = t + w_x i + w_y j + w_z k$$
+$$AB = st - \vct{v}\cdot\vct{w} + \vct{t}\times\vct{w} + s\vct{w} + t\vct{v}$$
+To je uporabno, zaenkrat pa omenimo bolj kot zanimivost.
+\end{document}

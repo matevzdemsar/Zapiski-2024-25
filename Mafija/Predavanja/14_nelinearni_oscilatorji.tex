@@ -1,0 +1,97 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\,\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Nelinearni oscilatorji.} Primer bi bil pri nihalu, ki ga odmaknem za dovolj velik kot, da Taylorjev razvoj kosinusa ni več ustrezen.
+$$\ddot{x} + 2\beta\dot{x} + \omega_0^2(x + \gamma x^3) = A\cos\omega t$$
+Temu pravimo Duffingova enačba - gre za vzbujanje nihanja s frekvenco $\gamma$. Ni analitično rešljiva, lahko pa jo analiziramo s pomočjo faznega diagrama. Uporabimo Van der Polovo transformacijo:
+$$u = x\cos\omega t - \dot x \omega^{-1}\sin\omega t$$
+$$v = -x\sin \omega t - \dot x \omega^{-1}\sin\omega t$$
+$$\dot u = -\sin\omega t - \cos\omega t\,\dot x \frac{1}{\omega} + \cos\omega t\,\dot x - \ddot x \omega^{-1}\sin\omega t = -\frac{\sin \omega t}{\omega} (\ddot x + x \omega^2) = $$
+$$ = \frac{\sin\omega t}{\omega} \left[(\omega_0^2 - \omega^2)x + 2\beta \dot x + \omega_0^2\gamma x^3 - A\cos\omega t\right]$$
+$$\dot v = \frac{\cos\omega t}{\omega} \left[(\omega_0^2 - \omega^2)x + 2\beta \dot x + \omega_0^2\gamma x^3 - A\cos\omega t\right]$$
+Spet moramo namesto $x$ in $\dot x$ vstaviti $u$ in $v$.
+$$\dot u = \frac{1}{\omega}\sin\omega t \left[(\omega_0^2 - \omega^2)(u\cos\omega t - v\sin\omega t) - 2\beta\omega(u\sin\omega t + v\cos\omega t) + \omega_0^2\gamma(u\cos\omega t - v\sin\omega t)^3 - A\cos\omega t\right]$$
+$$\dot v = \frac{1}{\omega}\cos\omega t \left[(\omega_0^2 - \omega^2)(u\cos\omega t - v\sin\omega t) - 2\beta\omega(u\sin\omega t + v\cos\omega t) + \omega_0^2\gamma(u\cos\omega t - v\sin\omega t)^3 - A\cos\omega t\right]$$
+To povprečimo po periodi in dobimo diferencialni enačbi
+$$\dot u = -\frac{1}{2\omega} \left[(\omega_0^2-\omega^2)u + 2\beta\omega u + \frac{3}{4}\omega_0^2\gamma(u^2 + v^2)v\right]$$
+$$\dot u = -\frac{1}{2\omega} \left[-(\omega_0^2-\omega^2)u + 2\beta\omega u - \frac{3}{4}\omega_0^2\gamma(u^2 + v^2)u + A\right]$$
+Dobili smo nekaj, kar ni odvisno od časa, torej sklepamo, da bo morda $\dot u = \dot v = 0$. Lahko poskusimo iti v polarne koordinate, in sicer označimo
+$$v = r\sin\vartheta$$
+$$u = r\cos\vartheta$$
+$$\frac{3}{4}\omega_0^2\gamma r^3 + (\omega_0^2 - \omega^2)r = A\cos\vartheta$$
+$$2\beta\omega r = -A\sin\vartheta$$
+Tu je $r$ amplituda vsiljenega nihanja, $\vartheta$ pa faza.
+$$A^2 = ... = (4\beta^2\omega^2 + (\omega_0^2 - \omega^2)^2)r^2 + \left(\frac{3}{4}\omega_0^2\gamma\right)r^6$$
+To je sicer grdo, je pa funkcija ene spremenljivke. Dobili smo resonančno krivuljo v implicitni obliki, ne da bi reševali enačbo.
+Časovne odvisnosti ne moremo dobiti (na začetku leta smo že za nevsiljenu nihanje dobili neanalitične eliptične integrale), smo pa dobili nekaj informacij o sistemu.
+\begin{align*}
+    \dot x & = v \\
+    \dot v & = -\omega_0^2 x - \beta v - \omega_0^2\gamma x^3 + F\cos\tau \\
+    \dot \tau = \omega
+\end{align*}
+S tem smo vpeljali čas kot koordinato.
+\paragraph{Poincarejev presek.} Gledamo podmnožico faznega prostora.
+\paragraph{Lorenzov '63 sistem.} Je prvi sistem, za katerega se je izkazalo, da je kaotičen. Opisuje ga sistem diferencialnih enačb.
+\begin{align*}
+    \dd{x}{t} & = \sigma(y - x) \\
+    \dd{y}{t} & = x(\rho - z) - y \\
+    \dd{z}{t} & = xy - \beta z
+\end{align*}
+Gre nekako ze to, da se rešitev, kadar doseže sedlo, razcepi na dve rešitvi, ki se med seboj oddaljujeta eksponentno (dokler ne dosežeta velikosti sistema):
+$$x(0) + \varepsilon \to x(t) + \varepsilon e^{\lambda t}$$
+\section{Oblike nelinearnosti}
+\paragraph{Parametrična resonanca.} Primer je Mathieujeva enačba:
+$$\ddot x + 2\beta\dot x + (\omega_0^2 2\gamma\cos2\omega tx = 0)$$
+Rešujemo s Floquetovim nastavkom:
+$$x(t) = e^{\lambda t} P(t)$$
+Kjer je $P(t)$ periodična funkcija, vzemimo kar $a\cos\omega t + b\sin\omega t$.
+$$(\lambda^2 - \omega^2 + \omega_0^2 + 2\beta\lambda)(a\cos\omega t + b\sin\omega t) + 2(\lambda + \beta)\omega(-a\sin\omega t + b\cos\omega t) - 2\gamma \cos(2\omega t) (a\cos\omega t + b\sin\omega t) = 0$$
+Da se znebimo člena $2\gamma\cos\omega t$, obe strani pomnožimo s $\cos\omega t$ in integriramo. Podobno naredimo še s $\sin \omega t$.
+$$(\lambda^2 - \omega^2 + 2\beta\lambda + \omega_0^2)a + 2(\lambda + \beta)\omega b - \gamma a = 0$$
+$$(\lambda^2 - \omega^2 + 2\beta\lambda + \omega_0^2)b - 2(\lambda + \beta)\omega a + \gamma b = 0$$
+V matrični obliki:
+$$\begin{bmatrix}
+    (\lambda^2 - \omega^2 + 2\beta\lambda + \omega_0^2 - \gamma) & 2(\lambda+\beta)\omega \\
+    -2(\lambda + \beta)\omega & (\lambda^2 - \omega^2 + 2\beta\lambda + \omega_0^2 + \gamma)
+\end{bmatrix}\begin{bmatrix}
+    a \\ b
+\end{bmatrix} = 0$$
+Ker ima dobljena matrika neprazno jedro, mora biti njena determinanta enaka 0. Sledi
+$$((\lambda + \beta)^2 - \omega^2 + \omega_0^2 - \beta^2)^2 - \gamma^2 + 4\omega^2(\lambda+\beta)^2 = 0$$
+$\lambda = 0$ je nekakšna meja tega sistema, tedaj velja
+$$|\gamma| = \sqrt{(\omega_0^2 - \omega^2)^2 + 4\omega^2\beta^2}$$
+\paragraph{Van der Polov oscilator.} Imamo diferencialno enačbo
+$$\ddot x - \beta(1 - x^2)\dot x + \omega_0^2 x = 0$$
+Če je $x > 1$, prihaja do dušenja, je $x < 1$, pa do vzbujanja. Spet uporabimo Van der Polovo transformacijo in dobimo:
+$$\dot u = -\beta(1 - x^2)\dot x \sin t$$
+$$\dot v = -\beta(1 - x^2)\dot x \cos t$$
+$$\dot u = \beta\left(1 - (u\cos t - v\sin t)^2\right)(u\sin t + v\cos t)\sin t$$
+$$\dot u = \beta\left(1 - (u\cos t - v\sin t)^2\right)(u\sin t + v\cos t)\cos t$$
+Ko to povprečimo po periodi, dobimo
+$$\dot u = \frac{1}{2}\beta \left(1 - \frac{u^2 + v^2}{4}\right)u$$
+$$\dot v = \frac{1}{2}\beta \left(1 - \frac{u^2 + v^2}{4}\right)v$$
+Imamo dve stacionarni točki: $u, v = 0$ je odbojna točka, saj pri majhnih $u$ velja $u, v \sim e^{\beta t / 2}$.
+Druga je $u^2 + v^2 = 4$, gre za limitni cikel - torej ne le ena točka, temveč celotna krožnica.
+\end{document}
