@@ -1,0 +1,40 @@
+Hazards: (d8)
+1: The party stumbles into thick thorny vines. The player who rolled the d100 must succeed on a
+DC 13 Dexterity saving throw or take 2d4 slashing damage.
+
+2: The players begin to lose their footing as the ground begins sliding down the mountain underneath them.
+All players make a DC 13 Strength saving throw. Those who fail slide down the mountain for about 100 feet
+and are severely battered by stones, taking 2d4 bludgeoning damage.
+
+3: A rock slips from under the player’s foot. They must make a DC 13 Dexterity
+saving throw, taking 3d6 fall damage on a failure as they fall about 30 ft.
+
+4: A forgotten hunting trap activates. The player who rolled must make a DC 13 Dexterity
+saving throw to avoid the trap, taking 2d6 piercing damage on a failure. The player is
+then restrained until they (or someone next to them) succeeds on a DC 13 Strength check
+to free themselves. Each unsuccessful attempt causes the creature to take an additional 1d4 piercing damage.
+
+(In the first two rounds of d100 rolling, if numbers 5-8 are rolled as hazards, subtract 4 from the number rolled.)
+
+5: Ferocious winds threaten to blow the players off course. Until the end of the
+player’s next turn, ranged attacks and Wisdom checks are made at disadvantage. The
+players must also make a DC 10 Constitution saving throw or suffer a level of Exhaustion from the cold.
+
+6: Lightning strikes one of the players. It makes an attack roll with +5 to hit, dealing 2d6 lightning damage on a hit.
+
+7: As the players are walking across a patch of ice, it begins to crack under them.
+On a failed DC 15 Dexterity saving throw, they take 2d6 cold damage and suffer disadvantage
+on constitution saving throws as their foot slips through the ice into cold water. The target
+is restrained until they (or an ally helping them) succeed on a DC 13 Acrobatics check,
+taking an additional 1d6 damage on a fail.
+
+8: The players can hear a rumbling noise coming from a nearby peak. They see an avalanche
+coming towards them, they have one round to prepare (if they make checks, the DC is 13
+for Strength and Intelligence and 15 for Dexterity and Perception). After that, they must
+succeed on a DC 15 Strength / Dexterity saving throw (possibly with advantage, depending
+on how well they prepared). They take 2d6 bludgeoning + 1d6 cold damage on a failed save
+or half as much on a successful one. On a fail, they are swept up by the snow and buried.
+They can try to dig themselves out with a DC 13 Athletics check. If the other players try
+to help, they must first succeed on a DC 17 Investigation check to find them, but the DC
+for the Athletics check is lowered to 10. If a player takes more than 3 rounds to escape, 
+they must make a Constitution saving throw or suffer a level of exhaustion.

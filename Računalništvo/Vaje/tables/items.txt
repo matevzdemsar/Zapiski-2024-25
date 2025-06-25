@@ -1,0 +1,57 @@
+Items: (d20)
+1: A leather hat someone has lost a long time ago
+
+2: A broken sign that says “Beware! Gi” (it’s unfinished,
+it looks like the next letter was going to be an A)
+
+3: A tuft of herbs that could be made into three potions of lesser
+healing with a DC 14 Medicine check (requiring a fire and a pot of water)
+
+4: An hourglass - damaged but not beyond repair.
+
+5: A mountain goat dressed in tattered wizard robes. Yes, Banacha can ride it.
+No, it doesn’t make her immune to falling off cliffs, it will in fact die at the
+first available opportunity unless Banacha tries incredibly hard to keep it safe.
+
+6: A squirrel is trying to stick a gigantic acorn (the size of a plum) into the
+ground. It runs away when the party approaches and leaves the acorn behind.
+
+7: The remains of a thunder cannon not unlike the one Banacha uses.
+
+8: The skeleton of a dwarf, apparently somewhat recent. The bones have
+been licked clean by wild animals, but a successful DC 12 Investigation
+check reveals a pouch containing a gemstone worth 25 gp.
+
+9: A rolled up tent. When unrolled, one side seems to be heavily damaged and
+there are clear signs of claws on what remains. With the right tools, the tent
+can be fixed as part of a short rest with a successful DC 12 Sleight of Hand
+check - though it’s not of the highest quality.
+
+10: The players notice several birds lying on the ground in strange positions.
+They seem to be gray in colour, and touching them reveals the texture of stone. (They’re dwarf-made)
+
+11: A map of a land that none of the players have ever heard of.
+
+12: A bottle of what appears to be wine. If anyone drinks from it,
+they must make a Constitution saving throw. On a 13 or lower, they
+throw up immediately. On a 7 or lower, they also take 1d6 poison damage.
+
+13: A (badly damaged) minotaur skeleton with a (badly damaged) greatsword
+on its chest. The letter ‘B’ is etched into the blade just below the handle.
+
+14: A very dirty and weatherbeaten book. Most of the text is ineligible, but
+there are drawings of what appear to be various monsters.
+
+15: A horn. It seems to still work just fine.
+
+16: The remains of a campfire with the very old remains of a chicken.
+
+17: A stone with dwarvish runes carved into it. The runes read
+“Tell the [non-dwarves] this stone is magical.”
+
+18: The wind carries a fine robe into the player’s face. If wrapped
+around someone, it grants them a +1 to Constitution saves against cold.
+
+19: The remains of a saddle bag containing a silver ring (worth 10 gp)
+
+20: A spell scroll that casts Blindness on whoever reads it.

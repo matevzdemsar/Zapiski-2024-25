@@ -1,0 +1,27 @@
+Obstacles: (d6)
+1: A narrow and rickety hanging bridge. It is 60 ft. long. Walking across
+it requires a successful Acrobatics check, the DC for which increases by 3
+for every player currently on the bridge (13 for one person, 16 for 2 etc.).
+A fall results in 2d6 bludgeoning damage. If there are more than 4 people on
+the bridge at the same time, the rope holding the bridge snaps and everyone
+must make a DC 16 Dexterity saving throw. On a success, they manage to cling
+on to one of the ropes and swing their way to the opposite side, allowing
+them to climb up the rope onto the other side. A failure results in a fall.
+
+2: A 30 ft. cliff face that takes a DC 13 Dexterity check to climb successfully.
+
+3: A rushing river - not particularly deep, but 30 ft. wide and icy cold. There
+are blocks of ice floating down that could serve as stepping stones (but it will
+require a DC 13/15 Dexterity check). If a player falls into the river, they take 2d6 cold damage.
+
+4: The way forward is blocked by a large boulder. The players must roll a combined
+DC 65 Strength check to push it out of the way (Sycamore also helps).
+
+5: A waterfall blocks the path. Getting wet means disadvantage on Constitution
+saving throws against the cold. In the later stages of the climb, it also deals 1d6 bludgeoning damage.
+
+6: A patch of flowers is growing all around the path. They seem to be on fire
+(any potential snow around them has melted) but not particularly bothered by it.
+Anyone who gets within 15 ft. must make a DC 13 Dexterity saving throw or take 2d4
+fire damage. The flowers are immune to fire and cold damage but die as soon as
+they're pulled out of the ground.
