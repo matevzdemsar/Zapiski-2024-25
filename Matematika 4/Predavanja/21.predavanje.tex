@@ -1,0 +1,64 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\section{Diferencialne enačbe v kompleksnih številih}
+Imamo linearno diferencialno enačbo 2. reda:
+$$y'' + p(x)y' + q(x)y = 0$$
+Čim imamo dve rešitvi, npr $y_1$ in $y_2$, ki sta linearno neodvisni, so ostale rešitve linearne kombinacije teh dveh rešitev, saj tvorite vektorski prostor.
+Če imamo eno rešitev ($y_1$), lahko drugo dobimo s pomočjo determinante Wronskega:
+$$W(x) = W(x_0) e^{-\int_{x_0}^{x} p(t)\dif t}$$
+Dobimo diferencialno enačbo 1. reda za $y_2$. \\[2mm]
+Problem: Rešitve običajno ni lahko uganiti. Namesto tega poskusimo sledeče: Diferencialno enačbo prestavimo v kompleksna števila:
+$$y'' + p(z) y' + q(z) = 0$$
+$$y = y(z)$$
+Recimo, da sta $p$ in $q$ holomorfni na nekem $D(0, R)$. Tedaj ju razvijmo v potenčni vrsti:
+$$p(z) = \Sum{k}p_kz^k,~~~q(z) = \Sum{k} q_kz^k$$
+Poglejmo primer, da je $y$ holomorfna:
+$$y(z) = \Sum{k} c_kz^k$$
+$$y'(z) = \Sum{k} (k+1)c_{k+1}z^{k}$$
+$$y''(z) = \Sum{k} (k+1)(k+2)c_{k+2}^{k}$$
+To vstavimo v enačbo, imamo produkt dveh vrst.
+$$\Sum{k}(k+2)(k+1)c_{k+1}z^k + \Sum{i}(p_iz^i)\cdot\Sum{j}(j+1)c_{j+1}z^j + \Sum{i}q_iz^i \cdot \Sum{j} c_jz^j$$
+Poglejmo, kakšen bo koeficient pri $z^k$:
+$$(k+1)(k+2)c_{k+2} + \sum_{j=0}^{k}p_{k-j}(j+1)c_{j+1} + \sum_{j=0}^{k}q_{k-j}c_j = 0$$
+Dobimo rekurzivno formulo za $c_k$, vemo pa, da je $c_0 = y(0)$ in $c_1 = y'(0)$. Tako dobimo številsko vrsto za $y$.
+\paragraph{Izrek.} Recimo, da sta $p$ in $q$ holomorfni in imamo diferencialno enačbo
+$$y'' + py' + qy = 0$$
+Tedaj ima enačba natanko eno rešitev $y$, ki je holomorfna na $D(\alpha, R)$ in zadošča pogojema $y(\alpha) = A$ in $y'(\alpha) = B$.
+Pri tem naj bosta $A$ in $B$ kompleksni števili.
+\paragraph{Dokaz.} (ideja dokaza) Razvijemo kot prej, nato pokažemo, da je konvergenčni radij tako pridobljene številske vrste večji od 0.
+\paragraph{Definicija.} Dana je enačba $y'' + py' + qy = 0$. $\alpha \in \C$ je regularna točka enačbe, če sta $p$ in $q$ holomorfni v $\alpha$. Sicer pa je $\alpha$ ingularna točka enačbe.
+Pravimo, da je $\alpha$ pravilna singularna točka, če ima $p(z)$ v njej polj stopnje $\leq 1$, $q(z)$ pa pol stopnje $\leq 2$.
+\paragraph{Primer:} $z=0$ je pravilna singularna točka Besselove enačbe
+$$y'' = \frac{1}{z}y' + \left(1 - \frac{\nu^2}{z^2}\right)y = 0$$
+Recimo torej, da je 0 pravilna singularnost neke enačbe $y'' + py' + qy = 0$.
+Funkciji $z \mapsto zp(z)$ in $z \mapsto z^2q(z)$ sta holomorfni, zato ju razvijmo v vrsti:
+$$zp(z) = \Sum{k} p_kz^k$$
+$$y^2q(z) = \Sum{k} q_kz^k$$
+Rešitev $y$ zato iščemo z nastavkom $$y = z^\mu\Sum{k}c_kz^k = c_kz^{k+\mu}$$
+$$y' = \Sum{k}(k+\mu)c_kz^{k+\mu-1}$$
+$$y'' = \Sum{k}(k+\mu)(k + \mu - 1)c_kz^{k+\mu-2}$$
+To vstavimo v enačbo $z^2y'' + z^2p(z)y' + z^2q(z)y = 0$ in spet dobimo rekurzivno zvezo
+$$(k+\mu)(k+\mu-1)c_k + \sum_{j=0}^{k}(j + \mu)c_jp_{k-j} + \sum_{j=0}^{k}c_jq_{k-j} = 0$$
+\end{document}

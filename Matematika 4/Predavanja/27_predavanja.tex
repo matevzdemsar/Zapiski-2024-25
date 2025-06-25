@@ -1,0 +1,78 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Nihanje neskončne strune.} Imamo samo začetno obliko strune, prejšnjič smo dobili enačbo
+$$G'(x) = \frac{1}{2}(f'(x) + \frac{g(x)}{c})$$
+$$G(x) = \frac{1}{2}f(x) + \frac{1}{2c} \int_{0}^{x}g(s)\,\dif s + D$$
+$$F(x) = f(x) - G(x) = \frac{1}{2}f(x) - \frac{1}{2c} \int_{0}^{x} g(s)\,\dif s - D$$
+Rešitev:
+$$u(x, t) = \frac{1}{2}\left(f(x - ct) + f(x + ct)\right) + \frac{1}{2c}\int_{x-ct}^{x+ct}g(s)\dif s$$
+\paragraph{Prevajanje toplote na končni palici.} Imamo toplotno enačbo
+$$U_t = c^2 U_x$$
+Robna pogoja: $u(0, t) = u(a, t) = 0$ \\
+Začetni pogoj: $u(x, 0) = f(x)$ \\
+Kot zadnjič uporabimo separacijo spremenljivk:
+$$\frac{1}{c^2} \frac{T'}{T} = \frac{X''}{X} = -\lambda$$
+Robna pogoja: $X(0) = 0$, $X(a) = 0$ (lahko je tudi $T = 0$, toda taka rešitev je nezanimiva) \\
+$X$ del poiščemo kot pri nihanju strune:
+$$\lambda_k = \left(\frac{k\pi}{a}\right)^2,~k>0$$
+$$X_k(x) = \sin\left(\frac{k\pi}{a}x\right)$$
+$T$ del: $$\frac{T'}{T} = -\left(\frac{k\pi c}{a}\right)^2$$
+$$T = e^{-\left(\frac{k\pi c}{a}\right)^2t}$$
+$$u_k(x, t) = A_ke^{-\left(\frac{k\pi c}{a}\right)^2t}\sin\left(\frac{k\pi}{a}x\right)$$
+Začetni pogoj $t=0$:
+$$f(x) = \Sum{k}A_k\sin\left(\frac{k\pi}{a}x\right)$$
+Gre torej za sinusno vrsto za $f(x)$:
+$$A_k = \frac{2}{a}\int_{0}^{a} f(x) \sin\left(\frac{k\pi}{a}x\right)\,\dif x$$
+\paragraph{Sturm-Liouviellov problem.} Iščemo neničelne $y(x)$ in $\lambda \in \C$, da bo veljalo
+$$P(x) y'' + Q(x)y' + R(x)y = -\lambda y$$
+Pri čemer velja $x \in [a, b]$, $P, Q, R$ zvezne na $[a, b]$, $y$ pa naj zadošča robnima pogojema
+$$\alpha_1 y(a) + \alpha_2 y'(a) = 0$$
+$$\beta_1 y(b) + \beta_2 y'(b) = 0$$
+Pri čemer so $\alpha_1, \alpha_2, \beta_1, \beta_2$ realna števila z lastnostmi $\alpha_1^2 + \alpha_2^2 \neq 0$ in
+$\beta_1^2 + \beta_2^2 \neq 0$ \\
+Kaj, če robni pogoji niso homogeni? Npr. pri toplotni enačbi:
+$$U_t = c^2 U_x$$
+$$u(0, t) = A, ~~ u(a, t) = B,~~a, b \text{ konstanti}$$
+Tedaj poskusimo najprej rešiti primer, ko je enačba homogena, nato pa iz te vmesne rešitve dobimo iskano rešitev.
+$$u(x, t) = v(x, t) + A + \frac{B-A}{a}x,~~\text{kjer $v$ reši enačbo za homogena robna pogoja.}$$
+Nazaj k Sturm-Liouviellovem problemu: Parametra $\lambda$ še ne poznamo, želimo pa, da je tak, da bo imela enačbe $$Py'' + Qy' + Ry = -\lambda y$$
+imela netrivialne rešitve. Bonus točke, če je $\lambda \in \R$ in $y \in C^2[a, b]$. \\
+Imejmo preslikavo $\fn{L}{C^2[a, b]}{C[a, b]}$ s predpisom:
+$$Ly  = Py'' + Qy' + Ry$$
+$L$ je linearne preslikava - posledica lastnosti odvoda in zveznih funkcij. Rešujemo problem
+$$Ly = -\lambda y$$
+Iščemo torej lastne vektorje in lastne vrednosti linearne preslikave $L$. Če hočemo, da so lastne vrednosti realne, mora biti $A$ sebi adjungirana:
+$$\avg{Lu, v} = \avg{u, L^*v}$$
+$$\avg{Lu, v} = \int_{a}^{b}\left(Pu'' + Qu' + Ru\right)\overline{v}\,\dif x$$
+$$= \int_{a}^{b} (P\overline{v})u'' \,\dif x + \int_{a}^{b} (Q\overline{v})u'\,\dif x + \int_{a}^{b}Ru\overline{v}$$
+To integriramo po metodi per partes:
+$$= (P\overline{v})u'\Big|_a^b - \int_{a}^{b}(P\overline{v})'u'\,\dif x + (Q\overline{v})u\Big|_a^b - \int_{a}^{b}(Q\overline{v})'u\,\dif x + \int_{a}^{b}Ru\overline{v}q,\dif x$$
+Na integralu $\displaystyle{\int_{a}^{b} (P\overline{v})'u'\,\dif x}$ še enkrat uporabimo per partes:
+$$= \left[(P\overline{v})u' + Q\overline{v}u - (P\overline{v})'u\right]\Big|_a^b + \int_{a}^{b} u\left((Pv)'' - (Qv)' + Rv\right)\,\dif x$$
+Definiramo $L^* = (Pv)'' - (Qv)' + Rv$. Velja torej
+$$\avg{Lu, v} = \left[P\overline{v}u' + Q\overline{v}u-(P\overline{v})'u\right]\Big|_{a}^{b} + \avg{u, L^*v}$$
+\paragraph{Definicija.} $L$ je formalno sebi adjungirana, če velja $L = L^*$.
+\end{document}

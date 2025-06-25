@@ -1,0 +1,78 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\paragraph{Primer.} $\displaystyle{\partial_{\vct{n}}u(\vct{r}) -\frac{\vct{r} - \vct{r_0}}{R^3} = ... = -\frac{1}{R^2}}$
+\paragraph{Greenove identitete.} Naj bosta $u$ in $v$ dvakrat zvezno odvedljivi na okolici nekega območja $D$ skupaj z robom (torej $\overline{D}$).
+Tedaj velja:\begin{enumerate}
+    \item $\displaystyle{\iint_{\partial D} v \partial_{\vct{n}}u\dif S = \iiint_D(v\Delta u + \nabla u \nabla v)\dif V}$
+    \item $\displaystyle{\iint_{\partial D} (v \partial_{\vct{n}}u - u\partial_{\vct{n}} v)\dif S = \iiint_D(v\Delta u - u \Delta v)\dif V}$
+    \item $\displaystyle{\iint_{\partial D}\left[\frac{1}{||\vct{r} - \vct{r_0}||}\partial_{\vct{n}}\left(u(\vct{r})\right) - u(\vct{r_0})\partial_{\vct{n}}\left(\frac{1}{||\vct{r} - \vct{r_0}||}\right)\right]\dif S - \iiint_D\frac{\Delta u}{||\vct{r} - \vct{r_0}||}\dif V = 4\pi u(\vct{r_0})}$
+\end{enumerate}
+\paragraph{Dokaz.}
+$$\iint_{\partial D} v\partial_{\vct{n}}u \dif S = \iint v\nabla u \vct{n}\cdot\dif S = \iint_{\partial D} v \nabla u \dif\vct{S}$$
+Zdaj lahko uporabimo Gaussov izrek:
+$$= \iiint_D \div (v\nabla u)\dif V$$
+$$\div(v\nabla u) = \pd{}{x}\left(v\pd{u}{x}\right) + \pd{}{y}\left(v\pd{u}{y}\right) + \pd{}{z}\left(v\pd{u}{z}\right)$$
+Upoštevamo pravilo za odvod produkta:
+$$= \pd{v}{x}\pd{u}{x} + \pd{v}{y}\pd{u}{y} + \pd{v}{z}\pd{u}{z} + v\pd{^2u}{x^2} + v\pd{^2u}{y^2} + v\pd{^2u}{z^2} = \nabla u\cdot \nabla v + v\Delta u$$
+Druga točka sledi iz prve. Za tretjo točko pa ne bomo navajali celega dokaza, saj je predolg, temveč se zadovoljimo s tole skico:
+Za $v$ vzamemo $\displaystyle{v = \frac{1}{||\vct{r} - \vct{r_0}||}}$ in uporabimo 2.. Greenovo formulo za območje $D - \overline{K}(\vct{r_0}, \delta)$ - v $r_0$ tako izbrana funkcija $v$ namreč ni definirana. $\delta$ bomo nazadnje poslali proti $0$.
+S tm dobimo želeni rezultat.
+\paragraph{Posledica.} Če je $u$ harmonična na okolici $\overline{D}$, velja
+$$\iint\partial_{\vct{n}}u\dif S = 0$$
+\paragraph{Dokaz:} Uporabimo 1. Greenovo formulo za $v = 1$, kajti $\nabla v = 0$ in $\Delta u = 0$.
+\paragraph{Posledica.} Recimo, da je $u$ harmonična na okolici $\overline{D}$. Naj bo $\vct{r_0} \in D$ in naj krogla $\overline{K}(\vct{r_0}, R)$ leži v $D$. Tedaj je
+$$u(\vct{r_0}) = \frac{1}{4\pi R^2} \iint_{\partial K(\vct{r_0}, R)}u\vct{r}\dif S$$
+\paragraph{Dokaz.} Uporabimo 3. Greenovo formulo in prejšnjo posledico.
+\paragraph{Posledica.} (princip maksima in minima) Naj bo $u$ nekonstantna harmonična funkcija na povezani množici $D$. Potem $u$ ne zavzame maksima ali minimuma na $D$.
+Če je $K$ kompaktna množica in je $u$ zvezna na okolici $K$ ter harmonična znotraj $K$, potem zavzame maksimum in minimum na robu $K$.
+\paragraph{Dokaz.} Enak kot pri 15. predavanju, le v $\R^3$.
+\paragraph{Dirichletov problem za območja v $\R^3$} Recimo, da je $D$ omejeno območje z gladkim robom. Iščemo funkcije $u$, ki so harmonične na $D$ in velja $\displaystyle{u\big|_{\partial D} = f}$, kjer je $f$ zvezna
+na $\partial D$. Poleg tega zahtevamo, da je $u$ zvezna na $\overline{D}$. \\[3mm]
+Recimo, da znamo problem rešiti za naslednji poseben primer: \\
+Izberemo $\vct{r_0} \in D$. Recimo, da smo našli zvezno funkcijo $v$, ki je na robu $D$ enaka $\displaystyle{v\big|_{\partial D} = \frac{1}{4\pi ||\vct{r} - \vct{r_0}||}}$ \\[3mm]
+Zdaj poskusimo iz take rešitve sestaviti rešitev za poljubno funkcijo $f$. Vemo, da bo za $u$ in $v$ veljala 2. Greenova identiteta, za $u$ pa 3. Greenova identiteta.
+$$\iint_{\partial D}\left(v\partial_{\vct{n}}u - u\partial_{\vct{n}}v\right)\dif S = 0$$
+$$u(\vct{r_0}) = \frac{1}{4\pi} \iint_{\partial D}\left[\frac{1}{||\vct{r} - \vct{r_0}||}\partial_{\vct{n}}u - u(\vct{r})\partial_{\vct{n}}\left(\frac{1}{||\vct{r} - \vct{r_0}||}\right)\right]\dif S$$
+Ker je $\displaystyle{\frac{1}{4\pi||\vct{r} - \vct{r_0}||}}$ ravno enako $v$, iz 3. Greenove identitete dobimo
+$$u(\vct{r_0}) = \iint_{\partial D} v\partial_{\vct{n}}u - u\partial_{\vct{n}}\left(\frac{1}{4\pi ||\vct{r} - \vct{r_0}||}\right) \,\dif S$$
+Po zaslugi 2. Greenove formule lahko naredimo sledečo zamenjavo:
+$$\iint_{\partial D} v\partial_{\vct{n}}u \dif S = \iint_{\partial D} u\partial_{\vct{n}}v \dif S$$
+$$u(\vct{r_0}) = \iint_{\partial D} u(\vct{r})\partial_{\vct{n}}\left(v(\vct{r}) - \frac{1}{4\pi ||\vct{r} - \vct{r_0}||}\right)$$
+Definiramo Greenovo funkcijo območja $D$: $\displaystyle{G(\vct{r}, \vct{r_0}) = v(\vct{r}) - \frac{1}{4\pi ||\vct{r} - \vct{r_0}||}}$ \\
+Zanjo velja, da je harmonična in da je za $\vct{r} \in \partial D$ enaka 0. Takšna funkcija je Poissonovo jedro območja $D$. \\
+Zdaj lahko iščemo funkcijo $u$, za katero velja: $\Delta u = 0$, $\displaystyle{u\big|_{\partial D} = f}$. Če rešitev obstaja, je enaka
+$$u(\vct{r_0}) = \iint_{\partial D} f(\vct{r})\partial_{\vct{n}} G(\vct{r}, \vct{r_0}) \dif S$$
+Najti moramo le Greenovo funkcijo. Tega se ne da enostavno narediti, lahko pa preverimo, ali je neka funkcija ustrezna. Da se jo mora namreč zapisati kot:
+$$G(\vct{r}, \vct{r_0}) = v(\vct{r}) - \frac{1}{4\pi ||\vct{r} - \vct{r_0}||}$$
+Pri čemer mora biti $v$ harmonična. Poleg tega problem običajno rešujemo na krogli, torej lahko preverimo, ali velja $||\vct{r}|| = 1$ za $\vct{r} \in \partial D$.
+Če je to izpolnjeno, imamo opravka z Greenovo formulo in lahko izračunamo $u$.
+\section{Fourierova transformacija}
+\paragraph{Definicija.} Bodi $\fn{f}{\R}{\C}$. Nosilec funkcije $f$ je zaprta množica $\mathrm{supp}f = \overline{\{x \in \R:~f(x)\neq0\}}$
+Najbolj preprost primer noslica je npr. nosilec karakteristične funkcije $$\chi_{(a, b)} = \begin{cases}
+    1 & x \in (a, b) \\
+    0 & x \notin (a, b)
+\end{cases}$$
+Tedaj je $\mathrm{supp} \chi_{n} = [a, b]$
+\end{document}

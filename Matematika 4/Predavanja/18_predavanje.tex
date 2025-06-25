@@ -1,0 +1,79 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+Prejšnjič smo za $\fn{f}{\R}{\C}$ definirali $\mathrm{supp}f = \overline{\{x\in\R:\,f(x)\neq0\}}$ \\
+Gledali bomo zvezne funkcije $f$, katerih nosilci so kompletni (zaprti in omejeni). Množico takšnih funkcij
+označimo s $C_c(\R)$. \\[3mm]
+Bodi $f \in C_c(\R)$. Tedaj obstaja tak interval $[a, b]$, da je zunaj tega intervala $f \equiv 0$ (direktna posledica kompletnosti nosilca $f$). Poljeg tega zaradi zveznosti funkcije velja:
+$$\int_{-\infty}^{\infty} |f(x)|\dif x = \int_{a}^{b}|f(x)|\dif x < \infty$$
+\paragraph{Definicija.} Bodi $f \in C-c(\R)$. $L^1-$norma funkcije $f$ je
+$$||f||_1 = \int_{-\infty}^{\infty} |f(x)|\dif x$$
+Definiramo lahko tudi razdaljo med $f$ in $g$: $d(f, g) = ||f - g||_1$.
+Množico $C_c(\R)$ lahko tedaj obravnavamo kot metrični prostor (preverimo lahko, da je tudi vektorski prostor.) \\[3mm]
+Zdaj vzamemo zaporedje funkcij $f_n$, ki konvergira proti neki funkciji $f$. To pomeni, da za vsak $\varepsilon>0$ obstaja $n_0$
+da za $n \geq n_0$ velja $||f_n - f|| < \varepsilon$. Ni pa nujno, da je $f$ v $C_c(\R)$. Lahko imamo na primer funkcije, ki so definirane na vedno večjem intervalu, tako da bi morala biti $f$ definirana na celotni množici $\R$. \\[3mm]
+Metrični prostor $C_c(\R)$ želimo dopolniti glede na $L^1$ mero. To pomeni, da moramo vanj vključiti limite vseh zaporedij $f_n \in C_c$. Definiramo
+$L^1(\R) = \{\fn{f}{\R}{\C};\,||f||_1c< \infty\}$
+\paragraph{Definicija.} Naj bo $f \in L^1(\R)$. Fourierova transformiranka funkcije $f$ je funkcija $\hat{f}$, ki je za neki $\xi \in \R$ definirana kot
+$$\hat{f}(\xi) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(x)\cdot e^{-ix\xi}\dif x$$
+\paragraph{Opomba.} $\displaystyle{|\hat{f}|_1 =\frac{1}{\sqrt{2\pi}}\left|\int_{-\infty}^{\infty}f(x)\cdot e^{-ix\xi}\dif x\right| \leq \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}|f(x)|\cdot |e^{-ix\xi}|} = \frac{1}{\sqrt{2\pi}}||f||_1$
+\paragraph{Trditev.} (osnovne lastnosti Fourierovih transformirank)
+\begin{enumerate}
+    \item $\hat{f}$ je zvezna, $\displaystyle{|\hat{f}| \leq \frac{1}{\sqrt{2\pi}} ||f||_1}$
+    \item Naj bo $t \in \R$, definiramo $\fn{e_t}{\R}{\C}$ s predpisom $$e_t(x) = e^{itx}$$ Tedaj velja: $$\widehat{f \cdot e_t}(\xi) = \widehat{f}(\xi - t)$$
+    \item Naj bo $a > 0$ in $f_a(x) = f(ax)$. Tedaj je $$\widehat{f_a}(\xi) = \frac{1}{a}\hat{f}\left(\frac{\xi}{a}\right)$$
+    \item Za neki $t\in\R$ definiramo $f_t = f(x-t)$. Tedaj je $$\widehat{f_t}(\xi) = e^{-it\xi} \hat{f}(\xi)$$
+    \item Bodi funkcija $(\mathrm{id} \cdot f): x \mapsto xf(x)$ element množice $L^1(\R)$. Tedaj je $$\widehat{(\mathrm{id} \cdot f)}(\xi) = -\frac{1}{i}\hat{f}'(\xi)$$
+    \item Če je $f$ zvezno odvedljiva in je $f' \in L^1(\R)$, potem je $$\widehat{f'}(\xi) = i\xi\hat{f}(\xi)$$
+    \item $\displaystyle{\widehat{\alpha f + \beta g}(\xi) = \alpha \hat{f}(\xi) + \beta \hat{g}(\xi)}$
+\end{enumerate}
+\paragraph{Dokaz.}
+\begin{enumerate}
+    \item Zveznost dokažemo tako, da izrazimo razliko $$|\hat{f}(\xi + h) - \hat{f}(\xi)| = \frac{1}{\sqrt{2\pi}}\left|\int_{-\infty}^{\infty} f(x)e^{-ix\xi} \left(e^{-ixh} - 1\right)\dif x\right|$$
+    $$\leq \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} |f(x)|\left|e^{-ixh} - 1\right|\dif x$$
+    Ker mora biti $\displaystyle{\int_{-\infty}^{\infty} |f(x)| < \infty}$, mora obstajati tak $A > 0$, da je $\int_{|x| > A} |f(x)|\dif x$ poljubno majhen. Poleg tega je $\lim_{h\to0}|e^{-ihx} - 1| = 0$, torej lahko izberemo tak $h$, da je $|e^{-ihx} - 1| < \varepsilon$, vsekakor pa je $|e^{-ihx} - 1| \leq |e^{ihx}| + |1| = 2$. Sledi:
+    $$\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} |f(x)|\left|e^{-ixh} - 1\right|\dif x \leq \frac{1}{\sqrt{2\pi}} \int_{|x| > A} |f(x)| \cdot 2 \dif x + \frac{\varepsilon}{\sqrt{2\pi}} \int_{-A}^{A}|f(x)|\dif x$$
+    Oba člena lahko naredimo poljubno majhna. Prvega z izbiro $A$, drugega pa z izbiro $h$.
+    \item Po definiciji: $$\widehat{f \cdot e_t}(\xi) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f(x)e^{itx}e^{-ix\xi}\dif x = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f(x)e^{-i(x - t)\xi}\dif x$$ Vemo, da je $\dif x = \dif (x - t)$.
+    \item Spet po definiciji: $$\widehat{f_a}(\xi) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f(ax) e^{-iax\xi} \dif x$$
+    Uvedemo novo spremenljivko $t = ax,~\dif t = a \dif x$:
+    $$= \frac{1}{a}\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(t)e^{-it\xi}\dif t = \frac{1}{a}\widehat{f}\left(\frac{\xi}{a}\right)$$
+    \item Podobno.
+    \item Sledila bo iz naslednje trditve:
+    \item $$\widehat{f'}(\xi) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f'(x)e^{-ix\xi}\dif x = ... \text{ per partes } ... = i\xi \cdot \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(x)e^{-ix\xi}\dif x = i\xi \hat{f}(\xi)$$
+    \item Integral je linearen.
+\end{enumerate}
+\paragraph{Opomba.} Za $f\in L^{1}(\R)$ je $\hat{f} \in C(\R)$. Lahko definiramo preslikavo $\fn{\Lambda}{L^1(\R)}{C(\R)}$, ki je zaradi lastnosti 7. linearna preslikava - pravimo ji Fourierova transformacija.
+\paragraph{Konvolucija funkcij.} Naj bosta $f, g \in L^1(\R)$. kovolucija $f$ in $g$ je funkcija $(f*g)$, definirana kot:
+$$(f*g)(x) = \int_{-\infty}^{\infty}f(x-t)g(x)\dif t$$
+\paragraph{Trditev.} Lastnosti konvolucije. Naj bodo $f, g, h \in L^1(\R)$ in $\alpha, \beta$ skalarja. Velja:
+\begin{enumerate}
+    \item $f*g = g*f$
+    \item $(f*g)*h = f*(g*h)$
+    \item $(\alpha f + \beta g) * h = \alpha f * h + \beta f * h$
+    \item $f * g \in L^1(\R),~||f * g|| \leq ||f||\cdot||g||$
+\end{enumerate}
+\paragraph{Dokaz.} Večinoma sledi iz lastnosti integrala.
+\paragraph{Izrek.} $\displaystyle{\widehat{f * g} = \sqrt{2\pi}\hat{f}\cdot\hat{g}}$
+\end{document}

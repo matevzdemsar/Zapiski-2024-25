@@ -1,0 +1,84 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\paragraph{Posledica:} Naj bo $u$ harmonična na odprti množici $D$. Tedaj je $u$ neskončnokrat odvedljiva.
+\paragraph{Dokaz:} $u$ je v okolici neke točke $a \in D$ realni del kompleksne holomorfne funkcije $f$. Ker je $f$ holomorfna, je neskončnokrat odvedljiva, saj jo lahko razvijemo v potenčno vrsto.
+Ker je $f$ neskončnokrat odvedljiva, pa je tudi $u$ neskončnokrat odvedljiva.
+\paragraph{Izrek:} (izrek o povprečni vrednosti) Bodi $\fn{u}{D}{\R}$ harmonična funkcija in $\overline{D}(a, r) \subseteq D$. Tedaj je 
+$$u(a) = \frac{1}{2\pi} \int_{0}^{2\pi} u(a + re^{i\varphi})\dif\varphi$$
+\paragraph{Dokaz:} $\overline{D}(a, r)$ je enostavno povezano območje, in vemo, da obstaja holomorfna funkcija $f$, za katero velja $u = \mathfrak{Re}(f)$.
+Uporabimo Cauchyjev izrek:
+$$f(a) = \frac{1}{2 \pi i} \int_{\partial D(a, r)}\frac{f(\zeta)}{\zeta - a}\dif\zeta = \frac{1}{2\pi i} \int_{0}^{2\pi}\frac{f(a+re^{i\varphi})}{re^{-\varphi}} rie^{i\varphi}\dif\varphi$$
+$$= \frac{1}{2\pi} \int_{0}^{2\pi} f(a + re^{i\varphi})\dif\varphi$$
+Upoštevamo, da je $u = \mathfrak{Re}(f)$
+$$u(a) = \frac{1}{2\pi}\int_{0}^{2\pi} u(a + re^{i\varphi}) d\varphi$$
+\paragraph{Izrek} (princip minima in maksima) Bodi $D$ odprta povezana množica v $\R^2$ in $u$ nekonstantna harmonična funkcija na njej.
+Potem $u$ na $D$ ne zavzame maksimuma ali minimuma. Če je $K$ kompaktna množica znotraj $D$, $u$ zavzame minimum in maksimum na robu $K$.
+\paragraph{Dokaz.} Recimo, da obstaja $a\in D$, v kateri bi $u$ zavzela maksimum:
+$$u(a) = M$$
+Oglejmo si množico vseh točk na $D$, kjer $u$ zavzame maksimum:
+$$U = \left\{z\in D; u(z) = M\right\}$$
+Ta mora biti neprazna, saj smo predpostavili $a \in M = u^{-1}(\{M\})$
+Ker je $\{M\}$ zaprta, mora biti tudi $U$ zaprta, saj je $u$ zvezna. Če nam uspe pokazati, da je $U$ hkrati odprta, bo to protislovje, saj tedaj $D$ ne bi bilo povezano območje.
+Izberimo torej $b \in U$ in si oglejmo krog $\overline{D}(b, R) \subseteq D$. \\
+Trdimo: $D(b, R) \subseteq U$
+Kolobar $D(b, R) \setminus \{b\}$ si lahko predstavljamo kot unijo krožnic $\partial D(b,\rho),~\rho<R$. Dovolj je torej dokazati, da je $\partial D(b, \rho) \subseteq U ~\forall \rho < R$. \\
+$$M = u(b) = \frac{1}{2\pi}\int_{0}^{2\pi}u(b + e^{i\varphi})\dif\varphi$$
+$$u(b+e^{i\varphi}) \leq M$$
+$$2\pi M =  \int_{0}^{2\pi} u(b + e^{i\varphi})\dif\varphi$$
+$$\int_{0}^{2\pi} M\dif\varphi = \int_{0}^{2\pi} u(b + e^{i\varphi})\dif\varphi$$
+$$\int_{0}^{2\pi} \left(M - u(b + e^{i\varphi})\right)\dif\varphi = 0$$
+To pa pomeni, da je $u(b + e^{i\varphi}) = M~\forall\varphi$ oziroma je $\partial D(b, \rho) \subseteq U~\forall \rho$
+\paragraph{Dirichletov problem za krog.} Na krogu $\overline{D}(0, 1)$ iščemo funkcije z lastnostjo $\Delta u = 0$, ki naj bo poleg tega na $\partial D(0, 1)$ zvezna.
+\paragraph{Poissonova jedra.} Vzamemo $0 \leq r < 1$. Definiramo $$\fn{P_r}{\R}{\R}:~P_r(\vartheta) = \frac{1-r^2}{1-2r\cos\vartheta - r^2}$$
+\paragraph{Opomba.} $\displaystyle{P_r(\vartheta) = \mathfrak{Re}\left(\frac{1 + re^{i\vartheta}}{1 - re^{i\vartheta}}\right)}$
+\paragraph{Dokaz.} \text{} \\
+$$\frac{1 + re^{i\vartheta}}{1 - re^{i\vartheta}} = \frac{(1 - re^{-i\vartheta})(1 + re^{i\vartheta})}{1 - r(e^{i\vartheta} + e^{-i\vartheta}) + r^2}$$
+$$= \frac{1 - r^2 + 2i\sin\vartheta}{1 - 2\cos\vartheta + r^2}$$
+\paragraph{Trditev:} Za Poissonova jedra veljajo sledeče trditve:
+\begin{enumerate}
+    \item $P_r$ so zvezne.
+    \item $P_r > 0$
+    \item $P_r$ so sode.
+    \item $P_r$ so periodične s periodo $2\pi$.
+    \item Če je $0\leq\delta\leq\vartheta\leq2\pi$, je $P_r(\vartheta)\leq P_r(\delta)$, ali drugače, $P_r$ je padajoča na $[0, \pi]$.
+    \item $\lim_{r \to 1} P_r{0} = \infty$
+    \item Čim je $0 < |\vartheta| \leq \pi$, $\lim_{r \to 1}=0$ konvergira enakomerno.
+\end{enumerate}
+\paragraph{Dokaz.} Edina možna težava za zveznost se pojavi, če je $1 - 2r\cos\vartheta + r^2 = 0$. Poglejmo, pri katerih $r$ se to lahko zgodi.
+$$D = 4\cos^2 - 4 = 4(\cos^2\vartheta - 1) \leq 0$$
+Če je $D<0$, do polov sploh ne pride. $D=0$ pa dobimo v primeru $\vartheta = 0 + 2k\pi$. Tedaj dobimo $r^2 - 2r + 1 = 0 = (r-1)^2$, toda predpostavili smo, da $r\neq1$. S tem smo dokazali točko 1,
+mimogrede pa tudi točko 6, kajti $\displaystyle{\lim_{r \to 1}P_r(0) = \frac{1 - r^2}{(1 - r)^2} = \lim_{r\to1}\frac{r+1}{r-1} = \infty}$. \\
+Ker je diskriminanta negativna, je imenovalec pozitiven, pa tudi števec je gotovo pozitiven. S tem je točka 2 dokazana. \\
+Točka 3 očitno velja: Če v $P_r$ namesto $\vartheta$ vstavimo $-\vartheta$, lahko uporabimo $\cos(-\vartheta) = \cos\vartheta$ in dobimo isti rezultat. \\
+S točko 4 je podobno: Namesto $\vartheta$ vstavimo $\vartheta + 2\pi$ in dobimo isti rezultat. \\
+Točka 5: Če je $\delta \leq \vartheta$, je $\cos\vartheta \leq \cos\delta$. The rest is history. \\
+Točka 6: Izberemo $\delta \in (0,\vartheta)$. $$|P_r(\vartheta) - 0| = P_r(\vartheta) = \frac{1-r^2}{1 - 2r\cos\vartheta + r^2} \leq \frac{1-r^2}{1 - 2r\cos\delta + r^2}$$
+Zadnje je neodvisno od $\vartheta$ in konvergira proti 0.
+\paragraph{Izrek.} (Poissonova formula) Bodi $u$ zvezna na $\overline{D}(0, 1)$ in harmonična na $D(0, 1)$. Potem za vsak $0 \leq r < 1$ velja
+$$e(re^{i\varphi}) = \frac{1}{2\pi}\int_{0}^{2\pi} P_r(\vartheta - \varphi) u(e^{i\vartheta})\dif\vartheta$$
+\paragraph{Opomba.} To pomeni, da bo rešitev Dirichletovega problema, če obstaja, gotovo oblike
+$$u(re^{i\varphi}) = \frac{1}{2\pi}\int_{0}^{2\pi}P_r(\vartheta - \varphi)g(e^{i\vartheta})\dif\vartheta,$$
+kjer je $g$ željena vrednost funkcije $u$ na $\partial D(0, 1)$.
+\end{document}

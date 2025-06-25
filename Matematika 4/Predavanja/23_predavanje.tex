@@ -1,0 +1,93 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+Zadnjič smo obravnavali Besselovo funkcijo. Dokopali smo se do rešitve $\displaystyle{J_{\nu}(z) = \Sum{n} \frac{(-1)^n}{2^{\nu + 2n} n!\Gamma(\nu + n + 1)}}$ va $\mu = \mu_1 = \nu$.
+Zdaj poglejmo še drugo rešitev. Če velja $\mu_1 - \mu_2 = 2\nu \notin \N$, ni težav:
+Druga rešitev je $J_{-\nu}(z)$, ki je linearno neodvisna od prve.
+Splošna rešitev je torej $$y = C_1J_{\nu}(z) + C_2J_{-\nu}(z)$$
+Zdaj pa poglejmo še primer, ko je $2\nu \in \N$. Ločimo dva primera: Ko je $2\nu$ sodo ali liho število. Obravnavajmo vsako možnost posebej.
+\begin{itemize}
+    \item $2\nu$ je liho število:
+\end{itemize}
+Od prej imamo rekurzivno zvezo: $c_{k} k(k - 2\nu) = -c_{k-2}$
+Če je $k = 2\nu$, velja $c_{k-2} = 0$. Ker je $2\nu$ liho število, je $k$ liho število, $k-2$ pa prav tako.
+Tedaj naj bojo vsi koeficienti $c_n = 0$, če je $n$ lih. Kot prej izberemo $c_0$ in dobimo funkcijo $J_{-\nu}$. Pri členu $n=0$ je $J_\nu$ člen omejen v okolici $0$, $J_{-\nu}$ člen pa ne - torej imamo linearno neodvisni rešitvi.
+\begin{itemize}
+    \item $2\nu$ je sodo število
+\end{itemize}
+Ali drugače povedano: $\nu = m \in \N$. Spet lahko naredimo isto kot prej. Trdimo pa, da tedaj $J_{-m}$ in $J_{m}$ nista linearno neodvisni. Bolj specifično,
+$$J_{-m}(z) = (-1)^mJ_m(z)$$
+Dokaz: $$J_{-m} = \Sum{n} \frac{(-1)^n}{2^{-m-2n}n!\Gamma(-m+n+1)}z^{2n-m}$$
+Če je $-m+n+1 \leq 0$, imamo težavo z $\Gamma$ funkcijo - v negativnih celih številih gre namreč v neskončno. Zanima nas torej le vsota od $m$ naprej, označimo $k = n-m$.
+$$= \Sum{k}\frac{(-1)^{m+k}}{2^{m+2k}(m+k)!\Gamma(k+1)}z^{m+2k} = (-1)^m\Sum{k} \frac{(-1)^k}{2^{m+2k}(m+k)!k!}z^{m+2k}$$
+$$L_\nu(z)(-1)^m\Sum{k}\frac{(-1)^n}{2^{m+2n}n!\Gamma(m + n + 1)}z^{m+2n}$$
+Vidimo, da sta si vrsti bolj ali manj enaki, le v imenovalcu moramo na primeren način izraziti $\Gamma$ funkcijo.
+\paragraph{Lastnosti Besselovih funkcij}
+$$J_{1/2}(z) = \Sum{n} \frac{(-1)^n}{2^{2n + 1/2}n!\Gamma(n + 3/2)}z^{2n + 1/2}$$
+$$\Gamma(n + 3/2) = (n+\frac{1}{2})\cdot(n-\frac{1}{2})\cdot...\cdot\frac{3}{2}\cdot\frac{1}{2}\Gamma\left(\frac{1}{2}\right)$$
+$$= \frac{(2n+1)(2n-1)...\cdot 3 \cdot 1}{2^{n+1}}\sqrt{\pi}$$
+Sledi $$J_{1/2}(z) = \Sum{0} \frac{(-1)^n}{2^{n-1/2}n!(2n+1)(2n-1)...5\cdot3\cdot1\cdot\sqrt{\pi}}z^{2n + 1/2}$$
+$$= \sqrt{\frac{2}{\pi z}} \Sum{n} \frac{(-1)^n}{2\cdot 1 \cdot 2 \cdot 2 \cdot 2 \cdot 3 \cdot 2 \cdot 4 \cdot ... \cdot 2 \cdot n \cdot (2n+1)(2n-1)...\cdot 3\cdot 1}z^{2n+1}$$
+$$= \sqrt{\frac{2}{\pi z}}\Sum{n} \frac{(-1)^2}{(2n+1)!}z^{2n+1}$$
+Vidimo $\displaystyle{J_{1/2} (z) = \sqrt{\frac{2}{\pi z}}\sin z}$. Na podoben način dokažemo $\displaystyle{J_{-1/2} (z) = \sqrt{\frac{2}{\pi z}}\cos z}$
+\paragraph{Trditev.} Veljajo naslednje enakosti:
+\begin{enumerate}
+    \item $\dd{}{z}\left(z^\nu J_{nu}(z) = z^\nu J_{\nu - 1}(z)\right)$
+    \item $\dd{}{z}\left(z^{-\nu} J_{\nu}(z)\right) = -z^{-\nu} J_{\nu + 1} (z)$
+    \item $\dd{}{z}(J_\nu(z)) + \frac{\nu}{z}J_\nu(z) = J_{\nu - 1}$
+    \item $\dd{}{z}(J_\nu(z)) - \frac{\nu}{z}J_\nu(z) = -J_{\nu + 1}$
+    \item $\frac{2\nu}{z} J_{\nu} J_{\nu - 1}(z) + J_{\nu + 1}(z)$
+    \item $2\dd{}{z} \left(J_\nu (z)\right) = J_{\nu - 1}(z) - J_{\nu + 1}(z)$
+\end{enumerate}
+\paragraph{Dokaz.} Točko (1) dokažemo tako, da funkcijo $z^\nu J_\nu(z)$ zapišemo kot vrsto in jo kot tako odvajamo po $z$. Točko (2) dokažemo podobno. Točko (3) dokažemo tako, da enakost pri točki (1) najprej na levi strani uporabimo pravilo za odvod produkta, nato pa obe strani delimo z $z^\nu$.
+Točko (4) dokažemo tako, da isti postopek uporabimo na točki (2). Enakosti (5) in (6) pa sta razlika ter vsota enakosti (3) in (4).
+\section{Lastnosti celoštevilskih Besselovih funkcij}
+\paragraph{Izrek.} $\displaystyle{\Sum[-\infty]{m} J_m(z)t^m = e^{\frac{z}{2}(t - 1/t)}}$ za neki $z, t \in \C$.
+Pravimo, da je funkcija $\displaystyle{e^{\frac{z}{2}(t-1/t)}}$ generirajoča
+ali rodovna funkcija celoštevilskih Besselovih funkcij - v resnici gre v tem izreku za njen razvoj v Laurentovo vrsto.
+\paragraph{Dokaz.}
+$$e^{\frac{z}{2}(t-1/t)} e^{\frac{zt}{2}}\cdot e^{-\frac{z}{2t}} = \left(\Sum{k}\frac{1}{k!}\left(\frac{zt}{2}\right)^k\right) \cdot \left(\Sum{n}\frac{1}{n!}(-1)^n\left(\frac{z}{2t}\right)^n\right)$$
+Dobimo produkt vrst, šlo bo za vrsto oblike $\displaystyle{\Sum[-\infty]{m} ? \, t^m}$
+Člen pri $t^m$ je enak
+$$\sum_{k-n=m}\frac{1}{k!}\frac{z^k}{2^k}(-1)^n\frac{z^n}{2^n}\frac{1}{n!}$$
+Vstavimo $k=n+m$, dobimo vsoto po vseh pozitivnih $n$:
+$$= \Sum{n} \frac{1}{(m+n)!}\frac{(-1)^nz^{m+2n}}{n!2^{m+2n}} = J_m(z)$$
+Se pravi so koeficienti te vrste ravno Besselove funkcije.
+\paragraph{Trditev.} Veljajo naslednje lastnosti:
+\begin{enumerate}
+    \item Za vse $z, w \in \C$ in $m \in \N$ velja $$J_m(z+w) = \Sum[-\infty]{k}J_{m-k}(z)J_k(w)$$
+    \item $\displaystyle{1 = J_0(z^2) + 2\Sum[1]{k}J_k(z)^2}$
+    \item $|J_0(z)| \leq 1$ in $|J_k(z)|\leq 1/\sqrt{2}$ za $k = 1, 2, ...$
+    \item Za $x \in \R$: $$J_m(x) = \frac{1}{\pi} \int_{0}^{\pi} \cos(m\varphi - x\sin\varphi)\dif\varphi$$
+\end{enumerate}
+\paragraph{Dokaz.} Prvo enakost dokažemo z rodovno funkcijo:
+$$\Sum[-\infty]{\infty} J_m(z+w) t^m = e^{\frac{z+w}{2}(t - 1/t)} = e^{\frac{z}{2}(t-1/t)} \cdot e^{\frac{w}{2}(t-1/t)}$$
+Ti dve eksponentni funkciji zapišemo kot vrsti, zmnožimo in pogledamo eksponent pri $t^m$. \\[2mm]
+Druga točka: V prvo enakost vstavimo $w = -z$, dobimo $$J_m(0) = \Sum[-\infty]{k}J_{m-k} (z)J_k(-z)$$
+$$J_k(z) = \Sum{n} ... z^{2n+k}$$
+Če je $k$ sod, je $J_k(-z) = J_k(z)$. Če je lih, je $J_k(z) = -J_k(z)$. \\[2mm]
+Točka (3) sledi direktno iz točke (2). \\[2mm]
+Točka (4): Dokazali bomo jutri z uporabo rodovne funkcije in spremenljivko $t = e^{i\varphi}$.
+\end{document}

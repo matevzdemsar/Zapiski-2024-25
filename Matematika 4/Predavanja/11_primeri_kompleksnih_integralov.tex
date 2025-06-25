@@ -1,0 +1,59 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+\paragraph{Trditev.} Na območju $\mathcal{D}$ naj ima funkcija $\fn{f}{\mathcal{D}}{\C}$ singularnosti le v obliki polov. \\
+Naj bo $\overline{D}(a, r)$ cel vsebovan v $\mathcal{D}$ in na robu tega kroga naj ne bo ne ničel ne polov funkcije $f$. Potem je 
+$$\frac{1}{2\pi i}\int_{\partial D(a, r)}\frac{f'(z)}{f(z)}dz = N - P$$
+kjer smo z $N$ označili število ničel znotraj $D(a, r)$ - pri čemer upoštevamo morebitno večkratnost ničel, s $P$ pa število polov znotraj $D(a ,r)$. \\
+\paragraph{Dokaz.} Po izreku o stekališčih je ničel končno mnogo. Ker so poli funkcije $f$ ničle funkcije $1/f$, je tudi teh končno mnogo. \\
+Naj bojo $a_1, a_2, ..., a_n$ ničle s kratnostmi $m_1, m_2, ..., m_n$ \\
+poli pa $b_1, b_2, ..., b_p$ s kratnostmi $n_1, n_2, ..., n_p$ \\
+$N = m_1 + m_2 + ... + m_n$ in $P = n_1 + n_2 + ... + n_p$ \\
+Za funkcijo $f$ vemo, da mora biti oblike $\displaystyle{f(z) = \frac{(z-a_1)^{m_1}(z-a_2)^{m_2}...(z-a_n)^{m_n}}{(z-b_1)^{n_1}(z-b_2)^{n_2}...(z-a_p)^{n_p}}g(z)}$, pri čemer $g(z)$ na $D(a, r)$ nima ničel ali polov. \\
+Zdaj bomo morali to odvajati. Začnimo z najenostavnejšim primerom, ko ima $f(z)$ le eno ničlo.
+$$f(z) = (z-a)^kg(z)$$
+$$f'(z) = k(z-a)^{k-1}g(z) + (z-a)^kg'z$$
+$$\frac{f'(z)}{f(z)} = \frac{k}{z-a} + \frac{g'(z)}{g(z)}$$
+V našem primeru imamo produkt takšnih funkcij, torej:
+$$\frac{f'(z)}{f(z)} = \frac{m_1}{z-a_1} + \frac{m_2}{z-a_2} + ... + \frac{m_n}{z-a_n} - \frac{n_1}{z-b_1} + \frac{n_2}{z-b_2} + ... + \frac{n_p}{z-b_p} + \frac{g'(z)}{g(z)}$$
+$$\frac{1}{2\pi i} \int_{\partial D(a, r)} \frac{f'(z)}{f(z)}dz = m_1 \frac{1}{2\pi i} \int_{\partial D(a, r)} \frac{1}{z-a_1}dz + m_2 \frac{1}{2\pi i} \int_{\partial D(a, r)} \frac{1}{z-a_2}dz + ... $$
+$$- n_1 \frac{1}{2\pi i} \int_{\partial D(a, r)} \frac{1}{z-b_1}dz - n_2 \frac{1}{2\pi i} \int_{\partial D(a, r)} \frac{1}{z-b_2}dz - ...$$
+$$+ \frac{1}{2\pi i} \int_{\partial D(a, r)} \frac{g'(z)}{g(z)}dz$$
+Izrazi oblike $\displaystyle{\frac{1}{2\pi i} \int_{\partial D(a, r)}\frac{1}{z-z_0}dz}$ so enaki 1 (gre za indeks krivulje), izraz $\displaystyle{\frac{1}{2\pi i} \int_{\partial D(a, r)} \frac{g'(z)}{g(z)}dz}$ pa bo po Cauchyjevem izreku enak 0.
+\paragraph{Izrek.} Izrek o odprti preslikavi: \\
+bodi $\fn{f}{\mathcal{D}}{\C}$ holomorfna in nekonstantna. Potem je $f$ odprta preslikava, kar pomeni,
+da je $f(U)$ odprta v $\C$, čim je $U$ odprta v $\mathcal{D}$.
+\paragraph{Dokaz.} (skica dokaza) Recimo, da je $U$ odprta v $\mathcal{D}$. Iščemo $\varepsilon>0$, da bo $D(f(\alpha),\varepsilon) \subseteq f(U)$. To sledi iz naslednjega rezultata: \\
+Recimo, da je $f(\alpha) = \beta$; tedaj je $\alpha$ ničla funkcije $f(z) - \beta$. Recimo, da je $\alpha$ $n$-kratna ničla. Tedaj ima $f(z) - \beta$ natanko $n$ rešitev.
+Potem $\exists \delta > 0$ in $\exists \varepsilon > 0:~w\in D(\beta, \varepsilon),\,w\neq\beta$ ima enačba $f(z)=w$ natanko $n$ rešitev (tega dela ne bomo dokazovali).
+Ker je $U$ odprta, lahko dosežemo $D(\alpha, \delta) \subseteq U$. Zadošča dokazati, da je $D(\beta, \varepsilon) \subseteq U$. To pa je posledica tega, da ima enačba $f(z) - w$ natanko $n \geq 1$ rešitev za $w \in D(\beta, \varepsilon)$.
+\paragraph{Opomba.} Že na začetku smo povedali, da je pri funkciji $\fn{f}{A}{B}$ množica $V \subset B$ odprta v $B$, če je $f^{-1}(V)$ odprta v $A$. To sledi iz definicije zveznosti. Zdaj smo to nadgradili, saj odprtost $f$ zagotavlja zveznost $f^{-1}$.
+\paragraph{Posledica.} $\fn{f}{\mathcal{D}}{\C}$ bodi holomorfna in $\alpha \in \mathcal{D}$ taka točka, da $f'(\alpha) \neq 0$. tedaj obstaja okolica $\alpha$ (v nadaljnje označena z $U$), da bo $\displaystyle{f\big|_U\colon U \to f(U)}$ bijektivna in $f^{-1}$ holomorfna.
+\paragraph{Dokaz.} (skica dokaza) Označimo $f(\alpha) = \beta$. Tedaj je $\alpha$ ničla funkcije $g(z) = f(z) - \beta$. Ker je $f'(\alpha) = 0$, je $\alpha$ enkratna ničla funkcjie $g$.
+$$g(z) = (z-\alpha)^kh(z)$$
+$$f'(z) = g'(z) = k(z-\alpha)^{k-1}h(z) + (z-\alpha)^kh'(z)$$
+V točki $\alpha$ mora biti to različno od $0$, torej mora biti $k=1$, da prvi člen ne bo enak 0. \\
+Naj bo $g$ inverz $f$. To pomeni, da je $f(z) = w$ in $g(w) = z$. \\
+$$\lim_{w \to w_0} \frac{g(w) - g(w_0)}{w - w_0} = lim_{z \to z_0} \frac{z-z_0}{f(z) - f(z_0)} = \frac{1}{f'(z)}$$
+Kaj, če je $f'(z) = 0$? Ker je $f'$ zvezna in je $f'(\alpha) \neq 0$, lahko poiščemo dovolj majhen $\delta$, da na krogu $D(\alpha, \delta)$ velja $f'(z) \neq 0$
+\end{document}

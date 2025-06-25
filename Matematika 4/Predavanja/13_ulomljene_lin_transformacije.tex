@@ -1,0 +1,92 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+Bodi $\fn{f}{\C}{\C}$ s predpisom $\displaystyle{f(z) = \frac{az + b}{cz + d}}$. Če $c \neq 0$, ima $f$ pol pri $\displaystyle{-\frac{d}{c}}$.
+Definirajmo $\hat{\C} = \C \cup \{\infty\}$ in $\displaystyle{f\left(-\frac{d}{c}\right)} = \infty$. Dobimo $\fn{f}{\hat{\C}}{\hat{\C}}$.
+Če $c = 0$, dobimo $\displaystyle{f(z) = \frac{az + b}{d}}$ in je $f(\infty) = \infty$, če stvar definiramo na $\hat{C}$. \\[3mm]
+Zamislimo si, da namesto funkcije $f$ pišemo matriko:
+$$A = \begin{bmatrix}
+    a & b \\
+    c & d \\
+\end{bmatrix} ... f_A$$
+Kompozitum funkcij si lahko zamislimo kot množenje takih matrik:
+$$B = \begin{bmatrix}
+    u & v \\
+    w & t \\
+\end{bmatrix} ... f_B$$
+$$(f_A \circ f_B)(z) = ... = \frac{(au + bw)z + (av + bt)}{(cu + dw)z + (cv + dt)} ... C = \begin{bmatrix}
+    au + bw & av + bt \\
+    cu + dw & cv + dt \\
+\end{bmatrix} = A \cdot B$$
+Opomba: $f_I(z) = \frac{1z + 0}{0z + 1} = z = id(z)$ \\[3mm]
+Inverz take funkcije torej izračunamo tako, kot da bi računali inverz matrike:
+$$(f_A)^{-1} = f_{A^{-1}},~A^{-1} = \frac{1}{ad-bc}\begin{bmatrix}
+    d & -b \\
+    -c & a \\
+\end{bmatrix}$$
+Hitro vidimo, da $det(A) = 0 \Leftrightarrow f_A = \text{konst.}$ Če je namreč $ad = bc$, lahko za primer $d \neq 0$ izrazimo $\displaystyle{a = \frac{bc}{d}}$
+$$f_A(z) = \frac{az + b}{cz + d} = \frac{(bc)z + bd}{d(cz + d)} = \frac{b}{d}$$
+V primeru $d=0$ dokaz ni dosti težji. \\[3mm]
+Posebni primeri ulomljenih linearnih transformacij: \\
+1. Translacija: $f(z) = z + b$ \\
+2. Razteg: $f(z) = az, ~ a \in \R$ \\
+3. Rotacija: $f(z) = a(z),~ a \in \C,~|a| = 1$ oziroma $f(z) = ze^{i\varphi}$. Če zapišemo $z = re^{i\psi}$, je $f(z) = re^{i(\psi + \varphi)}$ \\
+4. Inverzija: $f(z) = 1/z$ \\
+\paragraph{Trditev.} Vsaka ulomljenalinearna transformacija je kompozitum preslikav tipa 1-4.
+\paragraph{Dokaz.} Bodi $\displaystyle{f(z) = \frac{az + b}{cz + d}}$.
+\begin{itemize}
+    \item $c=0,\,d\neq0$: $\displaystyle{f(z) = \frac{az + b}{d}} = \frac{a}{d}z + \frac{b}{d}$, kar je kompozitum raztega in translacije.
+    \item $c\neq0,\,d=0$: $\displaystyle{f(z) = \frac{az + b}{cz}} = \frac{a}{c} + \frac{b}{c}\frac{1}{z}$, kar je kompozitum inverzije, raztega in translacije.
+    \item $c\neq0,\,d\neq0$: $\displaystyle{z \to cz \to cz + d \to \frac{1}{cz + d} \to \left(b -\frac{ad}{c}\right)\frac{1}{cz + d} \to \frac{a}{c} + \left(b -\frac{ad}{c}\right)\frac{1}{cz + d}}$
+    \item Zadnji izraz pa je enak $f(z) = \displaystyle{\frac{az + b}{cz + d}}$ \hspace{2ex} (izpustili smo nekaj računanja).
+\end{itemize}
+\paragraph{Izrek.} Ulomljene linearne preslikave slikajo premice/krožnice v premice/krožnice. \\
+(Opomba: v sferični geometriji, na katero lahko prevedemo $\hat{\C}$, je premica le krožnica, ki prečka pol.)
+\paragraph{Dokaz.} Najprej želimo opisati premice in krožnice. Oglejmo si enačbo $\displaystyle{\alpha |z|^2 + \beta z + \overline{\beta}\overline{z} + \gamma = 0}$, pri čemer naj bo $\beta \neq 0$ in $|\beta|^2 > \alpha\gamma$.
+Označimo $z = x+iy$ in $\beta = a+ib$
+$$\alpha(x^2 + y^2) + (x + iy)(a + ib) + (x-iy)(a-ib) + \gamma = 0$$
+$$\alpha x^2 + \alpha y^2 + 2(ax - by) + \gamma = 0$$
+Če je $\alpha = 0$, dobimo enačbo premice v $\R^2$. Če je $\alpha \neq 0$, dobimo enačbo krožnice, za kar nam poskrbi pogoj $|\beta|^2 > \alpha\gamma$. \\
+Dovolj je pokazati, da translacija, razteg, rotacija in inverzija slikajo krožnice in premice v krožnice ali premice. Za prve tri je to očitno, posebno pozornost pa namenimo inverziji:
+$$\alpha |z|^2 + \beta z + \overline{\beta} \overline{z} + \gamma,~\backslash z \to \frac{1}{z}, \text{ nato } \cdot |z^2|$$
+$$\alpha + \beta\overline{z} + \overline{\beta}z + \gamma |z|^2 = 0$$
+Dobili smo enačbo, ki je enake oblike kot enačba za krožnico/premico, torej mora tudi sama opisovati krožnico/premico.
+\paragraph{Trditev:} Izberimo točke $z_1, z_2, z_3 \in \C$, ki naj bodo paroma različne. Poleg tega izberimo $w_1, w_2, w_3$, ki naj si bodo prav tako paroma različne. Tedaj obstaja ulomljena linearna transformacija, ki slika 
+\begin{align*}
+    z_1 \to w_1 \\
+    z_2 \to w_2 \\
+    z_3 \to w_3 \\
+\end{align*}
+\paragraph{Dokaz:} Najprej si oglejmo poseben primer: $w_1 = 0,\,w_2 = 1,\,w_3 = \infty$
+$$f(z) = \frac{z_2 - z_3}{z_2 - z_1} \cdot \frac{z - z_1}{z - z_3}$$
+Splošen primer: $z_1$, $z_2$ in $z_3$ znamo preslikati v $0, 1, \infty$. Na popolnoma enak način znamo tudi $w_1$, $w_2$ in $w_3$ preslikati v $0, 1, \infty$. Vzamemo torej inverze preslikav, ki preslikajo $w_1, w_2$ in $w_3$ v $0, 1, \infty$ in naredimo kompozitum.
+\paragraph{Riemannov upodobitveni izrek.} Vsako enostavno povezano območje $\mathcal{D}\subsetneq\C$ lahko z biholomorfno preslikavo preslikamo v $D(0, 1)$. Točna definicija enostavno povezanega območja je, da mora biti $\hat{\C} \setminus \mathcal{D}$ povezano.
+\paragraph{Kompleksna $\Gamma$ funkcija.}
+$$\Gamma(z) = \int_{0}^{\infty} t^{z-1}e^{-t}dt,~\mathfrak{Re}(z)>0$$
+\paragraph{Izrek.} $\Gamma (z)$ je holomorfna na $\{z\in\C;\mathfrak{Re}(z)>0\}$
+\paragraph{Dokaz.} Najprej potrebujemo sledečo pomožno trditev:
+\paragraph{Pomožna trditev.} Bodi $(f_n)_{n\in\N}$ zaporedje holomorfinh funkcij, ki enakomerno konvergira po kompaktni množici v $\mathcal{D}$ proti neki funkciji $f$. Tedaj je tudi $f$ holomorfna.
+\paragraph{Pomožni dokaz.}Uporabimo lahko Cauchyjevo formulo: $$f_n(z) = \frac{1}{2\pi i} \int_{\partial D(z, r)} \frac{f_n(\zeta)}{\zeta - z}d\zeta,$$
+kar enakomerno konvergira proti $$f(z) = \frac{1}{2\pi i} \int_{\partial D(z, r)} \frac{f(z)}{\zeta - z} d\zeta$$
+Ker lahko $f(z)$ zapišemo na tak način, jo lahko po neki trditvi zapišemo kot potenčno vrsto, torej je holomorfna.
+\end{document}

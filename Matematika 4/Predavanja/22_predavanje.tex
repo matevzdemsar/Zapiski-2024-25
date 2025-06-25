@@ -1,0 +1,94 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+Prejšnjič smo prišli do enačbe
+$$(k+\mu)(k+\mu-1)c_k + \sum_{j=0}^{k}(j + \mu)c_jp_{k-j} + \sum_{j=0}^{k}c_jq_{k-j} = 0$$
+Člene, ki vsebijejo $c_k$, zberemo skupaj.
+$$c_k\left((\mu + k)(\mu + k - 1) + (\mu + k)p_0 + q_0\right) + \sum_{j=0}^{k-1}\left((\mu + j)c_jp_{k-j} + c_jq_{k-j}\right) = 0$$
+Tako smo izrazili $c_k$ s pomočjo ostalih členov zaporedja. Potrebujemo še $\mu$. Pri $k=0$ je
+$$c_0\left(\mu(\mu - 1) + \mu p_0 + q_0\right) = 0$$
+Dobili smo kvadratno enačbo, ki ji pravimo tudi odločitvena zveza. Njeni rešitvi sta neki $\mu_1$ in $\mu_2$,
+običajno vzamemo $\mathfrak{Re}(\mu_1) >= \mathfrak{Re}(\mu_2)$. \\
+Označimo $f(\mu) = \mu(\mu - 1) + \mu p_0 + q_0 = (\mu - \mu_1)(\mu - \mu_2)$. Opazimo, da je člen pri $c_k$ ravno enak $f(\mu + k)$:
+$$c_k \cdot f(\mu + k) = -\sum_{j=0}^{k-1} \left((\mu + j) p_{k-j} + q_{k-j}\right)c_j$$
+$$c_k(\mu + k - \mu_1)(\mu + k - \mu_2) = -\sum_{j=0}^{k-1} \left((\mu + j) p_{k-j} + q_{k-j}\right)c_j$$
+Zdaj poglejmo primer $\mu = \mu_1$:
+$$c_k\cdot k \cdot \left(k + \mu_1 - \mu_2\right) = -\sum_{j}^{k-1}\left((\mu_1 + j)p_{k-j} + q_{k-j}\right)c_j$$
+Ker je $\mathfrak{Re}(\mu_1) > \mathfrak{Re}(\mu_2)$, mora biti vsota $k + \mu_1 - \mu_2$ različna od 0 (ker je $k>0$, pravzaprav večja od 0).
+Torej lahko pišemo
+$$c_k = -\frac{1}{k + \mu_1 - \mu_2} \sum_{j}^{k-1}\left((\mu_1 + j)p_{k-j} + q_{k-j}\right)c_j$$
+To je ena rešitev. Druga rešitev je, da vstavimo $\mu = \mu_2$.
+$$c_k\cdot k \cdot \left(k + \mu_2 - \mu_1\right) = -\sum_{j}^{k-1}\left((\mu_2 + j)p_{k-j} + q_{k-j}\right)c_j$$
+Zdaj nimamo več zagotovila, da je $k + \mu_2 - \mu_1 \neq 0$. Če je $\mu_1 - \mu_2 \in \N$, potem $\mu_1 - \mu_2$ -tega 
+člena ne bomo mogli izračunati. Sicer pa naredimo isto kot prej - delimo in dobimo linearno neodvisno rešitev.
+\paragraph{Primer.} $4z^2y'' + 2zy' + zy = 0$
+$$y'' + \frac{1}{2z} y' + \frac{1}{4z} y = 0$$
+$$zp(z) = \frac{1}{2}~~~p_0 = \frac{1}{2},~p_1 = p_2 = ... = 0$$
+$$z^2q(z) = \frac{z}{4}~~~q_1 = \frac{1}{4},~p_0 = p_2 = ... = 0$$
+Odločitvena zveza: $$\mu\left(\mu - 1 + p_0\right) + q_0 = 0$$
+$$\mu \left(\mu - \frac{1}{2}\right) = 0$$
+Dobili smo $\mu_1 = 1/2$ in $\mu_2 = 0$. Njuna razlika ni naravno število, torej ne bomo imeli težav. \\
+Vstavimo $\mu = \frac{1}{2}$:
+$$y = \Sum{k} c_kz^{k+\frac{1}{2}}$$
+$$y' = \Sum{k} c_k\left(k + \frac{1}{2}\right)z^{k-\frac{1}{2}}$$
+$$y'' = \Sum{k} c_k\left(k + \frac{1}{2}\right)\left(k - \frac{1}{2}\right)z^{k-\frac{3}{2}}$$
+To vstavimo v začetno enačbo, poiščemo koeficient pri $z^{k + \frac{1}{2}}$.
+$$c_k(2k+1)(2k-1) + c_k(2k+1) + c_{k-1} = 0$$
+$$c_k = -\frac{c_{k-1}}{2k(2k+1)}$$
+Ko izračunamo par členov (ali pa opazimo, da bomo v imenovalcu dobili $(2k-1)!$), vidimo, da ne potrebujemo rekurzivne zveze:
+$$c_k = \frac{(-1)^kc_0}{(2k+1)!}$$
+To je podobno vrsti za sinus, vendar ne čisto, saj $c_k$ stoji pred potenco $z^{k+1/2}$.
+Zdaj vstavimo $\mu = 0$ in pogledamo koeficient pri $z^k$.
+$$4c_kk(k-1)+ 2c_kk + d_{k-1} = 0$$
+$$c_k = -\frac{c_{k-1}}{2k(2k-1)}$$
+Spet opazimo, da je $\displaystyle{c_k = \frac{(-1)^kc_0}{(2k)!}}$. Tokrat imamo opravka s potencami $z^k = \displaystyle{(z^{1/2})^2k}$, torej je $$y_2 = c_0\cos\sqrt{z}$$
+Zdaj obravnavajmo še problematični primer: $\mu_1 - \mu_2 \in \N$, recimo $\mu_1 - \mu_2 = m$.
+$$0 = -\sum_{j=0}^{m-1}(...)c_j$$
+Tedaj postavimo $c_0 = c_1 = ... = c_{m-1} = 0$ in izberemo poljuben $c_m$. Ostale koefiiente lahko računamo z rekurzivno zvezo.
+S tem smo dobili rešitev, ki pa ni nujno linearno neodvisna od prve. \\
+Če sta naši rešitvi linearno neodvisni, lahko (brez dokaza) drugo rešitev dobimo z nastavkom
+$$y_2 = y_1\ln z + z^{\mu_2}\cdot f(z)$$
+Pri čemer mora biti $f(z)$ holomorna v okolici $0$ - tedaj jo lahko razvijemo, vstavimo v originalno enačbo in računamo koeficiente.
+\paragraph{Besselova diferencialna enačba.}
+$$z^2y'' + zy' + (z^2 - \nu^2) y = 0$$
+$$y'' + \frac{1}{z}y' + \left(1 - \frac{\nu^2}{z^2}\right)y = 0$$
+$0$ je pravilna singularna točka te enačbe.
+$$zp(z) = 1~~~p_0 = 1$$
+$$z^2q(z) = z^2 - \nu^2~~~p_0 = -\nu^2,~p_2 = 1$$
+$$\mu(\mu-1+p_0)+q_0=0$$
+$$\mu_1 = \nu,~~\mu_2 = -\nu$$
+Spet vzamemo $\mu = \mu_1 = \nu$, vstavimo v originalno enačbo in izrazimo koeficiente pri $z^{k+\nu}$.
+$$c_k(k+\nu)(k+\nu-1)+c_k(k+\nu) + c_{k-2} - \nu^2c_k = 0$$
+$$c_k\cdot k(k+2\nu) =-c_{k-2}$$
+$$c_k = -\frac{c_{k-2}}{k(k+2\nu)}$$
+Če poznamo $c_0$, lahko izračunamo $c_2, c_4, c_6 ...$ Za lihe $c_k$ lahko izberemo $c_1 = 0$ in dobimo \\ $c_1 = c_3 = c_5 = ... = 0$.
+Izkaže se, da to celo moramo narediti, sicer bi (nekje) dobili protislovje. \\
+Tudi za $c_0$ lahko izberemo $0$ in dobimo validno rešitev, ampak to je dolgočasno. Raje izberimo
+$$c_0 = \frac{1}{2^\nu\Gamma(\nu + 1)}$$
+Zdaj lahko izračunamo še ostale sode člene:
+$$c_2 = -\frac{1}{4(1 + \nu)2^\nu\Gamma(\nu+1)} = -\frac{1}{2^{\nu + 2}\Gamma(\nu + 2)}$$
+$$c_4 = \frac{1}{2^{\nu + 4} \Gamma(\nu + 3) \, (1 \cdot 2)}$$
+$$c_6 = -\frac{1}{2^{\nu + 6} \Gamma(\nu + 4) \, (1 \cdot 2 \cdot 3)}$$
+Splošen člen je: $\displaystyle{c_{2n} = \frac{(-1)^n}{2^{\nu + 2n}\Gamma(\nu + n + 1)\,n!}}$
+\end{document}

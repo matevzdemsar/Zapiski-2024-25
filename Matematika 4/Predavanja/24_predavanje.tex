@@ -1,0 +1,56 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\section{Legendrova diferencialna enačba in Legendrovi polinomi}
+Gre za diferencialno enačbo oblike $$(z^2 - 1)y'' + 2zy' - \nu(\nu - 1) = 0$$
+$$y'' + \frac{2z}{z^2 - 1}y' - \frac{\nu(\nu-1)}{z^2 - 1} = 0$$
+Imamo dve pravilni singularni točki: $z = \pm 1$. Točka $0$ je regularna, torej lahko poiščemo holomorfno funkcijo v okolici točke $0$.
+$$y  = \Sum{k} c_kz^k$$
+$$(z^2 + 1)\Sum{k} k(k-1)c_kz^{k-2} + 2\Sum{k}kc_kz^k - \nu(\nu + 1)\Sum{k} c_kz^k = 0$$
+Poiščimo koeficient pri $z^k = 0$:
+$$k(k-1)c_k - (k+2)(k+1)c_{k+2} + 2kc_k + \nu(\nu + 1)c_k$$
+$$c_k\left(k^2 + k - \nu(\nu + 1)\right) = (k+2)(k+1)c_{k+2}$$
+$$c_k(k - \nu)(k + \nu + 1) = (k+2)(k+1)c_{k+2}$$
+$$c_{k+2} = \frac{(k-\nu)(k+\nu+1)}{(k+2)(k+1)}c_k$$
+Eno rešitev dobimo tako, da nastavimo $c_0 = 1$ in $c_1 = 0$:
+$$c_2 = \frac{(-\nu)(\nu + 1)}{2}$$
+$$c_4 = \frac{(2-\nu)(-\nu)\cdot(\nu + 1)(\nu + 3)}{4!}$$
+$$c_6 = \frac{(4-\nu)(2-\nu)(-\nu)\cdot(\nu + 1)(\nu + 3)(\nu + 5)}{6!}$$
+$$\vdots$$
+Druga rešitev: $c_0 = 0$, $c_1 = 1$
+$$c_3 = \frac{(1-\nu)\cdot(\nu+2)}{3!}$$
+$$c_5 = \frac{(3-\nu)(1-\nu)\cdot(\nu + 2)(\nu + 4)}{5!}$$
+Ti dve rešitvi sta linearno neodvisni, splošne rešitev je torej linearna kombinacija teh dveh rešitev.
+$$c_{2n} = \frac{(-\nu)(-\nu+2)...(-\nu + 2n - 2)(\nu + 1)(\nu + 3) ... (\nu + 2n - 1)}{(2n)!}$$
+$$c_{2n+1} = (-1)^n \frac{(\nu - 1)(\nu - 3)...(\nu - 2n + 2)(\nu + 2)(\nu + 4) ... (\nu + 2n)}{(2n+1)!}$$
+Oglejmo si poseben primer, ko je $\nu = m \in \N$
+$$y_1 = \Sum{k} c_{2k}z^{2k}$$
+Člen $c_{2(m+1)}$ je enak $0$ zaradi faktorja $-\nu + 2m$. Sledi, da je za vsak $n \geq m+1$ veljalo $c_{2n} = 0$ in dobili bomo polinom stopnje $n = 2m$.
+Podoben sklep naredimo za rešitev $y_2$. Sklep: Če je $\nu \in \N$, je ena od rešitev Legendrove enačbe polinom stopnje $\nu$. \\[2mm]
+Nastavimo $\displaystyle{c_n = \frac{(2n)!}{(n!)^2 2^n}}$ in dobimo
+$$P_n(z) = \sum_{k=0}^{\lfloor\frac{n}{2}\rfloor}(-1)^k \frac{(2n-2k)!}{2^n k! (n-k)!(n-2k)!}z^{n-2k}$$
+To je Legendrov polinom stopnje $n$ (Lahko preverimo, da je temu res tako).
+\paragraph{Trditev.} (Rodriguesova formula) $P_n(z)$ lahko izračunamo tudi kot $$\frac{1}{2^n n!}\dd{^n}{z^n}\left((z^2 - 1)^n\right)$$
+\end{document}

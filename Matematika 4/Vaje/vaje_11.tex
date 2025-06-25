@@ -1,0 +1,71 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Naloga.} Reši diferencialno enačbo
+$$4z^2 y'' - 4zy' + (1+2z) y = 0$$
+okoli $z=0$
+$$y'' - y' + \frac{1 - 2z}{4z^2} = 0$$
+$$p = -1~~~p_0 = 0$$
+$$q = \frac{1 - 2z}{4z^2}~~~q_0 = \frac{1}{4}$$
+$$\mu(\mu - 1) + \frac{1}{4} = 0$$
+$$\mu_1 = \mu_2 = \frac{1}{2}$$
+$$Y_1 = z^{1/2}\Sum{n}c^nz^n = \Sum{n} c_nz^{n+1/2}$$
+Vstavimo v originalno enačbo, pogledamo člene pri $z^n$ in dobimo
+$$c_n = \frac{1}{n}c_{n-1}$$
+$$Y_1 = z^{1/2}e^z$$
+Ker je $\mu_1 - \mu_2 = 0$ in imamo linearno odvisni rešitvi, vzamemo nastavek
+$$Y_2 = Y_1 \ln z + \Sum{n}c_nz^{n+1/2}$$
+Vstavimo to v originalno enačbo. Upoštevamo, da je $4z^2y_1'' - 4z^2y_1' + (1-2z)y_1 = 0$
+$$4\left(2\Sum{n}\frac{(n+1/2)}{n!}z^{n-1/2} + \Sum{n}\frac{z^n+1/2}{n!} + \Sum{n}c_n(n-1/2)(n+1/2)z^{n-3/2}\right) - $$
+$$ -4\left(\Sum{n} \frac{z^{n-3/2}}{n!} + \Sum{n} c_n(n+1/2)z^{n-1/2}\right) + \Sum{n}c_nz^n - 2\Sum{n} c_nz^{n+3/2} = 0$$
+Pri $n=0$ ($z^{1/2}$):
+$$8 \cdot \frac{1}{2} - 4 + 4c_0\cdot \left(-\frac{1}{4}\right) = 0 \Rightarrow c_0 = 0$$
+Pri $n = 1$ ($z^{3/2}$):
+$$4 - 4c_1 - 4c_0 = 0 \Rightarrow c_1 = -1$$
+In tako naprej za poljuben $n$.
+\paragraph{Besselove funkcije.} So funkcije, ki rešijo enačbo $$z^2 y'' + zy' + (z^2 - \nu^2)y = 0$$
+$$J_\nu(z) = \Sum{n} (-1)^n\frac{\left(\frac{z}{2}\right)^{2n + \nu}}{n!\Gamma(n+\nu+1)}$$
+Velja:
+\begin{itemize}
+    \item Če $\nu \notin \Z$, sta $J_\nu$ in $J_{-\nu}$ linearno neodvisni, sicer je $J_{\nu} = (-1)^\nu J_{-\nu}$.
+    \item Von Neumannova funkcija: $$Y_\nu(z) = \frac{J_\nu(z)\cos(\nu \pi) - J_{-\nu}(z)}{\sin(\nu \pi)}$$ Za $n \in \N$: $$Y_n(z) = \lim_{\nu \to n} Y_\nu(z)$$
+    \item $\Sum{n} J_n(z)t^n = e^{\frac{z}{2}\left(1 - \frac{1}{t}\right)}$
+    \item $2J_\nu'(z) = J_{\nu - 1}(z) - J_{\nu + 1}(z)$
+    \item $\displaystyle{\frac{2\nu}{z}J_\nu(z) = J_{\nu - 1}(z) + J_{\nu + 1}(z)}$
+\end{itemize}
+\paragraph{Naloga.} Za $a \neq b$:
+$$u(x) = J_\nu(ax)$$
+$$v(x) = J_\nu(bx)$$
+Za Besselovo funkcijo velja $$x^2 J_\nu''(x) + xJ_\nu(x) + (x^2  \nu^2) J_\nu(x) = 0$$
+$$x^2 v''(x) + xv'(x) + (b^2x^2 - \nu^2) v(x) = 0$$
+$$x^2 u''(x) + xu'(x) + (a^2x^2 - \nu^2) u(x) = 0$$
+Prvo enačbo množimo z $u$, drugo z $v$, nato ju odštejemo.
+$$x^2(u''v - uv'') + x(v'u - uv') + x^2(a^2 + b^2) uv = 0$$
+$$\frac{-\left(x(u'v - uv')\right)'}{a^2 + b^2} = xuv$$
+To integriramo (npr. z mejama $0$ in $1$):
+$$\int_{0}^{1} x u(x) v(x) \, \dif x = \int_{0}^{1} x J_\nu(ax) + J_\nu(bx) \, \dif x= 0$$
+$$\frac{-1}{a^2 + b^2} (u'v - v'u)\Big|_{0}^1 = \frac{u(a)v'(b) - u'(a)v(b) - u(0)v'(0) + u'(0)v(0)}{a^2 + b^2} = 0$$
+
+\end{document}

@@ -1,0 +1,52 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Besselove funkcije.} Gre za rešitve diferencialne enačbe $$z^2y''+ zy' + (z^2- \nu^2)y = 0$$
+Za $\nu \in \R$ je
+$$J_\nu(z) = \Sum{n}(-1)^n \frac{\left(z/2\right)^{2n+\nu}}{n!\Gamma(n+\nu+1)}$$
+Zanje velja:
+\begin{enumerate}
+    \item Ko rešujemo parcialne diferencialne enačbe z metodo ločitve spremenljivk, pogosto dobimo probleme, ki privedejo do te enačbe.
+    \item Za $\nu \notin \Z$ sta $J_{\nu}$ in $J_{-\nu}$linearno neodvisni.
+    \item Za $\nu \in \Z$ je $J_\nu = (-1)^\nu J_\nu$
+    \item Von Neumannova funkcija: $$Y_\nu(z) = \frac{J_\nu(z)\sin(\nu\pi)-J_{-\nu}(z)}{\sin(\nu\pi)}$$
+    Za $\nu \in \N$ pa $$Y_n = \lim_{\nu \to n} Y_\nu(z)$$
+\end{enumerate} 
+\paragraph{Naloga.} Velja $\displaystyle{J_{1/2}(z) = \sqrt{\frac{2z}{\pi}}\frac{\sin z}{z}}$. Pokaži, da velja
+$$J_{n+1/2} = (-1)^n z^n\sqrt{\frac{2z}{\pi}}\left(\frac{1}{z}\dd{}{z}\right)^n\left(\frac{\sin z}{z}\right)$$
+\paragraph{Reševanje.} $n=0$: $\displaystyle{J_{1/2}(z) = \sqrt{\frac{2z}{\pi}}\frac{\sin z}{z}}$ \\
+Želimo ugotoviti, kako se $\displaystyle{\left(\frac{1}{z} \dd{}{z}\right)^n}$ spreminja z $n$.
+$$n = 0: ~~ \left(\frac{1}{z} \dd{}{z}\right)^0 f(z) = f(z)$$
+$$n = 1: ~~ \left(\frac{1}{z} \dd{}{z}\right)^1 f(z) = \frac{1}{z} f'(z)$$
+$$n = 2: ~~ \left(\frac{1}{z} \dd{}{z}\right)^2 f(z) = \frac{1}{z}\left(\frac{1}{z}f''(z) - \frac{1}{z^2}f'(z)\right)$$
+Za dokaz bomo uporabili indukcijo. Preverili smo že, da velja za $n=0$. Predpostavimo torej, da velja do nekega $n$, in poglejmo, kako je z $n+1$.
+$$J_{n + 3/2} = (-1)^{n+1}z^{n+1}\sqrt{\frac{2\pi}{z}}\left(\frac{1}{z} \dd{}{z}\right)^{n+1} \left(\frac{\sin z}{z}\right)$$
+$$= (-1)^{n+1}z^{n+1}\sqrt{\frac{2\pi}{z}}\left(\frac{1}{z} \dd{}{z}\right)\left(\left(\frac{1}{z} \dd{}{z}\right)^n \left(\frac{\sin z}{z}\right)\right)$$
+$\displaystyle{\left(\left(\frac{1}{z} \dd{}{z}\right)^n \left(\frac{\sin z}{z}\right)\right)}$ izrazimo iz $J_{n+1/2}$
+$$J_{n+3/2}(z) = (-1)^{n+1}z^{n+1}\sqrt{\frac{2\pi}{z}}\left(\frac{1}{z}\dd{}{z}\right)\left(J_{n+1/2}(z)\frac{1}{z^n}(-1)^n \sqrt{\frac{2\pi}{z}}\right)$$
+$$= -z^n \sqrt{\frac{2\pi}{z}} \frac{\pi}{2}\dd{}{z}\left(J_{n+1/2}(z)\,z^{-n-1/2}\right)$$
+Za Besselove funkcije velja $2J_\nu' = J_{\nu - 1} - J_{\nu + 1}$, $\displaystyle\frac{2\nu}{z} J_\nu = J_{\nu - 1} + J_{\nu + 1}$. Od faktorja pred odvodom ostane le še $-z^{n+1/2}$
+$$= - \frac{J_{n-1/2}(z)}{2} + \frac{J_{n+3/2}(z)}{2} + \frac{(n+1/2)}{z}J_{n + 1/2}(z) = - \frac{J_{n-1/2}(z)}{2} + \frac{J_{n+3/2}(z)}{2} + \frac{J_{n-1/2}(z)}{2} + \frac{J_{n+3/2}(z)}{2} = J_{n+3/2}(z)$$
+\end{document}

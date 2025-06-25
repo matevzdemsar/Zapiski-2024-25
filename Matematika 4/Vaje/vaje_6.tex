@@ -1,0 +1,50 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\paragraph{Biholomorfne funkcije.} Naj bosta $U, V$ območji v $\C$. $\fn{f}{U}{V}$ je biholomorfna, če je $f$ holomorfna, bijektivna in ima holomorfen inverz.
+\paragraph{Riemannov izrek.} Naj bo $U$ enostavno povezano območje v $\C$. Tedaj obstaja biholomorfna $\fn{f}{U}{D(0, 1)}$.
+\paragraph{Möbiusove transformacije.} So oblike:
+$$f(z) = \frac{az + b}{cz + d}$$
+\paragraph{Lastnosti.} So konformne (tj. ohranjajo kote - to je lastnost vsake biholomorfne preslikave). Slikajo premice in krožnice v premice in krožnice. \\
+Primer: Naj bo $g$ transformacija, za katero velja:
+$$g(0) = i$$
+$$g(\infty) = i$$
+$$g(1) = 1$$
+Iz prvega pogoja dobimo $\displaystyle{\frac{b}{d} = -i}$ \\
+Iz drugega pogoja dobimo $\displaystyle{\frac{a}{c} = i}$ \\
+Iz tretjega pogoja dobimo $\displaystyle{a + b = c + d}$ \\
+Izrazimo: $\displaystyle{a = ic,~b = -id}$
+$$ic - id = c + d$$
+$$c(i-1) = d(1+i)$$
+$$c = d\frac{1+i}{-1+i} = d\frac{(1+i)(-1-i)}{(-1+i)(-1-i)} = d\frac{-1 - 2i 1}{2} = -id$$
+Torej je $\displaystyle{g = \frac{dz - id}{-idz + d} = \frac{z - i}{-iz + 1}}$
+\paragraph{Osnovne/uporabne preslikave:}  (ne nujno Möbiusove) \\[3mm]
+Preslikava $g(z)$ slika zgornjo polravnino (torej $\{z \in \C: \mathfrak{Im}(z) > 0\}$) v $D(0, 1)$ \\
+Preslikava $z^2$ slika enega od kvadrantov kompleksne ravnine v zgornjo polravnino.
+Podobno dela vsaka preslikava oblike $z^n$ \\
+Preslikava $\sqrt{z}$ slika npr. četrtino kompleksne ravnine v osmino kompleksne ravnine. Podobno dela vsaka preslikava oblike $\displaystyle{\sqrt[n]{z}}$. \\
+Eksponentna preslikava $e^z$ slika pravokotnik v zgornji del kolobarja.
+\paragraph{Primer: Poišči biholomorfno preslikavo $\fn{f}{\{z \in \C;~z \neq 0,\,\text{Arg}z\in(0,\pi/2)\}}{D(0, 1)}$}.
+Rešitev: Najprej preslikamo v zgornjo polravnino, nato pa s funkcijo $g(z)$ v $D(0, 1)$.
+\end{document}

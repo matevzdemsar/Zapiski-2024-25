@@ -1,0 +1,94 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+\paragraph{Izrek.} (Izrek o maksimumih in minimumih) \\
+Bodi $\fn{f}{\mathcal{D}}{\C}$ holomorfna in nekonstantna. Potem $|f(z)|$ ne zavzame maksimuma na $D$. Minimum $f(z)$ lahko doseže le v ničlah $f$ na $D$.
+\paragraph{Dokaz.} Recimo, da imamo tak $z_0\in\mathcal{D}$, da je $|f(z_0)|$ maksimalna možna na $D$.
+Ker je $\mathcal{D}$ območje, je odprto, in tedaj je tudi $f(\mathcal{D})$ odprta. To pomeni, da obstaja tak $r>0$, da je $D(f(z_0), r) \subseteq f(\mathcal{D})$. Izmed točk znotraj $D(f(z_0), r)$ bo zagotovo kakšna
+točka $w$, za katero bo veljalo $|w|>|f(z_0)|$, recimo, da je $w=f(z_1)$.
+To pomeni, da je $|f(z_1)|>f(z_0)$ in prišli smo do protislovja. \\[4mm]
+Kar pa se tiče minimumov: Recimo, da $f(z)$ zavzame minimum v točki $z_0 \in \mathcal{D}$.
+Ker $f$ nima ničel, je $\displaystyle{g(z) = \frac{1}{f(z)}}$ holomorfna.
+Tedaj bi imela $g$ maksimum v $z_0$, ravnokar pa smo dokazali, da to ni mogoče.
+\paragraph{Posledica.} Bodi $\fn{f}{\mathcal{D}}{\C}$ holomorfna in nekonstantna in $K \subseteq \mathcal{D}$ kompaktna. Tedaj lahko $f(z)$ doseže maksimum le na $\partial K$,
+minimum pa na robu in v ničlah.
+\section{Biholomorfne preslikave.}
+\paragraph{Definicija.} Biholomorfne preslikave so preslikave, ki so hkrati bijektivne in holomorfne.
+V nadaljnjem bomo obravnavali bijektivne preslikave kroga. Bolj specifično nas zanimajo vse možne preslikave $\fn{f}{D(0, 1)}{D(0, 1)}$.
+\paragraph{Lema.} (Schwartzeva lema) Bodi $\fn{f}{D(0, 1)}{D(0, 1)}$ holomorfna in naj velja $f(0)=0$.
+Tedaj:
+\begin{itemize}
+    \item $|f(z)| \leq |z|$ za vsak $z\in D(0, 1)$
+    \item $|f'(0)| \leq 1$
+    \item Če obstaja $z_0 \in D(0, 1)$, da je $|f(z_0)|=|z_0|$ ali $f'(0)=1$, potem je $f(z) = \alpha z$, kjer je $\alpha$ konstanta in $|\alpha|=1$
+\end{itemize}
+\paragraph{Dokaz.} Najprej dokažimo prvo točko: $$f(z) = a_0 + a_1z + a_2z^2 + ... ~a_0 = 0$$
+$$g(z) = \frac{f(z)}{z} = a_1 + a_2z + ...$$
+V $z=0$ ima $g$ singularnost, toda vidimo, da je odpravljiva. Poleg tega lahko definiramo $g(0) = a_1$, torej je $g$ holomorfna.
+Uporabimo princip maksimuma:
+$$|g(z)| \leq \max|g(\zeta)|,~|\zeta|=r$$
+Pri tem bodi $r$ polmer zaprtega kroga $D(0, r) \subset D(0, 1)$.
+Tedaj je $$\frac{|f(z)|}{|z|} \leq \frac{|f(z_0)|}{r} \leq \frac{1}{r}$$
+Ker je $r \leq 1$, velja $|f(z)| \leq |z|$. \\
+Druga točka: $f'(0) = |a_1| = g(0)$, kar pa je po prvi točki $\leq 1$. \\
+Tretja točka: Recimo, da obstaja tak $z_0$, da je $|f(z_0)| = |z_0|$. Tedaj je $|g(z_0)|=1$, torej v $z_0$ funkcija $g$ zavzame maksimum. Ker se to ne sklada z izrekom o maksimumih, mora biti $g$.
+$$\forall z \in \mathcal{D}:~g(z) = \alpha\Rightarrow f(z) = \alpha z$$
+Če velja $|f'(0) = 1|$, to pomeni $|g(0)|=1$ in ima $g$ ponovno maksimum v $z$. \\[4mm]
+Oglejmo si naaslednje preslikave: \\
+Za neki $\alpha \in D(0, 1)$ definiramo 
+$$f_\alpha(z) = \frac{z-\alpha}{1-\overline{\alpha}z}$$
+Imamo pol $z=1/\overline{\alpha}$, $|z| = \frac{1}{|\alpha|} > 1$. Poleg tega je $f$ holomorfna na neki okolici $\overline{D}(0, 1)$
+\paragraph{Trditev.} $f_\alpha(\partial D(0, 1)) \subseteq \partial D(0, 1)$ in $f_\alpha(D(0, 1)) \subseteq D(0, 1)$
+\paragraph{Dokaz.} V resnici moramo dokazati $|z|=1 \Leftarrow |f(z)| = 1$
+$$\left|f_\alpha(z)\right| = \left|\frac{z-\alpha}{1-\overline{\alpha}z}\right| = \left|\frac{z-\alpha}{1-\alpha\overline{z}}\right| = \left|\frac{z-\alpha}{1-\alpha/z}\right| = \left|\frac{z(z-\alpha)}{z-\alpha}\right| = |z| = 1$$
+Zdaj dokažimo še $|z|<1\Leftarrow|f(z)|<1$. Recimo, da obstaja $z_0\in D(0, 1)$, da bo $|f_\alpha(z_0)| \geq 1$
+Potem $|f_\alpha(z)|$ zavzame maksimum v $D(0, 1)$. Po principu maksimuma bi morala biti $f_\alpha(z)$ konstantna, kar pa očitno ni res.
+\paragraph{Trditev.} $f_\alpha$ je bijektivna in velja $f_\alpha(\partial D(0, 1)) = \partial D(0, 1)$ ter $f_\alpha(D(0, 1)) = D(0, 1)$.
+\paragraph{Dokaz.} Dovolj je pokazati, da ima $\alpha$ obojestranski inverz. Ugibamo, da je ta inverz $f_{-\alpha}$.
+$$\left(f_{-\alpha} \circ f_\alpha\right)(z) = \frac{\frac{z-\alpha}{1-\overline{\alpha}z} + \alpha}{1 + \overline{\alpha}\frac{z-\alpha}{1-\overline{\alpha}z}} = \frac{z - \alpha\overline{\alpha}z}{1 - \alpha\overline{\alpha}} = z$$
+Z enakim postopkom pokažemo, da je $\displaystyle{\left(f_\alpha \circ f_{-\alpha}\right)(z) = z}$.
+$$\partial D(0, 1) = \mathrm{id}\left(\partial D(0, 1)\right) = f_\alpha\left(f_{-\alpha}\left(\partial D(0, 1)\right)\right)$$
+$$\subseteq f_\alpha\left(\partial D(0, 1)\right) \subseteq \partial D(0, 1)$$
+Sledi, da morajo biti povsod enačaji.
+Enak postopek naredimo za odprti krog $D(0, 1)$.
+\paragraph{Izrek.} Vsaka biholomorfna preslikava $\fn{f}{D(0, 1)}{D(0, 1)}$ je oblike
+$$f(z) = \beta f_\alpha(z);~\beta \in \partial D(0, 1)$$
+\paragraph{Ločimo dva primera:} $f(0) = 0$. Po Schwarzevi lemi mora veljati
+$$|f(z)|\leq|z|~\forall z\in D(0, 1)$$
+$$|f'(0)|\leq 1$$
+$f$ ima inverz, kar pomeni:
+$$\fn{f^{-1}}{D(0, 1)}{D(0, 1)}$$
+$$f^{-1}(0) = 0$$
+$$|z| = |f^{-1}\left(f(z)\right)| \leq |f(z)| \leq z$$
+Sledi, da morajo biti povsod enačaji: $|f(z)| = |z|$ za vsak $z$. Po Schwarzevi lemi je torej $f(z) = \beta z = \beta f_\alpha(z)$, pri čemer vzamemo $\alpha = 0$.
+Če je $f(0) = \gamma$, konstruiramo funkcijo $g := f_\gamma \circ f$.
+Ker sta $f$ in $f_\gamma$ biholomorfni, je tudi $g$ biholomorfna.
+$$g(0) = f_\gamma(f(0)) = f_\gamma (\gamma) = 0$$
+Imamo torej biholomorfno funkcijo, ki 0 slika v 0.
+$$g(z) = \beta z;~\beta = 1$$
+$$f(z) = f_{-\gamma}(\beta z) = \frac{\beta z + \gamma}{1 + \overline{\gamma}\beta z} = \beta \frac{z + \gamma/\beta}{1 + \overline{\gamma}{\beta}z} = \beta\frac{z + \gamma\overline{\beta}}{1 + \overline{\gamma\overline{\beta}}z} = \beta f_{-\gamma\overline{\beta}}(z)$$
+\section{Ulomljene linearne transformacije}
+\paragraph{Definicija.} Ulomljena linearna transformacija je preslikava $\fn{f}{\C}{\C}$, dana s predpisom
+$$f(z) = \frac{az+b}{cz+d},~a, b, c, d \in \C$$
+Opomba: Če je $c \neq 0$, ima f(z) pol pri $z=-d/c$.
+\end{document}

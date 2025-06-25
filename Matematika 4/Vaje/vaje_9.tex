@@ -1,0 +1,43 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Naloga:} V okolici $z=0$ poišči splošno rešitev enačbe
+$$z^2 y'' + z(z+1)y' - y = 0$$
+$$y'' + \frac{z+1}{z}y' - \frac{1}{z^2}y = 0$$
+$$p_0 = \lim_{z\to0} zp(z) = \lim_{z\to0} z\frac{z+1}{z} = 1$$
+$$q_0 = \lim_{z\to0} z^2q(z) = -1$$
+$$\mu(\mu-1) + \mu - 1 = 0$$
+$$\mu_1 = 1,~~\mu_1 = -1$$
+Ker je $\mu_1 - \mu_2 \in \N$, se stvari malo zakomplicirajo. Najprej izberemo $\mu = -1$
+$$y = z^{-1}\Sum{n} c_nz^n = \Sum{n}c_nz^{n-1}$$
+$$y' = \Sum{n}c_n(n-1)z^{n-2}$$
+$$y'' = \Sum{n} c_n(n-1)(n-2)z^{n-3}$$
+Vstavimo v originalno enačbo, poiščemo člene z isto potenco $z^m$:
+$$c_{m+1}m(m+1) + c_m(m-1) + c_{m+1} m - c_{m+1} = 0$$
+$$c_{m+1} = -\frac{m-1}{m^2-1}c_m = -\frac{c_m}{m+1}$$
+Če imamo $c_0 \in \C$, mora biti $c_1 = -c_0$, Za $c_2$ pa spet zadošča poljubno kompleksno število.
+$$y = c_0\left(\frac{1-z}{z}\right) + c_2\left(z - \frac{z^2}{3} + \frac{z^3}{3\cdot 4} - ...\right) = c_0 \left(\frac{1-z}{z}\right) + c_2 \left(\frac{2(e^{-z} - 1 + z)}{z}\right)$$
+Dobili smo linearno kombinacijo dveh funkcij. Preveriti moramo le še, da sta ti dve funkciji linearno neodvisni.
+\end{document}

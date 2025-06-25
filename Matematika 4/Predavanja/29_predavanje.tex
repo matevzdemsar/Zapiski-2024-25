@@ -1,0 +1,82 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\,\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Sferne funkcije.} Za enotsko sfero \(S\) gledamo funkcije \(\fn{f}{S}{\R}\),
+ki naj bojo dvakrat zvezno odvedljive. Med njimi iščemo rešitev parcialne diferencialne enačbe \[\nabla^2u = -\lambda u\]
+Uvedemo sferične koordinate za \(r=1\). Tedaj lahko \(f\) gledamo kot \(\fn{f(\varphi, \vartheta)}{[0, 2\pi] \times [0, \pi]}{\R}\)
+Dodamo zahtevi za \(f\), in sicer mora biti
+\[f(0, \vartheta ) = f(2\pi, \vartheta)\]
+\[f(\varphi, 0) = \mathrm{konst.}\]
+\[f(\varphi, \pi) = \mathrm{konst.}\]
+Uvedemo skalarni produkt:
+\[\avg{f, g} = \iint_S f(\varphi, \vartheta) g(\varphi, \vartheta) \dif S = \int_{0}^{2\pi} \int_{0}^{\pi} f(\varphi, \vartheta)g(\varphi, \vartheta)\sin\vartheta\dif\vartheta\dif\varphi\]
+Iz skalarnega produkta sledi norma \(||f|| = \sqrt{\avg{f, f}}\). Označimo z \(L^2(S)\) napolnitev prostora zveznih funkcij \(\fn{f}{S}{\R}\) glede na to normo.
+(V praksi gre za tiste funkcije, za katere integral kvadrata funkcije obstaja.)
+Na tem prostoru je \(-\nabla^2\) linearna preslikava.
+\paragraph{Izrek.} Preslikava \(-\nabla^2\) je glede na dani skalarni produkt sebi adjungirana.
+Sledi, da ima realne lastne vrednosti, katerim pripadajoče funkcije so med seboj pravokotne.
+\paragraph{Dokaz.} V sferičnih koordinatah ima Laplaceov operator obliko \[\nabla^2u = \frac{1}{\sin\vartheta}\dd{}{\vartheta}\left(u_\vartheta\sin\vartheta\right) + \frac{1}{\sin^2\vartheta}\dd{^2u}{\varphi^2}\]
+Preveriti želimo \(\avg{\nabla^2u, v} = \avg{u, \nabla^2v}\)
+\[\avg{\nabla^2u, v} = \int_{0}^{2\pi}\dif\varphi\int_{0}^{\pi}\left(\frac{1}{\sin\vartheta}\dd{}{\vartheta}(u_\vartheta \sin\vartheta) + \frac{1}{\sin^2\vartheta}\dd{^2u}{\varphi^2}v(\vartheta, \varphi)\sin\vartheta\dif\vartheta\right)\]
+\[= \int_{0}^{2\pi} \dif\varphi \int_{0}^{\pi}\dd{}{\vartheta}(u_\vartheta\sin\vartheta)v(\varphi, \vartheta)\dif\vartheta + \int_{0}^{\pi} \dif\vartheta \int_{0}^{2\pi} \frac{1}{\sin\vartheta}v \dd{^2u}{\varphi^2}\dif\varphi\]
+Oba integrala rešujemo z metodo per partes:
+\[I_1 = \int_{0}^{2\pi} \left(vu_\vartheta\sin\vartheta\Big|_0^\pi - \int_{0}^{\pi} u_\vartheta v_\vartheta \sin\vartheta \dif\vartheta\right)\dif\varphi = \int_{0}^{2\pi} \left(0 - \int_{0}^{\pi} u_\vartheta v_\vartheta \sin\vartheta \dif\vartheta\right)\dif\varphi\]
+\[I_2 =  \int_{0}^{\pi}\left(\frac{1}{\sin\vartheta}vu_\varphi\Big|_0^{2\pi} - \int_{0}^{2\pi}\frac{1}{\sin\vartheta}v_\varphi u_\varphi \dif\varphi\right)\dif\vartheta
+= \int_{0}^{\pi}\left(0 - \int_{0}^{2\pi}\frac{1}{\sin\vartheta}v_\varphi u_\varphi \dif\varphi\right)\dif\vartheta\]
+Vsota teh je \[\avg{\nabla^2u, v} = \int_{0}^{2\pi}\dif\varphi\int_{0}^{\pi}\left(-u_\vartheta v_\vartheta\sin\vartheta - \frac{1}{\sin\vartheta}v_\varphi u_\varphi\right)\]
+Opazimo, da je dobljeni integral simetričen glede na \(u\) in \(v\) - brez težav bi ju lahko zamenjali in dobili isti rezultat. Sledi:
+\[\avg{\nabla^2u, v} = \avg{\nabla^2v, u} = \avg{u, \nabla^2 v}\] \\
+\(\backslash\mathrm{end}\{\mathrm{proof}\}\) \\
+Vrh tega lahko pokažemo, da je \(-\nabla^2\) pozitivno semi-definitna linearna preslikava, kar pomeni, da so vse lastne vrednosti večje ali enake 0. \\[3mm]
+Iščemo ortogonalno bazo \(L^2(S)\), sestavljeno iz lastnih funkcij operatorja \(-\nabla^2\):
+\[\nabla^2u = -\lambda u\]
+Vzamemo nastavek \(u(\varphi, \vartheta) = \phi(\varphi)\theta(\vartheta)\)
+\[\frac{1}{\sin\vartheta}\phi(\theta'\sin\vartheta)' + \frac{1}{\sin^2\vartheta}\theta\phi'' = -\lambda\phi\theta\]
+\[\frac{1}{\sin\vartheta}\frac{\vartheta'\sin\vartheta}{\theta} + \frac{1}{\sin^2\vartheta}\frac{\phi''}{\phi} = -\lambda\]
+\[\sin\vartheta\frac{(\theta'\vartheta)'}{\vartheta} + \lambda\sin^2\vartheta = -\frac{\phi''}{\phi} = m^2\]
+Tu bodi \(m\) neko naravno število, ki naj ne bo 0 (saj ne iščemo trivialne rešitve). \\[3mm]
+Nekaj podobnega smo že reševali. Za \(\phi\) dobimo \[\phi(\varphi) = A\cos m\varphi + B\sin m\varphi\]
+Za \(\theta\) del imamo diferencialno enačbo \[\sin\varphi \frac{(\theta'\sin\vartheta)'}{\theta} + \lambda\sin^2\vartheta = m^2\]
+Uporabimo substitucijo \(\cos\vartheta = s\)
+\[(1-s^2)\dd{\theta}{s} -2s\dd{\theta}{s} + \left(\lambda - \frac{m^2}{1-s^2}\right)\theta = 0\]
+Če je \(\lambda = n(n+1),~n\in\N\), so rešitve te enačbe pridruženi Legendrovi polinomi \(P^m_n(\cos\vartheta)\). Tedaj je
+\[u = (A\cos m\varphi + B\sin m\varphi)P^m_n(\cos\vartheta)\]
+Definiramo sferične harmonike:
+\[Y_n^0(\varphi, \vartheta) = P_n(\cos\vartheta)\]
+\begin{align*}
+    Y_n^{(-1)} (\varphi, \vartheta) & = P_n^1(\cos\vartheta)\sin\varphi & Y_n^1(\varphi, \vartheta) & = P_n^1(\cos\vartheta)\cos\varphi \\
+    Y_n^{(-2)} (\varphi, \vartheta) & = P_n^2(\cos\vartheta)\sin2\varphi & Y_n^2(\varphi, \vartheta) & = P_n^2(\cos\vartheta)\cos2\varphi \\
+    \vdots & \vdots & \vdots & \vdots \\
+    Y_n^{(-m)} (\varphi, \vartheta) & = P_n^2(\cos\vartheta)\sin m\varphi & Y_n^m(\varphi, \vartheta) & = P_n^2(\cos\vartheta)\cos m\varphi
+\end{align*}
+\paragraph{Izrek.} \(Y_n^{(\pm k)},~k=0, 1, ...\) tvorijo ortogonalno bazo prostora \(L^2(S)\). Velja tudi \[||Y_{n}^{0}||^2 = \frac{4\pi}{2n+1}\]
+\[||Y_n^{(\pm m)}||^2 = \frac{2\pi}{2n+1}\frac{(n+m)!}{(n-m)!}\]
+Posledica tega je, da lahko vsako funkcijo \(\fn{f}{S}{\R},~f\in L^2(S)\), zapišemo kot linearno kombinacijo sferičnih funkcij:
+\[f(\varphi, \vartheta) = \Sum{n}\sum_{m=0}^{n}\left(A_{nm}Y_n^{(-m)}(\varphi, \vartheta) + B_{nm}Y_n^{(m)}(\varphi, \vartheta)\right)\]
+Za \(m \neq 0\) najdemo koeficiente \(A_{nm}\) in \(B_{nm}\) s skalarnim produktom:
+\[A_{nm} = \frac{\avg{f, Y_n^{(-m)}}}{||Y_n^{(-m)}||^2}\]
+\[B_{nm} = \frac{\avg{f, Y_n^{(m)}}}{||Y_n^{(m)}||^2}\]
+Pri \(m=0\) imamo \(c_n = A_{n0} + B_{n0} = \avg{f, Y_{n}^{(0)}} / ||Y_{n}^{(0)}||^2\)
+\end{document}

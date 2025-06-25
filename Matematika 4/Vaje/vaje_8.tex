@@ -1,0 +1,52 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Int}{\int_{-\infty}^{\infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Fourierjeva transformacija.} Če je $\fn{f}{\R}{\C}$, je njena Fourierjeva transformiranka definirana kot $$\widehat{f}(\xi) = \frac{1}{\sqrt{2\pi}}\Int f(x)e^{-ix\xi}\dif x$$
+Ima sledeče lastnosti:
+$$\widehat{f(x)e^{itx}}(\xi) = \widehat{f}(\xi - t)$$
+$$\widehat{f(ax)} = \frac{1}{a}\widehat{f}\left(\frac{\xi}{a}\right)$$
+$$\widehat{f(x-t)}(\xi) = \widehat{f}(\xi) e^{-it\xi}$$
+Inverzna Fourierjeva transformacija:
+$$f(x) = \frac{1}{\sqrt{2\pi}}\Int \widehat{f}(\xi) e^{-ix\xi}\dif\xi$$
+Velja $\widehat{\widehat{f}}(x) = f(-x)$
+\paragraph{Tabela znanih transofrmacij.} \text{}
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c}
+        \hline
+        $f(x)$ & $\widehat{f}(\xi)$ \\[2mm]
+        \hline
+        $e^{-|x|}$ & $\sqrt{\frac{1}{\pi}} \frac{1}{1+\xi^2}$ \\[2mm]
+        $e^{-a^2x^2/2}$ & $\frac{1}{a}e^{-\xi^2/2a^2}$ $(a>0)$ \\[2mm]
+        $\chi_{[a, a]}(x)$ & $\sqrt{\frac{2}{\pi}}\frac{\sin(a\xi)}{\xi}$ \\[2mm]
+        $\frac{1}{1+x^2}$ & $\sqrt{\frac{\pi}{2}}e^{-|\xi|}$ \\[2mm]
+        $e^{-ax^2}$ & $\frac{1}{\sqrt{2a}} e^{-\xi^2/4a}$
+    \end{tabular}
+\end{table}
+Ravno tako pa prav pride sledeče dejstvo:
+$$\widehat{f'(x)} = i\xi\widehat{f}(\xi)$$
+$$\widehat{f''(x)} = -\xi^2\widehat{f}(\xi)$$
+\end{document}

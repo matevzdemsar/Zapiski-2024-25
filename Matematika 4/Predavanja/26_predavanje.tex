@@ -1,0 +1,98 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\section{Robni pogoji}
+\subsection{Nihanje končne strune}
+Imamo parcialno diferencialno enačbe $$U_{tt} = c^2 U_{xx}$$
+Struna naj bo vpeta, torej sta naša robna pogoja $U(0, t) = 0$ in $U(a, t) = 0$.
+Ob času $t=0$ imamo začetna pogoja $u(x, 0) = f(x)$ in $u_t(x, 0) = g(x)$
+(začetna oblika strune in začetna hitrost). Iščemo dvakrat zvezno odvedljivo rešitev.
+\paragraph{Fourierova metoda separacije spremenljivk.} Iščemo funkcijo, ki vsaj okvirno reši problem in je lepe oblike.
+Vzamemo nastavek $$U(x, t) = X(x) \cdot T(t)$$
+Vstavimo v originalno enačbo, nato delimo z $XT$:
+$$XT'' = c^2X''T$$
+$$\frac{1}{c^2}\frac{T''}{T} = \frac{X''}{X}$$
+Ker je leva stran neodvisna od $x$, desna pa od $t$, morata biti obe strani konstantni (označimo $-\lambda$). Dobimo torej diferencialni enačbi
+$$X'' + \lambda X = 0$$
+$$T'' + c^2 \lambda T = 0$$
+Naš primer bo lahko zadoščal robnima pogojema $X(0)T(t) = 0$ in $X(a)T(t) = 0$.
+$T(t)=0$ nam da trivialno rešitev, posebej moramo obravnavati robna pogoja $X(0) = 0$ in $X(a) = 0$. \\
+Najprej rešujmo enačbo za $X$. Ker imamo opravka z linearno diferencialno enačbo 2. reda, bodo rešitve eksponentne funkcije. Imamo več možnosti glede na izbiro $\lambda$:
+\begin{enumerate}
+    \item $\lambda = 0$: $X_1 = e^{0x} = 1$, $X_2 = xe^{0x} = x$. Dobimo linearno funkcijo, ki mora biti zaradi začetnih pogojev enaka $X = 0$
+    \item $\lambda < 0$: $X = C_1 e^{\sqrt{-\lambda} x} + C_2 e^{\sqrt{-\lambda} x}$, kar je pri upoštevanju robnih pogojev mogoče le, če je $C_1 = C_2 = 0$ ali $a=0$
+    \item $\lambda > 0$: $\mu_1 = i\sqrt{\lambda}$, $\mu_2 = i\sqrt{\lambda}$, dobimo vsoto sinusne in kosinusne funkcije. Robna pogoja nam data
+    $C_1 = 0$ in $\sqrt{\lambda} = k\pi,~k\in\N$. Dobimo neskončno družino rešitev $X_k = \sin (\sqrt{\lambda_k}x)$, $\displaystyle{\lambda_k = \left(\frac{k\pi}{a}\right)^2}$.
+\end{enumerate}
+Zdaj, ko poznamo $\lambda$, rešimo še enačbo za $T$.
+$$T'' + \left(\frac{ck\pi}{a}\right)^2T = 0$$
+$$T(t) = A_k \cos\left(\frac{ck\pi}{a}t\right) + B_k \sin\left(\frac{ck\pi}{a}t\right)$$
+$$U_k(x, t) = X_k(x)T_k(t)$$
+Tako pridobljena $U_k(x, t)$ zadošča enačbi in robnima pogojema, ne pa nujno tudi začetnima pogojema. Da dobimo enačbo, ki ustreza začetnima pogojema, poskusimo z vsoto več $U_k$.
+$$\Sum{k} U_k(x, t)$$
+tudi (vsaj formalno) zadošča valovni enačbi in robnima pogojema. Predvidevamo, da bomo lahkokoeficiente $A_k$ in $B_k$ nastavili tako, da bo vsota zadoščala začetnima pogojema.
+$$U(x, t) = \Sum{k} \sin\left(\frac{k\pi}{a}x\right)\left(A_k\cos\left(\frac{ck\pi}{a}t\right) + B_k\sin\left(\frac{ck\pi}{a}t\right)\right)$$
+Začetna pogoja:
+\begin{itemize}
+    \item $U(x, 0) = f(x)$
+    \item $U_t(x, 0) = g(x)$
+\end{itemize}
+Tedaj je $$f(x) = \Sum{k}A_k\sin\left(\frac{k\pi}{a}x\right)$$
+Prepoznamo sinusno vrsto, ki smo jo obravnavali pri Matematiki III. Iz drugega pogoja pa dobimo
+$$g(x) = \Sum{k} B_k \frac{ck\pi}{a}\sin\left(\frac{k\pi}{a}x\right)$$
+Spet imamo sinusno vrsto. Funkciji $f, g$ sta definirani na intervalu $[0, a]$. Razširimo ju do lihih funkcij na intervalu $[-a, a]$. To moremo storiti, saj morata biti v $x=0$ enaki $0$ in lahko definiramo $f(-x) = -f(x)$ in $g(-x) = -g(x)$.
+Zdaj lahko ti funkciji razvijemo v sinusno vrsto in pri tem dobimo koeficiente $A_k$ ter $\displaystyle{B_x\frac{k\pi c}{a}}$.
+$$A_k = \frac{2}{a}\int_{0}^{a} f(x)\sin\left(\frac{k\pi}{a}x\right)\,\dif x$$
+$$B_k = \frac{2}{k\pi c}\int_{0}^{a}g(x)\in\left(\frac{k\pi}{a}x\right)$$
+Zadošča integrirati od $0$ do $a$, saj sta produkta $f(x)\sin(\lambda x)$ in $g(x)\sin(\lambda x)$ sodi funkciji.
+\paragraph{Opomba.} Ker potrebujemo dvakrat zvezno odvedljivo rešitev, imamo določene zahteve za $f$ in $g$.
+V splošnem bo dobljena $u$ dovoljkrat zvezno odvedljiva, če bosta tudi $f$ in $g$ dovolj gladki
+(v našem primeru moramo zahtevati, da sta štirikrat zvezno odvedljivi). Fourierova vrsta po točkah konvergira, dokler sta $f$ in $g$ vsaj odsekoma zvezni
+(s fizikalnega stačišča to običajno ni težava, saj je nihanje nezvezne strune precej težko doseči).
+\subsection{Nihanje neskončne strune.} Tu ni robnih pogojev, imamo le začetna pogoja:
+$$U(x, 0) = f(x)$$
+$$U_t(x, 0) = g(x)$$
+\paragraph{D'Lambertova metoda.} Vpeljemo novi spremenljivki $\xi = x - ct$ in $\eta = x + ct$.
+$$U_t = U_\xi \xi_t + U_\eta \eta_t = -cU_\xi + c U_\eta$$
+$$U_{tt} = \left(U_t\right)_\xi \xi_t + \left(U_t\right)_\eta = c^2 U_{\xi\xi} - 2c^2 U_{\xi\eta} + c^2U_{\eta\eta}$$
+Pri tem smo upoštevali, da je $U$ zvezno parcialno odvedljiva in lahko enačimo $U_{\eta\xi} = U_{\xi\eta}$.
+$$U_x = U_\xi \xi_x + U_\eta \eta_x = U_\xi + U_\eta$$
+$$U_{xx} = ... = U_{\xi\xi} + 2U_{\xi\eta} + U_{\eta\eta}$$
+Iz podatka $T_{tt} = c^2U_xx$ dobimo
+$$-2c^2U_{\xi\eta} = 2c^2U_{\xi\eta}$$
+$$I_{\xi\eta} = 0$$
+Sledi: $$U = F(\xi) + G(\eta)$$
+$$U(x, t) = F(x - ct) + G(x + ct)$$
+Določiti moramo $F$ in $G$. To storimo na podlagi začetnih pogojev, dobimo
+$$F(x) + G(x) = f(x)$$
+$$-c F'(x) + c G'(x) = g(x)$$
+Dobili smo dve enačbi za neznani funkciji $F$ in $G$. Lahko na primer prvo enačbo odvajamo (zahtevali bomo, da je tu vse odvedljivo):
+$$F'(x) + G'(x) = f'(x)$$
+$$-cF'(x) + cG'(x) = g(x)$$
+\\
+$$2cG'(x) = cf'(x) + g(x)$$
+$$G'(x) = \frac{1}{2}\left(f'(x) + \frac{g(x)}{c}\right)$$
+To bomo naslednjič integrirali in iz $G$ izrazili $F$.
+\end{document}

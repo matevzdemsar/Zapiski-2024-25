@@ -1,0 +1,96 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\,\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Uteženi prostori.} Definiramo skalarni produkt kot
+$$\avg{u, v}_w = \int u(x)v(x)w(x)\dif x$$
+Tedaj $w$ imenujemmo utež. Biti mora pozitivna. Ker smo spremenili definicijo skalarnega produkta, moramo hkrati ponovno definirati tudi normo (označimo $||\cdot||_w$) in prostor $L^2(\R)$ (označimo $L_w^2(\R)$).
+\paragraph{Izrek.} (Sturm Liouviellov izrek) Dan je operator $$Ly = (Py')' + Ry,~~y\in C(a, b)$$
+kjer bodi $P$ zvezno odvedljiva, $R$ pa zvezna. Bodi $w$  utež, ki bodi zvezna in pozitivna na $(a, b)$.
+Rešujemo uteženi lastni problem $$Ly = -\lambda w y$$
+Kjer $y$ zadošča ločenima robnima pogojema
+$$\alpha_1 y(a) + \alpha_2 y'(a) = 0$$
+$$\beta_1 y(b) + \beta_2 y'(b) = 0$$
+\begin{enumerate}
+    \item (Posplošene) lastne vrednosti so realne
+    \item (Posplošeni) lastni funkciji, ki pripadata različnima (posplošenima) lastnima vrednostima, sta uteženo ortogonalna.
+    \item Lastni podprostor, ki pripada neki (posplošeni) lastni vrednosti, je enorazsežen.
+    \item Obstaja zaporedje posplošenih lastnih funkcij $(y_n)_{n \in \N}$ za lastne vrednosti $(\lambda_n)_{n\in\N}$, ki tvorijo ortonormirano bazo $L_w^2(a, b)$
+    Torej za vsak $y \in L^2_w(a, b)$ velja $$y = \Sum[1]{n}\avg{y, y_n}_w y_n$$ (Imamo konvergenco po točkah)
+    Pri tem velja še $\lim_{n\to\infty}\lambda_n = \infty$
+\end{enumerate}
+\paragraph{Dokaz.} $L$ je formalno sebi adjungiran:
+$$\avg{Lu, v} = \avg{u, Lv}$$
+\begin{enumerate}
+    \item Bodi $\lambda$ lastna vrednost in $u$ pripadajoča lastna funkcija:
+    $$Lu = -\lambda wu$$
+    $$\avg{Lu, u} = -\lambda \avg{wu, u} = -\lambda \int_{a}^{b}wu\overline{u}\dif x = -\lambda ||u||^2_w$$
+    Hkrati je $\avg{Lu, u} = \avg{u, Lu} = -\overline{\lambda} \avg{u, wu} = ... = -\overline{\lambda} ||u||^2_w$. Sledi $\lambda||u||_w^2 = \overline{\lambda}||u||_w^2$. Ker $u\neq0$, mora biti $\lambda \in \R$.
+    \item Naj bosta $u$ in $v$ lastni funkciji z različnima lastnima vrednostima. $$\avg{Lu, v} = -\lambda_1\avg{wu, v} = -\lambda_1\avg{u,v}_w$$
+    Hkrati je $\avg{Lu, v} = \avg{u, Lv} = ... = -\lambda_2\avg{u, v}_w$. Ker sta si $\lambda_1$ in $\lambda_2$ po predpostavki različni, mora biti $\avg{u, v}_w = 0$.
+    \item Naj bosta $u$ in $v$ dve lastni funkciji za isto lastno vrednost $\lambda$. Dokazujemo, da sta linearno odvisni.
+    Upoštevamo robna pogoja:
+    $$\alpha_1u(a) + \alpha_1u'(a) = 0$$
+    $$\beta_1 u(b) + \beta_2 u'(b) = 0$$
+    \\
+    $$\alpha_1v(a) + \alpha_1v'(a) = 0$$
+    $$\beta_1 v(b) + \beta_2 v'(b) = 0$$
+    Lahko si zamislimo, da gre za skalarni produkt dveh vektorjev:
+    $$\begin{bmatrix}
+        \alpha_1 \\ \alpha_2
+    \end{bmatrix}\begin{bmatrix}
+        u(a) \\ u'(a)
+    \end{bmatrix} = 0$$
+    $$\begin{bmatrix}
+        \beta_1 \\ \beta_2
+    \end{bmatrix}\begin{bmatrix}
+        u(b) \\ u'(b)
+    \end{bmatrix}$$$$\begin{bmatrix}
+        \alpha_1 \\ \alpha_2
+    \end{bmatrix}\begin{bmatrix}
+        v(a) \\ v'(a)
+    \end{bmatrix} = 0$$
+    $$\begin{bmatrix}
+        \beta_1 \\ \beta_2
+    \end{bmatrix}\begin{bmatrix}
+        v(b) \\ v'(b)
+    \end{bmatrix}$$
+    $(\alpha_1, \alpha_2)$ je neničeln vektor, ki je hkrati
+    pravokoten na $(u(a), u'(a))$ in $(v(a), v'(a))$. To je v $\R^2$ mogoče le, če sta vektorja linearno odvisna.
+    Sledi, da obstajata taka $C_1, C_2$, da je $$\begin{bmatrix}
+        C_1\begin{bmatrix}
+            u(a) \\ u'(a)
+        \end{bmatrix}
+        + C_2 \begin{bmatrix}
+            v(a) \\ v'(a)
+        \end{bmatrix} = 0
+    \end{bmatrix}$$
+    Če je $y = C_1 u + C_2 v$ in dokažemo $y = 0$, vemo, da sta $u, v$ linearno odvisni.
+    $$Ly = -\lambda w y$$
+    $$y(a) = C_1u(a) + C_2 v(a) = 0$$
+    $$y'(a) = 0$$
+    Imamo Cauchyjevo nalogo za $y'$. Vemo, da ima taka naloga natanko eno rešitev, in vidimo, da je $y=0$ rešitev. Torej sta $u, v$ linearno odvisni.
+    \item Ne bomo dokazovali.
+\end{enumerate}
+\end{document}

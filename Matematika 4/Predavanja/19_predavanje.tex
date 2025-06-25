@@ -1,0 +1,84 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\Int}{\int_{-\infty}^{\infty}}
+\begin{document}
+Od prejšnjič nam je ostala trditev $\displaystyle{\widehat{f * g} = \sqrt{2\pi}\hat{f}\cdot\hat{g}}$
+\paragraph{Dokaz.} Predpostavimo najprej $f, g \in C_c(\R)$
+$$\widehat{f * g}(\xi) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}(f * g)(x) e^{-ix\xi}\dif x$$
+$$= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \dif x \int_{-\infty}^{\infty}f(x-t)g(t)e^{-ix\xi}\dif t$$
+Uporabimo fubinijev izrek:
+$$= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}\dif t\int_{-\infty}^{\infty}f(x-t)e^{-ix\xi}g(t)\dif x$$
+Vzamemo novo spremenljivko $y = x-t$
+$$= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}\dif t\int_{-\infty}^{\infty}f(y)e^{-iy\xi}g(t)e^{-it\xi}\dif y$$
+$$= \frac{1}{\sqrt{2\pi}}\left(\sqrt{2\pi} \hat{f}\right)\int_{-\infty}^{\infty}g(t)e^{-it\xi}\dif t = \sqrt{2\pi}\hat{f}\cdot\hat{g}$$
+Splošni primer (skiza dokaza): čim sta $f, g$ v $L^1(\R)$ morata obstajati zaporedji funkcij $f_n$ in $g_n \in C_c(\R)$, ki proti njima konvergirata.
+Pokazati bi bilo treba le, da tedaj tudi $\widehat{f * g}$ konvergira.
+\paragraph{Definicija.} Radi bi if $\hat{f}$ dobili $f$. Tega se ne da storiti za vse funkcije. Schwarzev razred funkcij je množica funkcij, za katere velja:
+\begin{enumerate}
+    \item $f$ je $\infty$-krat zvezno odvedljiva.
+    \item Funkcije $f^{(n)}(x) \, x^{m}$ so omejene funkcije za vse $m, n \geq 0$.
+\end{enumerate}
+Primer take funkcije je $f(x) = e^{-x^2}$. Hkrati to velja za vse neskončnokrat zvezno odvedljive funkcije s kompaktnim nosilcem (označimo $C_c^{\infty}(\R)$).
+Njihmnožico označimo z $\mathcal{S}(\R)$.
+\paragraph{Trditev.} $\mathcal{S}(\R) \subset L^1(\R)$
+\paragraph{Dokaz.} Bodi $f\in\mathcal{\R}$. Zanima nas $\displaystyle{\int_{-\infty}^{\infty}}|f(x)|\dif x < \infty$ \\[3mm]
+Ker je $f\in\mathcal{S}(\R)$, je $f(x)\left(1 + x^2\right)$ omejena. Recimo torej, da je $$|f(x)\left(1 + x^2\right)| \leq M$$
+$$|f(x)| \leq \frac{M}{1 + x^2}$$
+$$\int_{-\infty}^{\infty}|f(x)|\dif x \leq \int_{-\infty}^{\infty}\frac{M}{1 + x^2}\dif x = M\arctan x\Big|_{-\infty}^{\infty} = M\pi < \infty$$
+\paragraph{Trditev.} Naj bosta $f, g \in \mathcal{S}(\R)$. Potem so tudi naslednje funkcije v $\mathcal{S}(\R)$:
+\begin{enumerate}
+    \item $f_t: x \mapsto f(x-t)$
+    \item $f_{[a]}: x \mapsto f(ax)$
+    \item $f^{(n)}$
+    \item $x \mapsto f(x)p(x)$, kjer je $p$ polinom
+    \item $f * g$
+\end{enumerate}
+\paragraph{Dokaz.} Točke 1-4 so očitne, dokaz za 5. točko:
+$$(f * g)(x) = \int_{-\infty}^{\infty}f(x-t)g(t)\dif t$$
+$$\dd{}{x}(f * g)(x) = \int_{-\infty}^{\infty} f'(x-t)g(t)\dif t = (f' * g)(x)$$
+$$\dd{^n}{x^n}(f * g)^{(n)}(x) = (f^{(n)}*g)(x)$$
+\paragraph{Inverzna Fourierova transformacija.} Bodi $g_0(x) = e^{-x^2/2}$
+\begin{enumerate}
+    \item $\widehat{g_0} = g_0$
+    \item $\widehat{g_{0[a]} = \frac{1}{a}e^{-\frac{x^2}{2a^2}}}$
+\end{enumerate}
+\paragraph{Dokaz.} Točka 2) sledi iz točke 1), kajti $\widehat{g_{0[a]}}(x) = \frac{1}{a}\widehat{g_0}(\frac{\xi}{a})$ \\[2mm]
+Dokaz točke 1): $$\widehat{g_0}(\xi) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{x^2/2} e^{-ix\xi}\dif x = \frac{1}{\sqrt{2\pi}}\Int e^{-(x+i\xi)^2/2}e^{-\xi^2/2}\dif x$$
+$$= \frac{e^{-\xi^2/2}}{\sqrt{2\pi}} \Lim{A} \int_{-A+i\xi}^{A+i\xi} e^{-z^2/2}\dif z$$
+Vemo, da je $\displaystyle{\int_{-\infty}^{\infty} e^{t^2/2} \dif t = \sqrt{2\pi}}$. V kompleksnih številih to zahteva malo več truda, ampak na koncu dobimo $\widehat{g_0}(\xi) = e^{-\xi^2/2}$
+\paragraph{Trditev.} Naj za neko funkcijo $g \in L^1(\R)$ velja $\displaystyle{\Int g(x)\dif x = 1}$. Za vsako zvezno $\fn{f}{\R}{\C}$ velja:
+$$\lim_{\delta \to 0} f * \left(\frac{1}{\delta}g(\frac{x}{\delta})\right) = f$$
+Ta konvergenca je enakomerna na nekem končnem zaprtem intervalu. Če je hkrati $f \in L^1(\R)$, potem je
+$$\lim_{\delta \to 0} ||f - f * \left(\frac{1}{\delta}g(\frac{x}{\delta})\right)||_1 = 0$$
+Mimogrede: označimo $\displaystyle{g_{(\delta)} = \frac{1}{\delta}g\left(\frac{x}{\delta}\right)}$
+\paragraph{Dokaz.} $$\left|(f * g_{(\delta)})(x) - f(x)\right| = \left|\Int f(x-t)g_{(\delta)}(t)\dif t - f(x)\Int g_{(\delta)}(t)\dif t\right|$$
+$$\leq \Int |f(x-t) - f(x)| \cdot \frac{1}{\delta} |g\left(\frac{t}{\delta}\right)|\dif t$$
+Če je $t$ majhen (manjši od nekega majhnega $\delta$), je $|f(x-t) - f(x)| < \varepsilon$ za vsak $x$ na izbranem intervalu. Če je $t$ velik, gre $\displaystyle{g\left(\frac{t}{\delta}\right)}$
+proti nič, saj je $g \in L^1$, $|f(x-t) - f(x)|$ pa je, zaradi omejenosti $f$, manjši od neke konstante $M$. Oba integrala ($t < \delta$ in $t \geq \delta$) gresta torej proti 0.
+\paragraph{Izrek.} (Weierstrassov aproksimacijski izrek). Naj bo $\fn{f}{\R}{\C}$ zvezna na nekem končnem zaprtem intervalu $[a, b]$. Potem za vsak $\varepsilon > 0$ obstaja tak polinom $p$,
+da velja $|f(x) - p(x)| < \varepsilon$ za poljuben $x \in [a, b]$.
+\paragraph{Dokaz.} (Ideja dokaza) Uporabimo prejšnjo trditev za $\displaystyle{g(x) = \frac{1}{\sqrt{2\pi}}}e^{-x^2/2}$
+\paragraph{Izrek.} (Inverzna Fourierova transformacija.) Za $f \in \mathcal{S}(\R)$ velja $$f(x) = \frac{1}{\sqrt{2\pi}}\Int \hat{f}(\xi)e^{ix\xi}\dif \xi$$
+\paragraph{Opomba.} $f(x) = \widehat{\widehat{f}}(-x) = \widehat{\widehat{\widehat{\widehat{f}}}}(x)$. Lahko si zamislimo linearno preslikavo $\fn{\mathcal{F}}{\mathcal{S}}{\mathcal{S}}$, ki slika $f$ v $\widehat{f}$ in zanjo velja
+$\mathcal{F}^4 = \text{Id}$. Je bijektivna, njen inverz je $\mathcal{F}^3$. Na $L^1(\R)$ pa trditev velja le skoraj povsod.
+\end{document}

@@ -1,0 +1,88 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\paragraph{Trditev.} Imejmo funkcijo $u$, ki bodi zvezna na $\partial D(0, 1)$ in harmonična na $D(0, 1)$. Tedaj je (za $r < 1$)
+$$u(re^{i\varphi}) = \frac{1}{2\pi}\int_{0}^{2\pi} P_r\left(\vartheta - \varphi\right)u(e^{i\vartheta})\dif\vartheta$$
+\paragraph{Dokaz.} Najprej predpostavimo, da je $u$ harmonična na neki okolici $\overline{D}(0, 1)$, tedaj je realni del neke holomorfne funkcije.
+Uporabimo Cauchyjev izrek:
+$$f(z) = \frac{1}{2\pi i} \int_{\partial D(0, 1)} \frac{f(\zeta)}{\zeta - z}\dif\zeta = \frac{1}{2\pi i}\int_{\partial D(0, 1)} \frac{f(\zeta)}{\zeta\left(1 - \frac{z}{\zeta}\right)}$$
+V splošnem velja $\displaystyle{\frac{1}{\zeta} = \overline{\zeta}}$. Torej:
+$$f(z) = \int_{\partial D(0, 1)} \frac{f(\zeta)}{1 - \overline{\zeta}z}\frac{\dif \zeta}{\zeta}$$
+Čeprav v integrirani funkciji nastopa $\overline{\zeta}$, je še vedno holomorfna, saj nima pola. Do pola bi namreč prišlo pri $\zeta = 1/\overline{z}$ ali $\zeta = z$, kar pa se ne more zgoditi, saj je $\zeta$
+vedno zunaj $D(0, 1)$, $z$ pa vedno znotraj. Poleg tega hitro pokažemo: $\displaystyle{\frac{1}{1-\overline{z}\zeta} - 1}\frac{1}{\zeta} = \frac{\overline{z}}{1 - \overline{z}\zeta}$
+$$f(z) = \frac{1}{2\pi i}\int_{\partial D(0, 1)} f(\zeta)\left(\frac{1}{1-z\overline{\zeta}} + \frac{1}{1 - \overline{z}\zeta} - 1\right)\frac{\dif\zeta}{\zeta}$$
+$$=\frac{1}{2\pi i}\int_{\partial D(0, 1)}f(\zeta) \frac{1 - \overline{z}\zeta + 1 - z\overline{\zeta} - 1 + \overline{z}\zeta + z\overline{\zeta} - z\overline{z}\zeta\overline{\zeta}}{|1-\overline{z}\zeta|^2}\frac{\dif\zeta}{\zeta}$$
+$\zeta$ leži na robu enotske krožnice, torej je $|\zeta| = 1$.
+$$= \frac{1}{2\pi i}\int_{\partial D(0, 1)} f(\zeta) \frac{1 - |z|^2}{|1 - z\overline{\zeta}|^2}\frac{\dif\zeta}{\zeta}$$
+$$= \frac{1}{2\pi i}\int_{0}^{2\pi} f(e^{i\vartheta})\frac{1 - r^2}{|1 - re^{i\varphi}e^{-i\vartheta}|}\frac{ie^{i\vartheta}}{e^{i\vartheta}}\dif\vartheta$$
+$$= \frac{1}{2\pi} \int_{0}^{2\pi} f(e^{i\vartheta})\frac{1 - r^2}{|1 - re^{i(\varphi - \vartheta)}|^2}\dif\vartheta$$
+V ulomku prepoznamo $P_r(\varphi - \vartheta) = P_r(\vartheta - \varphi)$. \\[2mm]
+Zdaj na realnem delu te funkcije (pri nekem specifičnem kotu $\varphi$ - uznačimo $u_\varphi$) uporabimo Poissonovo formulo:
+$$u_\varphi(re^{i\varphi}) = \frac{1}{2\pi}\int_{0}^{2\pi} P(\vartheta - \varphi) u_\varphi(e^{i\vartheta})\dif\vartheta$$
+Označimo, za $\rho < 1$:
+$$u(r\rho e^{i\varphi}) = \frac{1}{2\pi} \int_{0}^{2\pi} P_r(\vartheta - \varphi) u(\rho e^{e^{i\vartheta}}) \dif\vartheta$$
+Pošljemo $\rho$ proti 1. Ker je $u$ zvezna, integral pa enakomerno zvezen, dobimo
+$$u(re^{i\varphi}) = \frac{1}{2\pi} \int_{0}^{2\pi} P_r(\vartheta - \varphi) u(e^{i\vartheta}) \dif\vartheta$$
+\paragraph{Posledica.} $$\frac{1}{2\pi} \int_{0}^{2\pi} P_r(\vartheta)\dif\vartheta = 1$$
+Dokažemo s Poissonovo formulo za $u = 1, \varphi = 1$
+\paragraph{Izrek.} Naj bo $g$ zvezna funkcija na $\partial D(0, 1)$. Potem obstaja funkcija $u$, ki je zvezna na $\partial D(0, 1)$, harmonična v $D(0, 1)$ in $u\Big|_{\partial} = g$. Takšna $u$ je enolično določena.
+\paragraph{Dokaz.} Najprej pokažimo, da je takšna funkcija kvečjemu ena sama. Naj bosta $u_1$ in $u_2$ dve takšni funkciji.
+Tedaj bodi $u = u_1 - u_2$
+$$\Delta u = \Delta u_1 - \Delta u_2 \equiv 0$$
+Torej je tudi $u$ harmonična na $D(0, 1)$
+$$u\Big|_{\partial D(0, 1)} = u_1\Big|_{\partial D(0, 1)} - u_2\Big|_{\partial D(0, 1)} = g - g = 0$$
+Uporabimo izrek o minimumih in maksimumih: če $u$ zavzame na $\partial D(0, 1)$ tako minimum kot maksimum, je $0 \leq u \leq 0$ oziroma $u=0$. \\
+Zdaj s Poissonovo formulo definirajmo $u$: \\[2mm]
+$$u(re^{i\varphi}) = \begin{cases}
+    g & r = 1 \\
+    \frac{1}{2\pi} \int_{0}^{2\pi} P_r(\vartheta - \varphi) g(e^{i\vartheta})\dif\vartheta & r < 1
+\end{cases}$$
+Pokažimo še, da ima takšna $u$ želene lastnosti, torej da je harmonična na $D(0, 1)$. \\
+Vemo: $\displaystyle{P_r (\vartheta) = \mathfrak{Re}\left(\frac{1+z}{1-z}\right) = \mathfrak{Re}\left(\frac{1+\overline{z}}{1 - \overline{z}}\right)}$
+$$u(re^{i\varphi}) = \frac{1}{2\pi} \int_{0}^{2\pi} \mathfrak{Re}\left(\frac{1 + re^{i(\varphi - \vartheta)}}{1 - re^{i(\varphi - \vartheta)}}\right)g(e^{i\vartheta})\dif\vartheta$$
+$$= \frac{1}{2\pi} \int_{0}^{2\pi} \mathfrak{Re}\left(\frac{e^{i\vartheta}}{e^{i\vartheta}}\frac{1 + re^{i(\varphi - \vartheta)}}{1 - re^{i(\varphi - \vartheta)}}\right)g(e^{i\vartheta})\dif\vartheta$$
+$$= \frac{1}{2\pi} \int_{0}^{2\pi} \mathfrak{Re}\left(\frac{e^{i\vartheta} + re^{i\varphi}}{e^{i\vartheta} - re^{i\varphi}}\right)g(e^{i\vartheta})\dif\vartheta$$
+$$u(z) = \mathfrak{Re}\left(\frac{1}{2\pi} \int_{0}^{2\pi} \frac{e^{i\vartheta} + z}{e^{i\vartheta} - z}g(e^{i\vartheta}) \dif\vartheta\right)$$
+Ker je integrand zvezen in parcialno zvezno odvedljiv po $z$, je funkcija $\displaystyle{\frac{1}{2\pi} \int_{0}^{2\pi}} \frac{e^{i\vartheta} + z}{e^{i\vartheta} - z} g(e^{i\vartheta} \dif\vartheta)$ odvedljiva, torej je holomorfna,
+torej je $u$ harmonična. Nazadnje je treba preveriti, da je $u$ zvezna ko se približujemo robu, torej da je
+$$\lim_{r \to 1} u(re^{i\varphi}) = g(e^{i\varphi})$$
+Izkoristimo dejstvo, da je $\displaystyle{\frac{1}{2\pi}\int_{0}^{2\pi}P_r(\vartheta - \varphi) \dif\vartheta = 1}$
+$$|u(re^{i\varphi}) - g(e^{i\varphi})| = \left|\frac{1}{2\pi}\int_{0}^{2\pi} P_r(\varphi - \vartheta) g(e^{i\vartheta}) \dif\vartheta - g(e^{i\varphi})\right|$$
+$$= \left|\frac{1}{2\pi}\int_{0}^{2\pi} P_r(\varphi - \vartheta) g(e^{i\vartheta}) \dif\vartheta - g(e^{i\varphi}) \frac{1}{2\pi} \int_{0}^{2\pi}P_r(\varphi - \vartheta)\dif\vartheta\right|$$
+$$= \frac{1}{2\pi}\left|\int_{0}^{2\pi}P_r(\varphi - \vartheta) \left(g(e^{i\vartheta}) - g(e^{i\varphi})\right)\dif\vartheta\right|$$
+Ker je $g$ zvezna, lahko poskrbimo, da je $\displaystyle{\left|g(e^{i\vartheta}) - g(e^{i\varphi})\right| < \frac{\varepsilon}{2}}$, dokler je $|\vartheta - \varphi| < \delta$.
+Poleg tega je $P_r$ omejena, torej ga lahko navzgor ocenimo z $M$. To pomeni, da je
+$$|u(re^{i\varphi}) - g(e^{i\vartheta})| \leq \frac{1}{2\pi}\left(M\int_{|\varphi - \vartheta| < \delta} |g(e^{i\vartheta}) - g(e^{i\varphi})|\dif\vartheta + \int_{|\varphi - \vartheta| \geq \delta} P_r(\vartheta - \varphi)|g(e^{i\vartheta}) - g(e^{i\varphi})|\dif\vartheta\right)$$
+Prvi integral je navzgor omejen z $\varepsilon/2$. Drugi integral je integral produkta omejene količine s funkcijo $P_r$, ki gre v limiti $r\to 1$ proti $0$. \\[2mm]
+Splošno:
+$$\left|u(re^{i\varphi}) - g(e^{i\psi})\right| = \left|u(re^{i\varphi}) - g(e^{i\psi}) + g(e^{i\varphi}) - g(e^{i\varphi})\right| \leq \left|u(re^{i\varphi}) - g(e^{i\varphi})\right| + \left|g(e^{i\varphi}) - g(e^{i\psi})\right|$$
+Za prvi člen smo ravno dokazali, da gre proti $0$, drugi pa gre proti $0$ zaradi zveznosti $g$.
+\paragraph{Harmonične funkcije v $\R^3$} Poseben primer: $\fn{u}{\R^3-\{0\}}{\R}$ radialno simetrična okoli $0$, harmonična. Označimo $\vct{r} = (x, y, z)$. Tedaj je $r = \sqrt{x^2 + y^2 + z^2}$.
+Če je $u$ radialno simetrična okoli $0$, je $$u(x) = -\frac{1}{4\pi} \frac{1}{||x - x_0||}$$
+fundamentalna rešitev enačbe $\Delta u = 0$.
+\paragraph{ Greenove identitete.} Bodi $D$ območje v $\R^3$, naj bo omejeno in ima gladek rob $\partial D$, ki je torej ploskev. Ploskev parametriziramo: $\vct{r} = \vct{r}(t, s)$. Zahtevamo $\vct{r}_t \times \vct{r}_s \neq 0$.
+Tedaj je normala ploskve enaka $$\vct{n} = \pm \frac{\vct{r}_t\times\vct{r}_s}{||\vct{r}_t\times\vct{r}_s||}$$
+\paragraph{Definicija.} Bodi $u$ odvedljiva v okolici $\overline{D}$ in $\vct{r} \in \partial D$ normalni odvod v točki $\vct{r}$ definiramo kot
+$$\left(\partial_{\vct{n}}u\right)(\vct{r}) = (\nabla u)(\vct{r}) \cdot \vct{n}$$
+\end{document}

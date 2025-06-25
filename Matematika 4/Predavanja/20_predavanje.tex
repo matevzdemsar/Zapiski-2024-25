@@ -1,0 +1,58 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Int}{\int_{-\infty}^{\infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\paragraph{Dokaz.} Najprej kot prej zapišemo $\displaystyle{g_{[\delta]}(x) = \frac{1}{\sqrt{2\pi}}e^{-\delta^2x^2/2}}$
+in $\displaystyle{g_{(\delta)}(x) = \frac{1}{\sqrt{2\pi}\delta}e^{-\frac{x^2}{2\delta^2}}}$. Trdimo, da je
+$$(f * g_{(\delta)})(x) = \Int \widehat{f} (\xi) e^{ix\xi} g_{(\delta)}(\xi)\dif\xi$$
+Izračunajmo desno stran enačbe - upoštevamo definicijo $\widehat{f}$:
+$$\Int \widehat{f} (\xi) e^{ix\xi} g_{(\delta)}(\xi)\dif\xi = \Int \dif\xi \frac{1}{\sqrt{2\pi}}\Int f(t)e^{-it\xi}\dif t g_{[\delta]}(\xi)$$
+Upoštevali smo tudi, da je $\widehat{g_{[delta]}} = g_{(\delta)}$Uporabimo Fubinijev izrek, da zamenjamo vrstni red integriranja.
+$$= \frac{1}{\sqrt{2\pi}}\Int\dif t\Int f(t)e^{-(t-x)i\xi}g_{[\delta]}(\xi)\dif\xi$$
+V drugem integralu prepoznamo $\widehat{g_{[\delta]}(t-x)}$
+$$= \Int g_{(\delta)}(t-x)f(t)\dif t = g_{(\delta)}*f = f*g_{(\delta)}$$
+\paragraph{Plancerelov izrek.} Ideja izreka je, da obravnavamo $\fn{\mathcal{F}}{\mathcal{S}}{\mathcal{S}}$ kot linearno preslikavo. Na $C_c(\R)$ lahko
+poleg tega vpeljemo skalarni produkt
+$$\avg{f, g} = \Int f(x)\overline{g(x)}\dif x$$
+$$||f||_2 = \sqrt{\avg{f, f}}$$
+Uvedemo množico $L^2$, ki je napolnitev metričnega prostora $C_c(\R)$ glede na $||\cdot||_2$.
+Gre v bistvu za vse funkcije, za katere je $\displaystyle{\Int |f(x)|^2\dif x < \infty}$. \\
+Očitno je $\mathcal{S} \subseteq L^2(\R)$ oziroma $C_c^\infty(\R) \subseteq \mathcal{S} \subseteq L^2(\R)$.
+\paragraph{Trditev.} Če sta $f, g \in \mathcal{S}(\R)$, potem je $\avg{f, g} = \avg{\widehat{f}, \widehat{g}}$
+\paragraph{Dokaz.} Izračunamo.
+$$\avg{f, g} = \Int f(x)\overline{g(x)}\dif x = \Int \dif x \overline{g(x)} \frac{1}{\sqrt{2\pi}} \Int \widehat{f}(\xi)e^{ix\xi}\dif\xi$$
+To smemo, ker sta $f, g \in \mathcal{S}$. Poleg tega nam to omogoča tudi uporabo Fubinijevega izreka.
+$$=\Int \widehat{f}(\xi)\dif\xi \frac{1}{\sqrt{2\pi}} \Int \overline{g(x)e^{-ix\xi}}\dif x$$
+$$= \Int \widehat{f}(\xi)\overline{\widehat{g}(\xi)}\dif\xi = \avg{\widehat{f}, \widehat{g}}$$
+\paragraph{Izrek.} Fourierovo transformacijo $\fn{\mathcal{F}}{\mathcal{S}(\R)}{\mathcal{S}(\R)}$ lahko na enoličen način razširimo do unitarne preslikave
+$\fn{\tilde{\mathcal{F}}}{L^2(\R)}{L^2(\R)}$
+\paragraph{Dokaz.} Takšno preslikavo $\tilde{\mathcal{F}}$ lahko definiramo kot limito preslikav $\mathcal{F}$ za zaporedje funkcij $f_n \in \mathcal{S}$. Preverimo, ali je 
+konvergenca proti tej limiti enakomerna:
+$$||\hat{f}_n - \hat{f}_m||^2 = \avg{\hat{f}_n - \hat{f_m}, \hat{f}_n - \hat{f_m}} = \avg{f_n - f_m, f_n - f_m} = ||f_m - f_n||$$
+To pa gre proti 0, ko gresta $m$, $n$ proti neskončno. $\hat{f}_n$ je torej Cauchyjevo zaporedje, torej ima limito. Preverimo še, da je taka preslikava unitarna.
+$$\avg{\hat{f}, \hat{g}} = \avg{\lim \hat{f}_n, \lim \hat{g}_n} = \lim \avg{\hat{f}_n, \hat{g}_n} = \lim\avg{f_n, g_n} = \avg{\lim f_n, \lim g_n} = \avg{f, g}$$
+\paragraph{Izrek.} (Riemann-Lebesguova lema) Za vsako $f \in L^1(\R)$ velja $$\lim_{|\xi| \to \infty}\hat{f}(\xi) = 0$$
+\paragraph{Ideja dokaza.} Najprej obravnavamo poseben primer: $$\left|\hat{f}(\xi)\right| = \left|\frac{e^{-ib\xi} - e^{-ia\xi}}{-\sqrt{2\pi i \xi}}\right| \leq \frac{1}{\sqrt{2\pi}|\xi|} \left(\left|e^{-ib\xi} - e^{-ia\xi}\right|\right) \leq \frac{1}{\sqrt{2\pi}|\xi|}$$
+Za splošen primer pa lahko $f$ aproksimiramo s takšnimi funkcijami. Če nam namreč uspe zapisati $\displaystyle{g = \sum_i c_i \chi_{[ai, bi]}}$, je stvar dokazana. Preostanek dokaza pa bi bil, da se to vedno da storiti.
+\end{document}
