@@ -1,0 +1,50 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\paragraph{Sipanje na centralnem potencialu.} Definiramo vpadni parameter $b$: Razdalja med premico, po kateri bi potoval delec, če ne bi bilo potenciala, in vzporedno premico, na kateri leži izvor potenciala.
+Recimo, da ima delec na začetku hitrost $\vct{v}$.
+$$p_\varphi = mbv$$
+$$\vct{L} = m\vct{v}\times\vct{r}$$
+Na drugi strani potenciala postavimo tarčo, skozi katero gre delec po prehodu mimo izvora potenciala. Pri tem se giblje pod kotom $\vartheta$ glede na začetno smer gibanja.
+O številskem pretoku skozi tarčo lahko povemo naslednje:
+$$j = \dd{I}{S} = \dd{(\dif N/\dif T)}{S}$$
+$$\dif I_{vhod} = j \dif S = 2\pi b\,\dif b$$
+$$\dif I_{izhod} = j \sigma(\vartheta) \dif\Omega$$
+Ta dva tokova morata biti enaka, torej:
+$$2 b \dif b = \sigma(\vartheta)\dif\Omega$$
+Tu je $\Omega$ prostorski kot, definiran kot $$\sin\vartheta\,\dif\vartheta$$
+Sipalni presek je torej enak $$\sigma(\vartheta) = \frac{2}{\sin\vartheta}\dd{b}{\vartheta}$$
+Označimo tudi sipalni presek, pri katerem pride do trka:
+$$\sigma_{trk} = \pi b^2$$
+\paragraph{Sipanje pozitivnega naboja.} Potencial je enak
+$$V(r) = \frac{k}{r}$$
+Orbite v takem potencialu imajo obliko $\displaystyle{\frac{1}{r} = \frac{1}{p}\left(1 - \varepsilon\cos(\varphi - \varphi_0)\right)}$,
+kjer smo definirali $$p = \frac{p_\varphi^2}{m\tilde{k}}$$
+$$\varepsilon = \sqrt{1 + \frac{2Ep_\varphi^2}{m\tilde{k}^2}}$$
+V limiti $r \to \infty$ je $\cos\varphi_0 = \frac{1}{\varepsilon}$. Ko gre $\varphi \to \varphi_{min}$, ger $\displaystyle{r \to \frac{p}{1 - \varepsilon}}$.
+$$r(\varphi) = \frac{p}{1 - \varepsilon\cos(\varphi - \varphi_0)}$$
+$$\dd{r(\varphi)}{\varphi} = -p\frac{\varepsilon\sin(\varphi - \varphi_0)}{(1 - \varepsilon\cos(\varphi - \varphi_0))^2} \equiv 0$$
+Sledi $\cos(\varphi - \varphi_0) = 1$ oziroma $\varphi_{min} = \varphi_0$. Sicer pa je
+$$\varphi = \varphi_0 \pm \arccos\frac{1}{\varepsilon} = \varphi_0\pm\varphi_0 = 2\varphi$$
+\end{document}

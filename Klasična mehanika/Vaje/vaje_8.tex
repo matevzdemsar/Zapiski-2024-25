@@ -1,0 +1,76 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+\paragraph{Gibanje dveh teles pri centralni sili.} Med telesoma deluje potencial $U(\vct{r}, \dot{\vct{r}})$, kjer je $\vct{r} = \vct{r}_2 - \vct{r}_1$.
+Izračunamo $\vct{r}_T = \frac{1}{m_1 + m_2}(m_1\vct{r}_1 + m_2\vct{r}_2)$, definiramo $M = m_1 + m_2$ in $\displaystyle{m = \frac{m_1m_2}{M}}$
+S tem smo iz $L = L(\vct{r}_1, \vct{r}_2, \dot{\vct{r}}_1, \dot{\vct{r}}_2)$ dobili $L = L(\vct{r}, \vct{r}_T, \dot{\vct{r}}, \dot{\vct{r}}_T)$.
+Če je sila centralna, je potencial neodvisen tudi od hitrosti: $V = V(r)$. Lahko si mislimo, da telesi eno na drugega delujeta s skupnim navorom
+$\vct{M} = \vct{F} \times \vct{r} = 0$. Tedaj j e tudi vrtilna količina $\vct{L} = - \vct{p} \times \vct{r}$ konstantna. Tedaj je
+$$L = \frac{m}{2}\left(\dot{r}^2 + r^2\dot{\vartheta}^2 + r^2\sin^2\vartheta\dot\varphi^2\right) - V(r)$$
+$$\dd{}{t}\left(\pd{L}{\dot{\varphi}}\right) - \pd{L}{\varphi} = 0$$
+$$\dd{}{t}\left(mr^2\sin^2\vartheta\,\dot{\varphi}\right) = 0$$
+$$mr^2\sin^2\vartheta\,\dot{\varphi} = \text{konst.} = |\vct{L}| =: p_\varphi$$
+\\
+$$\dd{}{t} \left(\pd{L}{\dot\vartheta}\right) - \pd{L}{\vartheta} = 0$$
+$$\dd{}{t}\left(mr^2\dot\vartheta\right) - \frac{m}{2}\left(r^22\sin\vartheta\cos\vartheta\,\dot{\varphi}^2\right)$$
+$$\dd{}{t} = \dot{\varphi} \dd{}{\varphi} = \frac{p_\varphi}{mr^2\sin^2\vartheta}\dd{}{\varphi}$$
+$$\frac{1}{r^2\sin^\vartheta} \dd{}{\varphi} (\frac{1}{\sin^2\vartheta}\pd{\vartheta}{\varphi}) - \cos\vartheta\left(\frac{1}{r\sin^2\vartheta}\right) = 0$$
+Uporabimo še relacijo $\displaystyle{\dd{}{\varphi}\cot\vartheta = -\frac{1}{\sin^2\vartheta}\dd{\vartheta}{\varphi}}$
+$$\frac{1}{r^2\sin^2\vartheta}\left[\dd{^2}{\varphi^2}(\cot\vartheta) + \cot\vartheta\right] = 0$$
+Rešitev takšne diferencialne enačbe je $\cot\vartheta = A\cos(\varphi - \varphi_0)$.
+Pokažemo lahko, da se telesi gibljeta po neki ravnini (če ni očitno). Uvedemo $H = T + V$ (celotna energija sistema).
+V polarnih koordinatah je ta enaka $\displaystyle{H = \frac{m}{2}\dot{r}^2 + \frac{p_\varphi^2}{2mr^2}} + V(r)$
+\paragraph{Delec v potencialu $V \propto r^{-1}$} Imejmo $\displaystyle{-\frac{k}{r}},~k>0$. Zanima nas zveza $r(\varphi)$, ki ji pravimo tudi orbita.
+$$H = \frac{m}{2}\dot{r}^2 + \frac{p_\varphi}{2mr^2} - \frac{k}{r}$$
+Kot prej uporabimo zvezo $\displaystyle{\dd{}{t} = \dot{\varphi}\dd{}{\varphi}}$, poleg tega pa je $\displaystyle{\dot{\varphi} = \frac{p_\varphi}{mr^2}}$. Nato uvedemo novo spremenljivko:
+$\displaystyle{\dot{r} = -\frac{1}{v^2}\dot{v} = -\frac{1}{v^2}\frac{p_\varphi}{mr^2}\dd{v}{\varphi} = -\frac{p_\varphi}{m}\dd{v}{\varphi}}$ \\
+Tedaj je $$H = \frac{m}{2}\frac{p_\varphi^2}{m^2}v'^2 + \frac{p_\varphi^2v^2}{2m}-kv$$
+$$\dd{H}{\varphi} = \frac{p_\varphi^2}{m}v'v'' + \frac{p_\varphi^2}{m}vv' - kv' \equiv 0$$
+$$v'\left(\frac{p_\varphi^2}{m}v'' + \frac{p_\varphi^2}{m}v - k\right)=0$$
+Imamo dve možnosti: Če je $v' = 0$, je rešitev oblike $v = v_0 = \frac{1}{r}$, torej je $r = \frac{1}{u_0} = \text{konst.}$ in imamo gibanje po krožnici.
+Sicer imamo nehomogeno diferencialno enačbo:
+$$v'' + v = \frac{mk}{p_\varphi^2}$$
+Rešimo jo z nastavkom $v = e^{\lambda\varphi}$ in dobimo $u(\varphi) = Ae^{i\varphi} + Be^{-i\varphi}$, kar je po adicijskem izreku enako
+$$u(\varphi) = C\cos(\varphi - \varphi_0)$$
+Za partikularni del lahko hitro uganemo $\displaystyle{v = \frac{mk}{p_\varphi^2}}$. Tedaj je torej
+$$u(\varphi) = C\cos(\varphi - \varphi_0) + \frac{mk}{p_\varphi^2}$$
+Uporabimo še začetni pogoj: $u'(\varphi_0) = 0$ - pri kotu 0 ni radialnega gibanja.
+To pomeni, da je $u(\varphi_0)=C + \frac{mk}{p_\varphi^2}$
+Z večjo količino računanja, ki se mi ga ni dalo prepisati (gre pa za vstavljanje $u(\varphi_0)$ v $H$), dobimo $C = \pm\frac{mk}{p_\varphi^2}\sqrt{\frac{2Hp_\varphi^2}{mk^2} + 1}$
+Izbira znaka $+$ ali $-$ je dokaj irrelevantna, saj konstanto $C$ postavimo pred $\cos(\varphi - \varphi_0)$, $\cos$ pa je soda funkcija, torej je $-\cos x = \cos x$.
+Dobimo:
+$$r(\varphi) = \frac{1}{u(\varphi)} = \frac{1}{\frac{km}{p_\varphi^2}\left(-\sqrt{\frac{2Hp_\varphi^2}{mk} + 1}\cos(\varphi - \varphi_0) + 1\right)}$$
+Uvedemo konstanti $\displaystyle{p = \frac{p_\varphi^2}{mk}}$ in $\displaystyle{\varepsilon = \sqrt{\frac{2Hp_\varphi^2}{mk}} + 1}$. Ostane nam enačba
+$$r(\varphi) = \frac{p}{1 - \varepsilon\cos(\varphi - \varphi_0)}$$
+To je enačba stožnice (krožnice, elipse, parabole ali hiperbole).
+\paragraph{Klasifikacija orbit.} Iz enačbe potenciala $V$ lahko že vnaprej uganemo obliko orbite.
+Najprej si oglejmo efektivni potencial za $\displaystyle{V \propto \frac{1}{r}}$:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.3]{efektivni_potencial.png}
+    \caption{Slika je simbolična.}
+\end{figure}
+\newline
+Vidimo, da imamo nek radij $r_0$, kjer je energija minimalna: Tam pride do krožnice. Če je $r<r_0$, vendar je $H < 0$, imamo elipso. Če je $H=0$ imamo parabolo, sicer imamo hiperbolo.
+\end{document}

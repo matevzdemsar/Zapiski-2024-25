@@ -1,0 +1,101 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+Zadnjič smo prišli do zaključka, da togo telo opišemo s 6N koordinatami: koordinatami točke in orientacijo telesa glede na to točko. Obravnavamo torej
+gibanje telesa z eno nepremično točko. Glede na to očko vrtenje telesa opišemo kot
+$$\vct{L} = \sum_i m_i(\vct{r}_i\times\vct{v}_i)  =\sum_{i} \left(\vct{r}_i \times (\vct{w} \times \vct{r}_i)\right)$$
+$$= \sum_{i}m_i\left[(\vct{r}_i\cdot\vct{r}_i)\vct{w} - (\vct{r}_i\cdot\vct{w})\vct{r}_i\right]$$
+$$= \sum_im_i\left[(x_i^2 + y_i^2 + z_i^2)(w_x\hat{e}_x + w_y\hat{e}_y + w_z\hat{e_z}) - (x_iw_x + y_iw_y + z_iw_z)(x\hat{e}_x + y\hat{e}_y + z\hat{e}_z)\right]$$
+$$\vct{L} = \sum_im_i\begin{bmatrix}
+    y^2 + z^2 & -xy & -xz \\
+    -yx & x^2 + z^2 & -yz \\
+    -zx & -zy & x^2 + y^2
+\end{bmatrix}\begin{bmatrix}
+    w_x \\ x_y \\ w_z
+\end{bmatrix}$$
+Vsoto aproksimiramo z integralom:
+$$\vct{L} \approx \int \rho(\vct{r}) \begin{bmatrix}
+    y^2 + z^2 & -xy & -xz \\
+    -yx & x^2 + z^2 & -yz \\
+    -zx & -zy & x^2 + y^2
+\end{bmatrix} \dif^3 r = \underline{\underline{J}}\dot{\vct{w}}$$
+Zdaj uporabimo ortogonalno transformacijo:
+$$\vct{L'} = R\vct{L} = R\underline{\underline{J}}\dot{\vct{w}} = R\underline{\underline{J}}R^{-1} R\dot{\vct{w}} = J'\dot{\vct{w'}}$$
+Poiščimo lastni sistem, v katerem je $\underline{\underline{J}}$ diagonalna matrika. Tedaj je
+$$\vct{L} = \begin{bmatrix}
+    J_{xx}w_x \\ J_{yy}w_y \\ J_{zz}w_z
+\end{bmatrix} \equiv \begin{bmatrix}
+    J_xw_x \\ J_yw_y \\ J_zw_z
+\end{bmatrix}$$
+Tapišimo še kinetično energijo:
+$$T = \frac{1}{2}\sum_im_iv_i^2 = \frac{1}{2}\sum_im_i\vct{v}_i\cdot\vct{v_i}$$
+Spomnimo se, da je $\vct{v} = (\vct{w}_i\times\vct{r}_i)$. Od tod pa lahko uporabimo pravila za mešani produkt:
+$$T = \frac{1}{2}\sum_im_i(\vct{w}\times\vct{r}_i)\cdot\vct{v}_i = \frac{1}{2}\vct{w}\sum_im_i\cdot(\vct{v}_i\times\vct{r}_i) = \frac{1}{2}\vct{w}\underline{\underline{J}}\vct{w}$$
+\paragraph{Frizbi.} Izberemo koordinate $\vct{e}_1, \vct{e}_2, \vct{e}_3$, ki tvorijo lastni sistem frizbija. Ti vektorji imajo nekakšno časovno odvisnost.
+Če naj bo $b$ točka na frizbiju, njen položaj opišemo kot
+$$\vct{b}(t) = \sum_{\alpha} b_\alpha\vct{e}_\alpha$$
+$$\dd{\vct{b}}{t} = \left(\dd{\vct{b}}{t}\right)_{nein} + \vct{w}\times\vct{b}$$
+$$\pd{\vct{L}}{t} = \vct{M} = \left(\dd{\vct{L}}{t}\right)_{nein} + \vct{w}\times\vct{L}$$
+Tu je $\displaystyle{\vct{L} = \sum_{\alpha} J_{\alpha\alpha}w_\alpha\vct{e}_\alpha}$
+$$\left(\dd{\vct{L}}{t}\right)_{nein} = \sum_\alpha J_{\alpha\alpha} \dot{w}_\alpha\vct{e}_\alpha$$
+$$\vct{w}\times\vct{L} = \left((J_{33} - J_{22})w_2w_3,~(J_{11} - J_{33})w_3w_1, (J_{22} - J_{11})w_1w_2\right)$$
+Posamezne komponente nam dajo tri Eulerjeve enačbe:
+$$J_{11}\dot{w}_1 - (J_2 -  J_3)(w_2w_3) = M_1$$
+$$J_{22}\dot{w}_2 - (J_3 -  J_1)(w_2w_3) = M_2$$
+$$J_{33}\dot{w}_3 - (J_1 -  J_2)(w_2w_3) = M_3$$
+Te enačbe so analitično rešljive le v posebnih primerih. Najpreprostejši je $J_1 = J_2 = J_3$ in $\vct{M} = 0$ (krogla, ki se vrti brrez vpliva zunanjih navorov) - tedaj je $\vct{w} = \text{konst.}$ \\[3mm]
+Nekoliko bolj zanimiv primer je primer osne simetrije : $J_1 = J_2 \neq J_3$ in $\vct{M} = 0$.
+Iz tretje enačbe takoj dobimo $w_3 = \text{konst.} = w_0$ Prvi dve enačbi predelamo takole:
+$$J_1\dot{w}_1 = (J_1 - J_3)w_2w_0$$
+$$J_1\dot{w}_2 = (J_3 - J_1)w_1w_0$$
+Ker je $w_0$ konstanta, sta enečbi linearni in ju zmoremo rešiti Vpeljemo konstanto $\displaystyle{\Omega = \frac{J_3 - J_1}{J_1}w_0}$
+$$\dot{w}_1 = -\Omega w_2$$
+$$\dot{w}_2 = -\Omega w_1$$
+Najenostavneje ta sistem rešimo tako, da prvo enačbo odvajamo po času in vstavimo $\dot{w}_2$ iz druge enačbe.
+$$\ddot{w}_1 = -\Omega^2w_1$$
+$$w_1 = A\cos(\Omega t + \delta)$$
+$$w_2 = A\sin(\Omega t + \delta)$$
+(Mimogrede: $w_1^2 + w_2^2 = A^2 = \text{konst.}$) \\
+Sledi, da se os frizbija vrti okoli vektorja $\vct{w}$, ki je zaradi odsotnosti navora konstanten.
+Takšno vrtenje je videti kot tresenje (wobbling). Lastno je slabo vrženemu frizbiju (tudi dobro vrženemu frizbiju, ampak v tem primeru sta $\omega$ in $\vct{e}_3$ vzporedna in se nič ne vidi), vrtavki, planetom itd.
+\paragraph{Stabilnost vrtavke.} Zdaj si mislimo, da je $\vct{M}$ še vedno 0, vztrajnostni momenti pa so si med seboj paroma različni. Opazimo, da je
+$$w_1=w_2=0,~w_3=w_0$$
+Rešitev Eulerjevih enačb, vendar takšna rešitev velja le, če telo zavrtimo v ravno pravi smeri. Zdaj si zamislimo, da je os telesa za nek $\vct{\eta}$ izmaknjena iz osi vrtenja.
+$$\vct{w} = \begin{bmatrix}
+    \eta_1 \\ \eta_2 \\ w_0 + \eta_3
+\end{bmatrix}$$
+Eulerjeve enačbe tedaj postanejo
+$$J_1\dot{\eta}_1 - (J_2 - J_3) \eta_2(w_0 + \eta_3) = 0$$
+$$J_2\dot{\eta}_2 - (J_3 - J_1) \eta_1(w_0 + \eta_3) = 0$$
+$$J_1\dot{\eta}_1 - (J_1 - J_2) \eta_1\eta_2 = 0$$
+Ker to ni rešljivo, recimo, da je $\vct{\eta}$ dovolj majhen, da lahko zanemarimo vse člene reda velikosti $\eta^2$. Takoj iz tretje enačbe dobimo $\dot{\eta}_3 = 0$
+Iz ostalih dveh enačb dobimo:
+$$J_1\dot{\eta}_1 = \left(J_2 - J_3\right)w_0\eta_2$$
+$$J_2\dot{\eta}_2 = \left(J_3 - J_1\right)w_0\eta_1$$
+To spet združimo v eno samo enačbo 2. reda, in sicer:
+$$J_1\ddot{\eta}_1 = \frac{(J_3-J_2)(J_3-J_1)}{J_1J_2}\eta$$
+Zdaj imamo dve možnosti, in sicer zaradi predznaka izraza $(J_3-J_2)(J_2-J_1) =: w_c^2$. Če je ta pozitiven,
+je rešitev sinusna funkcija in dobimo isto kot prej. Če je negativen, je rešitev $\eta(t) = Ae^{\pm iw_ct}$
+oziroma nekakšna hiperbolična funkcija. Tako dobimo pojav Dzhanenbekova (video na spletni učilnici).
+\end{document}

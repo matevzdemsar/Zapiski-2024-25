@@ -1,0 +1,53 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\,\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Naloga.} Torzijsko sklopljeni težni nihali. Zanimajo nas lastna nihanja pri majhnih odkimih okoli ravnovesne lege.
+$$V = -mgl(\cos\varphi_1 + \cos\varphi_2) + \frac{1}{2}D(\varphi_2 - \varphi_1)^2$$
+$$T = \frac{1}{2}m(l\dot\varphi_1)^2 + \frac{1}{2}m(l\dot\varphi_2)^2 = \frac{1}{2}ml^2(\varphi_1^2 + \varphi_2^2)$$
+Iščemo ravnovesni legi:
+$$\pd{V}{\varphi_1} = -mgl(-\sin\varphi_{10}) + \frac{1}{2}D(-2\varphi_{20} + 2\varphi_{10}) = 0$$
+$$\pd{V}{\varphi_2} = -mgl(-\sin\varphi_{20}) + \frac{1}{2}D(2\varphi_{20} - 2\varphi_{10}) = 0$$
+Enačbi seštejemo, nato odštejemo:
+$$+: ~~\sin\varphi_{10} + \sin\varphi_{20} = 0$$
+$$-: ~~ mgl(\sin\varphi_{10} - \sin\varphi_{20}) + 2D(-\varphi_{20} + \varphi_{10}) = 0$$
+Možne rešitve prve enačbe:
+$$\varphi_{10} = -\varphi_{20} + 2k\pi$$
+$$\varphi_{10} = -\varphi_{20} + \pi + 2k\pi$$
+Označimo $\alpha = D/mgl$
+$$V = V_0 + \frac{1}{2}\underline{s\varphi}\duline{V}\underline{s\varphi},~~\duline{V} = mgl\begin{bmatrix}
+    \cos\varphi_{10} + \alpha & -\alpha \\
+    -\alpha & \cos\varphi_{20} + \alpha
+\end{bmatrix}$$
+$$\duline{T} = ml^2\begin{bmatrix}
+    1 & 0 \\
+    0 & 1
+\end{bmatrix}$$
+\paragraph{Naloga.} $\tilde{L} = \frac{1}{2}\underline{\dot\eta}\duline{T}\underline{\dot\eta} - \frac{1}{2}\underline{\eta}\duline{V}\underline{\eta}$.
+Uporabimo nastavek $\underline{\eta} = e^{i \omega t}\underline{a}$
+$$\duline{V}\underline{a} = \omega^2 \duline{T} \underline{a}$$
+$$(\duline{V} - \omega^2\duline{T})\underline{a} = 0$$
+$$\det (\duline{V} - \omega^2\duline{T}) = 0$$
+Izračunamo lastne vrednosti $\omega$ in pripadajoče lastne vektorje $\underline{a}$. $\eta(t)$ je linearna kombinacija teh rešitev.
+\end{document}

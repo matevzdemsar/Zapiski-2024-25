@@ -1,0 +1,68 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+Kinetično energijo smo pri prejšnjem predavanju zapisala kot $$\sum_{i=1}^{N}\frac{1}{2}m_iv_i^2 = \sum_{j, k = 1}^{n}\frac{1}{2}w_{jk}\dot{q}_j\dot{q}_k$$
+$$w_{jk}(\underline{q}) = \sum_{i=1}^{N} m_i\pd{r_i}{q_j}\pd{r_i}{q_k} = w_{kj}$$
+Uvedemo posplošeni impulz (gibalna količina, moment; tudi kanonični impulz).
+$$p_j = \pd{L}{\dot{q}_j} = \pd{T}{\dot{q}_j} - \pd{V}{\dot{q}_j}$$
+če je $L$ neodvisna od $q_j$.
+$$\pd{T}{\dot{q}_j} - \pd{V}{\dot{q}_j} = \sum_{k=1}^{n}w_{jk}\dot{q}_k - \pd{V}{\dot{q}_j}$$
+\section{Hamiltonova funkcija}
+Ne tisti Hamilton. Neki Irec, eden bolj priznanih angleško govorečih matematikov.
+$$H = \sum_{j}p_j\dot{q}_j - L = H(\underline{q}, \underline{p}, t)$$
+Če $V$ ni odvisen od $\dot{q}$, velja tudi:
+$$H = \sum_{j,k}w_{jk}\dot{q}_k\dot{q}_j - L$$
+$$H = 2T - L = T + V$$
+\\
+$$\dd{H}{t} = \sum_{j}\left[\dd{}{t}\left(\pd{L}{\dot{q}_j}\right)\dot{q}_j + \pd{L}{\dot{q}_j}\ddot{q}_j\right] - \sum_{j}\left[\pd{L}{q_j} + \pd{L}{\dot{q}_j}\ddot{q}_j\right] - \pd{L}{t} = -\pd{L}{t}$$
+\\
+\paragraph{Izrek Emmy Noethen:} Koordinato $q_j(t)$ zamenjajmo s $Q_j(t, s)$, pri čemer velja $\displaystyle{\lim_{s\to 0}Q_j = q_j}$.
+Razen tega naj bo $L$ neodvisen od $s$.
+$$\pd{L}{s} = \pd{}{s}L\left(\underline{Q}(t, s), \underline{\dot{Q}}(t, s), t\right) = 0$$
+$$\pd{L}{s} = \sum_{j}\left[\pd{L}{Q_j}\pd{Q_j}{s} + \pd{L}{\dot{Q}_j}\pd{\dot{Q}_j}{s}\right] = 0$$
+Vzeli bomo limito $s \to 0$. Tedaj je $Q_j$ kar enak $q_j$.
+$$= \pd{L}{q_j}\pd{Q_j}{s}\Big|_{s=0} + \sum_{j}\pd{L}{\dot{q}_j}\dd{}{t}\pd{Q_j}{s}\Big|_{s=0}$$
+V prvi vsoti upoštevamo $\displaystyle{\pd{L}{q_j} = \dd{}{t}\pd{L}{\dot{q}_j}}$:
+$$= \dd{}{t}\sum_{j=1}^{n}\pd{L}{\dot{q}_j}\pd{Q_j}{s} \Big|_{s=0} \Rightarrow \sum_{j=1}^{n}p_j\pd{Q_j}{s}\Big|_{s=0} = \text{konst.}$$
+\paragraph{Fermatov princip:} Oglejmo si lomni količnik. Ta je definiran kot $\displaystyle{n(\vct{r}) = \frac{c}{v(\vct{r})}}$.
+$$t_0 = \int_{t_1}^{t_2}\frac{1}{c}\frac{c}{v}\dd{s}{t}dt = \int_{0}^{s_{AB}}n(s)ds$$
+\paragraph{Hamiltonov princip.} Definiramo akcijo:
+$$\int_{t_1}^{t_2}L(\underline{q}(t), \underline{\dot{q}}(t), t)\,dt = S$$
+Oznalimu tudi $A: \underline{q}(t) \to S$ \\[4mm]
+Recimo, da imamo majhen odmik od začetnih koordinat:
+$$q_j(t) \to q_j(t) + \delta q_j(t)$$
+$$S = \int_{t_1}^{t_2} L\,dt$$
+$$\delta S = \int_{t_1}^{t_2}\left(\sum_{j}\pd{L}{q_j}\delta q_j + \sum_j\pd{L}{\dot{q}_j}\delta\dot{q}_j\right)dt$$
+$$= \int_{t_1}^{t_2}\sum_j\left(\pd{L}{q_j}\delta q_j - \dd{}{t}\pd{L}{\dot{q}_j}\delta q_j\right)dt$$
+$$= \int_{t_1}^{t_2}\sum_j\left(\pd{L}{q_j} - \dd{}{t}\pd{L}{\dot{q}_j}\right)\,\delta q_j\,dt$$
+To pa mora biti enako 0, da je zadoščeno E-L pogoju.
+\paragraph{Primer.} $\displaystyle{L' = L + \dd{}{t}F(\underline{q}(t), t)}$
+$$S' = S + F\Big|_{t_1}^{t_2}$$
+$$0 = \delta S' = \delta S + \delta F \Rightarrow \delta F = 0$$
+\paragraph{Enodimenzionalni problemi.} Zanima nas $q(t)$, poznamo $q(0)$ in $\dot{q}(0)$.
+$$L = \frac{1}{2}w(q)\dot{q}^2 - V(q)$$
+$$H = T + V = E = \frac{1}{2}w(q)\dot{q}^2 + V(q) = \text{konst.}$$
+Očitno je $\displaystyle{0 \leq \dot{q}^2 = \frac{2(E-V)}{w}}$
+$$\dot{q} = \pm \sqrt{\frac{2(E-V(q))}{w(q)}} = \dd{q}{t}$$
+Stvar lahko integriramo po času in dobimo $q(t)$. Integral ni vedno trivialen, je pa uporabno vedeti, da vsak eno-dimenzionalen problem lahko rešimo s takim integralom.
+\end{document}

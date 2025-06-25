@@ -1,0 +1,101 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\,\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Stožec na nagnjeni podlagi.}
+$$J = J_x = J_y =... =  \frac{hR^2\pi}{5}\left(h^2 + \frac{R^2}{4}\right)\frac{m}{V} = \frac{3}{5}m\left(h^2 + \frac{R^2}{4}\right)$$
+$$J' = J_z = \int (x^2 + y^2)\dif m = \int_{0}^{2\pi} \int_{0}^{h} \int_{0}^{\frac{R}{h}z} r^3 \rho \dif r \dif z \dif \varphi =
+2\pi\rho \int_{0}^{h} \left(\frac{r^4}{4}\right)\Big|_0^{\frac{R}{h}z}\dif z = ... = \frac{3}{10}mR^2$$
+Gibanje stožca bomo izračunali z Lagrangeovim formalizmom, zato poiščimo vezi za Eulerjeve kote.
+\begin{enumerate}
+    \item $\vartheta = \frac{\pi}{2} - \alpha = $ konst.
+    \item $\sqrt{h^2 + R^2}\dot\varphi + R\dot\psi = 0$
+    $$\dot\psi = -\frac{1}{\sin\alpha}\dot\varphi$$
+\end{enumerate}
+$$T = \frac{1}{2}J\left(\dot\varphi^2\sin^2\vartheta + \dot\vartheta^2\right) + \frac{1}{2}J' \left(\dot\varphi\cos\vartheta + \dot\psi\right)^2 =$$
+$$ = \dot\varphi^2 \left(\frac{1}{2}J\cos\alpha + \frac{1}{2}J'\left(\sin^2\alpha - 2 + \frac{1}{\sin^2\alpha}\right)\right) = \frac{1}{2}J_{eff}\dot\varphi^2$$
+$$V = mg\frac{3}{4}h(-\cos\alpha\sin\beta\cos\varphi + \sin\alpha\cos\beta)$$
+(višina težišča v odvisnosti od kota $\varphi$).
+$$L = \frac{1}{2}J_{eff}\dot\varphi^2 - mg\frac{3}{4}h\left(\cos\alpha\sin\beta\cos\varphi + \sin\alpha\cos\beta\right)$$
+$$\pd{L}{\varphi} = \dd{}{t}\pd{L}{\dot\varphi}J_{eff}\ddot\varphi = -mg\frac{3}{4}h\cos\alpha\sin\beta\sin\varphi$$
+Za $\varphi \ll 1$:
+$$-mg\frac{3}{4}h \cos\alpha\sin\beta \varphi = J_{eff}\ddot\varphi$$
+Dobimo nihanje s kotno hitrostjo $\displaystyle{\omega = \frac{3}{4}\frac{mgh\cos\alpha\sin\beta}{J_{eff}}}$, pri čemer je
+$$J_{eff} = J\sin^2\left(\frac{\pi}{2} - \alpha\right) + J'\left(\cos\left(\frac{\pi}{2}-\alpha\right) - \frac{1}{\sin\alpha}\right)^2 = ... = \frac{h^2}{h^2 + R^2}m\left(\frac{9}{10}h^2 + \frac{3}{20}R^2\right)$$
+\paragraph{Mala nihanja.} $$L = T - V = \frac{1}{2} \sum_{ij} w_{ij}(\underline{q})q_iq_j - V$$
+Stabilna ravnovesna lega: $$\pd{V}{q_i} \Big|_{\underline{q}^*} = 0,~~\pd{^2V}{q_i \partial q_j} > 0$$
+$$\eta_i = q_i - q_i^*$$
+$$L = \frac{1}{2}\sum_{ij} w_{ij}(\underline{q}^0) \dot{\eta}_i\dot{\eta}_j - V(\underline{q}^0) - \frac{1}{2}\sum_{ij} \pd{^2V}{q_i \partial q_j}$$
+$$L = \frac{1}{2}\underline{\dot\eta} \duline{T} \underline{\dot\eta} + \underline{\eta} \duline{V} \underline{\eta}$$
+\newpage
+\paragraph{Naloga.} Pet mas, povezanih z vzmetmi.
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[scale=0.7]
+        \draw (0, 0) circle (0.5);
+        \draw (-2.5, 0) circle (0.5);
+        \draw (2.5, 0) circle (0.5);
+        \draw (0, -2.5) circle (0.5);
+        \draw (0, 2.5) circle (0.5);
+        
+        \draw[dashed] (0.5, 0) -- (2, 0);
+        \draw[dashed] (-0.5, 0) -- (-2, 0);
+        \draw[dashed] (0, 0.5) -- (0, 2);
+        \draw[dashed] (0, -0.5) -- (0, -2);
+
+        \node (5) at (0, 0) {$5$};
+        \node (4) at (0, -2.5) {$4$};
+        \node (3) at (-2.5, 0) {$3$};
+        \node (2) at (0, 2.5) {$2$};
+        \node (1) at (2.5, 0) {$1$};
+    \end{tikzpicture}
+\end{figure}
+$$T = \sum_{i=1}^{5} \frac{1}{2}m\dot z_i^2$$
+$$V = \sum_{i=1}^{4} k\left(\sqrt{l^2 + (z_5 - z_j)^2} + l_0^2\right)^2 = \sum_{i=0}^{4} k\left(l \sqrt{1 + \left(\frac{z_5 - z_i}{l}\right)^2} - l_0\right)$$
+Upoštevamo $(1 + x)^n \approx 1 + nx$ za dovolj majhne $x$.
+$$V = \sum_{i=1}^{4} \frac{1}{2}k\left(\frac{1}{2}(z_5 - z_i)^2 + l_0^2\right)^2$$
+$$= V_0 + \frac{1}{2}\sum_{ij} V_{ij} z_i z_j$$
+$$\duline{V}\underline{a} = \omega^2 \duline{T}\underline{a} = \omega^2 m\duline{a}$$
+$$V = \begin{bmatrix}
+    1 & 0 & 0 & 0 & -1 \\
+    0 & 1 & 0 & 0 & -1 \\
+    0 & 0 & 1 & 0 & -1 \\
+    1 & 0 & 0 & 1 & -1 \\
+    -1 & -1 & -1 & -1 & -4
+\end{bmatrix}$$
+Imamo lastne vektorje
+$$a_1 = \begin{pmatrix} 1 \\ 1 \\ -1 \\ -1 \\ 0 \end{pmatrix},~~~\duline{V} a_1 = \tilde{k}a_1 = \omega_1^2m\underline{a_1}$$
+$$\omega_1 = \sqrt{\frac{k}{m}}$$
+Podobno dobimo za $a_2 = (1, -1, -1, 1, 0)$ in $a_3 = (1, -1, 1, -1, 0)$. Imamo še dva lastna vektorja:
+$$a_4 = \begin{pmatrix}
+    1 \\ 1 \\ 1 \\ 1 \\ 1
+\end{pmatrix},~~~\duline{V}a_4 = 0 \rightarrow \omega_4 = 0$$
+Pri $a_4$ gre v bistvu za translacijo.
+$$a_5 = \begin{pmatrix}
+    1 \\ 1 \\ 1 \\ 1 \\ -\alpha
+\end{pmatrix},~~~\duline{V}a_5 = \lambda a_5$$
+Imamo dve možnosti za $\lambda$, in sicer $\lambda = 0$ in $\lambda = 4$. Če je $\lambda = 0$, smo spet dobili translacijo, za $\lambda = 4$ pa dobimo:
+$$\omega_5 = \sqrt{\frac{4k}{m}}$$
+
+\end{document}

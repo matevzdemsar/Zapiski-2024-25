@@ -1,0 +1,49 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\paragraph{Orbite v potencialu $1/r^2$} \text{} \\
+$$H = \frac{m\dot{r}^2}{2} + V_{ef}$$
+$$V_{ef} = \frac{p_\varphi^2}{2mr^2} - \frac{\kappa}{r^2} = \frac{p_\varphi^2}{2m}\left(1 - \frac{\kappa 2m}{p_\varphi^2}\right)\frac{1}{r^2}$$
+Označimo $\displaystyle{\gamma = \frac{\kappa 2m}{p_\varphi^2}}$. Naša rešitev bo odvisna od $\gamma$: Če je $\gamma < 1$, so 
+orbite neomejene in opazovano telo bo odletelo stran. Če je $\gamma > 1$, so orbite omejene, toda potencial gre v centru kroženja proti neskončno,
+zato bo Petja padla v center. Če je $\gamma = 1$, pa je $V_{ef} = 0$, kar pomeni kroženje.
+$$H = \frac{m\dot{r}^2}{2} + \frac{p_\varphi^2}{2m}(1 - \gamma)\frac{1}{r^2}$$
+Uvedemo $u = 1/r$, $\displaystyle{\dot{r} = -\frac{1}{u^2}\dd{u}{t}} = -\frac{1}{u^2}\dd{u}{\varphi}\dd{\varphi}{t} = -\frac{p_\varphi}{mr^2u^2}\dd{u}{\varphi} = -\frac{p_\varphi}{m}\dd{u}{\varphi}$.
+$$H = \frac{m}{2}\frac{p_\varphi^2u'^2}{m^2} + \frac{p_\varphi^2}{2m}\left(1 - \gamma\right)^2u^2$$
+Da dobimo enačbo gibanja, še na obeh straneh odvajamo po $\varphi$:
+$$0 = \frac{p_\varphi^2}{m}u'\left(u'' + (1+\gamma)u\right)$$
+Enačba ima dve rešitvi: $u' = 0$ in $u'' + (1 - \gamma)u = 0$. Prva rešitev je kroženje (saj je tedaj radij konstanten), druga rešitev pa je diferencialna enačba:
+$$u'' + (1 - \gamma)u = 0$$
+Tu se pokaže odvisnost gibanja od $\gamma$: \\[3mm]
+Če je $\gamma < 1$, dobimo za rešitev kosinusno funkcijo:
+$$r = \frac{1}{C\cos\left(\sqrt{1-\gamma}(\varphi - \varphi_0)\right)}$$
+Če je $\gamma = 1$:
+$$u'' = 0 \Rightarrow r = \frac{1}{A\varphi + B}$$
+Kar je spirala: $\displaystyle{\Lim{\varphi}r = 0}$. Če je hkrati $u' = 0$ pa gre kot prej za krožnico. \\[3mm]
+Če je $\gamma > 1$, dobimo enačbo oblike
+$$u'' - \alpha u = 0,~\alpha > 0$$
+$$u = Be^{\sqrt{\alpha}\varphi} + Ce^{\sqrt{\alpha}\varphi}$$
+$$r = \frac{1}{u}$$
+Če je $B \neq 0$ in $C \neq 0$, $r(\varphi)$, je $r$ omejen. Sicer pač ne.
+\end{document}

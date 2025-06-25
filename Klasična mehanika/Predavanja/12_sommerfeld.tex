@@ -1,0 +1,73 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Milankovićevi cikli.} Zanima nas, zakaj na Zamlji pride do ledenih dob. Zemljina os vrtenja je nagnjena glede na ekvator za $\vartheta = 23.44^\circ$ in se s časom spreminja za $\pm 1^\circ$. Na isti kot pride vsakih $41\,000$ let.
+Zemlja se vrti okoli Sonca po elipsi, ki se počasi vrti, in sicer s precesijskim časom $26\,000$ let. Posledično je na vsake toliko časa severna polobla hkrati nagnjena stran od Sonca in še na največji oddaljenosti od njega.
+(Trenutno je poleti Zemlja bolj oddaljena od Sonca kot pozimi). To vodi do ledene dobe.
+\paragraph{Sommerfeldov model majhnih nihanj.} Sledeči sistem obravnavajmo s pomočjo Lagrangeovega formalizma.
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+        \draw (-4, 0) -- (4, 0);
+        \draw[dashed] (-3, 0) -- (-1.5, -3);
+        \draw[dashed] (3, 0) -- (1.5, -3);
+        \draw[dashed] (-1.5, -3) -- (1.5, -3);
+        \filldraw (-1.5, -3) circle (0.07) node[left] {$m_1$};
+        \filldraw (1.5, -3) circle (0.07) node[right] {$m_2$};
+        \node (A) at (-3, -1.5) {$k_1,\,l_1$};
+        \node (B) at (3, -1.5) {$k_2,\,l_2$};
+        \node (C) at (0, -3.5) {$k,\,l$};
+    \end{tikzpicture}
+\end{figure}
+$$T = \frac{1}{2}m_1\left(\dot l_1^2 + l_1^2\dot\varphi_1^2\right) + \frac{1}{2}m_2\left(\dot l_2^2 + l_2^2\dot\varphi_2^2\right)$$
+$$V = m_1gl_1(1 - \cos\varphi_1) + m_2gl_2(1 - \cos\varphi_2) + \frac{1}{2}k_1(l_{10} - l_1)^2 + \frac{1}{2}k_2(l_{20} - l_2)^2 + \frac{1}{2}k(l_0 - l)^2$$
+Iz tega sestavimo $L = T - V$ in uporabimo Euler-Lagrangeovo enačbo, ki pa ne bo rešljiva. (Dobimo nelinearne diferencialne enačbe, ki običajno niso analitično rešljive.)
+Največ, kar lahko naredimo, je da si ogledamo obnašanje sistema za majhne odmike okoli stabilne lege.
+$$L = T - V = \frac{1}{2}\sum_{ij} w_{ij}(\underline{q})\dot q_i \dot q_j$$
+$$V(\underline{q}) = V(\underline{q_0}) + \sum_{i=1}^{n} \pd{V}{q_i}\Big|_{q_{i,0}}(q_i - q_{i, 0}) + \sum_{ij} \pd{^2V}{q_i \partial q_j}\Big|_{\underline{q_{0}}}(q_i - q_{i, 0})(q_j - q_{j, 0}) + ... \text{ (Taylor)}$$
+Prva vsota je enaka 0, saj je $\displaystyle{\pd{V}{q_i}(q_0) = 0}$. Navsezadnje je $q_0$ stabilna lega, torej mora imeti potencial v njej minimum. Mimogrede označimo $\eta_i = q_i - q_{i, 0}$.
+$$T = \frac{1}{2}\sum_{ij} T_{ij} \dot\eta_i\dot\eta_j$$
+$$T_{ij} = w_{ij}(\underline{q_0}) + \sum_{k} \pd{w_i}{q_k}\eta_k + \dots$$
+S tem smo dobili matriki $T$ in $V$:
+$$V_{ij} = \pd{^2 V}{q_i \partial q_j}\Big|_{\underline{q_0}}$$
+$$T_{ij} = w_{ij}(\underline{q_0}) + \sum_{k}\pd{w_i}{q_k}\eta_k$$
+$$\tilde{L} = \frac{1}{2}\sum_{ij}\left(T_{ij}\dot\eta_i\dot\eta_j - V_{ij}\eta_i\eta_j\right)$$
+To si smemo privoščiti za dovolj majhne odmike od ravnovesne lege. Zvaj uporabimo Euler-Lagrangeovo enačbo:
+$$\dd{}{t}\pd{\tilde{L}}{\dot\eta_i} - \pd{\tilde{L}}{\eta_i} = 0$$
+$$\sum_{j} T_{ij}\ddot{\eta}_j + \sum_j V_{ij}\eta_j = 0~~\forall i$$
+Dobimo sistem enačb, ki ga bomo znali rešiti.
+\paragraph{Notacija.} Pri tej analizi uporabljamo sledečo notacijo:
+\begin{itemize}
+    \item $\underline{a} = \begin{pmatrix}
+        a_1 \\ a_2 \\ \vdots \\ a_n
+    \end{pmatrix}$ je vektor (stolpec).
+    \item $\underline{a}^T = (a_1, a_2, ..., a_n)$ je vrstica.
+    \item $\duline{A}$ je matrika, $\duline{A}^T$ je transponirana matrika.
+    \item $\displaystyle{\duline{A}\underline{a}_i = \sum_{j=1}^{n} A_{ij}a_j}$
+    \item $\displaystyle{\underline{a}^T\duline{A} = \sum_{j=1}^n a_j A_{ij}}$
+\end{itemize}
+V taki notaciji imamo opravka z enačbo
+$$\tilde{L} = \frac{1}{2}\left(\underline{\dot\eta}^T\duline{T}\underline{\dot\eta} - \underline{\eta}^T\duline{V}\underline{\eta}\right)$$
+\end{document}

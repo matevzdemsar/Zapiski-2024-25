@@ -1,0 +1,80 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\,\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Termini za ustne izpite.} 12. ter 13. 6 in 1. ter 2. 7.
+\paragraph{Majhna nihanja.} Imamo vektor odmika $\underline{\eta}$.
+$$\tilde{L} = \frac{1}{2}\dot{\underline{\eta}}^T\duline{T}\dot{\underline{\eta}} - \frac{1}{2}\underline{\eta}^T\duline{V}\underline{\eta}$$
+$$\sum_j T_{ij}\ddot\eta_j + \sum_j V_{ij}\eta_j = 0,~\forall i$$
+\paragraph{Lastna nihanja.} $\eta_i = \alpha a_i e^{i\omega t},~\omega\in\R$
+To vstavimo v enačbo, da dobimo
+$$\sum_j V_{ij}a_j - \omega^2 \sum_j T_{ij}a_j = 0$$
+$$\duline{V}\underline{a} = \omega^2\duline{T}\underline{a} = \lambda\duline{T}\underline{a},~\omega^2 \geq 0$$
+\paragraph{Poseben primer.} $\duline{T} = T\duline{I}$.
+$$(\duline{V} - \lambda T \duline{I})\underline{a} = (\duline{V} - \tilde{\lambda} I)\underline{a} = 0$$
+Pokažemo lahko, da so lastni vektorji $\underline{a_k}$ ortogonalni. Iz normiranih vektorjev $\underline{a_k}$ sestavimo matriko $\duline{A}$.
+$$\duline{A} = \begin{bmatrix}
+    a_{11} & a_{21} & a_{31} & \dots & a_{n1} \\
+    a_{12} & \ddots &&& \\
+    a_{13} && \ddots && \\
+    \vdots &&& \ddots & \\
+    a_{1n} &&&& a_{nn} \\
+\end{bmatrix} = (\underline{a_1}, \underline{a_2}, ... \underline{a_n})$$
+Velja:
+$$\duline{A}^T\duline{A} = \duline{A}\duline{A}^T = \duline{T}$$
+$$\duline{A}^T \duline{V} \duline{A} = \duline{\tilde{\Lambda}}$$
+tu je $\duline{\tilde{\Lambda}}$ diagonalna matrika oblike
+$$\duline{\tilde{\Lambda}} = \begin{bmatrix}
+    \lambda_1 &&& \\
+    & \lambda_2 && \\
+    && \ddots & \\
+    &&& \lambda_n \\
+\end{bmatrix}$$
+Poleg tega velja tudi
+$$\duline{A}^T \duline{T} \duline{A} = \duline{I}$$
+$$\duline{A}^T \duline{V}\duline{A} = \duline{A}^T\duline{T}\duline{A}\duline{\Lambda} = \duline{\Lambda}$$
+\paragraph{Normalne koordinate.} Od prej:
+$$\tilde{L} = \frac{1}{2}\dot{\underline{\eta}} \duline{T} \dot{\underline{\eta}} - \frac{1}{2}\underline{\eta} \duline{V} \underline{\eta}$$
+Ker je $\eta$ linearna kombinacija lastnih vektorjev, zapišemo $\eta = \duline{A}\underline{\alpha}$. Sledi:
+$$\tilde{L} = \frac{1}{2}\dot{\underline{\alpha}}^T\dot{\underline{\alpha}} - \frac{1}{2}\underline{\alpha}^T\duline{\lambda}\underline{\alpha}$$
+\paragraph{Hamiltonov formalizem.} $L = T - V$;
+$$L = L(\underline{q}, \dot{\underline{q}}, t)$$
+$$p_i = \pd{L}{\dot{q}_i}$$
+$$\dd{}{t}\pd{L}{\dot{q}} - \pd{L}{q_i} = 0$$
+Definiramo $H = \displaystyle{\sum_{i}p_i\dot{q}_i} - L = T + V = H(\underline{q}, \underline{p}, t)$
+$$\dif H = \sum_i \left(\dot{q}_i\dif p_i + p_i \dif \dot{q}_i\right) - \sum_i \left(\pd{L}{q_i}\dif q_i + \pd{L}{\dot{q}_i}\dif\dot{q}_i\right) - \pd{L}{t}\dif t$$
+Dobimo Hamiltonove enačbe:
+$$\dot{q}_i = \pd{H}{p_i}$$
+$$\dot{p}_i = -\pd{H}{q_i}$$
+$$\pd{H}{t} = -\pd{L}{t}$$
+Kajti $\displaystyle{\dif H = \pd{H}{q_i}\dif q_i + \pd{H}{p_i} \dif p_i + \pd{H}{t}\dif t}$
+\paragraph{Nabit delec v elektromagnetnem polju.} $$\vct{F} = e(\vct{E} + \vct{v} \times \vct{B})$$
+$$\dd{}{t}\pd{L}{\dot{q}_i} - \pd{L}{q_i} = 0,~~F_i = \pd{V}{q_i} + \pd{}{t}\pd{V}{\dot{q}_i},~~V(\duline{q}, \duline{\dot{q}}, t)$$
+\\
+$$\vct{B} = \nabla\times\vct{A}$$
+$$\vct{E} = -\nabla\phi - \pd{\vct{A}}{t}$$
+$$\nabla\times\vct{E} = - \nabla\times\pd{\vct{A}}{t} = -\dd{}{t}\nabla\times\vct{A} = - \pd{\vct{B}}{t}$$
+$$\vct{F} = e\left[-\nabla\phi - \pd{\vct{A}}{t} + \vct{v}\times(\nabla \times \vct{A})\right]$$
+$$H = \frac{(\vct{p} - e\vct{A})^2}{2m} + V + e\phi$$
+\end{document}

@@ -1,0 +1,49 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\,\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Poissonovi oklepaji.} Ponovno imamo $f(\underline{q}, \underline{p}, t)$, kjer so posplošene koordinate $\underline{q}$ in impulzi $\underline{p}$ odvisni od časa. Spet je $\displaystyle{p_i = \pd{L}{\dot{q}_i}},~\dot{q}_i = \pd{H}{p_i}, ~\dot{p}_i = -\pd{H}{q_i}$.
+$$\dd{f}{t} = \sum_{i} \left(\pd{f}{q_i}\dot{q}_i + \pd{f}{p_i}\dot{p}_i\right) + \pd{f}{t}$$
+$$= \sum_i \left(\pd{f}{q_i}\pd{H}{p_i} - \pd{f}{p_i}\pd{H}{q_i}\right) + \pd{f}{t} = \left[f, H\right] + \pd{f}{t}$$
+Definirali smo Poissonov oklepaj $\displaystyle{\left[f, g\right] = \sum_i \left(\pd{f}{q_i}\pd{g}{p_i} - \pd{f}{p_i}\pd{g}{q_i}\right)}$. Včasih se uporablja tudi oznako $\{f, g\}$.
+\paragraph{Lastnosti.} Poissonovi oklepaji imajo naslednje lastnosti:
+\begin{enumerate}
+    \item $[f, \lambda g + \eta h] = \lambda[f, g] + \eta[f, h]$
+    \item $[f, g] = -[g, f]$
+    \item $[f, gh] = [f, g]h + g[f, h]$
+    \item $[f, f] = 0$
+    \item $[x, p_x] = 1$
+    \item $[x, p_y] = 0$
+\end{enumerate}
+\paragraph{Lagrangeov formalizem za zvezno sredstvo.} Na primer za struno:
+$$\dif T = \frac{1}{2}\dot{u}^2\rho S_0 \dif x = \frac{1}{2}\rho S_0 \left(\pd{u}{t}\right)^2\dif x$$
+$$\dif V = F(\dif l - \dif x) = F(\sqrt{\dif x^2 + \dif u^2} - \dif x) \approx \frac{1}{2}F \left(\pd{u}{x}\right)^2\dif x$$
+$$\dif L = \frac{1}{2}\rho S_0 \left(\pd{u}{t}\right)^2\dif x \pm \frac{1}{2} F\left(\pd{u}{x}\right)^2\dif x \pm \rho S_0 u\dif x$$
+$$\mathcal{L} = \dd{L}{x} = ...$$
+$$L = \int_{x_1}^{x_2}\mathcal{L}\dif x = \int_{x_1}^{x_2} \mathcal{L}\left(u(x, t), u_x, u_t, x, t\right)$$
+$$S = \int_{0}^{t}L\dif t = \iint\mathcal{L}\dif x \dif t \, (\mathrm{d} y, \dif z)$$
+Euler-Lagrangeova enačba za tak sistem je
+$$\dd{}{t}\pd{\mathcal{L}}{u_t} + \dd{}{x}\pd{\mathcal{L}}{u_x} - \pd{\mathcal{L}}{x} = 0$$
+Iz tega lahko izpeljamo na primer Maxwellove zakone, valovne enačbe itd.
+\end{document}

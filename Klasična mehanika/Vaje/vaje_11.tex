@@ -1,0 +1,81 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Dinamika togega telesa.}
+$$\duline{J} = \sum_i m_i(Ir^2 - \vct{r}\otimes\vct{r})$$
+$$\vct{r}\otimes\vct{r} = \begin{pmatrix}
+    x^2 & xy & xz \\
+    yx & y^2 & yz \\
+    zx & zy & z^2
+\end{pmatrix}$$
+Vsoto ocenimo z integralom.
+$$\duline{J} = \int \dif m \begin{pmatrix}
+    x^2 & xy & xz \\
+    yx & y^2 & yz \\
+    zx & zy & z^2
+\end{pmatrix}$$
+$$T = \frac{1}{2}\vct{\omega}^T\duline{J}\vct{\omega}$$
+V lastnem sistemu velja $$\duline{J} = \begin{pmatrix}
+    J_x & 0 & 0 \\
+    0 & J_y & 0 \\
+    0 & 0 & J_z
+\end{pmatrix}$$
+V tem sistemu je
+$$\vct{L} = J_x \omega_x'\hat{i'} + J_y \omega_y'\hat{j'} + J_z \omega_z'\hat{k'}$$
+$$\\dot{vct{L}} =
+J_x \dot{\omega}_x'\hat{i'} + J_x\dot{\omega}_x'(\vct{\omega} \times \hat{i'}) +
+J_y \dot{\omega}_y'\hat{j'} + J_y\dot{\omega}_y'(\vct{\omega} \times \hat{j'}) +
+J_z \dot{\omega}_z'\hat{k'} + J_z\dot{\omega}_z'(\vct{\omega} \times \hat{k'})$$
+Tako dobimo Eulerjeve enačbe:
+$$M_x' = J_x\dot\omega_x' - (J_y-J_z)\omega_y'\omega_z'$$
+$$M_y' = J_y\dot\omega_x' - (J_z-J_x)\omega_z'\omega_x'$$
+$$M_z' = J_z\dot\omega_x' - (J_x-J_z)\omega_x'\omega_y'$$
+\paragraph{Prosta simetrična vrtavka.} $J_x = J_y = J \neq J_z$, $\vct{M}=0$
+Uporabimo Eulerjeve enačbe:
+$$0 = J\dot{\omega}_x' + (J - J_z)\omega_y'\omega_z'$$
+$$0 = J\dot{\omega}_y' + (J_z - J)\omega_z'\omega_x'$$
+$$0 = J_z\dot\omega_z'$$
+Iz tretje enačbe dobimo $\omega_z' = \omega_0$. Uvedemo novo spremenljivko $\xi = \omega_x' + i\omega_y'$, $\dot\xi = \dot\omega_x' + i\dot\omega_y'$. Seštejemo prvi dve enačbi:
+$$J\dot\xi + J\omega_0i\xi - J_z\omega_0\xi = 0$$
+$$\frac{\dif\xi}{\xi} = -i\omega_0\left(1 - \frac{J_z}{J}\dif t\right)$$
+$$\xi = Ce^{-i\omega_z\left(1 - \frac{J'}{J}\right)t}$$
+Označimo $\displaystyle{\Omega_p = \omega_z \left(1 - \frac{J_z}{J}\right)}$
+$$\omega_x' = |C|\cos(\Omega_p t)$$
+$$\omega_y' = |C|\sin(\Omega_p t)$$
+$$\omega_z' = \omega_0$$
+\paragraph{Navoj v ležajih pravokotne plošče.} Pravokotnik naj ima stranici $a$ in $b$.
+$$J_x = \int (y^2 + z^2)\dif m = \iint y^2 \frac{m}{ab}\,\dif x\,\dif y$$
+$$=\int_{-b/2}^{b/2}\int_{-a/2}^{a/2} y^2 \frac{m}{ab}\,\dif x\,\dif y = ... = \frac{mb^2}{12}$$
+$$J_y = ... = \frac{ma^2}{12}$$
+$$J_z = \frac{m}{12}(b^2 + a^2)$$
+$$J_{xy} \int -xy\,\dif m = 0$$
+$$\text{(Liha funkcija na simetričnem intervalu)}$$
+$$\vct{\omega} = \omega_0 \frac{a}{\sqrt{a^2 + b^2}}i' + \omega_0\frac{b}{\sqrt{a^2 + b^2}}j'$$
+$$M_x' = M_y' = 0$$
+$$M_z' = \frac{mab\omega_0^2}{12(a^2 + b^2)}(a^2 - b^2)$$
+Vstavimo v Eulerjeve enačbe.
+V posebnem primeru, ko je $a=b$, lahko izračunamo silo $F$, kajti $M_z = Fr$, $\displaystyle{r = \frac{a}{2\sqrt{a^2+b^2}}}$.
+Tedaj je $$F = \frac{mb\,\omega_0^2}{6\sqrt{a^2 + b^2}}$$
+\end{document}

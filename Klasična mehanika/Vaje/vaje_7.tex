@@ -1,0 +1,71 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+\paragraph{1. naloga:} Valj s spiralnim vodilom. Okoli valja je navito vodilo, karakterizirano s konstantno $p = \dd{z}{\varphi}$.
+Po tem vodilu spustimo maso m, razen tega se valj lahko prosto vrti okoli svoje osi. \\[4mm]
+Uvedemo cilindrične koordinate:
+$$x = R\cos\varphi$$
+$$y = R\sin\varphi$$
+$$z = z$$
+Imamo vezi $r=R$ in $z=p(\varphi - \Phi)$. Zasuk valja označimo s $\Phi$.
+$$T = \frac{m}{2}\left(\dot{r}^2 + r^2\dot{\varphi}^2+\dot{z}^2\right) + \frac{1}{2}J\dot{\Phi}^2$$
+$$J = \frac{1}{2}MR^2$$
+$$T = \frac{m}{2}\left(R^2\dot{\varphi}^2 + p^2(\dot{\varphi} - \dot{\Phi})^2\right) + \frac{MR^2}{4}\dot{\Phi}^2$$
+$$V = mgp(\varphi - \Phi)$$
+$$L = T - V = \frac{m}{2}\left(R^2\dot{\varphi}^2 + p^2(\dot{\varphi} - \dot\Phi^2) + \frac{Mr^2}{r}\dot\Phi^2\right) - mgp(\varphi - \Phi)$$
+E-L enačba: imamo dve generalizirani koordinati, in sicer $\varphi$ in $\Phi$. Tedaj velja:
+$$\dd{}{t}\pd{L}{\dot{\varphi}} = \pd{L}{\varphi}$$
+$$\dd{}{t}\pd{L}{\dot{\Phi}} = \pd{L}{\Phi}$$
+Najprej obravnavajmo $\varphi$, nato $\Phi$:
+$$\dd{}{t} \left[\frac{m}{2}\left(2R^2\dot{\varphi} + 2R^2(\dot\varphi - \dot\Phi)\right)\right] + mgp = 0$$
+$$R^2\ddot\varphi + R^2(\ddot\varphi - \ddot\Phi) + gp = 0$$
+$$\dd{}{t} \left[\frac{m}{2} \left(2p^2(\dot{\varphi} - \dot{\Phi})\right) + \frac{MR^2}{2}\dot\Phi - mgp = 0\right]$$
+$$-p^2\ddot\varphi + \left(\frac{MR^2}{2m} + p^2\right)\ddot\Phi - gp = 0$$
+\begin{eqnarray}
+    \ddot\varphi \left(R^2 + p^2\right) - \ddot\Phi p^2 + gp = 0 \\
+    \ddot\Phi \left(\frac{MR^2}{2m} + p^2\right) - \ddot\varphi p^2 - gp = 0
+\end{eqnarray}
+Enačbo (1) pomnožimo z $\displaystyle{\frac{MR^2}{2m} + p^2}$, enačbo (2) pa s $p^2$, nato ju seštejemo (želimo se namreč znebiti spremenljivke $\Phi$). Dobimo linearno enačbo za $\ddot\varphi$ s preprosto rešitvijo
+$$\ddot\varphi = \frac{gp\left(\frac{MR^2}{2m}\right)}{p^4 - \left(\frac{MR^2}{2m} + p^2\right)\left(R^2 + p^2\right)}$$
+To je konstantno, označimo z $\alpha$. Tedaj je $\displaystyle{\varphi(t) = \frac{1}{2}\alpha t^2 + Ct + D}$. Na podoben način bi lahko dobili tudi $\ddot\Phi = \beta$ in rešitev za $\Phi(t)$.
+\paragraph{Izbira oblike vodila za harmonsko nihanje.} Harmonsko nihanje pomeni, da je neodvisno od začetne amplitude. Njegova enačba je
+$$\ddot\vartheta + w^2\vartheta = 0$$
+Želimo najti vodilo, po katerem se bo masa gibala harmonično. \\
+Želimo rezultat oblike $$L = \frac{1}{2} m\dot{s}^2 - \frac{1}{2}ks^2$$
+Trenuto imamo $$L = \frac{1}{2}m(\dot{x}^2 + \dot{y}^2) - mgy$$
+Kinetični del: $$\frac{1}{2}m(\dot{x}^2 + \dot{y}^2) = \frac{1}{2}m\dot{s}^2(\dot{x'}^2 + \dot{y'}^2)$$
+(Pri tem smo uvedli nov koordinatni sistem $x',\, y'$)
+$$\dot x = x' \dot s$$
+$$\dot y = y' \dot s$$
+Torej mora biti $x'^2 + y'^2 = 1$ oziroma $\displaystyle{(dx)^2 + (dy)^2 = (ds)^2}$. Sledi $\displaystyle{s = \int \sqrt{(dx)^2 + (dy)^2}}$. \\
+To vstavimo v izraz za potencialno energijo: $$k\frac{1}{2}\left[\int \sqrt{(dx)^2 + (dy)^2}\right]^2 = mgy$$
+$$\sqrt{\frac{k}{2}}\int \sqrt{1 + \left(\frac{dx}{dy}\right)^2}dy = \sqrt{mgy}$$
+Z obojestranskim odvajanjem lahko izrazimo $\displaystyle{\dd{y}{x}}$:
+$$\dd{y}{x} = \sqrt{\frac{2ky}{mg - 2ky}}$$
+Da izrazimo $x$ in $y$, vzemimo $\displaystyle{\dd{y}{x} = \tan\varphi}$. Z nekaj trigonometrije dobimo $$\dd{\varphi}{x} = \frac{k}{mg}\frac{1}{\cos^2\varphi}$$
+Z integriranjem dobimo
+$$x = \frac{mg}{4k}(2\varphi + \sin2\varphi + C)$$
+$$y = \frac{mg}{4k}(1 \cos2\varphi)$$
+To je enačba cikloide. Izračunamo lahko tudi periodo nihanja (z integralom $\displaystyle{\int \frac{\sqrt{(dx)^2 + (dy)^2}}{\sqrt{2g(y - y_0)}}}$,
+kjer $x$ in $y$ izrazimo preko $\varphi$). Dobimo $\displaystyle{T = 4\pi \sqrt{\frac{m}{4k}}}$
+\end{document}

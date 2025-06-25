@@ -1,0 +1,61 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+\begin{document}
+\paragraph{Eulerjevi koti.} Prejšnji teden smo definirali transformacijo $\vct{r}(x, y, z) \to \vct{r}'(x', y', z')$ s pomočjo matrike
+$$\begin{bmatrix}
+    x' \\ y' \\ z'
+\end{bmatrix} = \begin{bmatrix}
+    \cos\varphi & \sin\varphi & 0 \\
+    -\sin\varphi & \cos\varphi & 0 \\
+    0 & 0 & 1
+\end{bmatrix} \begin{bmatrix}
+    x \\ y \\ z
+\end{bmatrix}$$
+Takšna transformacija zasuka koordinatni sistem okoli osi $z$ za kot $\varphi$. Matriko bomo označili kot $R_3(\varphi)$. Velja:
+$$R_3^{-1}(\varphi) = R_3^T(\varphi) = R_3(-\varphi)$$
+Takšni rotaciji rečemo tudi precesija, saj se spreminja le $\varphi$. \\[3mm]
+Zdaj naredimo rotacijo okoli ene od preslikanih osi (recimo $x'$) za kot $\vartheta$.
+$$R_1(\vartheta) = \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & \cos\vartheta & \sin\vartheta \\
+    0 & -\sin\vartheta & \cos\vartheta \\
+\end{bmatrix}$$
+S to transformacijo dobimo $\vct{r}'' = (x'', y'', z'')$.
+Nazadnje zasukajmo sistem okoli osi $z''$ za kot $\varPsi$.
+$$R_3(\varPsi) = \begin{bmatrix}
+    \cos\varPsi & \sin\varPsi & 0 \\
+    -\sin\varPsi & \cos\varPsi & 0 \\
+    0 & 0 & 1
+\end{bmatrix}$$
+S tem smo preslikali $\vct{r}'' \to \vct{r}''' (x''', y''', z''')$.
+Zdaj vse te preslikave združimo:
+$$R = R_3(\varPsi)R_1(\vartheta)R_3(\varphi)$$
+$R$ je gotovo ortogonalna transformacija, saj je produkt ortogonalnih transformacij.
+\paragraph{Eulerjev izrek.} Če velja $R^{-1} = R^T$ in $\det R = 1$, je $R$ rotacija, torej obstaja tak vektor $\vct{n}$, da je $R\vct{n} = \vct{n}$
+\paragraph{Dokaz.} $$R\vct{n} = \vct{n} = I\vct{n}$$
+Sledi: $$(R-I)\vct{n} = 0$$
+$$\det(R-I) = 0?$$
+Vemo: $\det(R-I) = \det(R - I)^T = \det (R^T - I) = \det(R^{-1} - R^{-1}R)$ \\ $= \det R^{-1} \det(I-R) = \det(I-R) = -\det(R-I)$
+Sledi $\det(R-I) = -\det(I-R)$
+\end{document}

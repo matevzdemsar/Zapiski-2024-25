@@ -1,0 +1,62 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+
+
+\begin{document}
+\paragraph{Problem dveh teles.}
+$$\vct{r} = \vct{r}_1 - \vct{r}_2$$
+$$\vct{r}_T = \frac{1}{m_1 + m_2}\left(m_1\vct{r}_1 + m_2\vct{r}_2\right)$$
+Označimo $M = m_1 + m_2$ in $\displaystyle{m = \frac{m_1m_2}{m_1 + m_2}}$ Tedaj velja:
+$$\frac{M}{m_1} \vct{r}_T = \vct{r}_1 + \frac{m_2}{m_1}\vct{r}_2$$
+$$\vct{r}_2 = \vct{r}_T + \frac{m_1}{M}\vct{r}$$
+$$\vct{r}_1 = \vct{r}_T - \frac{m_2}{M}\vct{r}$$
+Izrazimo kinetično in potencialno energijo. Predpostavili bomo, da je potencialna energija posledica centralnih sil, torej neodvisna od hitrosti. \\
+Poseben primer: $m_2 \ll M$: $$T = \frac{1}{2}M\dot{r}_T^2 + \frac{1}{2}m\dot{r}^2$$
+Sicer:
+Opazimo, da je $\vct{r}_T$ ciklična, torej je $\vct{p}_T = m\dot{\vct{r}}_T = \text{konst.}$
+Oziroma: $$\vct{r}_T(t) = \vct{r}_T(t_0) + \dot{\vct{r}}_T(t_0)\cdot t$$
+Predpostavili smo, da je sila med telesoma centralna.
+$$\vct{F} = -\nabla V(r) = - \dd{V}{r}\frac{\vct{r}}{r}$$
+Opazimo $\dot{\vct{L}} = \vct{r}\times\vct{F} = 0$, kar pomeni, da je $L$ konstantna. Poleg tega je $\vct{r} \cdot \vct{L} = 0$, torej je tudi $z$ konstantna. \\
+(Pri tem $\vct{L}$ označuje vrtilno količino, ne Lagrangiana).
+Nekako tako dobimo Keplerjev zakon: $$d\vct{r} = \vct{r}(t+dt) - \vct{r}(t),$$
+označimo $dS = rdr = r^2d\varphi$. Ker je $L$ konstantna, je tudi $\displaystyle{\dd{S}{t}}$ konstantna, kar je ravno 2. Keplerjev zakon. \\[4mm]
+\paragraph{Keplerjev problem.} Enačba gibanja po elispi. Vpeljemo konstanto gibanja $\vct{A}$, imenovan Laplace-Runge-Lenz-Paulijev vektor. Pauli ga je uporabil za
+reševanje vodikovega atoma, ostali pa vsak za svoje namene. Mi bomo obravnavali gravitacijsko silo.
+$$E = \frac{1}{2}m\dot{r}^2 - G\frac{m_1m_2}{r}$$
+Mimogrede: $m_1m_2 = mM$. Če je $m_1 \gg m_2$, običajno aproksimiramo $m_1 = M$ in $m_2 = m$.
+$$m\ddot{\vct{r}} = f\frac{\vct{r}}{r} = -G\frac{mM}{r^2}\frac{\vct{r}}{r} = \dot{\vct{p}}$$
+$$\dd{}{t}\vct{p}\times\vct{L} = \dot{\vct{p}}\times\vct{L} + \vct{p}\times\dot{\vct{L}}$$
+$$= \frac{f(r)}{r} \,\vct{r}\times(\vct{r}\times m\dot{\vct{r}}) = mf(r)r^2\left(\frac{\dot{\vct{r}}}{r} - \frac{\dot{r}}{r^2}\vct{r}\right)$$
+$$= mk\dd{}{t}\left(\frac{\vct{r}}{r}\right)$$
+Označili smo $k = GmM$, v primeru električne sile bi bil $\displaystyle{k = \pm\frac{e_1e_2}{4\pi \varepsilon_0}}$.
+S tem smo dobili želeno konstanto gibanja $\displaystyle{\vct{A} = \vct{p}\times\vct{L} - mk\frac{\vct{r}}{r}}$. \\
+$$\vct{A_0}\vct{r} = A_0r\cos\varphi = \vct{r}\cdot\left(\vct{p}\times\vct{L}\right) - mkr = L_0^2 - mkr$$
+$$(A_0 \cos\varphi + mk)r = L_0^2 = r_0^2m^2v_0^2$$
+$$r\varphi = \frac{L_0^2}{mk\left(1 ' \frac{A_0}{mk}\cos\varphi\right)} = \frac{\tilde{r}_0}{1 + \varepsilon\cos\varphi}$$
+Dobili smo parametrizacijo elipse z ničlo v gorišču. $\varepsilon$ je odvisen od začetne hitrosti, in sicer:
+$$\varepsilon = \frac{A_0}{m^2MG} = \frac{r_0v_0^2}{MG} - 1$$
+Ko se $v_0$ manjša, pa se $\varepsilon$ približuje $-1\,\to$ dobimo prosti pad. \\
+Ko je $\varepsilon = 0$, dobimo krog. Za takšen $\varepsilon$ je potrebna $\displaystyle{v_1 = \sqrt{\frac{MG}{r_0}}}$ ali prva kozmična hitrost. \\
+Za $\varepsilon = 1$ je potrebna $\displaystyle{v_2 = \sqrt{2\frac{MG}{r_0}}}$. To je druga kozmična hitrost. Če si ponovno ogledamo enačbo $r(\varphi)$, bo za $\varepsilon \geq 1$
+obstajal tak kot $\varphi$, da bo šel $r(\varphi)$ proti neskončno.
+\end{document}
