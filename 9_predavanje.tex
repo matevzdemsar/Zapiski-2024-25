@@ -1,0 +1,70 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{esint}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\newcommand{\vct}[1]{\overrightarrow{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fn}[3]{{#1}\colon {#2} \rightarrow {#3}}
+\newcommand{\avg}[1]{\langle {#1} \rangle}
+\newcommand{\Sum}[2][0]{\sum_{{#2} = {#1}}^{\infty}}
+\newcommand{\Lim}[1]{\lim_{{#1} \rightarrow \infty}}
+\newcommand{\Binom}[2]{\begin{pmatrix} {#1} \cr {#2} \end{pmatrix}}
+\newcommand{\duline}[1]{\underline{\underline{#1}}}
+
+\begin{document}
+\paragraph{Numerično odvajanje.} Matematično je odvod definiran kot $$f'(x) = \lim_{h \to 0}\frac{f(x+h) - f(x)}{h}$$
+Manjši $h$ pomeni boljši približek, toda v praksi to ni nujno dobro. Mislimo si, da z računalnikom vrednost funkcije v neki točki izračunamo na $\varepsilon$ natančno (zaradi numerične napake).
+Denimo, da bo $\varepsilon_, \varepsilon_2 \leq \varepsilon = 10^{-16}$
+$$f(c+h) = \tilde{f}(c+h) + \varepsilon_1$$
+$$f(c) = \tilde{f}(c+h) + \varepsilon_2$$
+$$\frac{f(c+h) - f(c)}{h} = \frac{\tilde{f}(c+h) - \tilde{f}(c)}{h} + \frac{2\varepsilon}{h}$$
+Vidimo, da nam majhen $h$ da zelo veliko napako. Najbolj smiselno je vzeti $h$ reda velikosti $\sqrt{\varepsilon}$.
+\paragraph{Metoda nedoločenih koeficientov.} Iščemo dobro formulo za računanje odvoda. Recimo, da imamo točke $x_{-1}, x_0, x_1$, in zapovrh naj bo $x_0 = 0$.
+Stvar si še nekoliko poenostavimo in recimo, da je $x_{-1} = -h$ in $x_1 = h$.
+Ideja je, da najdemo take koeficiente $\alpha_{-1}, \alpha_0 in \alpha_1$, da bo $f'(0) \approx \alpha_{-1} f(-h) + \alpha_0 f(0) + \alpha_1 f(h)$
+Če za $f(x)$ vstavimo polinome (1, $x$, $x^2$) in dobimo sistem treh enačb s tremi neznankami.
+$$(1)' = 0 = \alpha_{-1} + \alpha_0 + \alpha_{1}$$
+$$(x)'_{x=0} = 1 = \alpha_{-1}(-h) + \alpha_{0} \cdot 0 + \alpha_1 h$$
+$$(x^2)'_{x=0} = 0 = \alpha_{-1}(-h)^2 + \alpha_{0}\cdot 0^2 + \alpha_{1} h^2$$ 
+Rešitev tega sistema je $\alpha_{-1} = -1/2h$, $\alpha_0 = 0$ in $\alpha_{1} = \frac{1}{2h}$
+Dobili smo torej $\displaystyle{f'(0) = \frac{1}{2h}\left(f(h) - f(-h)\right)}$, s čimer smo izpeljali formulo za odvod.
+\paragraph{Newtonova metoda.} Druga možnost je, da skozi točke $x_{-1}, x_{0}, x_{1}$ potegnemo interpolacijski polinom Newtonove oblike, ga odvajamo in vstavimo $x=0$.
+$$p_2(x) = f(-h) + (x+h)\frac{f(0) - f(-h)}{h} + x(x+h)\frac{f(h) - 2f(0) + f(-h)}{2h^2}$$
+$$p_2'(x) = \frac{f(0) - f(-h)}{h} + (2x+h)\frac{f(h) - 2f(0) + f(-h)}{2h^2}$$
+$$p_2'(0) = \frac{f(h) - f(-h)}{2h}$$
+\paragraph{Vaja.} Funkcijo $f(x) = \sin x$ želimo interpolirati na intervalu $[0, \pi/2]$ z odsekoma linearno funkcijo v $n$ ekvidistančnih točkah. Kolikšen mora biti $n$, da bo napaka manjša od nekega $\varepsilon > 0$? \\[3mm]
+Označimo $\fn{I_n}{[0, \pi/2]}{\R}$. Imamo intervale $[x_0, x_1]$, $[x_{1}, x_2]$, ..., $[x_{n-2}, x_{n-1}]$, za vsakega izmed njih velja $\displaystyle{\Delta x = x_{i} - x_{i-1} = \frac{\pi}{2n}}$
+$$I_n\Big|_{[x_{i-1}, x_{i}]} = p_i, i=1, 2, ..., n-1$$
+$p_i$ je linearna funkcija, ki se z $f$ ujema v točkah $x_i$ in $x_{i-1}$. Zanima nas največje odstopanje od funkcije $f$.
+$$|p_i(x) - f(x)| = \frac{f''(\xi)}{2}(x-x_i)(x-x_{i-1})$$
+$$\max_{x_{i-1} \leq x \leq x_{i}} |p_i(x) - f(x)| = \max_{x_{i-1} \leq x \leq x_{i}} \left|\frac{f''(\xi)}{2}\right||(x-x_i)(x-x_{i-1})|$$
+V našem primeru je $f$ sinus, ki ga navzgor ocenimo na $1$.
+$$\max |p_i(x) - f(x)| = \frac{1}{2}\max_{x_{i-1} \leq x \leq x_{i}} |(x-x_i)(x-x_{i-1})|$$
+$x-x_i$ in $x-x_{i-1}$ ocenimo na največ $h/2$. Sledi $|p_i(x) - f(x)| \leq h^2/2$.
+Prej smo izračunali, da je $\displaystyle{\frac{\pi}{2n}}$. Ker želimo, da je $\displaystyle{\frac{h^2}{8}\leq\varepsilon}$, mora biti
+$$n > \sqrt{\frac{\pi^2}{32\varepsilon}}$$
+Za $\varepsilon = 10^{-8}$ na primer dobimo $n=5554$.
+\paragraph{Vaja.} Tokrat želimo $f(x)$ interpolirati s točkama $x_0 = 0$ in $x_1 = \pi/2$. Poleg vrednosti funkcije v teh točkah uporabimo še odvode do stopnje $k\in\N$. Koliko mora biti $k$, da je napaka pod $\varepsilon$? \\[3mm]
+Interpolacijski polinom dobimo iz točk
+$$(x_0, f_0), (x_0, f'_0), ... (x_0, f_0^{(k)})$$
+$$(x_1, f_1), (x_1, f'_1), ... (x_1, f_1^{(k)})$$
+To nam da polinom stopnje $2k+1$ (saj imamo $2k+2$ točk).
+$$f(x) - p_{2k+1}(x) = \frac{f^{2k+2}(\xi)}{(2k+2)!}\omega(x)$$
+$$\omega(x) = (x-x_0)^{k+1}(x-x_1)^{k+1}$$
+Spet upoštevamo $\sin(x) \leq 1$, poleg tega to velja tudi za vse odvode sinusa.
+$$|f(x) - _{2k+1}(x)| \leq \frac{1}{(2k+1)!}\max_{0 \leq x \leq \pi/2}|\omega(x)|$$
+Z odvodom $\omega'(x)$ ugotovimo, da ima odvod $k$-kratno ničlo pri $x_0 = 0$ in $k$-kratno ničlo pri $x_1 = \pi/2$ ,poleg tega pa še ničlo pri $\pi/4$, ki predstavlja maksimum.
+Velja torej $$\max \omega(x) = \left(\frac{\pi}{4}\right)^{2k+2}$$
+Dobimo $\frac{1}{(2k+2)!} \left(\frac{\pi}{4}\right)^{2k+2} \leq \varepsilon$.
+\end{document}
